@@ -1,0 +1,37 @@
+<div class="anim-slide-right" style="height: 100%;float: left">
+    <md-sidenav
+            class="md-sidenav-right pull--left data--base--wrapper "
+            md-component-id="left"
+            md-is-locked-open="vm.showMenu"
+            md-whiteframe="4"
+            style="float: left"
+    >
+        <md-toolbar class="md-theme-indigo header">
+
+        </md-toolbar>
+        <md-content layout-padding class="data--base--column--wrapper">
+            <md-list flex>
+                <!--<md-subheader class="md-no-sticky"></md-subheader>-->
+                <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.dataBases" ng-click="vm.getBaseData(item.objectId)"  ng-class="{active: vm.parameter.objectId == item.objectId}">
+                    <div class="md-list-item-text" layout="column" >
+                     <span>
+                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                        {{ item.displayName }}
+                     </span>
+                    </div>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</div>
+
+<div
+        class="anim-slide-below-fade"
+        style="
+    width: 78%;
+    float: left;
+    margin-top: 255px;"
+>
+    <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+    <div style="width: 100%;" id="pluralisticList-list" ui-grid="gridOptions" class="common--uigrid--height" ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-resize-columns ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+</div>

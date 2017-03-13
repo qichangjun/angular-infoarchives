@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "translate.service.js",
+  "sourceRoot": "",
+  "sources": [
+    "translate.service.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,MAAR,CAAe,OAAf,CACA,CAAC,OADD,CACS,oBADT,EAEE;IAAC,YAAD,EAAc,UAAd,EACE,SAAC,UAAD,EAAY,QAAZ,GAAA;aACE;AAAA,QAAA,SAAA,EAAU,SAAC,GAAD,GAAA;AACR,UAAA,IAAG,GAAH;AACE,mBAAO,UAAU,CAAC,OAAX,CAAmB,GAAnB,CAAP,CADF;WAAA,MAAA;AAGE,mBAAO,GAAP,CAHF;WADQ;QAAA,CAAV;QADF;IAAA,CADF;GAFF,CAAA,CAAA;AAAA"
+}

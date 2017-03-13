@@ -1,0 +1,92 @@
+<div class="info--archive--main--content--wrapper">
+    <div class="top--head--box">
+        <md-toolbar class="md-menu-toolbar "  style="background: transparent;float: right;width: 100px">
+            <div layout="row">
+                <div>
+                    <md-menu-bar >
+                        <md-menu>
+                            <button ng-click="$mdMenu.open()">
+                                用户
+                            </button>
+                            <md-menu-content>
+                                <md-menu-item class="md-indent">
+                                    <md-menu>
+                                        <md-button ng-click="$mdMenu.open()">切换语言</md-button>
+                                        <md-menu-content width="3">
+                                            <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
+                                            <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
+                                            <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="xxx">xxx</md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </md-menu-item>
+                                <md-menu-divider></md-menu-divider>
+                                <md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler</md-menu-item>
+                                <md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar</md-menu-item>
+                                <md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions</md-menu-item>
+                                <md-menu-divider></md-menu-divider>
+                                <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
+                                <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
+                                <md-menu-item class="md-indent">
+                                    <md-button ng-click="vm.loginOut()">
+                                        登出
+                                    </md-button>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </md-menu-bar>
+                </div>
+            </div>
+        </md-toolbar>
+    </div>
+    <md-sidenav
+                class="md-sidenav-left pull-left info--archive--sidebar--wrapper"
+                md-component-id="left"
+                md-is-locked-open="true"
+                md-whiteframe="4">
+
+        <md-toolbar class="md-theme-indigo header">
+            <h1 class="md-toolbar-tools">InfoArchives</h1>
+        </md-toolbar>
+        <div class="info--archive--sidebar--content">
+            <div class="md-toolbar-tools header--bottom--version"> Version 1.0 Bild 10032</div>
+            <md-content layout-padding class="sidebar--column--wrapper">
+                <md-list flex>
+                    <md-subheader class="md-no-sticky separate--column--header">状态</md-subheader>
+                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.state" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+
+                        <div class="md-list-item-text each--column--box__text" layout="column" >
+                             <span>
+                                <span class="{{item.img}} item--img" aria-hidden="true"></span>
+                                {{ item.title }}
+                             </span>
+                        </div>
+                    </md-list-item>
+                    <md-divider ></md-divider>
+                    <md-subheader class="md-no-sticky separate--column--header">归档项目</md-subheader>
+                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.fileItem" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+                        <div class="md-list-item-text each--column--box__text" layout="column">
+                    <span>
+                        <span class="{{item.img}} item--img" aria-hidden="true"></span>
+                        {{ item.title }}
+                    </span>
+                        </div>
+                    </md-list-item>
+                    <md-divider ></md-divider>
+                    <md-subheader class="md-no-sticky separate--column--header">数据管理</md-subheader>
+                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.data" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+                        <div class="md-list-item-text each--column--box__text" layout="column">
+                            <span>
+                                <span class="{{item.img}} item--img" aria-hidden="true"></span>
+                                {{ item.title }}
+                            </span>
+                        </div>
+                    </md-list-item>
+        </md-list>
+    </md-content>
+            </div>
+</md-sidenav>
+
+    <div ui-view class="anim-in-out " data-anim-sync="true" style="height: 100%;float: left;width: 83.8%;overflow-x: hidden;"></div>
+
+</div>
+

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "hsApi.js",
+  "sourceRoot": "",
+  "sources": [
+    "hsApi.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,OAAO,CAAC,MAAR,CAAe,OAAf,CACA,CAAC,OADD,CACS,OADT,EACkB,SAAA,GAAA;AAChB,IAAA,IAAE,CAAA,WAAA,CAAF,GAAiB,aAAjB,CAAA;AAAA,IACA,IAAE,CAAA,YAAA,CAAF,GAAkB,cADlB,CAAA;AAAA,IAEA,IAAE,CAAA,cAAA,CAAF,GAAoB,gBAFpB,CADgB;EAAA,CADlB,CAAA,CAAA;AAAA"
+}

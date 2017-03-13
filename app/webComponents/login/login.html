@@ -1,0 +1,88 @@
+<form class="normal--user--login clearfix"
+       name="form_login"
+      ng-submit="form_login.$valid?vm.login(vm.user):vm.form_login.submit=true">
+  <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+  <div class="top--logo--box">
+    <div class="caption--box">
+      <!--<img class="caption&#45;&#45;box__logo" src="images/toolbar-logo.png" alt=""/>-->
+    </div>
+  </div>
+  <div class="input-content-wrapper">
+    <div class="caption">inforArchive</div>
+    <div class="input-content--box">
+      <div class="form-group user-login-input">
+        <div abc-def>
+          <md-input-container class="md-block">
+            <label class="title" translate="登录名"></label>
+            <input type="text"
+                   name="loginName"
+                   ng-model="vm.user.loginName"
+                   class="form-control user-login-input__input"
+                   placeholder="account"
+                   required
+                   md-no-asterisk
+            >
+            <div ng-messages="form_login.loginName.$error">
+              <div ng-message="required">请输入帐号</div>
+            </div>
+          </md-input-container>
+        </div>
+
+      </div>
+      <div class="form-group user-login-input ">
+        <md-input-container class="md-block">
+          <label class="title" translate="密码"></label>
+          <input type="password" name="password"
+                 ng-model="vm.user.password"
+                 md-no-asterisk
+                 class="form-control user-login-input__input"
+                 placeholder="Password"
+                 minlength="6"
+                 maxlength="18"
+                 required
+          >
+          <div ng-messages="form_login.password.$error">
+            <div ng-message="required">请输入密码</div>
+            <div ng-message="maxlength">密码长度不能超过18位</div>
+            <div ng-message="minlength">密码长度不能少于6位</div>
+          </div>
+        </md-input-container>
+      </div>
+      <div class="form-group user-login-input ">
+        <md-input-container>
+          <label>选择语言</label>
+          <md-select ng-model="vm.user.language" ng-init="vm.user.language = 'cn'">
+            <md-option  value="en" >
+              English
+            </md-option>
+            <md-option  value="cn" >
+              中文
+            </md-option>
+          </md-select>
+        </md-input-container>
+      </div>
+
+      <div class="checkbox user-login-checkbox">
+        <label >
+          <input type="checkbox" ng-model="vm.remember"> <span >记住我</span>
+        </label>
+      </div>
+      <button type="submit"
+              ng-disabled="vm.loading"
+              class="btn btn-primary user-login-btn"
+              >
+        <span translate="登录">登录</span>
+      </button>
+
+    </div>
+
+  </div>
+
+
+</form>
+
+
+
+
+
+

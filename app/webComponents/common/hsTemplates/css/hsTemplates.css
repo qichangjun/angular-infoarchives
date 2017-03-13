@@ -1,0 +1,18 @@
+.new-project-alert-modal-wrapper {
+  width: 454px;
+  height: 370px;
+  padding: 30px; }
+  .new-project-alert-modal-wrapper .new-project-alert-icon-box {
+    text-align: center; }
+  .new-project-alert-modal-wrapper .new-project-alert-prompt {
+    text-align: center;
+    font-size: 38px; }
+  .new-project-alert-modal-wrapper .success--tips {
+    text-align: center;
+    font-size: 16px;
+    color: #999999;
+    padding: 17px 0; }
+  .new-project-alert-modal-wrapper .btn-box {
+    text-align: center; }
+
+/*# sourceMappingURL=../../../../../maps/webComponents/common/hsTemplates/css/hsTemplates.css.map */

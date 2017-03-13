@@ -1,0 +1,152 @@
+<div class="anim-slide-right" style="height: 100%;float: left">
+    <md-sidenav
+            class="md-sidenav-right pull--left data--base--wrapper anim-fade"
+            md-component-id="left"
+            md-is-locked-open="vm.showMenu"
+            md-whiteframe="4">
+        <md-toolbar class="md-theme-indigo header">
+            <!--<h1>数据过滤</h1>-->
+            <!--<span>通过过滤条件组合进行批次筛选</span>-->
+        </md-toolbar>
+        <md-content layout-padding class="data--base--column--wrapper">
+            <md-list flex>
+                <!--<md-subheader class="md-no-sticky"></md-subheader>-->
+                <md-list-item class="md-1-line each--column--box">
+                    <div layout="row">
+                        <!--<md-select ng-model="vm.parameter.systemSource"-->
+                        <!--md-on-open="vm.loadSystemSource()"-->
+                        <!--md-on-close="vm.clearSystemSource()"-->
+                        <!--data-md-container-class="selectdemoSelectHeader"-->
+                        <!--multiple-->
+                        <!--&gt;-->
+                        <!--<md-optgroup  >-->
+                        <!--<md-option ng-value="systemSource" ng-repeat="systemSource in vm.systemSourceLists |filter:vm.systemSource">{{systemSource}}</md-option>-->
+                        <!--</md-optgroup>-->
+                        <!--</md-select>-->
+                        <span >按来源系统</span>
+                        <div>
+                            <ui-select multiple ng-model="vm.parameter.systemSource" theme="bootstrap"  close-on-select="false" style="width: 200px;" title="Choose a color">
+                                <ui-select-match placeholder="按来源系统">{{$item}}</ui-select-match>
+                                <ui-select-choices repeat="system in vm.systemSourceLists | filter:$select.search">
+                                    {{system}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line each--column--box">
+                    <div layout="row">
+                        <span >按单位</span>
+                        <div>
+                            <ui-select multiple ng-model="vm.parameter.unit" theme="bootstrap"   close-on-select="false" style="width: 200px;" title="Choose a color">
+                                <ui-select-match placeholder="按单位">{{$item}}</ui-select-match>
+                                <ui-select-choices repeat="unit in vm.unitList | filter:$select.search">
+                                    {{unit}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <!--<md-input-container style="width:200px;">-->
+                            <!--<span>按单位</span>-->
+                            <!--<md-select ng-model="vm.parameter.unit"-->
+                                       <!--md-on-open="vm.loadUnit()"-->
+                                       <!--md-on-close="vm.clearUnit()"-->
+                                       <!--data-md-container-class="selectdemoSelectHeader"-->
+                                       <!--multiple-->
+                            <!--&gt;-->
+                                <!--<md-optgroup  >-->
+                                    <!--<md-option ng-value="unit" ng-repeat="unit in vm.unitList |filter:vm.unit">{{unit}}</md-option>-->
+                                <!--</md-optgroup>-->
+                            <!--</md-select>-->
+                        <!--</md-input-container>-->
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line each--column--box">
+                    <div layout="row">
+                        <span >按数据形态</span>
+                        <div>
+                            <ui-select multiple ng-model="vm.parameter.dataType" theme="bootstrap"  close-on-select="false" style="width: 200px;" title="Choose a color">
+                                <ui-select-match placeholder="按数据形态">{{$item}}</ui-select-match>
+                                <ui-select-choices repeat="dataType in vm.dataTypeList | filter:$select.search">
+                                    {{dataType}}
+                                </ui-select-choices>
+                            </ui-select>
+                        </div>
+                        <!--<md-input-container style="width:200px;">-->
+                            <!--<span>按数据形态</span>-->
+                            <!--<md-select ng-model="vm.parameter.dataType"-->
+                                       <!--md-on-open="vm.loadDataType()"-->
+                                       <!--md-on-close="vm.clearDataType()"-->
+                                       <!--data-md-container-class="selectdemoSelectHeader"-->
+                                       <!--multiple-->
+                            <!--&gt;-->
+                                <!--<md-optgroup  >-->
+                                    <!--<md-option ng-value="dataType" ng-repeat="dataType in vm.dataTypeList |filter:vm.dataType">{{dataType}}</md-option>-->
+                                <!--</md-optgroup>-->
+                            <!--</md-select>-->
+                        <!--</md-input-container>-->
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line each--column--box">
+                    <div layout="row">
+                        <md-input-container>
+                            <span>时间范围</span>
+                            <div flex-gt-xs>
+                                <md-datepicker
+                                        ng-init="vm.dateFrom = (vm.parameter.dateFrom | toDate)"
+                                        ng-model="vm.dateFrom"
+                                        ng-change="vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search()"
+                                        md-placeholder="选择日期"
+                                        md-open-on-focus
+                                ></md-datepicker>
+                                <md-button ng-click="vm.dateFrom = null;vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search();">清除</md-button>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+                <div style="margin-left: 24px">
+                    <span>至</span>
+                </div>
+                <md-list-item class="md-1-line each--column--box">
+                    <div layout="row">
+                        <md-input-container>
+                            <div flex-gt-xs>
+                                <md-datepicker
+                                        ng-init="vm.dateTo = (vm.parameter.dateTo | toDate)"
+                                        ng-model="vm.dateTo"
+                                        ng-change="vm.parameter.dateTo = vm.dateTo.toISOString(); vm.search()"
+                                        md-placeholder="选择日期"
+                                        md-open-on-focus
+                                ></md-datepicker>
+                                <md-button ng-click="vm.dateTo = null;vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search();">清除</md-button>
+                            </div>
+                        </md-input-container>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line each--column--box">
+                    <div flex-gt-sm="50">
+                        <md-checkbox  ng-checked="vm.parameter.dataError" ng-click="vm.parameter.dataError=!vm.parameter.dataError;vm.search()"  aria-label="Checkbox 1">
+                            只显示有异常的批次
+                        </md-checkbox>
+                    </div>
+                </md-list-item>
+                <md-list-item class="md-1-line each--column--box">
+                    <md-button class="md-raised" ng-click="vm.search()">搜索</md-button>
+                </md-list-item>
+            </md-list>
+        </md-content>
+    </md-sidenav>
+</div>
+
+<div
+    class="anim-slide-below-fade"
+    style="
+        margin-top:57px;
+        width: 78%;
+        float: left;
+    "
+>
+    <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+
+
+
+</div>

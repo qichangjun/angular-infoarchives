@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "mdToast.js",
+  "sourceRoot": "",
+  "sources": [
+    "mdToast.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA;AAAA"
+}

@@ -1,0 +1,54 @@
+<md-dialog aria-label="Mango" class="edit--select--modal--wrapper" >
+    <form ng-cloak>
+        <md-toolbar>
+            <div class="md-toolbar-tools">
+                <h2>修改属性</h2>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content">
+                <form name="newProject" action="">
+                    <md-input-container class="md-block attribute--row--box" ng-if="vm.propertyName == '数据库类型'" >
+                        <span class="attribute--row--box__title">数据库类型</span>
+                        <md-select class="attribute--row--box__select" placeholder="数据库类型" ng-model="vm.propertyValue" md-on-open="vm.loadDataBase()" >
+                            <md-option ng-value="dataBase.name" ng-repeat="dataBase in vm.dataBases">{{dataBase.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block attribute--row--box" ng-if="vm.propertyName == '门类号'">
+                        <span class="attribute--row--box__title">门类号</span>
+                        <md-select class="attribute--row--box__select" placeholder="门类号" ng-model="vm.propertyValue" >
+                            <md-option ng-value="ruleType.name" ng-repeat="ruleType in vm.ruleType">{{ruleType.name}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block attribute--row--box" ng-if="vm.propertyName == '年度'">
+                        <span class="attribute--row--box__title"> 年度 </span>
+                        <md-select class="attribute--row--box__select" placeholder="年度" ng-model="vm.propertyValue" >
+                            <md-option ng-value="year" ng-repeat="year in vm.years">{{year}}</md-option>
+                        </md-select>
+                    </md-input-container>
+
+                    <md-input-container class="md-block attribute--row--box" ng-if="vm.propertyName == '系统保留时间'">
+                        <span class="attribute--row--box__title"> 系统保留时间 </span>
+                        <md-select class="attribute--row--box__select" placeholder="无" ng-model="vm.propertyValue"  >
+                            <md-option ng-value="keepTime" ng-repeat="keepTime in vm.keepTime">{{keepTime}}</md-option>
+                        </md-select>
+                    </md-input-container>
+                </form>
+
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row">
+            <span flex></span>
+            <md-button  ng-click="vm.cancel()">
+                取消
+            </md-button>
+            <md-button  ng-click="vm.editProperty()">
+                确定
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>

@@ -1,0 +1,62 @@
+@import '../../../less/variables';
+
+.ui-grid-row.ui-grid-row-selected > [ui-grid-row] > .ui-grid-cell {
+
+  .ui-grid-cell-contents{
+    background-color: @rowSelected;
+  }
+  .hs-ui-grid-cell-contents{
+    background-color: @rowSelected;
+  }
+  .ui-grid-cell-focus {
+    outline: 0;
+    background-color: #F1F8FF;
+  }
+  //.ui-grid-row-selected{
+  //  background-color: #F1F8FF;
+  //}
+}
+
+.ui-grid-disable-selection {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  cursor: default;
+}
+
+.ui-grid-selection-row-header-buttons {
+  cursor: pointer;
+  //opacity: 0.1;
+  font-size: 12px;
+  color: #ffffff;
+  transform: scale(0.85);
+  -ms-transform:scale(0.85);
+  //&:first-child{
+  //  color: #000011;
+  //}
+  &:before{
+    border: 1px solid @selectionBorderColor;
+    padding: 1px 13px 1px 0px;
+    border-radius: 3px;
+    //background: @selectionBorderColor;
+    opacity: 1;
+  }
+
+  &.ui-grid-row-selected {
+    //opacity: 0.5;
+    color:#424242;
+    //border-color:#424242 ;
+    background-color: #F1F8FF;
+
+  }
+
+  &.ui-grid-all-selected {
+    //opacity: 1;
+    color: #000000;
+  }
+}
+
+

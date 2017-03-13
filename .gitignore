@@ -1,0 +1,13 @@
+# coffee:
+*.coffee
+.DS_Store
+.idea/
+.svn/
+
+# dependencies
+/node_modules
+/app/bower_components
+
+#dist and maps
+/dist
+/maps
