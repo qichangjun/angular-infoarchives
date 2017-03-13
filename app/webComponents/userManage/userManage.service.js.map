@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "userManage.service.js",
+  "sourceRoot": "",
+  "sources": [
+    "userManage.service.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EACA,OAAO,CAAC,MAAR,CAAe,OAAf,CACA,CAAC,OADD,CACS,mBADT,EAEE,CAAC,MAAD,EAAQ,IAAR,EAAa,UAAb,EAAwB,UAAxB,EACE,SAAC,IAAD,EAAM,EAAN,EAAS,QAAT,EAAkB,QAAlB,GAAA,CADF,CAFF,CADA,CAAA;AAAA"
+}

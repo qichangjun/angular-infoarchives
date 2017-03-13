@@ -81,11 +81,20 @@
                             </span>
                         </div>
                     </md-list-item>
-        </md-list>
+                    <md-divider ></md-divider>
+                    <md-subheader class="md-no-sticky separate--column--header">其他</md-subheader>
+                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.other" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+                        <div class="md-list-item-text each--column--box__text" layout="column">
+                            <span>
+                                <span class="{{item.img}} item--img" aria-hidden="true"></span>
+                                {{ item.title }}
+                            </span>
+                        </div>
+                    </md-list-item>
+                </md-list>
     </md-content>
             </div>
 </md-sidenav>
-
     <div ui-view class="anim-in-out " data-anim-sync="true" style="height: 100%;float: left;width: 83.8%;overflow-x: hidden;"></div>
 
 </div>

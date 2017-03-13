@@ -1,0 +1,40 @@
+<md-sidenav
+        class="md-sidenav-right pull--left data--base--wrapper "
+        md-component-id="left"
+        md-is-locked-open="true"
+        md-whiteframe="4"
+        style="float: left"
+>
+    <md-toolbar class="md-theme-indigo header">
+
+    </md-toolbar>
+    <md-content layout-padding class="data--base--column--wrapper">
+        <md-list flex>
+            <!--<md-subheader class="md-no-sticky"></md-subheader>-->
+            <md-list-item class="md-1-line each--column--box"  ui-sref="infoArchives.userManage"  ng-class="{active: $state.includes('infoArchives.userManage')}">
+                <div class="md-list-item-text" layout="column" >
+                     <span>
+                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                        用户管理
+                     </span>
+                </div>
+            </md-list-item>
+            <!--<md-list-item class="md-1-line each&#45;&#45;column&#45;&#45;box"    ui-sref="infoArchives.organizationManage"  ng-class="{active: $state.includes('infoArchives.organizationManage')}">-->
+                <!--<div class="md-list-item-text" layout="column" >-->
+                     <!--<span>-->
+                        <!--<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>-->
+                        <!--组织机构管理-->
+                     <!--</span>-->
+                <!--</div>-->
+            <!--</md-list-item>-->
+            <!--<md-list-item class="md-1-line each&#45;&#45;column&#45;&#45;box"    ui-sref="infoArchives.dialogRecord"  ng-class="{active: $state.includes('infoArchives.dialogRecord')}">-->
+                <!--<div class="md-list-item-text" layout="column" >-->
+                     <!--<span>-->
+                        <!--<span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>-->
+                        <!--日志记录-->
+                     <!--</span>-->
+                <!--</div>-->
+            <!--</md-list-item>-->
+        </md-list>
+    </md-content>
+</md-sidenav>
