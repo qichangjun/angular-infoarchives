@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("dataBaseController", [
-    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', 'hsUiGridTemplates', '$timeout', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, hsUiGridTemplates, $timeout) {
-      var getBaseData, getDataList, getGridData, init, listenEvent, vm;
+    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', 'hsUiGridTemplates', '$timeout', 'dataErrorService', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, hsUiGridTemplates, $timeout, dataErrorService) {
+      var getBaseData, getDataList, getGridData, init, listenEvent, loadDataType, loadSystemSource, loadUnit, search, vm;
       vm = this;
       vm.parameter = $stateParams;
       $scope.totalItems = 64;
@@ -14,6 +14,9 @@
         getDataList();
         getGridData();
         listenEvent();
+        loadSystemSource();
+        loadUnit();
+        loadDataType();
         vm.showMenu = true;
       };
       listenEvent = function() {
@@ -62,6 +65,33 @@
           }, function(res) {});
         }
       };
+      loadSystemSource = function() {
+        return dataErrorService.getSystemSource().then(function(res) {
+          return vm.systemSourceLists = res.data;
+        }, function(res) {});
+      };
+      loadUnit = function() {
+        return dataErrorService.getUnit().then(function(res) {
+          return vm.unitList = res.data;
+        }, function(res) {});
+      };
+      loadDataType = function() {
+        return dataErrorService.getDataType().then(function(res) {
+          return vm.dataTypeList = res.data;
+        }, function(res) {});
+      };
+      search = function() {
+        return $timeout(function() {
+          $state.go('.', vm.parameter, {
+            notify: false
+          });
+          return getGridData();
+        }, 500);
+      };
+      vm.search = search;
+      vm.loadDataType = loadDataType;
+      vm.loadUnit = loadUnit;
+      vm.loadSystemSource = loadSystemSource;
       vm.getBaseData = getBaseData;
       init();
     }

@@ -11,7 +11,7 @@
     };
   }).controller("dataErrorController", [
     '$scope', '$log', '$state', '$timeout', '$element', '$stateParams', 'dataErrorService', 'dataBaseService', 'hsUiGridTemplates', 'i18nService', 'hsTpl', function($scope, $log, $state, $timeout, $element, $stateParams, dataErrorService, dataBaseService, hsUiGridTemplates, i18nService, hsTpl) {
-      var getBaseData, getDataList, getGridData, init, initGrid, loadDataType, loadSystemSource, loadUnit, reset, search, vm;
+      var getBaseData, getDataDown, getDataList, getGridData, init, initGrid, loadDataType, loadSystemSource, loadUnit, reset, search, vm;
       vm = this;
       vm.systemSource;
       vm.unit;
@@ -39,7 +39,7 @@
           enableSelectAll: true,
           useExternalSorting: true,
           onRegisterApi: function(gridApi) {
-            gridApi.infiniteScroll.on.needLoadMoreData($scope, $scope.getDataDown);
+            gridApi.infiniteScroll.on.needLoadMoreData($scope, getDataDown);
             $scope.gridApi = gridApi;
             $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
               if (sortColumns.length === 0) {
@@ -67,7 +67,7 @@
           }
         };
       };
-      $scope.getDataDown = function() {
+      getDataDown = function() {
         if (vm.parameter.objectId) {
           return dataBaseService.getGridData(vm.parameter).then(function(res) {
             $scope.gridApi.infiniteScroll.saveScrollPercentage();

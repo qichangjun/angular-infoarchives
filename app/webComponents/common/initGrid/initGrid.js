@@ -15,6 +15,7 @@
       getGrid = function() {
         i18nService.setCurrentLang('zh-cn');
         return $scope.gridOptions = {
+          enableFiltering: true,
           rowTemplate: hsTpl.hsRowTemplate,
           rowHeight: 40,
           saveSort: false,

@@ -31,7 +31,7 @@
           access_level: 2
         }
       }).state("infoArchives.dataBase", {
-        url: "dataBase/:objectId?currentPage",
+        url: "dataBase/:objectId?currentPage&dataPath&sip&dataSize&startData",
         templateUrl: "webComponents/dataBase/dataBase.html?" + window.hsConfig.bust,
         controller: "dataBaseController",
         controllerAs: "vm",

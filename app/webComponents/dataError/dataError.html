@@ -37,7 +37,6 @@
 >
     <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
     <div>
-        {{gridOptions.data.length}}
         <div style="float: left;">
             <span >按数据形态</span>
             <div>
@@ -119,7 +118,7 @@
         </div>
     </div>
     <div style="float:left;width: 100%;">
-        <div style="width:100%;"  ui-grid="gridOptions" class="common--uigrid--height" ui-grid-infinite-scroll></div>
+        <div style="width:100%;"  ui-grid="gridOptions" class="common--uigrid--height" ui-grid-selection ui-grid-infinite-scroll></div>
     </div>
 
 </div>
