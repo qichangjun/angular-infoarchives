@@ -1,4 +1,4 @@
-<div class="anim-slide-right" style="height: 100%;float: left">
+<div class="anim-slide-right data--base--sidenav">
     <md-sidenav
             class="md-sidenav-right pull--left data--base--wrapper "
             md-component-id="left"
@@ -6,16 +6,16 @@
             md-whiteframe="4"
             style="float: left"
     >
-        <md-toolbar class="md-theme-indigo header">
-
-        </md-toolbar>
+        <div class="select--data--source--box">
+            选择数据源
+        </div>
         <md-content layout-padding class="data--base--column--wrapper">
             <md-list flex>
                 <!--<md-subheader class="md-no-sticky"></md-subheader>-->
                 <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.dataBases" ng-click="vm.getBaseData(item.objectId)"  ng-class="{active: vm.parameter.objectId == item.objectId}">
                     <div class="md-list-item-text" layout="column" >
                      <span>
-                        <span class="glyphicon glyphicon-hourglass" aria-hidden="true"></span>
+                        <span class="fa fa-database" aria-hidden="true"></span>
                         {{ item.displayName }}
                      </span>
                     </div>
@@ -25,14 +25,7 @@
     </md-sidenav>
 </div>
 
-<div
-    class="anim-slide-below-fade"
-    style="
-        margin-top:57px;
-        width: 78%;
-        float: left;"
->
-    <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+<div class="anim-slide-below-fade data--base--sidenav--right--box">
     <div>
         <div style="float: left;">
             <span >按数据形态</span>

@@ -1,14 +1,14 @@
 <form class="normal--user--login clearfix"
        name="form_login"
       ng-submit="form_login.$valid?vm.login(vm.user):vm.form_login.submit=true">
-  <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
-  <div class="top--logo--box">
-    <div class="caption--box">
-      <!--<img class="caption&#45;&#45;box__logo" src="images/toolbar-logo.png" alt=""/>-->
-    </div>
-  </div>
+  <div id="loading-bar-container"></div>
+  <!--<div class="top&#45;&#45;logo&#45;&#45;box">-->
+    <!--<div class="caption&#45;&#45;box">-->
+      <!--&lt;!&ndash;<img class="caption&#45;&#45;box__logo" src="images/toolbar-logo.png" alt=""/>&ndash;&gt;-->
+    <!--</div>-->
+  <!--</div>-->
   <div class="input-content-wrapper">
-    <div class="caption">inforArchive</div>
+    <div class="caption">inforArchives</div>
     <div class="input-content--box">
       <div class="form-group user-login-input">
         <div abc-def>
@@ -49,9 +49,9 @@
         </md-input-container>
       </div>
       <div class="form-group user-login-input ">
-        <md-input-container>
-          <label>选择语言</label>
-          <md-select ng-model="vm.user.language" ng-init="vm.user.language = 'cn'">
+        <label class="select--language--title">选择语言</label>
+        <md-input-container class="select--language--box">
+          <md-select class="select--language--box__select" ng-model="vm.user.language" ng-init="vm.user.language = 'cn'">
             <md-option  value="en" >
               English
             </md-option>

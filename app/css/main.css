@@ -8,21 +8,17 @@
 body {
   font-family: Arial, Verdana, Tahoma, "Hiragino Sans GB", Microsoft YaHei, SimSun, sans-serif;
   font-size: 13px;
-  line-height: 1.42857;
+  line-height: 1.42857143;
   color: #333; }
 
 .info--archive--main--content--wrapper {
   width: 1366px;
   margin: 0 auto;
-  height: 100%; }
-  .info--archive--main--content--wrapper .top--head--box {
-    height: 55px;
-    width: 1366px;
-    background: #eaeae2;
-    position: absolute; }
+  height: 100%;
+  position: relative; }
   .info--archive--main--content--wrapper .info--archive--sidebar--wrapper {
     height: 100%;
-    width: 220px;
+    width: 178px;
     background: #464646; }
     .info--archive--main--content--wrapper .info--archive--sidebar--wrapper .header {
       height: 55px;
@@ -65,15 +61,32 @@ body {
               vertical-align: text-bottom; }
           .info--archive--main--content--wrapper .info--archive--sidebar--wrapper .info--archive--sidebar--content .sidebar--column--wrapper .each--column--box .md-button {
             min-height: 40px; }
+  .info--archive--main--content--wrapper .info--archive--right--content--wrapper {
+    position: absolute;
+    top: 0px;
+    left: 178px;
+    right: 0px;
+    bottom: 0px; }
+    .info--archive--main--content--wrapper .info--archive--right--content--wrapper .top--head--box {
+      height: 55px;
+      width: 1188px;
+      background: #eaeae2; }
+    .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box {
+      overflow-x: hidden;
+      width: 100%;
+      height: calc(100% - 55px); }
+      .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav {
+        float: left;
+        height: 100%; }
+      .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box {
+        float: left; }
   .info--archive--main--content--wrapper .data--base--wrapper {
     height: 100%;
-    width: 240px;
+    width: 235px;
     background: #626569;
     box-shadow: none; }
     .info--archive--main--content--wrapper .data--base--wrapper .header {
-      height: 55px;
-      min-height: 55px;
-      background: #eaeae2; }
+      min-height: 0px; }
     .info--archive--main--content--wrapper .data--base--wrapper .data--base--column--wrapper {
       background: transparent;
       color: #c0c4c7;
@@ -88,38 +101,42 @@ body {
           border-left: 5px solid #fa7455; }
 
 .project--manage--main--content--wrapper {
-  height: calc(100% - 159px); }
-  .project--manage--main--content--wrapper .card--title--box {
+  width: 100%;
+  height: 100%;
+  background: #fafafa; }
+  .project--manage--main--content--wrapper .new--project--wrapper {
+    width: 100%; }
+  .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--title--box {
     background: #2D7D9A;
     padding: 11px 14px 6px 14px;
     color: #ffffff;
     width: 219px; }
-    .project--manage--main--content--wrapper .card--title--box .md-headline {
+    .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--title--box .md-headline {
       font-size: 14px;
       line-height: 24px; }
-    .project--manage--main--content--wrapper .card--title--box .md-subhead {
+    .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--title--box .md-subhead {
       font-size: 11px;
       color: #cccccc !important; }
-  .project--manage--main--content--wrapper .card--actions--btn--box {
+  .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--btn--box {
     background: #E8EDF1;
     margin: 0;
     padding: 8px; }
-  .project--manage--main--content--wrapper .card--actions--pull--left {
+  .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--left {
     float: left; }
-    .project--manage--main--content--wrapper .card--actions--pull--left .icon--button {
+    .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--left .icon--button {
       margin: 6px;
       outline: none; }
-  .project--manage--main--content--wrapper .card--actions--pull--right {
+  .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--right {
     float: right; }
-    .project--manage--main--content--wrapper .card--actions--pull--right .icon--button {
+    .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--right .icon--button {
       padding: 6px;
       outline: none; }
-  .project--manage--main--content--wrapper .project--manage--list--img--box {
+  .project--manage--main--content--wrapper .project--manage--data--list--wrapper .project--manage--list--img--box {
     height: 121px;
     width: 100%;
     background: #ffffff;
     display: table; }
-    .project--manage--main--content--wrapper .project--manage--list--img--box__do--center {
+    .project--manage--main--content--wrapper .project--manage--data--list--wrapper .project--manage--list--img--box__do--center {
       display: table-cell;
       vertical-align: middle;
       text-align: center; }
@@ -341,4 +358,4 @@ body {
     margin: 0px;
     height: 34px; }
 
-/*# sourceMappingURL=../../maps/css/main.css.map */
+/*# sourceMappingURL=main.css.map */

@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module("myApp").service("dataBaseService", [
-    '$log', '$q', '$timeout', function($log, $q, $timeout) {
-      var getDataList, getGridData;
+    '$log', '$q', '$timeout', 'Restangular', 'hsAPI', 'MockRestangular', function($log, $q, $timeout, Restangular, hsAPI, MockRestangular) {
+      var getDataList, getGridData, test;
       $log.info("dataBaseService");
       getDataList = function() {
         var deferred, res;
@@ -110,6 +110,17 @@
         }, 1000);
         return deferred.promise;
       };
+      test = function() {
+        var deferred;
+        deferred = $q.defer();
+        MockRestangular.one(hsAPI['test']).get().then(function(res) {
+          return deferred.resolve('用户登录：登录成功');
+        }, function(res) {
+          return deferred.reject('用户登录：系统错误，请稍候再试');
+        });
+        return deferred.promise;
+      };
+      this.test = test;
       this.getGridData = getGridData;
       this.getDataList = getDataList;
     }

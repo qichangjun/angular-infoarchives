@@ -1,5 +1,5 @@
 
-<div class="anim-slide-right" style="height: 100%;float: left">
+<div class="anim-slide-right data--base--sidenav" >
     <md-sidenav
             class="md-sidenav-right pull--left data--base--wrapper "
             md-component-id="left"
@@ -7,9 +7,9 @@
             md-whiteframe="4"
             style="float: left"
     >
-        <md-toolbar class="md-theme-indigo header">
-
-        </md-toolbar>
+        <div class="select--data--source--box">
+            选择数据源
+        </div>
         <md-content layout-padding class="data--base--column--wrapper">
             <md-list flex>
                 <!--<md-subheader class="md-no-sticky"></md-subheader>-->
@@ -27,15 +27,7 @@
 </div>
 
 
-<div
-    class="anim-slide-below-fade"
-    style="
-        margin-top:57px;
-        width: 78%;
-        float: left;
-    "
->
-    <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+<div class="anim-slide-below-fade data--base--sidenav--right--box">
     <div>
         <div style="float: left;">
             <span >按数据形态</span>

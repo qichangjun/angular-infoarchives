@@ -12,7 +12,7 @@
 body {
   font-family: Arial, Verdana, Tahoma, "Hiragino Sans GB", Microsoft YaHei, SimSun, sans-serif;
   font-size: 13px;
-  line-height: 1.42857;
+  line-height: 1.42857143;
   color: #333;
 }
 
@@ -21,15 +21,10 @@ body {
   width: 1366px;
   margin: 0 auto;
   height: 100%;
-  .top--head--box{
-    height: 55px;
-    width: 1366px;
-    background: #eaeae2;
-    position: absolute;
-  }
+  position: relative;
   .info--archive--sidebar--wrapper{
     height: 100%;
-    width: 220px;
+    width: 178px;
     background: #464646;
     .header{
       height: 55px;
@@ -85,15 +80,40 @@ body {
       }
     }
   }
+  .info--archive--right--content--wrapper{
+    position: absolute;
+    top: 0px;
+    left: 178px;
+    right: 0px;
+    bottom: 0px;
+    .top--head--box{
+      height: 55px;
+      width: 1188px;
+      background: #eaeae2;
+    }
+    .data--base--sidenav--box{
+      overflow-x: hidden;
+      width: 100%;
+      height: calc(100% - 55px);
+      //clear: both;
+      .data--base--sidenav{
+        float: left;
+        height: 100%;
+      }
+      .data--base--sidenav--right--box{
+        float: left;
+      }
+    }
+  }
   .data--base--wrapper{
     height: 100%;
-    width: 240px;
+    width: 235px;
     background: #626569;
     box-shadow: none;
     .header{
-      height: 55px;
-      min-height: 55px;
-      background: #eaeae2;
+      //height: 55px;
+      min-height: 0px;
+      //background: #eaeae2;
     }
     .data--base--column--wrapper{
       background: transparent;
@@ -116,50 +136,57 @@ body {
 
 //projectManage
 .project--manage--main--content--wrapper{
-  height: calc(100% - 159px);
-  .card--title--box{
-    background: #2D7D9A;
-    padding:11px 14px 6px 14px;
-    color: #ffffff;
-    //width: 184px;
-    width: 219px;
-    .md-headline{
-      font-size: 14px;
-      line-height: 24px;
-    }
-    .md-subhead{
-      font-size: 11px;
-      color: #cccccc !important;
-    }
-  }
-  .card--actions--btn--box{
-    background: #E8EDF1;
-    margin: 0;
-    padding: 8px;
-  }
-  .card--actions--pull--left{
-    float: left;
-    .icon--button{
-      margin: 6px;
-      outline: none;
-    }
-  }
-  .card--actions--pull--right{
-    float: right ;
-    .icon--button{
-      padding: 6px;
-      outline: none;
-    }
-  }
-  .project--manage--list--img--box{
-    height: 121px;
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  .new--project--wrapper{
     width: 100%;
-    background: #ffffff;
-    display: table;
-    &__do--center{
-      display: table-cell;
-      vertical-align: middle;
-      text-align: center;
+  }
+  .project--manage--data--list--wrapper{
+    .card--title--box{
+      background: #2D7D9A;
+      padding:11px 14px 6px 14px;
+      color: #ffffff;
+      //width: 184px;
+      width: 219px;
+      .md-headline{
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .md-subhead{
+        font-size: 11px;
+        color: #cccccc !important;
+      }
+    }
+    .card--actions--btn--box{
+      background: #E8EDF1;
+      margin: 0;
+      padding: 8px;
+    }
+    .card--actions--pull--left{
+      float: left;
+      .icon--button{
+        margin: 6px;
+        outline: none;
+      }
+    }
+    .card--actions--pull--right{
+      float: right ;
+      .icon--button{
+        padding: 6px;
+        outline: none;
+      }
+    }
+    .project--manage--list--img--box{
+      height: 121px;
+      width: 100%;
+      background: #ffffff;
+      display: table;
+      &__do--center{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
     }
   }
 }

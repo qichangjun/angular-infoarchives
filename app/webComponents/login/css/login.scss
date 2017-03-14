@@ -27,89 +27,89 @@
         top: 45px;
         .user-login__tr{
 
-        .icon-left-box{
-          position: absolute;
-          top:75px;
-          left:-32px;
-          .icon-left{
-            display: block;
-            width: 250px;
-            height: 197px;
-            background: url("../images/user-login_left.jpg") no-repeat;
-          }
-        }
-        .icon-center-box{
-          position: absolute;
-          top:75px;
-          left:218px;
-          &__top{
-            width: 394px;
-            height: 7px;
-            background: url("../images/user-login-center-md1.png") no-repeat;
-          }
-          &__middle{
-            width: 394px;
-            height: 179px;
-            background: url("../images/user-login_md2.jpg") repeat-x;
-          }
-          &__bottom{
-            width: 394px;
-            height: 11px;
-            background: url("../images/user-login-center-md3.png") no-repeat;
-          }
-          .user-login-title__bg{
-            color: #ffffff;
-            font-size: 30px;
-            letter-spacing: 2px;
+          .icon-left-box{
             position: absolute;
-            top: 57px;
-            left: 43px;
-            &__English{
+            top:75px;
+            left:-32px;
+            .icon-left{
               display: block;
-              font-size: 14px;
+              width: 250px;
+              height: 197px;
+              background: url("../images/user-login_left.jpg") no-repeat;
             }
           }
-        }
-        .icon-right-box{
-          width: 330px;
-          height: 355px;
-          background: url("../images/user-login-right-bg.png") no-repeat;
-          position: absolute;
-          top:9px;
-          right:-42px;
-          .hs-user-login-wrapper__input{
-            width: 234px;
+          .icon-center-box{
             position: absolute;
-            top: 98px;
-            left: 30px;
-            .user-login-input{
-              margin-bottom: 10px;
-              .login-input-transl{
-                float: left;
-                padding-top: 8px;
-                text-align: center;
-                width: 70px;
+            top:75px;
+            left:218px;
+            &__top{
+              width: 394px;
+              height: 7px;
+              background: url("../images/user-login-center-md1.png") no-repeat;
+            }
+            &__middle{
+              width: 394px;
+              height: 179px;
+              background: url("../images/user-login_md2.jpg") repeat-x;
+            }
+            &__bottom{
+              width: 394px;
+              height: 11px;
+              background: url("../images/user-login-center-md3.png") no-repeat;
+            }
+            .user-login-title__bg{
+              color: #ffffff;
+              font-size: 30px;
+              letter-spacing: 2px;
+              position: absolute;
+              top: 57px;
+              left: 43px;
+              &__English{
+                display: block;
+                font-size: 14px;
               }
-              input{
-                width: 160px;
-                float: right;
-              }
-              select{
-                width: 160px;
-                float: right;
+            }
+          }
+          .icon-right-box{
+            width: 330px;
+            height: 355px;
+            background: url("../images/user-login-right-bg.png") no-repeat;
+            position: absolute;
+            top:9px;
+            right:-42px;
+            .hs-user-login-wrapper__input{
+              width: 234px;
+              position: absolute;
+              top: 98px;
+              left: 30px;
+              .user-login-input{
+                margin-bottom: 10px;
+                .login-input-transl{
+                  float: left;
+                  padding-top: 8px;
+                  text-align: center;
+                  width: 70px;
+                }
+                input{
+                  width: 160px;
+                  float: right;
+                }
+                select{
+                  width: 160px;
+                  float: right;
 
+                }
               }
-            }
-            .user-login-checkbox{
-              padding-left: 70px;
-            }
-            .user-login-btn{
-              padding: 6px 30px;
-              margin-left: 70px;
+              .user-login-checkbox{
+                padding-left: 70px;
+              }
+              .user-login-btn{
+                padding: 6px 30px;
+                margin-left: 70px;
+              }
             }
           }
         }
-      }
       }
     }
   }
@@ -118,7 +118,8 @@
 .normal--user--login{
   width: 100%;
   height: 100%;
-  background: #f5f5f5;
+  //background: #f5f5f5;
+  background: url(../images/login--bg.jpg) no-repeat center;
   overflow-y: auto;
   position: relative;
   .top--logo--box{
@@ -131,7 +132,7 @@
       margin: 0 auto;
       height: inherit;
       &__logo{
-      margin-top: 15px;
+        margin-top: 15px;
       }
       .title{
         //display: inline-block;
@@ -146,10 +147,13 @@
   }
   .input-content-wrapper{
     width: 420px;
-    margin: 100px auto 0;
-    background: #ffffff;
+    margin: 160px auto 0;
+    font-size: 14px !important;
+    //background: #ffffff;
     border-radius: 5px;
     padding: 30px;
+    box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
+    background: rgba(255, 255, 255, 0.65);
     .caption{
       display: inline-block;
       font-size: 18px;
@@ -170,7 +174,25 @@
           line-height: 40px;
           border: 1px solid #e1e1e1;
           border-radius: 5px;
+          background: #ffffff;
         }
+        .select--language--title{
+          font-weight: normal;
+          transform: none;
+          color: rgba(0,0,0,0.54);
+          width: 75px;
+          vertical-align: text-top;
+        }
+        .select--language--box{
+          margin: 0px;
+          &__select{
+            margin: 0px;
+            width: 270px;
+          }
+        }
+      }
+      .user-login-checkbox{
+        margin: 20px 0;
       }
     }
     .user-login-btn{
