@@ -110,7 +110,7 @@
     }
   ]).controller('editProjectController', [
     '$scope', '$log', '$stateParams', '$mdDialog', 'item', 'mdDialogService', '$timeout', function($scope, $log, $stateParams, $mdDialog, item, mdDialogService, $timeout) {
-      var cancel, editModule, editProject, editProperty, hideMessage, init, newModule, vm;
+      var cancel, editModule, editProject, hideMessage, init, newModule, vm;
       vm = this;
       init = function() {
         vm.showMessage = true;
@@ -121,32 +121,6 @@
       };
       cancel = function() {
         return $mdDialog.cancel();
-      };
-      editProperty = function(event, propertyName, propertyValue) {
-        if (propertyName === '项目名称' || propertyName === '业务编号') {
-          return mdDialogService.initPromptDialog(event, propertyName, propertyValue).then(function(res) {
-            if (propertyName === '项目名称') {
-              return vm.entity.name = res;
-            } else if (propertyName === '业务编号') {
-              return vm.entity.number = res;
-            }
-          }, function(res) {});
-        } else {
-          return mdDialogService.initCustomDialog('editSelectController', 'webComponents/common/hsTemplates/doc/projectManage/editSelect.html?' + window.hsConfig.bust, event, {
-            propertyName: propertyName,
-            propertyValue: propertyValue
-          }).then(function(res) {
-            if (propertyName === '数据库类型') {
-              return vm.entity.dataBaseType = res;
-            } else if (propertyName === '门类号') {
-              return vm.entity.ruleType = res;
-            } else if (propertyName === '年度') {
-              return vm.entity.year = res;
-            } else if (propertyName === '系统保留时间') {
-              return vm.entity.keepTime = res;
-            }
-          }, function(res) {});
-        }
       };
       newModule = function(event) {
         return mdDialogService.initCustomDialog('customeModuleController', 'webComponents/common/hsTemplates/doc/projectManage/customeModule.html?' + window.hsConfig.bust, event, {
@@ -183,40 +157,6 @@
       vm.editModule = editModule;
       vm.editProject = editProject;
       vm.newModule = newModule;
-      vm.editProperty = editProperty;
-      vm.cancel = cancel;
-      init();
-    }
-  ]).controller('editSelectController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'propertyName', 'propertyValue', 'projectManageService', function($scope, $log, $stateParams, $mdDialog, propertyName, propertyValue, projectManageService) {
-      var cancel, editProperty, init, loadDataBase, vm;
-      vm = this;
-      vm.propertyName = propertyName;
-      vm.propertyValue = propertyValue;
-      init = function() {
-        vm.ruleType = [
-          {
-            name: '呵呵哒'
-          }, {
-            name: '哈哈'
-          }
-        ];
-        vm.years = [1991, 1998, 2010, 2017];
-        return vm.keepTime = ['3年', '5年', '10年'];
-      };
-      cancel = function() {
-        return $mdDialog.cancel();
-      };
-      loadDataBase = function() {
-        return projectManageService.getDataBaseList().then(function(res) {
-          return vm.dataBases = res.data;
-        }, function(res) {});
-      };
-      editProperty = function() {
-        return $mdDialog.hide(vm.propertyValue);
-      };
-      vm.editProperty = editProperty;
-      vm.loadDataBase = loadDataBase;
       vm.cancel = cancel;
       init();
     }

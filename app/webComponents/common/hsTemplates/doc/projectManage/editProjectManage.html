@@ -1,5 +1,5 @@
 <md-dialog aria-label="Mango" class="edit--project--manage--modal--wrapper">
-    <form ng-cloak>
+
         <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
             <div class="md-toolbar-tools">
                 <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
@@ -9,20 +9,23 @@
                 <span flex></span>
             </div>
         </md-toolbar>
+
         <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
         <md-dialog-content class="edit--project--manage--modal--content">
+
             <div class="md-dialog-content left--content">
-                <form name="newProject" action="">
+                <form  editable-form ng-cloak name="newProject" action="">
                     <div >
+
                         <section layout="row" layout-md="row" layout-align="start center" layout-wrap class="edit--project--row--box">
                             <span class="edit--project--row">基本信息</span>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">项目名称</span>
-                                <a href="" ng-click="vm.editProperty($event,'项目名称',vm.entity.name)">{{vm.entity.name}}</a>
+                                <a href = "#" editable-text="vm.entity.name" e-name = "vm.entity.name" placeholder="vm.entity.name" e-single = ""> {{ vm.entity.name || 'empty' }}</a>
                             </div>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">业务编号</span>
-                                <a href="" ng-click="vm.editProperty($event,'业务编号',vm.entity.number)">{{vm.entity.number}}</a></div>
+                                <a href = "#" editable-text="vm.entity.number" e-name = "vm.entity.number" placeholder="vm.entity.number" e-single = ""> {{ vm.entity.number || 'empty' }}</a>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">创建时间</span>
                                 {{vm.entity.createDate}}
@@ -40,7 +43,7 @@
                             <span class="edit--project--row">源系统数据库信息</span>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">数据库类型</span>
-                                <a href="" ng-click="vm.editProperty($event,'数据库类型',vm.entity.dataBaseType)">{{vm.entity.dataBaseType}}</a>
+                                <a href = "#" editable-text="vm.entity.dataBaseType" e-name = "vm.entity.dataBaseType" placeholder="vm.entity.dataBaseType" e-single = ""> {{ vm.entity.dataBaseType || 'empty' }}</a>
                             </div>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">数据抽取方式</span>
@@ -52,9 +55,10 @@
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">档号规则</span>
                                 系统号&nbsp;&nbsp;-&nbsp;&nbsp;全宗号&nbsp;&nbsp;-&nbsp;&nbsp;
-                                <a href="" ng-click="vm.editProperty($event,'门类号',vm.entity.ruleType)">{{vm.entity.ruleType}}</a>
+                                <a href = "#" editable-text="vm.entity.ruleType" e-name = "vm.entity.ruleType" placeholder="vm.entity.ruleType" e-single = ""> {{ vm.entity.ruleType || 'empty' }}</a>
+
                                 &nbsp;&nbsp;-&nbsp;&nbsp;
-                                <a href="" ng-click="vm.editProperty($event,'年度',vm.entity.year)">{{vm.entity.year}}</a>
+                                <a href = "#" editable-text="vm.entity.year" e-name = "vm.entity.year" placeholder="vm.entity.year" e-single = ""> {{ vm.entity.year || 'empty' }}</a>
                                 &nbsp;&nbsp;-&nbsp;&nbsp;流水号
                             </div>
                             <div class="attribute--row--box">
@@ -62,7 +66,7 @@
                             </div>
                             <div class="attribute--row--box">
                                 <span class="attribute--row--box__title">系统保留时间</span>
-                                <a href="" ng-click="vm.editProperty($event,'系统保留时间',vm.entity.keepTime)">{{vm.entity.keepTime}}</a>
+                                <a href = "#" editable-text="vm.entity.keepTime" e-name = "vm.entity.keepTime" placeholder="vm.entity.keepTime" e-single = ""> {{ vm.entity.keepTime || 'empty' }}</a>
                             </div>
                         </section>
                     </div>
@@ -131,7 +135,4 @@
                 </div>
             </div>
         </md-dialog-content>
-
-
-    </form>
 </md-dialog>
