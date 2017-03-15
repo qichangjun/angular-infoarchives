@@ -145,8 +145,8 @@
   ]).run([
     'editableOptions', 'editableThemes', function(editableOptions, editableThemes) {
       editableOptions.theme = 'default';
-      editableThemes['default'].submitTpl = '<button type="submit" >确定</button>';
-      return editableThemes['default'].cancelTpl = '<button type="button" ng-click="$form.$cancel()" >取消</button>';
+      editableThemes['default'].submitTpl = '<button type="submit" class="btn btn-primary">确定</button>';
+      return editableThemes['default'].cancelTpl = '<button type="button" class="btn btn-default" ng-click="$form.$cancel()" >取消</button>';
     }
   ]).factory('languageStorage', [
     'Cookies', function(Cookies) {

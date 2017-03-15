@@ -112,6 +112,15 @@
     '$scope', '$log', '$stateParams', '$mdDialog', 'item', 'mdDialogService', '$timeout', function($scope, $log, $stateParams, $mdDialog, item, mdDialogService, $timeout) {
       var cancel, editModule, editProject, hideMessage, init, newModule, vm;
       vm = this;
+      vm.statuses = [
+        {
+          value: 1,
+          text: 'name1'
+        }, {
+          value: 2,
+          text: 'name2'
+        }
+      ];
       init = function() {
         vm.showMessage = true;
         vm.entity = item;
