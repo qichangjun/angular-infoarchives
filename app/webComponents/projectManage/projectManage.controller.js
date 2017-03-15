@@ -171,17 +171,16 @@
     }
   ]).controller('customeModuleController', [
     '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'module', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, module) {
-      var WorkFlow, cancel, deleteNode, editProject, findMaxId, init, initId, jsonToObj, listenEvent, modelPush, searchId, updateFileData, updateMetaData, updateName, vm;
+      var cancel, deleteNode, editProject, findMaxId, init, initId, jsonToObj, listenEvent, modelPush, searchId, updateFileData, updateMetaData, updateName, vm;
       vm = this;
       $scope.saveData = [];
       initId = void 0;
       $scope.module = module;
       init = function() {
-        var testData;
         listenEvent();
         if (!module) {
           initId = 1;
-          $scope.nodes = {
+          return $scope.nodes = {
             "name": "record",
             "id": initId,
             "type": "record",
@@ -198,18 +197,8 @@
         } else {
           $scope.nodes = angular.copy(module.data[0]);
           jsonToObj($scope.nodes);
-          initId = findMaxId($scope.nodes);
+          return initId = findMaxId($scope.nodes);
         }
-        testData = new WorkFlow();
-        console.log(testData);
-        return testData.consoleInfo();
-      };
-      WorkFlow = function() {
-        this.qq = 21234;
-        return this.kk = 2222;
-      };
-      WorkFlow.prototype.consoleInfo = function() {
-        return console.log(this.qq);
       };
       listenEvent = function() {
         $scope.$on('node:delete', function(e, d) {

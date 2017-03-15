@@ -27,8 +27,8 @@ body {
     width: 178px;
     background: #464646;
     position: relative !important;
-    z-index: 99;
-    box-shadow: -5px 0px 10px 3px rgba(0,0,0,0.1) inset;
+    z-index: 70;
+    box-shadow: -5px 0px 10px  rgba(0,0,0,0.1) inset;
     .header{
       height: 57px;
       min-height: 57px;
@@ -87,7 +87,7 @@ body {
               width: 20px;
               margin-right: 5px;
               text-align: center;
-              vertical-align: text-bottom;
+              vertical-align: sub;
             }
           }
           .md-button{
@@ -128,9 +128,69 @@ body {
           font-size: 16px;
           padding: 15px 0 10px 25px;
         }
+        //data--error background--img
+        &.data--error{
+          .data--base--wrapper{
+            background: #f5f5f5 url(../images/batch-two-level-menu-bg.png) no-repeat 100% 97%;
+          }
+        }
       }
       .data--base--sidenav--right--box{
         float: left;
+        width: calc(100% - 237px);
+        padding: 10px 20px;
+        .data--filtering--wrapper{
+          margin-bottom: 20px;
+          .data--filtering--head{
+            font-size: 16px;
+            margin-bottom: 10px;
+            .title{
+              display: inline-block;
+              margin-right: 5px ;
+            }
+          }
+          .filter--properties--box{
+            background: #f5f5f5;
+            border-radius: 5px;
+            padding: 10px 15px 10px 15px;
+            .single--attribute--box{
+              display: inline-block;
+              width: 12%;
+              margin-right: 15px;
+              vertical-align: top;
+              &.time--frame{
+                width: 33%;
+                .attribute--value{
+                  display: inline-block;
+                  width: 45%;
+                }
+                .select--time{
+                }
+              }
+              .attribute--title{
+                display: block;
+                padding-bottom: 6px
+              }
+              .attribute--value{
+              //  select within delete operation
+                .ui-select-multiple.ui-select-bootstrap .ui-select-match-item{
+                  background: #91a8c0;
+                  color: #ffffff;
+                }
+                .ui-select-multiple.ui-select-bootstrap .ui-select-match .close{
+                  font-size: 21px;
+                  color: #ffffff;
+                  opacity: 1;
+                  outline: none;
+                }
+              }
+            }
+            .search--location--box{
+              height: 48px;
+              line-height: 48px;
+            }
+          }
+        }
       }
     }
   }
@@ -172,6 +232,11 @@ body {
         }
       }
     }
+    //.batch--two--level--menu--bg{
+    //  position: absolute;
+    //  right: 0px;
+    //  bottom: 20px;
+    //}
   }
 }
 
@@ -202,7 +267,8 @@ body {
     .card--actions--btn--box{
       background: #E8EDF1;
       margin: 0;
-      padding: 8px;
+      padding: 5px 8px 4px 8px;
+      font-size: 18px;
     }
     .card--actions--pull--left{
       float: left;
@@ -358,21 +424,23 @@ body {
       width: 315px;
       margin-left: 35px;
       .new--project--box{
-        height: 262px;
+        height: 246px;
         border-radius: 5px;
-        background: #a1a1a1;
+        background: #ecf6fb;
         margin: 21px 0 0 0;
+        color: #3a87ad;
+        border: 1px solid #d0eff5;
         &__head-box{
-          padding: 30px 30px 20px 30px;
+          padding: 40px 30px 20px 30px;
           .title{
-            font-size: 18px;
-            color: #ffffff;
+            font-size: 16px;
+            //color: #ffffff;
             padding-left: 15px;
           }
         }
         .prompt-content{
           padding: 0 30px 20px;
-          color: #ffffff;
+          color: inherit;
           font-size: 13px;
         }
         &__btn--box{
@@ -385,22 +453,17 @@ body {
       &.new--project--after{
         .new--project--box{
           height: 214px;
-          background: #c8eade;
-          border: 1px solid #8ad3b9;
-          &__head-box{
-            padding: 20px 30px 20px 30px;
-            .title{
-              color: #333333;
-            }
-          }
+          background: #d9edf7;
+          border: 1px solid #bce8f1 ;
+          margin-bottom: 30px;
           .prompt-content{
-            color: #333333;
+            color: inherit;
           }
         }
         .data--template{
           color: #999999;
           padding-bottom: 4px;
-          margin: 30px 0 15px 0;
+          margin: 0px 0 15px 0;
           border-bottom: 2px solid #d7d7d7;
         }
         .data--template--content{

@@ -21,8 +21,8 @@ body {
     width: 178px;
     background: #464646;
     position: relative !important;
-    z-index: 99;
-    box-shadow: -5px 0px 10px 3px rgba(0, 0, 0, 0.1) inset; }
+    z-index: 70;
+    box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1) inset; }
     .info--archive--main--content--wrapper .info--archive--sidebar--wrapper .header {
       height: 57px;
       min-height: 57px;
@@ -72,7 +72,7 @@ body {
               width: 20px;
               margin-right: 5px;
               text-align: center;
-              vertical-align: text-bottom; }
+              vertical-align: sub; }
           .info--archive--main--content--wrapper .info--archive--sidebar--wrapper .info--archive--sidebar--content .sidebar--column--wrapper .each--column--box .md-button {
             height: 48px;
             line-height: 48px;
@@ -102,8 +102,48 @@ body {
         .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav .select--data--source--box {
           font-size: 16px;
           padding: 15px 0 10px 25px; }
+        .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav.data--error .data--base--wrapper {
+          background: #f5f5f5 url(../images/batch-two-level-menu-bg.png) no-repeat 100% 97%; }
       .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box {
-        float: left; }
+        float: left;
+        width: calc(100% - 237px);
+        padding: 10px 20px; }
+        .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper {
+          margin-bottom: 20px; }
+          .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .data--filtering--head {
+            font-size: 16px;
+            margin-bottom: 10px; }
+            .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .data--filtering--head .title {
+              display: inline-block;
+              margin-right: 5px; }
+          .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box {
+            background: #f5f5f5;
+            border-radius: 5px;
+            padding: 10px 15px 10px 15px; }
+            .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box {
+              display: inline-block;
+              width: 12%;
+              margin-right: 15px;
+              vertical-align: top; }
+              .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box.time--frame {
+                width: 33%; }
+                .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box.time--frame .attribute--value {
+                  display: inline-block;
+                  width: 45%; }
+              .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box .attribute--title {
+                display: block;
+                padding-bottom: 6px; }
+              .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box .attribute--value .ui-select-multiple.ui-select-bootstrap .ui-select-match-item {
+                background: #91a8c0;
+                color: #ffffff; }
+              .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .single--attribute--box .attribute--value .ui-select-multiple.ui-select-bootstrap .ui-select-match .close {
+                font-size: 21px;
+                color: #ffffff;
+                opacity: 1;
+                outline: none; }
+            .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .data--filtering--wrapper .filter--properties--box .search--location--box {
+              height: 48px;
+              line-height: 48px; }
   .info--archive--main--content--wrapper .data--base--wrapper {
     height: 100%;
     width: 235px;
@@ -149,7 +189,8 @@ body {
   .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--btn--box {
     background: #E8EDF1;
     margin: 0;
-    padding: 8px; }
+    padding: 5px 8px 4px 8px;
+    font-size: 18px; }
   .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--left {
     float: left; }
     .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--actions--pull--left .icon--button {
@@ -272,19 +313,20 @@ body {
       width: 315px;
       margin-left: 35px; }
       .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content .new--project--box {
-        height: 262px;
+        height: 246px;
         border-radius: 5px;
-        background: #a1a1a1;
-        margin: 21px 0 0 0; }
+        background: #ecf6fb;
+        margin: 21px 0 0 0;
+        color: #3a87ad;
+        border: 1px solid #d0eff5; }
         .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content .new--project--box__head-box {
-          padding: 30px 30px 20px 30px; }
+          padding: 40px 30px 20px 30px; }
           .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content .new--project--box__head-box .title {
-            font-size: 18px;
-            color: #ffffff;
+            font-size: 16px;
             padding-left: 15px; }
         .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content .new--project--box .prompt-content {
           padding: 0 30px 20px;
-          color: #ffffff;
+          color: inherit;
           font-size: 13px; }
         .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content .new--project--box__btn--box {
           text-align: center; }
@@ -292,18 +334,15 @@ body {
             padding: 2px 30px; }
       .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .new--project--box {
         height: 214px;
-        background: #c8eade;
-        border: 1px solid #8ad3b9; }
-        .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .new--project--box__head-box {
-          padding: 20px 30px 20px 30px; }
-          .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .new--project--box__head-box .title {
-            color: #333333; }
+        background: #d9edf7;
+        border: 1px solid #bce8f1;
+        margin-bottom: 30px; }
         .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .new--project--box .prompt-content {
-          color: #333333; }
+          color: inherit; }
       .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .data--template {
         color: #999999;
         padding-bottom: 4px;
-        margin: 30px 0 15px 0;
+        margin: 0px 0 15px 0;
         border-bottom: 2px solid #d7d7d7; }
       .edit--project--manage--modal--wrapper .edit--project--manage--modal--content .right--content.new--project--after .data--template--content {
         padding: 10px 0 15px 0;
