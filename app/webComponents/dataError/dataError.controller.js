@@ -18,9 +18,6 @@
       vm.dataType;
       vm.parameter = $stateParams;
       init = function() {
-        dataBaseService.test().then(function(res) {
-          return console.log(res);
-        });
         initGrid();
         loadSystemSource();
         loadUnit();

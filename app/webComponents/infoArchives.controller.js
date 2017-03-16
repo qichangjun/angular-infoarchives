@@ -2,10 +2,13 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("infoArchivesController", [
-    '$scope', '$log', 'infoArchivesService', '$state', '$timeout', 'loginService', 'mdToastService', '$translate', 'Cookies', '$locale', 'uibDatepickerPopupConfig', function($scope, $log, infoArchivesService, $state, $timeout, loginService, mdToastService, $translate, Cookies, $locale, uibDatepickerPopupConfig) {
+    '$scope', '$log', 'infoArchivesService', '$state', '$timeout', 'loginService', 'mdToastService', '$translate', 'Cookies', '$locale', 'uibDatepickerPopupConfig', '$rootScope', function($scope, $log, infoArchivesService, $state, $timeout, loginService, mdToastService, $translate, Cookies, $locale, uibDatepickerPopupConfig, $rootScope) {
       var changeLanguage, changeRoute, init, loginOut, vm;
       vm = this;
       vm.currentsState = $state.current.name;
+      $rootScope.$on('$stateChangeStart', function(evt, next, curr) {
+        return vm.currentsState = next.name;
+      });
       init = function() {
         var locales;
         locales = {
@@ -72,8 +75,7 @@
         $translate.use(vm.language);
       };
       changeRoute = function(url) {
-        $state.go(url);
-        return vm.currentsState = url;
+        return $state.go(url);
       };
       loginOut = function() {
         vm.loading = true;
