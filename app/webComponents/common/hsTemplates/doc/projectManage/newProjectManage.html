@@ -42,15 +42,51 @@
                         <div class="new--project--row">归档策略</div>
                         <div class="attribute--row">
                             <span class="single--attribute--box__title">档号规则</span>
-                            <span>系统号&nbsp;&nbsp;-&nbsp;&nbsp;全宗号&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                            <md-select placeholder="门类号" ng-model="vm.entity.ruleType" class="single--attribute--box__select ref--rules--short--select">
-                                <md-option ng-value="ruleType.name" ng-repeat="ruleType in vm.ruleType">{{ruleType.name}}</md-option>
-                            </md-select>
-                            <span>&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                            <md-select placeholder="年度" ng-model="vm.entity.year" class="single--attribute--box__select ref--rules--short--select">
-                                <md-option ng-value="year" ng-repeat="year in vm.years">{{year}}</md-option>
-                            </md-select>
-                            <span>&nbsp;&nbsp;-&nbsp;&nbsp;流水号</span>
+                            <div ng-if="vm.entity.rules.length == 0" style="margin-left: 50px;">
+                                <md-menu>
+                                    <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="$mdMenu.open()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </md-button>
+                                    <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                                        <md-menu-item >
+                                            <md-button ng-click="vm.addString()">
+                                                添加字符串
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item >
+                                            <md-button ng-click="vm.addRule()">
+                                                添加属性
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </div>
+                            <div ng-repeat="rule in vm.entity.rules track by $index" style="margin-left: 50px;">
+                                <md-select  ng-if="rule.type == 'rule'" placeholder="请选择" ng-model="rule.value" class="single--attribute--box__select ref--rules--short--select">
+                                    <md-option ng-value="ruleType.name" ng-repeat="ruleType in vm.ruleType">{{ruleType.name}}</md-option>
+                                </md-select>
+                                <input style="width:77px" ng-if="rule.type == 'string'" ng-model="rule.value" class="form-control single--attribute--box__input">
+                                <md-menu>
+                                    <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="$mdMenu.open()">
+                                        <span class="glyphicon glyphicon-plus"></span>
+                                    </md-button>
+                                    <md-menu-content width="4" ng-mouseleave="$mdMenu.close()">
+                                        <md-menu-item >
+                                            <md-button ng-click="vm.addString($index)">
+                                                添加字符串
+                                            </md-button>
+                                        </md-menu-item>
+                                        <md-menu-item >
+                                            <md-button ng-click="vm.addRule($index)">
+                                                添加属性
+                                            </md-button>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                                <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="vm.deleteRule($index)">
+                                    <span class="glyphicon glyphicon-minus"></span>
+                                </md-button>
+                            </div>
                         </div>
                         <div class="attribute--row">
                             <div class="single--attribute--box">

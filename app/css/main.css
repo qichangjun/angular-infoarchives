@@ -175,6 +175,12 @@ body {
   background: #fafafa; }
   .project--manage--main--content--wrapper .new--project--wrapper {
     width: 100%; }
+    .project--manage--main--content--wrapper .new--project--wrapper .new--project--btn--box {
+      height: 79px;
+      padding-bottom: 8px; }
+      .project--manage--main--content--wrapper .new--project--wrapper .new--project--btn--box .new--project--btn {
+        margin: 15px 8px;
+        padding: 4px 45px; }
   .project--manage--main--content--wrapper .project--manage--data--list--wrapper .card--title--box {
     background: #2D7D9A;
     padding: 11px 14px 6px 14px;
@@ -256,10 +262,16 @@ body {
   padding: 20px; }
 
 .green--btn {
-  background: #40b98e !important;
+  background: #40B98E !important;
   color: #ffffff !important; }
   .green--btn:hover {
-    background: #40b98e; }
+    background: #03ce86 !important; }
+
+.red--btn {
+  background: #E1654F !important;
+  color: #ffffff !important; }
+  .red--btn:hover {
+    background: #de421b !important; }
 
 .edit--project--manage--modal--wrapper {
   width: 970px; }

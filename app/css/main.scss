@@ -1,6 +1,5 @@
 @charset "utf-8";
 
-
 .project-icon-tool{
   opacity: 0.5;
   transition-duration: 0.5s;
@@ -247,6 +246,15 @@ body {
   background: #fafafa;
   .new--project--wrapper{
     width: 100%;
+    //Change height
+    .new--project--btn--box{
+      height: 79px;
+      padding-bottom: 8px;
+      .new--project--btn{
+        margin: 15px 8px;
+        padding: 4px 45px;
+      }
+    }
   }
   .project--manage--data--list--wrapper{
     .card--title--box{
@@ -354,10 +362,17 @@ body {
   padding: 20px;
 }
 .green--btn{
-  background: #40b98e !important;
+  background: #40B98E !important;
   color: #ffffff !important;
   &:hover{
-    background: #40b98e;
+    background: #03ce86 !important;
+  }
+}
+.red--btn{
+  background: #E1654F !important;
+  color: #ffffff !important;
+  &:hover{
+    background: #de421b !important;
   }
 }
 //editProjectManage

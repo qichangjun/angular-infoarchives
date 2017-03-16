@@ -60,10 +60,11 @@
     }
   ]).controller('newProjectController', [
     '$scope', '$log', '$stateParams', '$mdDialog', 'parameter', 'projectManageService', function($scope, $log, $stateParams, $mdDialog, parameter, projectManageService) {
-      var cancel, init, loadDataBase, newProject, vm;
+      var addRule, addString, cancel, deleteRule, init, loadDataBase, newProject, vm;
       vm = this;
       vm.parameter = parameter;
       vm.entity = {};
+      vm.entity.rules = [];
       init = function() {
         vm.ruleType = [
           {
@@ -79,7 +80,14 @@
         return $mdDialog.cancel();
       };
       newProject = function() {
+        var i, j, len, ref, rows;
+        vm.entity.ruleValue = '';
         vm.loading = true;
+        ref = vm.entity.rules;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          vm.entity.ruleValue = vm.entity.ruleValue + rows.value;
+        }
         return projectManageService.newProject(vm.entity).then(function(res) {
           vm.loading = false;
           return $mdDialog.hide(vm.entity);
@@ -92,6 +100,38 @@
           return vm.dataBases = res.data;
         }, function(res) {});
       };
+      addRule = function(index) {
+        if (index >= 0) {
+          return vm.entity.rules.splice(index + 1, 0, {
+            type: 'rule',
+            value: 'none'
+          });
+        } else {
+          return vm.entity.rules.push({
+            type: 'rule',
+            value: 'none'
+          });
+        }
+      };
+      addString = function(index) {
+        if (index >= 0) {
+          return vm.entity.rules.splice(index + 1, 0, {
+            type: 'string',
+            value: '-'
+          });
+        } else {
+          return vm.entity.rules.push({
+            type: 'string',
+            value: '-'
+          });
+        }
+      };
+      deleteRule = function(index) {
+        return vm.entity.rules.splice(index, 1);
+      };
+      vm.deleteRule = deleteRule;
+      vm.addString = addString;
+      vm.addRule = addRule;
       vm.loadDataBase = loadDataBase;
       vm.newProject = newProject;
       vm.cancel = cancel;

@@ -25,8 +25,6 @@
 
     </md-sidenav>
 </div>
-
-
 <div class="anim-slide-left data--base--sidenav--right--box">
     <div class="data--filtering--wrapper">
         <div class="data--filtering--head">
@@ -69,35 +67,22 @@
             </div>
             <div class="single--attribute--box time--frame">
                 <span class="attribute--title">时间范围</span>
-                <div layout="row" class="attribute--value">
-                    <md-input-container class="select--time">
-                        <div flex-gt-xs>
-                            <md-datepicker
-                                    ng-init="vm.dateFrom = (vm.parameter.dateFrom | toDate)"
-                                    ng-model="vm.dateFrom"
-                                    ng-change="vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search()"
-                                    md-placeholder="选择日期"
-                                    md-open-on-focus
-                                    ></md-datepicker>
-                            <md-button ng-click="vm.dateFrom = null;vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search();">清除</md-button>
-                        </div>
-                    </md-input-container>
+                <div  layout="row" class="attribute--value">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateFrom" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
                 </div>
                 <span>至</span>
-
-                <div layout="row" class="attribute--value">
-                    <md-input-container class="select--time">
-                        <div flex-gt-xs>
-                            <md-datepicker
-                                    ng-init="vm.dateTo = (vm.parameter.dateTo | toDate)"
-                                    ng-model="vm.dateTo"
-                                    ng-change="vm.parameter.dateTo = vm.dateTo.toISOString(); vm.search()"
-                                    md-placeholder="选择日期"
-                                    md-open-on-focus
-                                    ></md-datepicker>
-                            <md-button ng-click="vm.dateTo = null;vm.parameter.dateFrom = vm.dateFrom.toISOString(); vm.search();">清除</md-button>
-                        </div>
-                    </md-input-container>
+                <div  layout="row" class="attribute--value">
+                    <p class="input-group">
+                        <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateTo" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                          <span class="input-group-btn">
+                            <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                          </span>
+                    </p>
                 </div>
             </div>
             <div class="search--location--box">
