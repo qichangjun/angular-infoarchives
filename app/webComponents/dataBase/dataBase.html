@@ -27,9 +27,10 @@
     <div class="data--filtering--wrapper">
         <div class="data--filtering--head">
             <span class="title">数据过滤</span>
-            <i class="fa fa-angle-down put--away--btn" aria-hidden="true"></i>
+            <i ng-show="vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-down put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
+            <i ng-show="!vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-right put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
         </div>
-        <div class="filter--properties--box">
+        <div class="filter--properties--box" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]" style="transition: .3s linear all;">
             <div class="clearfix">
                 <div class="single--attribute--box">
                 <span class="attribute--title">按数据形态</span>

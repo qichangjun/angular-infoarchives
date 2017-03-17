@@ -419,7 +419,6 @@ select.ui-grid-filter-select:hover {
   text-overflow: ellipsis;
   overflow: hidden;
   height: 100%;
-  border-bottom: 1px solid #eeeeee;
   line-height: 30px;
   background: #ffffff;
 }

@@ -29,9 +29,10 @@
     <div class="data--filtering--wrapper">
         <div class="data--filtering--head">
             <span class="title">数据过滤</span>
-            <i class="fa fa-angle-down put--away--btn" aria-hidden="true"></i>
+            <i ng-show="vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-down put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
+            <i ng-show="!vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-right put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
         </div>
-        <div class="filter--properties--box">
+        <div class="filter--properties--box" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]" style="transition: .3s linear all;">
             <div class="single--attribute--box">
                 <span class="attribute--title">按数据形态</span>
                 <div class="attribute--value">
@@ -93,18 +94,20 @@
         </div>
     </div>
     <div >
-        <div style="width:100%;margin-bottom: 10px;">
-            <h1>批次信息</h1>
-            <span>共有132个批次信息</span>
+        <div class="clearfix batch--info--box" style="width:100%;margin-bottom: 10px;">
+            <div class="batch--info--count">
+                <span class="title">批次信息</span>
+                <span class="data--count">共有132个批次信息</span>
+            </div>
             <md-button class="md-raised pull-right green--btn" ng-click="vm.search()">
                 <span class="glyphicon glyphicon-new-window"></span>
-                <span style="padding:10px">导出报表</span></md-button>
+                <span>导出报表</span></md-button>
             <md-button  class="md-raised pull-right red--btn" ng-click="vm.search()">
                 <span class="glyphicon glyphicon-refresh"></span>
-                <span style="padding:10px">强制转换</span>
+                <span>强制转换</span>
                 </md-button>
         </div>
-        <div style="margin-top: 33px;" ui-grid="gridOptions" class="common--uigrid--height" ui-grid-selection ui-grid-infinite-scroll></div>
+        <div ui-grid="gridOptions" class="common--uigrid--height" ui-grid-selection ui-grid-infinite-scroll></div>
     </div>
 
 </div>

@@ -1,3 +1,11 @@
+.hiddenTool {
+  padding: 0px !important;
+  height: 0px;
+  overflow: hidden; }
+
+.showTool {
+  height: 141px; }
+
 * {
   outline: none; }
 
@@ -196,6 +204,18 @@ body {
               height: 48px;
               line-height: 48px;
               clear: both; }
+        .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .batch--info--box {
+          height: 48px;
+          line-height: 48px;
+          margin-bottom: 10px; }
+          .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .batch--info--box .batch--info--count {
+            display: inline-block;
+            vertical-align: sub; }
+            .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .batch--info--box .batch--info--count .title {
+              font-size: 16px;
+              margin-right: 15px; }
+            .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav--right--box .batch--info--box .batch--info--count .data--count {
+              color: #3B98BE; }
   .info--archive--main--content--wrapper .data--base--wrapper {
     height: 100%;
     width: 235px;
@@ -315,13 +335,15 @@ body {
 
 .green--btn {
   background: #40B98E !important;
-  color: #ffffff !important; }
+  color: #ffffff !important;
+  padding: 0 12px; }
   .green--btn:hover {
     background: #03ce86 !important; }
 
 .red--btn {
   background: #E1654F !important;
-  color: #ffffff !important; }
+  color: #ffffff !important;
+  padding: 0 12px; }
   .red--btn:hover {
     background: #de421b !important; }
 

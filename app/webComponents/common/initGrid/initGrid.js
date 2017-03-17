@@ -23,6 +23,7 @@
           gridMenuTitleFilter: hsTranslateService.translate,
           enableRowSelection: true,
           enableSelectAll: true,
+          enableHorizontalScrollbar: false,
           paginationPageSizes: [5, 15, 20],
           paginationPageSize: Number($stateParams.pageSize) || 50,
           paginationCurrentPage: Number($stateParams.currentPage) || 1,
