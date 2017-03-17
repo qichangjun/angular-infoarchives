@@ -133,9 +133,7 @@
           res.data = res.data.concat(arry);
           i++;
         }
-        $timeout(function() {
-          return deferred.resolve(res);
-        }, 1000);
+        deferred.resolve(res);
         return deferred.promise;
       };
       this.getGridData = getGridData;

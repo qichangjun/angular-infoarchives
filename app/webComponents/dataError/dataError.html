@@ -87,9 +87,8 @@
             </div>
             <div class="search--location--box">
                 <div flex-gt-sm="20">
-                    <md-checkbox  ng-checked="vm.parameter.dataError" ng-click="vm.parameter.dataError=!vm.parameter.dataError;vm.search()"  aria-label="Checkbox 1">
-                        只显示有异常的批次
-                    </md-checkbox>
+                    <input type="checkbox" ng-click="vm.parameter.dataError = !vm.parameter.dataError" ng-checked="vm.parameter.dataError">
+                    <span style="padding: 5px 0px">只显示有异常的批次</span>
                     <md-button class="md-raised pull-right green--btn" ng-click="vm.search()">搜索</md-button>
                 </div>
             </div>
