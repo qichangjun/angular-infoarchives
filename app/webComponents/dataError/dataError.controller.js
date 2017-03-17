@@ -27,49 +27,20 @@
       initGrid = function() {
         i18nService.setCurrentLang('zh-cn');
         return $scope.gridOptions = {
+          showHeader: false,
           infiniteScrollRowsFromEnd: 30,
           infiniteScrollDown: true,
           rowTemplate: hsTpl.hsRowTemplate,
-          rowHeight: 40,
-          saveSort: false,
-          selectionRowHeaderWidth: 29,
-          enableGridMenu: true,
-          enablePaginationControls: true,
-          enableRowSelection: true,
-          enableSelectAll: true,
-          useExternalSorting: true,
+          rowHeight: 100,
           onRegisterApi: function(gridApi) {
             gridApi.infiniteScroll.on.needLoadMoreData($scope, getDataDown);
-            $scope.gridApi = gridApi;
-            $scope.gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
-              if (sortColumns.length === 0) {
-                return vm.parameter.sortWay = null;
-              } else {
-                vm.parameter.sortWay = sortColumns[0].sort.direction.toLocaleUpperCase();
-                return vm.parameter.sortField = sortColumns[0].name;
-              }
-            });
-            return $scope.cancelSelect = function(row) {
-              if (gridApi.selection) {
-                if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] === row) {
-                  gridApi.selection.clearSelectedRows();
-                } else if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] !== row) {
-                  gridApi.selection.clearSelectedRows();
-                  gridApi.selection.selectRow(row);
-                } else if (gridApi.selection.getSelectedRows().length < 1) {
-                  gridApi.selection.selectRow(row);
-                } else if (gridApi.selection.getSelectedRows().length > 1) {
-                  gridApi.selection.clearSelectedRows();
-                  gridApi.selection.selectRow(row);
-                }
-              }
-            };
+            return $scope.gridApi = gridApi;
           }
         };
       };
       getDataDown = function() {
         if (vm.parameter.objectId) {
-          return dataBaseService.getGridData(vm.parameter).then(function(res) {
+          return dataErrorService.getGridData(vm.parameter).then(function(res) {
             $scope.gridApi.infiniteScroll.saveScrollPercentage();
             $scope.gridOptions.data = $scope.gridOptions.data.concat(res.data);
             return $scope.gridApi.infiniteScroll.dataLoaded(true, true).then(function() {});
@@ -96,20 +67,12 @@
       getGridData = function() {
         vm.loading = true;
         if (vm.parameter.objectId) {
-          return dataBaseService.getGridData(vm.parameter).then(function(res) {
-            var column, i, len, ref, results;
+          return dataErrorService.getGridData(vm.parameter).then(function(res) {
             vm.loading = false;
             $scope.gridOptions.data = res.data;
             $scope.gridOptions.totalItems = 200;
-            $scope.gridOptions.columnDefs = hsUiGridTemplates.dataBase;
-            $scope.gridOptions.columnVirtualizationThreshold = hsUiGridTemplates.dataBase.length;
-            ref = $scope.gridOptions.columnDefs;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              column = ref[i];
-              results.push(column.enableColumnMenu = false);
-            }
-            return results;
+            $scope.gridOptions.columnDefs = hsUiGridTemplates.dataError;
+            return $scope.gridOptions.columnVirtualizationThreshold = hsUiGridTemplates.dataError.length;
           }, function(res) {});
         }
       };
