@@ -30,7 +30,7 @@
             <i ng-show="vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-down put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
             <i ng-show="!vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-right put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
         </div>
-        <div class="filter--properties--box" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]" style="transition: .3s linear all;">
+        <div class="filter--properties--box" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]"  style="transition: all 0.3s ease-in-out;">
             <div class="clearfix">
                 <div class="single--attribute--box">
                 <span class="attribute--title">按数据形态</span>
