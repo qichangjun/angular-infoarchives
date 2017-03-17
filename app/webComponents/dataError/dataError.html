@@ -86,16 +86,25 @@
                 </div>
             </div>
             <div class="search--location--box">
-                <div flex-gt-sm="20">
-                    <input type="checkbox" ng-click="vm.parameter.dataError = !vm.parameter.dataError" ng-checked="vm.parameter.dataError">
-                    <span style="padding: 5px 0px">只显示有异常的批次</span>
-                    <md-button class="md-raised pull-right green--btn" ng-click="vm.search()">搜索</md-button>
-                </div>
+                <input type="checkbox" ng-click="vm.parameter.dataError = !vm.parameter.dataError" ng-checked="vm.parameter.dataError">
+                <span style="padding: 5px 0px">只显示有异常的批次</span>
+                <md-button class="md-raised pull-right green--btn" ng-click="vm.search()">搜索</md-button>
             </div>
         </div>
     </div>
     <div >
-        <div  ui-grid="gridOptions" class="common--uigrid--height"  ui-grid-infinite-scroll></div>
+        <div style="width:100%;margin-bottom: 10px;">
+            <h1>批次信息</h1>
+            <span>共有132个批次信息</span>
+            <md-button class="md-raised pull-right green--btn" ng-click="vm.search()">
+                <span class="glyphicon glyphicon-new-window"></span>
+                <span style="padding:10px">导出报表</span></md-button>
+            <md-button  class="md-raised pull-right red--btn" ng-click="vm.search()">
+                <span class="glyphicon glyphicon-refresh"></span>
+                <span style="padding:10px">强制转换</span>
+                </md-button>
+        </div>
+        <div style="margin-top: 33px;" ui-grid="gridOptions" class="common--uigrid--height" ui-grid-selection ui-grid-infinite-scroll></div>
     </div>
 
 </div>

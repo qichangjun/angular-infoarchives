@@ -59,43 +59,40 @@
 </md-sidenav>
     <div class="info--archive--right--content--wrapper">
         <div class="top--head--box">
-            <md-toolbar class="md-menu-toolbar "  style="background: transparent;float: right;width: 100px">
-                <div layout="row">
-                    <div>
-                        <md-menu-bar >
-                            <md-menu>
-                                <button ng-click="$mdMenu.open()">
-                                    用户
-                                </button>
-                                <md-menu-content>
-                                    <md-menu-item class="md-indent">
-                                        <md-menu>
-                                            <md-button ng-click="$mdMenu.open()">切换语言</md-button>
-                                            <md-menu-content width="3">
-                                                <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
-                                                <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
-                                                <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="xxx">xxx</md-menu-item>
-                                            </md-menu-content>
-                                        </md-menu>
-                                    </md-menu-item>
-                                    <md-menu-divider></md-menu-divider>
-                                    <md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler</md-menu-item>
-                                    <md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar</md-menu-item>
-                                    <md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions</md-menu-item>
-                                    <md-menu-divider></md-menu-divider>
-                                    <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
-                                    <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
-                                    <md-menu-item class="md-indent">
-                                        <md-button ng-click="vm.loginOut()">
-                                            登出
-                                        </md-button>
-                                    </md-menu-item>
-                                </md-menu-content>
-                            </md-menu>
-                        </md-menu-bar>
-                    </div>
-                </div>
-            </md-toolbar>
+            <div layout="row" class="admin--info">
+                <md-menu-bar >
+                    <md-menu>
+                        <a ng-click="$mdMenu.open()" class="admin--info__link">
+                            <img class="navbar--admin--icon" src="images/navbar--admin--icon.jpg" alt=""/>
+                            <span class="caret"></span>
+                        </a>
+                        <md-menu-content>
+                            <md-menu-item class="md-indent">
+                                <md-menu>
+                                    <md-button ng-click="$mdMenu.open()">切换语言</md-button>
+                                    <md-menu-content width="3">
+                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
+                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
+                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="xxx">xxx</md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                            </md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item type="checkbox" ng-model="ctrl.settings.showRuler">Show ruler</md-menu-item>
+                            <md-menu-item type="checkbox" ng-model="ctrl.settings.showEquationToolbar">Show equation toolbar</md-menu-item>
+                            <md-menu-item type="checkbox" ng-model="ctrl.settings.showSpellingSuggestions">Show spelling suggestions</md-menu-item>
+                            <md-menu-divider></md-menu-divider>
+                            <md-menu-item type="checkbox" ng-model="ctrl.settings.compactControls">Compact controls</md-menu-item>
+                            <md-menu-item type="checkbox" ng-model="ctrl.settings.fullScreen">Full screen</md-menu-item>
+                            <md-menu-item class="md-indent">
+                                <md-button ng-click="vm.loginOut()">
+                                    登出
+                                </md-button>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
+            </div>
         </div>
         <div ui-view class="anim-in-out data--base--sidenav--box" data-anim-sync="true" ></div>
     </div>

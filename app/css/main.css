@@ -111,6 +111,21 @@ body {
       max-width: 1742px;
       width: auto;
       background: #eaeae2; }
+      .info--archive--main--content--wrapper .info--archive--right--content--wrapper .top--head--box .admin--info {
+        float: right;
+        height: 57px;
+        line-height: 57px;
+        margin-right: 5px; }
+        .info--archive--main--content--wrapper .info--archive--right--content--wrapper .top--head--box .admin--info__link {
+          cursor: pointer;
+          text-decoration: none;
+          color: #333333;
+          font-size: 14px; }
+          .info--archive--main--content--wrapper .info--archive--right--content--wrapper .top--head--box .admin--info__link .navbar--admin--icon {
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            margin-right: 5px; }
     .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box {
       position: relative;
       z-index: 10;
@@ -475,4 +490,4 @@ body {
     margin: 0;
     height: 34px; }
 
-/*# sourceMappingURL=../../maps/css/main.css.map */
+/*# sourceMappingURL=main.css.map */

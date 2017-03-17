@@ -132,6 +132,24 @@ body {
       max-width: 1742px;
       width: auto;
       background: #eaeae2;
+      .admin--info{
+        float: right;
+        height: 57px;
+        line-height: 57px;
+        margin-right: 5px;
+        &__link{
+          cursor: pointer;
+          text-decoration: none;
+          color: #333333;
+          font-size: 14px;
+          .navbar--admin--icon{
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            margin-right: 5px;
+          }
+        }
+      }
     }
     .data--base--sidenav--box{
       //overflow-x: hidden;
