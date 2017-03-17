@@ -33,6 +33,7 @@ div.ui-grid-cell input.edit-input {
 .ui-grid-row:nth-child(odd) .ui-grid-cell {
   background-color: transparent;
   border-right: none; }
+
 .ui-grid-row:nth-child(even) .ui-grid-cell {
   background-color: transparent;
   border-right: none; }
@@ -116,4 +117,4 @@ div.ui-grid-cell input.edit-input {
   margin-left: 0px;
   margin-top: 18px; }
 
-/*# sourceMappingURL=uiGridTemplates.css.map */
+/*# sourceMappingURL=../../../../../maps/webComponents/common/hsUiGridTemplates/css/uiGridTemplates.css.map */

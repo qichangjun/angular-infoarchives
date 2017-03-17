@@ -1510,6 +1510,7 @@ select[multiple].ui-grid-pager-row-count-picker select {
   -ms-user-select: none;
   user-select: none;
   cursor: default;
+  height: 100%;
 }
 .ui-grid-selection-row-header-buttons {
   cursor: pointer;

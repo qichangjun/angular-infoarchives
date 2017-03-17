@@ -1,5 +1,7 @@
 @charset "utf-8";
-
+* {
+  outline:none;
+}
 .project-icon-tool{
   opacity: 0.5;
   transition-duration: 0.5s;
@@ -36,7 +38,9 @@ body {
 }
 
 .info--archive--main--content--wrapper{
-  width: 1920px;
+  max-width: 1920px;
+  min-width: 1200px;
+  width: auto;
   margin: 0 auto;
   height: 100%;
   position: relative;
@@ -46,14 +50,14 @@ body {
     background: #464646;
     position: relative !important;
     z-index: 70;
-    box-shadow: -5px 0px 10px  rgba(0,0,0,0.1) inset;
+    box-shadow: -5px 0 10px  rgba(0,0,0,0.1) inset;
     .header{
       height: 57px;
       min-height: 57px;
       background: #40b98e;
       font-size: 18px;
       border-right: 1px solid #40b98e;
-      box-shadow: -5px 0px 10px rgba(0, 0, 0, 0.1) inset;
+      box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1) inset;
       .md-toolbar-tools{
         height: 57px;
         font-size: 18px;
@@ -119,13 +123,14 @@ body {
   }
   .info--archive--right--content--wrapper{
     position: absolute;
-    top: 0px;
+    top: 0;
     left: 178px;
-    right: 0px;
-    bottom: 0px;
+    right: 0;
+    bottom: 0;
     .top--head--box{
       height: 57px;
-      width: 1742px;
+      max-width: 1742px;
+      width: auto;
       background: #eaeae2;
     }
     .data--base--sidenav--box{
@@ -174,20 +179,24 @@ body {
             .single--attribute--box{
               display: inline-block;
               width: 12%;
-              margin-right: 15px;
+              min-width: 130px;
+              margin-right: 1%;
               vertical-align: top;
               &.time--frame{
+                float: right;
                 width: 33%;
+                min-width: 288px;
+                margin-right: 0;
                 .attribute--value{
                   display: inline-block;
-                  width: 32%;
+                  width: 46%;
                 }
                 .select--time{
                 }
                 .time--frame__sign{
                   position: relative;
-                  bottom: 23px;
-                  padding: 0 5px;
+                  bottom: 13px;
+                  padding: 0 1%;
                 }
               }
               .attribute--title{
@@ -216,6 +225,7 @@ body {
             .search--location--box{
               height: 48px;
               line-height: 48px;
+              clear: both;
             }
           }
         }
@@ -229,7 +239,7 @@ body {
     box-shadow: none;
     .header{
       //height: 55px;
-      min-height: 0px;
+      min-height: 0;
       //background: #eaeae2;
     }
     .data--base--column--wrapper{
@@ -359,7 +369,7 @@ body {
             width: 85px;
             margin-right: 10px;
             text-align: right;
-            margin-bottom: 0px;
+            margin-bottom: 0;
             vertical-align: baseline;
           }
           &__input{
@@ -375,7 +385,7 @@ body {
             border-radius: 4px;
             height: 34px;
             line-height: 29px;
-            margin: 0px;
+            margin: 0;
             &.ref--rules--short--select{
               width: auto;
               max-width: 150px;
@@ -507,7 +517,7 @@ body {
         .data--template{
           color: #999999;
           padding-bottom: 4px;
-          margin: 0px 0 15px 0;
+          margin: 0 0 15px 0;
           border-bottom: 2px solid #d7d7d7;
         }
         .data--template--content{
@@ -608,26 +618,26 @@ body {
       }
     }
     .edit--custom--data--modal__input--box{
-      margin: 0px;
+      margin: 0;
       .md-errors-spacer{
-        min-height: 0px;
+        min-height: 0;
       }
     }
     .edit--custom--data--modal__select--box{
-      margin: 0px;
+      margin: 0;
     }
     .edit--custom--data--modal__input{
       border: 1px solid #e4e4e4;
       border-radius: 5px;
       height: 34px;
       //line-height: 29px;
-      margin: 0px;
+      margin: 0;
     }
     .edit--custom--data--modal__select{
       border: 1px solid #e4e4e4;
       border-radius: 5px;
       border-bottom: none;
-      margin: 0px;
+      margin: 0;
       height: 34px;
       //line-height: 29px;
     }
