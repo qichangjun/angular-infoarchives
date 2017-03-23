@@ -1,0 +1,45 @@
+<div class="anim-slide-right data--base--sidenav project--edit" >
+    <md-sidenav
+            class="md-sidenav-right pull--left data--base--wrapper "
+            md-component-id="left"
+            md-is-locked-open="true"
+            md-whiteframe="4"
+    >
+        <div class="select--data--source--box">
+            项目设置
+            <div class="select--data--source--box__prompt">
+                <span class="fa fa-exclamation-circle"></span>
+                请先创建数据模板
+            </div>
+            <div class="select--data--source--box__prompt">
+                <span class="fa fa-exclamation-circle"></span>
+                创建了数据模板才能配置策略
+            </div>
+        </div>
+        <div class="data--base--column--wrapper">
+            <ul class="data--base--column--box">
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.dataModule')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.dataModule'}">
+                 <a>
+                    <span class="fa fa-sitemap" aria-hidden="true"></span>
+                    数据模版
+                 </a>
+                </li>
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.basicData')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.basicData'}">
+                 <a>
+                    <span class="fa fa-info-circle" aria-hidden="true"></span>
+                    项目基本信息
+                 </a>
+                </li>
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.ruleSet')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.ruleSet'}">
+                 <a>
+                    <span class="fa fa-map-signs" aria-hidden="true"></span>
+                    策略设置
+                 </a>
+                </li>
+                <div><img class="full-right" src="images/basicdata-two-level-menu-bg.png" alt=""/></div>
+            </ul>
+
+        </div>
+    </md-sidenav>
+</div>
+<div ui-view class="anim-in-out data--base--sidenav--right--box" data-anim-sync="true" ></div>

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "MockRestangular.factory.js",
+  "sourceRoot": "",
+  "sources": [
+    "MockRestangular.factory.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EACA,OAAO,CAAC,MAAR,CAAe,OAAf,CACA,CAAC,OADD,CACS,iBADT,EAEE;IAAC,aAAD,EACE,SAAC,WAAD,GAAA;aACE,WAAW,CAAC,UAAZ,CAAuB,SAAC,qBAAD,GAAA;eACrB,qBAAqB,CAAC,UAAtB,CAAiC,0CAAjC,EADqB;MAAA,CAAvB,EADF;IAAA,CADF;GAFF,CADA,CAAA;AAAA"
+}

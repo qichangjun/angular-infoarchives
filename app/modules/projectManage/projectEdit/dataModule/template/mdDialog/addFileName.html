@@ -1,0 +1,48 @@
+<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper">
+    <form ng-cloak
+          name="newFileName"
+          novalidate
+          ng-submit="newFileName.$valid?vm.newFileName():vm.newFileName.submit=true">
+        <md-toolbar class="md-menu-toolbar">
+            <div class="md-toolbar-tools">
+                <h2 class="modal--head--title">文档模版</h2>
+                <img class="modal--head--icon" src="images/edit--custom--data--modal--head--icon.png" alt=""/>
+                <span flex></span>
+            </div>
+        </md-toolbar>
+        <md-dialog-content>
+            <div class="md-dialog-content edit--custom--data--modal--content">
+                    <span class="attribute--row--box__title">文档模版名称</span>
+                    <div class="popover-wrapper attribute--row--box__value">
+                        <input ng-model="vm.fileName"
+                               class="form-control"
+                               name="Filename"
+                               required
+                               hs-form-message
+                               hs-form-message-show="vm.newFileName.submit"
+                               hs-form-message-template="newFileName_Filename.html"
+                        >
+                    </div>
+            </div>
+        </md-dialog-content>
+
+        <md-dialog-actions layout="row"class="new--project--manage--modal--footer">
+            <span flex></span>
+            <md-button  ng-click="vm.cancel()">
+                取消
+            </md-button>
+            <md-button  type="submit" class="green--btn">
+                确定
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+<script type="text/ng-template" id="newFileName_Filename.html" >
+    <div ng-show="vm.newFileName.submit">
+        <div  ng-show="newFileName.Filename.$error.required" >
+            <div hs-form-message-chrome-bubble  >
+                <span >请输入名称</span>
+            </div>
+        </div>
+    </div>
+</script>

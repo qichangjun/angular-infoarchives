@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "module.js",
+  "sourceRoot": "",
+  "sources": [
+    "module.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EAEA,OAAO,CAAC,MAAR,CAAe,OAAf,EAAwB,CACtB,WADsB,EAEtB,SAFsB,EAGtB,YAHsB,EAItB,WAJsB,EAKtB,wBALsB,EAMtB,aANsB,EAOtB,UAPsB,EAQtB,YARsB,EAStB,SATsB,EAUtB,mBAVsB,EAWtB,cAXsB,EAYtB,iBAZsB,EAatB,iBAbsB,EActB,oBAdsB,EAetB,uBAfsB,EAgBtB,iBAhBsB,EAiBtB,qBAjBsB,EAkBtB,uBAlBsB,EAmBtB,mBAnBsB,EAoBtB,oBApBsB,EAqBtB,wBArBsB,EAsBtB,cAtBsB,EAuBtB,YAvBsB,EAwBtB,aAxBsB,EAyBtB,WAzBsB,EA0BtB,qBA1BsB,EA2BtB,WA3BsB,CAAxB,CAFA,CAAA;AAAA"
+}

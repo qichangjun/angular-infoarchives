@@ -1,0 +1,123 @@
+@charset "utf-8";
+//projectManage
+.project--manage--main--content--wrapper{
+  width: 100%;
+  height: 100%;
+  background: #fafafa;
+  .new--project--wrapper{
+    width: 100%;
+    //Change height
+    .new--project--btn--box{
+      height: 79px;
+      padding-bottom: 8px;
+      .new--project--btn{
+        margin: 15px 8px;
+        padding: 4px 45px;
+      }
+    }
+  }
+  .project--manage--data--list--wrapper{
+    .card--title--box{
+      background: #2D7D9A;
+      padding:11px 14px 6px 14px;
+      color: #ffffff;
+      //width: 184px;
+      width: 219px;
+      .md-headline{
+        font-size: 14px;
+        line-height: 24px;
+      }
+      .md-subhead{
+        font-size: 11px;
+        color: #cccccc !important;
+      }
+    }
+    .card--actions--btn--box{
+      background: #E8EDF1;
+      margin: 0;
+      padding: 5px 8px 4px 8px;
+      font-size: 18px;
+    }
+    .card--actions--pull--left{
+      float: left;
+      .icon--button{
+        margin: 6px;
+        outline: none;
+      }
+    }
+    .card--actions--pull--right{
+      float: right ;
+      .icon--button{
+        padding: 6px;
+        outline: none;
+      }
+    }
+    .project--manage--list--img--box{
+      height: 121px;
+      width: 100%;
+      background: #ffffff;
+      display: table;
+      &__do--center{
+        display: table-cell;
+        vertical-align: middle;
+        text-align: center;
+      }
+    }
+  }
+}
+
+//newProjectManage
+.new--project--manage--modal{
+  width: 715px;
+  .new--project--content{
+    .new--project--row--box{
+      margin-bottom: 30px;
+      .new--project--row{
+        width: 100%;
+        color: #999999;
+        padding-bottom: 6px;
+        border-bottom: 1px solid #e4e4e4;
+        margin-bottom: 10px;
+      }
+      .attribute--row{
+        padding: 10px 13px;
+        .single--attribute--box{
+          width: 300px;
+          margin-right: 10px;
+          &__title{
+            display: inline-block;
+            font-weight: normal;
+            width: 85px;
+            margin-right: 10px;
+            text-align: right;
+            margin-bottom: 0;
+            vertical-align: baseline;
+          }
+          &__input{
+            display: inline-block;
+            width: 200px;
+            border-color: #e1e1e1;
+          }
+          &__select{
+            display: inline-block;
+            width: 200px;
+            border: 1px solid #e1e1e1;
+            border-bottom: none;
+            border-radius: 4px;
+            height: 34px;
+            line-height: 29px;
+            margin: 0;
+            &.ref--rules--short--select{
+              width: auto;
+              max-width: 150px;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+.new--project--manage--modal--footer{
+  border-top: 1px solid #e4e4e4;
+  padding: 20px;
+}

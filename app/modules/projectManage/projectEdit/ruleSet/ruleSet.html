@@ -1,0 +1,129 @@
+<div class="anim-slide-left">
+    <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
+        <div class="md-toolbar-tools">
+            <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
+                <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
+            </md-button>
+            <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
+            <span> > </span>
+            <span class="current--column">行政审批系统</span>
+            <span> | </span>
+            <span class="current--column">策略设置</span>
+            <md-button  ng-click="vm.save()">
+               保存
+            </md-button>
+        </div>
+    </md-toolbar>
+    <div >
+        <div ng-if="vm.showCreate" class="clearfix batch--info--box" style="width:100%;margin-bottom: 10px;">
+            <h1>您还没有创建数据模版,无法配置归档策略</h1>
+            <md-button class="md-warn md-raised md-button red--btn new--project--box__btn"  ng-click="vm.serfToCreateModule()">
+                立刻创建
+            </md-button>
+        </div>
+    </div>
+    <div ng-if="!vm.showCreate">
+        <section layout="row" layout-sm="column" layout-align="start center" layout-wrap class="edit--project--row--box">
+            <span class="edit--project--row">归档策略</span>
+            <div class="attribute--row--box">
+                <span class="attribute--row--box__title">档号规则</span>
+                <div class="new--project--row--box">
+                    <div class="attribute--row">
+                        <span ng-repeat="rule in vm.ruleProperty track by $index" style="position: relative">
+                            <a ng-if="rule.fieldType == 0" ng-click="vm.showEdit($index)">{{rule.attrDisplayName}}</a>
+                            <a ng-if="rule.fieldType == 1" ng-click="vm.showEdit($index)">{{rule.fieldValue}}</a>
+                            <a ng-if="rule.fieldType == 2" ng-click="vm.showEdit($index)">流水号</a>
+                            <div ng-show="rule.showEdit" class="md-whiteframe-12dp" style="position: absolute;width: 300px;z-index:70;background-color: white;left: 10px;">
+                                <md-button aria-label="Open menu with custom trigger"  ng-click="vm.addRule($index)">
+                                    <span >添加规则</span>
+                                </md-button>
+                                <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="vm.deleteRule($index)">
+                                    <span class="glyphicon glyphicon-trash"></span>
+                                </md-button>
+                                <div style="border:solid 1px black">
+                                    <span>元素类型</span>
+                                    <md-select  class="attribute--row--box__select" ng-model="rule.fieldType" >
+                                        <md-option ng-value="0" >属性</md-option>
+                                        <md-option ng-value="1" >分隔符</md-option>
+                                        <md-option ng-value="2" >流水号</md-option>
+                                    </md-select>
+                                    <div ng-if="rule.fieldType == 0">
+                                        <span>字段</span>
+                                        <md-select  class="attribute--row--box__select" ng-model="rule.attrName" ng-change="vm.changeAttr($index)">
+                                            <md-option ng-value="ruleType.attributeName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attributeValue}}</md-option>
+                                        </md-select>
+                                    </div>
+                                    <div ng-if="rule.fieldType == 1">
+                                        <span>字段</span>
+                                        <input type="text" ng-model="rule.fieldValue">
+                                    </div>
+                                    <div ng-if="rule.fieldType == 2">
+                                        <span>长度</span>
+                                        <input type="number" ng-model="rule.fieldSize">
+                                    </div>
+                                    <md-button aria-label="Open menu with custom trigger"  ng-click="rule.showEdit = false">
+                                            <span >确定</span>
+                                    </md-button>
+                                </div>
+                            </div>
+                            <!--<input style="width:77px" ng-if="rule.fieldType == 1" ng-model="rule.fieldValue" class="form-control single&#45;&#45;attribute&#45;&#45;box__input">-->
+                            <!--<div ng-if="rule.fieldType == 2">-->
+                                <!--流水号-->
+                                <!--<span>流水号长度</span>-->
+                                <!--<input type="number" style="width:77px"  ng-model="rule.fieldSize" class="form-control single&#45;&#45;attribute&#45;&#45;box__input">-->
+                            <!--</div>-->
+
+                            <!--<md-menu>-->
+
+                                <!--<md-menu-content width="4" ng-mouseleave="$mdMenu.close()">-->
+                                    <!--<md-menu-item >-->
+                                        <!--<md-button ng-click="vm.addString($index)">-->
+                                            <!--添加字符串-->
+                                        <!--</md-button>-->
+                                    <!--</md-menu-item>-->
+                                    <!--<md-menu-item >-->
+                                        <!--<md-button ng-click="vm.addRule($index)">-->
+                                            <!--添加属性-->
+                                        <!--</md-button>-->
+                                    <!--</md-menu-item>-->
+                                    <!--<md-menu-item >-->
+                                        <!--<md-button ng-click="vm.addSerial($index)">-->
+                                            <!--添加流水号-->
+                                        <!--</md-button>-->
+                                    <!--</md-menu-item>-->
+                                <!--</md-menu-content>-->
+                            <!--</md-menu>-->
+                            <!--<md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="vm.deleteRule($index)">-->
+                                <!--<span class="glyphicon glyphicon-minus"></span>-->
+                            <!--</md-button>-->
+                        </span>
+                        <md-button aria-label="Open menu with custom trigger"  ng-click="vm.addRule()">
+                            <span >添加规则</span>
+                        </md-button>
+                    </div>
+                    <!--<div class="attribute&#45;&#45;row">-->
+                        <!--<div class="single&#45;&#45;attribute&#45;&#45;box">-->
+                            <!--<span class="single&#45;&#45;attribute&#45;&#45;box__title"> 系统保留时间 </span>-->
+                            <!--<md-select placeholder="无" ng-model="vm.entity.keepTime" class="single&#45;&#45;attribute&#45;&#45;box__select" >-->
+                                <!--<md-option ng-value="keepTime" ng-repeat="keepTime in vm.keepTime">{{keepTime}}</md-option>-->
+                            <!--</md-select>-->
+                        <!--</div>-->
+                    <!--</div>-->
+                </div>
+            </div>
+            <!--<div class="attribute&#45;&#45;row&#45;&#45;box">-->
+                <!--<span class="attribute&#45;&#45;row&#45;&#45;box__sample">示例 ：YW001-J101-001-2017-0001</span>-->
+            <!--</div>-->
+            <!--<div class="attribute&#45;&#45;row&#45;&#45;box">-->
+                <!--<span class="attribute&#45;&#45;row&#45;&#45;box__title">系统保留时间</span>-->
+                <!--<div class="popover-wrapper">-->
+                    <!--<a href = "#" e-class="input&#45;&#45;basic&#45;&#45;style" editable-text="vm.entity.keepTime" e-name = "vm.entity.keepTime" placeholder="vm.entity.keepTime" e-single = ""> {{ vm.entity.keepTime || 'empty' }}</a>-->
+                <!--</div>-->
+
+            <!--</div>-->
+        </section>
+    </div>
+    <md-button aria-label="Open menu with custom trigger"  ng-click="vm.saveRule()">
+        <span >保存配置</span>
+    </md-button>
+</div>

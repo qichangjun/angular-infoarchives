@@ -4,9 +4,6 @@
 <!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
 <!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
   <head>
-
-
-
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Infoarchives</title>
@@ -23,7 +20,7 @@
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css"/>
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.min.css"/>
-    <link rel="stylesheet" href="vendor/angular-ui-grid-3.0.7/less/main.css" />
+    <link rel="stylesheet" href="custom_components/angular-ui-grid-3.0.7/less/main.css" />
 
 
     <!-- endbuild -->
@@ -32,10 +29,11 @@
     <!--Gulp need-->
     <!-- build:css(app) css/main.css -->
     <link rel="stylesheet" href="css/main.css" />
-    <link rel="stylesheet" href="webComponents/common/hsUiGridTemplates/css/uiGridTemplates.css" />
-    <link rel="stylesheet" href="webComponents/common/hsTemplates/css/hsTemplates.css" />
-    <link rel="stylesheet" href="webComponents/common/directive/collapsibleTree/collapsibleTree.css" />
-    <link rel="stylesheet" href="webComponents/login/css/login.css" />
+    <!--<link rel="stylesheet" href="common/hsUiGridTemplates/css/uiGridTemplates.css" />-->
+    <!--<link rel="stylesheet" href="common/hsTemplates/css/hsTemplates.css" />-->
+    <!--<link rel="stylesheet" href="common/directive/collapsibleTree/collapsibleTree.css" />-->
+    <!--<link rel="stylesheet" href="common/directive/messageVerify/css/hsFormMessage.css" />-->
+    <!--<link rel="stylesheet" href="modules/login/css/login.css" />-->
 
     <!-- endbuild -->
   </head>
@@ -45,9 +43,7 @@
 
     <!--Gulp need-->
     <!-- build:js(app) js/main.js -->
-    <script src="webComponents/hsconfig.js"></script>
     <script src="bower_components/lodash/lodash.js"></script>
-
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
@@ -65,38 +61,55 @@
     <script src="bower_components/angular-material/angular-material.js"></script>
     <script src="bower_components/angular-ui-grid/ui-grid.min.js"></script>
     <script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+
     <script src="bower_components/d3/d3.min.js"></script>
     <script src="bower_components/angular-ui-router-anim-in-out/anim-in-out.js"></script>
     <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
 
-    <script src="webComponents/app.js"></script>
-    <script src="webComponents/common/directive/collapsibleTree/angular-d3-tree.directive.js"></script>
-    <script src="webComponents/common/directive/systemSideBar/systemSideBar.directive.js"></script>
-    <script src="webComponents/common/translate/translate.service.js"></script>
-    <script src="webComponents/common/initGrid/initGrid.js"></script>
-    <script src="webComponents/common/hsUiGridTemplates/hsTpl.js"></script>
-    <script src="webComponents/common/hsUiGridTemplates/hsUiGridTemplates.js"></script>
-    <script src="webComponents/common/mdDialog/mdDialog.service.js"></script>
-    <script src="webComponents/common/mdToast/mdToast.service.js"></script>
-    <script src="webComponents/common/service/hsAuth/hsAuth.js"></script>
-    <script src="webComponents/common/service/hsApi/hsApi.js"></script>
+    <script src="common/module.js"></script>
+    <script src="common/plug.config.js"></script>
+    <script src="common/constant.js"></script>
+    <script src="common/router.js"></script>
+    <script src="common/run.js"></script>
+    <script src="common/app.config.js"></script>
+    <script src="common/factory/languageStorage.factory.js"></script>
+    <script src="common/factory/MockRestangular.factory.js"></script>
 
-    <script src="webComponents/login/login.service.js"></script>
-    <script src="webComponents/login/login.controller.js"></script>
-    <script src="webComponents/infoArchives.controller.js"></script>
-    <script src="webComponents/infoArchives.service.js"></script>
-    <script src="webComponents/dataBase/dataBase.controller.js"></script>
-    <script src="webComponents/dataBase/dataBase.service.js"></script>
-    <script src="webComponents/dataError/dataError.controller.js"></script>
-    <script src="webComponents/dataError/dataError.service.js"></script>
+    <script src="common/directive/collapsibleTree/angular-d3-tree.directive.js"></script>
+    <script src="common/directive/systemSideBar/systemSideBar.directive.js"></script>
+    <script src="common/directive/messageVerify/messageVerify.directive.js"></script>
+    <script src="common/translate/translate.service.js"></script>
+    <script src="common/initGrid/initGrid.js"></script>
+    <script src="common/mdDialog/mdDialog.service.js"></script>
+    <script src="common/mdToast/mdToast.service.js"></script>
+    <script src="common/service/hsAuth/hsAuth.js"></script>
+    <script src="common/service/hsApi/hsApi.js"></script>
 
-    <script src="webComponents/projectManage/projectManage.controller.js"></script>
-    <script src="webComponents/projectManage/projectManage.service.js"></script>
+    <script src="modules/login/login.service.js"></script>
+    <script src="modules/login/login.controller.js"></script>
 
-    <script src="webComponents/userManage/userManage.controller.js"></script>
-    <script src="webComponents/userManage/userManage.service.js"></script>
+    <script src="modules/main/infoArchives.controller.js"></script>
+    <script src="modules/main/infoArchives.service.js"></script>
+
+    <script src="modules/dataBase/dataBase.controller.js"></script>
+    <script src="modules/dataBase/dataBase.service.js"></script>
+    <script src="modules/dataError/dataError.controller.js"></script>
+    <script src="modules/dataError/dataError.service.js"></script>
+
+    <script src="modules/projectManage/projectManage.controller.js"></script>
+    <script src="modules/projectManage/projectManage.service.js"></script>
+    <script src="modules/projectManage/projectEdit/projectEdit.controller.js"></script>
+    <script src="modules/projectManage/projectEdit/basicData/basicData.controller.js"></script>
+    <script src="modules/projectManage/projectEdit/basicData/basicData.service.js"></script>
+    <script src="modules/projectManage/projectEdit/ruleSet/ruleSet.controller.js"></script>
+    <script src="modules/projectManage/projectEdit/ruleSet/ruleSet.service.js"></script>
+    <script src="modules/projectManage/projectEdit/dataModule/dataModule.controller.js"></script>
+    <script src="modules/projectManage/projectEdit/dataModule/dataModule.service.js"></script>
+
+    <script src="modules/userManage/userManage.controller.js"></script>
+    <script src="modules/userManage/userManage.service.js"></script>
 
     
     <!-- endbuild -->

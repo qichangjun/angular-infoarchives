@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "constant.js",
+  "sourceRoot": "",
+  "sources": [
+    "constant.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EACA,OAAO,CAAC,MAAR,CAAe,OAAf,CAEA,CAAC,QAFD,CAEU,SAFV,EAEqB,OAFrB,CAGA,CAAC,QAHD,CAGU,GAHV,EAGe,CAHf,CAIA,CAAC,QAJD,CAIU,QAJV,EAIoB,MAJpB,CAKA,CAAC,QALD,CAKU,OALV,EAKmB,EALnB,CAMA,CAAC,QAND,CAMU,cANV,EAM0B,EAN1B,CADA,CAAA;AAAA"
+}

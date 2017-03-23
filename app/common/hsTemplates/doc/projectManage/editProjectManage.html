@@ -1,0 +1,153 @@
+<md-dialog aria-label="Mango" class="edit--project--manage--wrapper">
+
+        <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
+                    <span class="fa fa-angle-left"></span>
+                </md-button>
+                <h2 class="title">{{vm.entity.name}}</h2>
+            </div>
+        </md-toolbar>
+
+        <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+        <md-dialog-content class="edit--project--manage--wrapper">
+
+            <div class="md-dialog-content base--info--content">
+                <form  editable-form ng-cloak name="newProject" action="">
+                    <div >
+                        <section layout="row" layout-md="row" layout-align="start center" layout-wrap class="edit--project--row--box">
+                            <span class="edit--project--row">基本信息</span>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">项目名称</span>
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style" editable-text="vm.entity.name" e-name = "vm.entity.name" placeholder="vm.entity.name" e-single = ""> {{ vm.entity.name || 'empty' }}</a>
+                                </div>
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">业务编号</span>
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style"  editable-text="vm.entity.number" e-name = "vm.entity.number" placeholder="vm.entity.number" e-single = ""> {{ vm.entity.number || 'empty' }}</a>
+                                </div>
+
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">创建时间</span>
+                                {{vm.entity.createDate}}
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">上次修改时间</span>
+                                {{vm.entity.modiftiDate}}
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">创建者</span>
+                                {{vm.entity.creator}}
+                            </div>
+                        </section>
+                        <section layout="row" layout-sm="column" layout-align="start center" layout-wrap class="edit--project--row--box">
+                            <span class="edit--project--row">源系统数据库信息</span>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">数据库类型</span>
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style" editable-text="vm.entity.dataBaseType" e-name = "vm.entity.dataBaseType" placeholder="vm.entity.dataBaseType" e-single = ""> {{ vm.entity.dataBaseType || 'empty' }}</a>
+                                </div>
+
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">数据抽取方式</span>
+                                {{vm.entity.getDataWay}}
+                            </div>
+                        </section>
+                        <section layout="row" layout-sm="column" layout-align="start center" layout-wrap class="edit--project--row--box">
+                            <span class="edit--project--row">归档策略</span>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">档号规则</span>
+                                系统号&nbsp;&nbsp;-&nbsp;&nbsp;全宗号&nbsp;&nbsp;-&nbsp;&nbsp;
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style" editable-select="vm.entity.ruleType" e-name = "vm.entity.ruleType" placeholder="vm.entity.year" e-single = "" e-ng-options="s.value as s.text for s in vm.statuses"> {{ vm.entity.ruleType || 'empty' }}</a>
+                                </div>
+                                &nbsp;&nbsp;-&nbsp;&nbsp;
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style" editable-text="vm.entity.year" e-name = "vm.entity.year" placeholder="vm.entity.year" e-single = ""> {{ vm.entity.year || 'empty' }}</a>
+                                </div>
+
+                                &nbsp;&nbsp;-&nbsp;&nbsp;流水号
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__sample">示例 ：YW001-J101-001-2017-0001</span>
+                            </div>
+                            <div class="attribute--row--box">
+                                <span class="attribute--row--box__title">系统保留时间</span>
+                                <div class="popover-wrapper">
+                                    <a href = "#" e-class="input--basic--style" editable-text="vm.entity.keepTime" e-name = "vm.entity.keepTime" placeholder="vm.entity.keepTime" e-single = ""> {{ vm.entity.keepTime || 'empty' }}</a>
+                                </div>
+
+                            </div>
+                        </section>
+                    </div>
+                </form>
+                <md-dialog-actions layout="row" class="edit--project--manage--footer">
+                    <span flex></span>
+                    <md-button ng-disabled="vm.loading" ng-click="vm.cancel()">
+                        取消
+                    </md-button>
+                    <md-button ng-disabled="vm.loading" ng-click="vm.editProject()" class="md-raised md-button green--btn">
+                        保存
+                    </md-button>
+                </md-dialog-actions>
+            </div>
+            <div class="right--content" ng-if="vm.entity.module.length == 0">
+                <div class="new--project--box">
+                    <div class="new--project--box__head-box">
+                        <img src="images/edit--project--manage--modal--new.png" alt=""/>
+                        <span class="title">还需要创建数据模板</span>
+                    </div>
+                    <div class="prompt-content">
+                        业务模板能够帮助您梳理业务流程，建立业务归档信息，并根据模板规则将业务信息填入到归档数据模型对应的位置上。
+                    </div>
+                    <div class="new--project--box__btn--box">
+                        <md-button class="md-warn md-raised md-button red--btn new--project--box__btn"  ng-click="vm.newModule($event)">
+                            <span class="glyphicon glyphicon-plus ng-scope"></span>
+                            新建模版
+                        </md-button>
+                    </div>
+                </div>
+            </div>
+            <div class="right--content new--project--after" ng-if="vm.entity.module.length > 0">
+                <div class="new--project--box" ng-show="vm.showMessage">
+                    <div class="new--project--box__head-box">
+                        <img src="images/edit--project--manage--modal--new.png" alt=""/>
+                        <span class="title">数据模版版本</span>
+                    </div>
+                    <div class="prompt-content">
+                        数据模板可以进行版本控制。你可以根据前端的业务系统信息更新，来编辑并升级数据模板。升级后原来的数据模板依旧保存着。
+                    </div>
+                    <div class="pull-right">
+                        不再显示
+                        <md-checkbox md-no-ink aria-label="Checkbox No Ink" ng-model="showMessage" ng-click="vm.hideMessage()">
+                        </md-checkbox>
+                    </div>
+                </div>
+                <div class="data--template">数据模版</div>
+                <div ng-repeat="module in vm.entity.module" class="data--template--content clearfix">
+                    <div ng-click="vm.editModule($event,module)" class="pull-left data--template--pattern">
+                        <img src="images/data--template--pattern.png" alt=""/>
+                    </div>
+                    <div class="full-right data--attribute--box">
+                        <div class="attribute--row">
+                            <span class="title">版本号</span>
+                            <span class="attribute-value">{{module.version}}.0 </span>
+                        </div>
+                        <div class="attribute--row">
+                            <span class="title">创建时间</span>
+                            <span class="attribute-value">{{module.createDate}}</span>
+                        </div>
+                        <div class="attribute--row">
+                            <span class="title">上次修改时间</span>
+                            <span class="attribute-value">{{module.modifyDate}}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </md-dialog-content>
+
+</md-dialog>

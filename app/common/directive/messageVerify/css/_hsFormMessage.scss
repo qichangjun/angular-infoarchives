@@ -1,0 +1,51 @@
+@charset "utf-8";
+.hsFormMessage-container{
+  position: absolute;
+}
+.hs-form-messages{
+  position: absolute;
+  z-index: 99;
+  padding: 3px 10px;
+  font-size: 12px;
+  margin: -6px;
+  top: 100%;
+  white-space: nowrap;
+  left: 50%;
+  border: 1px solid #bbb;
+  background: #fff;
+  border-radius: 3px;
+  box-shadow: 0 1px 2px 0 #bbb;
+  .msg-tri-outside{
+    position: absolute;
+    width: 0px;
+    height: 0;
+    left: 10px;
+    top: -15px;
+    border-style: solid;
+    border-width: 7px;
+    border-color: transparent transparent #bbb;
+  }
+  .msg-tri-inside{
+    position: absolute;
+    width: 0px;
+    height: 0;
+    left: 10px;
+    top: -14px;
+    border-style: solid;
+    border-width: 7px;
+    border-color: transparent transparent #fff;
+  }
+  .hs-form-messages__icon{
+    color: #faab20;
+    line-height: 1.5;
+    div{
+      display: inline;
+      font-size: 12px;
+      color: #000000;
+      font-family: Arial, Verdana, Tahoma, "Hiragino Sans GB", Microsoft YaHei, SimSun, sans-serif;
+      span{
+        display: inline;
+      }
+    }
+  }
+}

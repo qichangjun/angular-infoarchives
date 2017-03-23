@@ -1,0 +1,163 @@
+@charset "utf-8";
+
+.info--archive--main--content--wrapper{
+  max-width: 1920px;
+  min-width: 1200px;
+  width: auto;
+  margin: 0 auto;
+  height: 100%;
+  position: relative;
+  .info--archive--sidebar--wrapper{
+    height: 100%;
+    width: 178px;
+    background: #464646;
+    position: relative !important;
+    z-index: 70;
+    box-shadow: -5px 0 10px  rgba(0,0,0,0.1) inset;
+    .header{
+      height: 57px;
+      min-height: 57px;
+      background: #40b98e;
+      font-size: 18px;
+      border-right: 1px solid #40b98e;
+      box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1) inset;
+      .md-toolbar-tools{
+        height: 57px;
+        font-size: 18px;
+      }
+    }
+    .info--archive--sidebar--content{
+      border-right: 1px solid #3c4b4b;
+      .header--bottom--version{
+        font-size: 10px;
+        background: #689786;
+        height: 25px;
+        color: #bac9bf;
+      }
+      .sidebar--column--wrapper{
+        background: transparent;
+        color: #bbbbbb;
+        padding: 3px 0;
+        .flex{
+          padding: 8px 0;
+        }
+        .separate--column--header{
+          background: transparent;
+          color: #848484;
+          .md-subheader-inner{
+            border-bottom: 1px solid #505050;
+            padding-bottom: 6px;
+            padding-left: 30px;
+            font-size: 12px;
+          }
+        }
+        .each--column--box{
+          border-left: 5px solid #464646;
+          &.active {
+            background-color: #333333;
+            color: #ffffff !important;
+            border-left: 5px solid #de6262;
+            &:hover{
+              cursor: default !important;
+              background: #464646 !important;
+            }
+          }
+          &:hover{
+            border-color: #848484;
+          }
+          &__text{
+            min-height: 40px;
+            .item--img{
+              font-size: 20px;
+              width: 20px;
+              margin-right: 5px;
+              text-align: center;
+              vertical-align: sub;
+            }
+          }
+          .md-button{
+            height: 48px;
+            line-height: 48px;
+            padding-left: 27px;
+          }
+        }
+      }
+    }
+  }
+  .info--archive--right--content--wrapper{
+    position: absolute;
+    top: 0;
+    left: 178px;
+    right: 0;
+    bottom: 0;
+    .top--head--box{
+      height: 57px;
+      max-width: 1742px;
+      width: auto;
+      background: #eaeae2;
+      .admin--info{
+        float: right;
+        height: 57px;
+        line-height: 57px;
+        margin-right: 5px;
+        &__link{
+          cursor: pointer;
+          text-decoration: none;
+          color: #333333;
+          font-size: 14px;
+          .navbar--admin--icon{
+            width: 33px;
+            height: 33px;
+            border-radius: 50%;
+            margin-right: 5px;
+          }
+        }
+      }
+    }
+    .data--base--sidenav--box{
+      //overflow-x: hidden;
+      position: relative;
+      z-index: 10;
+      width: 100%;
+      height: calc(100% - 57px);
+      border-top: 1px solid #dfe0e1;
+      //border-left: 1px solid #d7d7d7;
+      border-right: 1px solid #f2f2f2;
+      //clear: both;
+      .data--base--sidenav{
+        float: left;
+        height: 100%;
+        border-top: 1px solid #d7d7d7;
+        .select--data--source--box{
+          font-size: 16px;
+          padding: 22px 0 20px 25px;
+          border-right: 1px solid #d7d7d7;
+          &__prompt{
+            font-size: 13px;
+            padding-top: 5px;
+            .fa{
+              color: #ff9900;
+              font-size: 15px;
+              margin-right: 5px;
+            }
+            &:first-child{
+              padding-top: 10px;
+            }
+          }
+        }
+        //data--error background--img
+        &.data--error{
+          .data--base--column--box{
+            //background: #f5f5f5 url(../images/batch-two-level-menu-bg.png) no-repeat 100% 97%;
+          }
+        }
+        &.project--edit{
+          .data--base--column--box{
+            background: #f7f7f7 url(../images/basicdata-two-level-menu-bg.png) no-repeat right 97%;
+          }
+        }
+      }
+    }
+  }
+
+}

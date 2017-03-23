@@ -1,0 +1,17 @@
+@charset "utf-8";
+.green--btn{
+  background: #40B98E !important;
+  color: #ffffff !important;
+  padding: 0 12px;
+  &:hover{
+    background: #03ce86 !important;
+  }
+}
+.red--btn{
+  background: #E1654F !important;
+  color: #ffffff !important;
+  padding: 0 12px;
+  &:hover{
+    background: #de421b !important;
+  }
+}
