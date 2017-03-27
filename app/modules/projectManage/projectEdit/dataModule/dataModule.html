@@ -1,22 +1,26 @@
-<div class="anim-slide-left ">
-    <div aria-label="customModule" class="edit--project--manage--modal--wrapper">
-        <div class="right--content" ng-if="vm.versionList.length == 0">
-            <div class="new--project--box">
-                <div class="new--project--box__head-box">
+<div class="anim-slide-left data--module--new--prompt--wrap">
+    <div aria-label="customModule" ng-show="vm.afterLoad">
+        <div ng-show="vm.versionList.length == 0">
+            <div class="new--prompt--box">
+                <div class="new--prompt--box__head">
                     <img src="images/edit--project--manage--modal--new.png" alt=""/>
-                    <span class="title">还需要创建数据模板</span>
+                    还需要创建数据模板
                 </div>
                 <div class="prompt-content">
                     业务模板能够帮助您梳理业务流程，建立业务归档信息，并根据模板规则将业务信息填入到归档数据模型对应的位置上。
                 </div>
-                <div class="new--project--box__btn--box">
-                    <md-button class="md-warn md-raised md-button red--btn new--project--box__btn"  ng-click="vm.versionList.push({versionNo:1.0});vm.currentVesion=1.0">
-                        创建数据模版
-                    </md-button>
-                </div>
+            </div>
+            <div class="new--prompt__btn--box">
+                <img src="images/create--data--template--icon.png" alt=""/>
+                <h4 class="title--content">该项目还没有定义数据模板</h4>
+                <md-button class="red--btn"  ng-click="vm.versionList.push({versionNo:1.0});vm.currentVesion=1.0">
+                    创建数据模版
+                </md-button>
+
+
             </div>
         </div>
-        <div ng-if="vm.versionList.length != 0">
+        <div ng-show="vm.versionList.length != 0">
             <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
@@ -27,25 +31,29 @@
                     <span class="current--column">行政审批系统</span>
                     <span> | </span>
                     <span class="current--column">数据模版</span>
-
-                    <div>
-                        <span>版本号</span>
-                        <md-select placeholder="1.0" class="single--attribute--box__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
-                            <md-option ng-value="versionList.versionNo" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
-                        </md-select>
+                    <div class="save--template--box">
+                        <div class="current--vesion">
+                            <span>版本号</span>
+                            <md-select placeholder="1.0" class="current--vesion__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
+                                <md-option ng-value="versionList.versionNo" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
+                            </md-select>
+                        </div>
+                        <md-button class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)">
+                            保存模版
+                        </md-button>
                     </div>
-                    <md-button ng-disabled="vm.loading" ng-click="vm.editProject($event)">
-                        保存模版
-                    </md-button>
                 </div>
             </md-toolbar>
-            <form >
+
+            <form class="edit--project--manage--wrapper" >
+                <div class="two--px--line"></div>
                 <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
                 <div>
                     <div class="md-dialog-content">
                         <form name="newProject" action="">
                             <div layout-gt-sm="row" id="container" >
-                                <collapsible-tree  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490'></collapsible-tree>
+                                <collapsible-tree style="position:relative;overflow: scroll;height: 787px;width: 100%;"  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490'>
+                                </collapsible-tree>
                             </div>
                         </form>
                     </div>
@@ -59,7 +67,9 @@
                 </div>
             </form>
         </div>
-
+    </div>
+    <div ng-show="!vm.afterLoad">
+    正在加载...
     </div>
 
 </div>

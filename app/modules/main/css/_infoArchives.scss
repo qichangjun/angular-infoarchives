@@ -22,7 +22,10 @@
       border-right: 1px solid #40b98e;
       box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1) inset;
       .md-toolbar-tools{
+        display: inline-block;
         height: 57px;
+        line-height: 57px;
+        text-align: center;
         font-size: 18px;
       }
     }

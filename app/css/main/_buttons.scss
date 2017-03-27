@@ -1,16 +1,46 @@
 @charset "utf-8";
 .green--btn{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 88px;
+  line-height: 36px;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  outline: none;
+  border: 0;
   background: #40B98E !important;
   color: #ffffff !important;
   padding: 0 12px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  margin: 0 8px;
   &:hover{
     background: #03ce86 !important;
   }
 }
 .red--btn{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 88px;
+  line-height: 36px;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  outline: none;
+  border: 0;
   background: #E1654F !important;
   color: #ffffff !important;
   padding: 0 12px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  margin: 0 8px;
   &:hover{
     background: #de421b !important;
   }

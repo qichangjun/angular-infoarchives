@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").controller("dataModuleController", [
     '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'dataModuleService', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, dataModuleService) {
-      var cancel, deleteNode, editFile, editProject, findMaxId, getModuleInfo, getVersionList, init, initId, jsonToObj, listenEvent, modelPush, module, searchId, searchIdAddFile, unupdateAbleAlert, updateAbleAlert, updateName, vm;
+      var addContainer, deleteNode, editFile, editProject, findMaxId, getModuleInfo, getVersionList, init, initId, jsonToObj, listenEvent, modelPush, module, searchIdAddFile, unupdateAbleAlert, updateAbleAlert, updateName, vm;
       vm = this;
       vm.parameter = $stateParams;
       module = null;
@@ -15,10 +15,21 @@
         return getVersionList();
       };
       getVersionList = function() {
+        vm.afterLoad = false;
         return dataModuleService.getModuleVersionList(vm.parameter.objectId).then(function(res) {
+          vm.afterLoad = true;
           vm.versionList = res.template;
           if (vm.versionList.length === 0) {
             vm.updateAble = false;
+            initId = 1;
+            $scope.nodes = {
+              "name": "record",
+              "objectId": initId,
+              "type": "record",
+              "children": []
+            };
+            module = {};
+            module.attrRules = [];
             if (vm.parameter.create) {
               vm.versionList.push({
                 versionNo: 1.0
@@ -31,13 +42,22 @@
             vm.parameter.moduleId = vm.versionList[vm.versionList.length - 1].objectId;
             return getModuleInfo();
           }
+        }, function(res) {
+          vm.afterLoad = true;
+        });
+      };
+      getModuleInfo = function() {
+        return dataModuleService.getModuleInfo(vm.parameter.moduleId).then(function(res) {
+          module = res;
+          $scope.nodes = angular.copy(module.containers[0]);
+          jsonToObj($scope.nodes);
+          return initId = findMaxId($scope.nodes);
         }, function(res) {});
       };
       listenEvent = function() {
         $scope.$on('node:delete', function(e, d) {
           return mdDialogService.initConfirmDialog(e, '删除节点', '确定要删除该节点吗?').then(function() {
             return $timeout(function() {
-              console.log;
               return deleteNode($scope.nodes, d.objectId);
             });
           }, function() {});
@@ -53,12 +73,12 @@
         });
         $scope.$on('add:node', function(e, d) {
           return $timeout(function() {
-            return searchId($scope.nodes, d.objectId, 'node');
+            return addContainer($scope.nodes, d.objectId, 'node');
           });
         });
         $scope.$on('add:block', function(e, d) {
           return $timeout(function() {
-            return searchId($scope.nodes, d.objectId, 'block');
+            return addContainer($scope.nodes, d.objectId, 'block');
           });
         });
         $scope.$on('node:addCustomData', function(e, d) {
@@ -179,24 +199,17 @@
           }
         }
       };
-      searchId = function(node, id, type) {
+      addContainer = function(node, id, type) {
         var i, j, len, ref, rows;
         if (node.objectId === id) {
           $timeout(function() {
-            initId = initId + 1;
+            initId = initId * 1 + 1;
             return node.children.push({
               "name": type,
               "objectId": initId,
               "type": type,
               "children": [],
-              "fileData": {
-                defaultData: [],
-                customData: []
-              },
-              "metaData": {
-                defaultData: [],
-                customData: []
-              }
+              "isNew": true
             });
           });
           return;
@@ -205,28 +218,21 @@
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.id === id) {
+            if (rows.objectId === id) {
               $timeout(function() {
-                initId = initId + 1;
+                initId = initId * 1 + 1;
                 return rows.children.push({
                   "name": type,
-                  "id": initId,
+                  "objectId": initId,
                   "type": type,
                   "children": [],
-                  "fileData": {
-                    defaultData: [],
-                    customData: []
-                  },
-                  "metaData": {
-                    defaultData: [],
-                    customData: []
-                  }
+                  "isNew": true
                 });
               });
               break;
               return;
             } else {
-              searchId(rows, id, type);
+              addContainer(rows, id, type);
             }
           }
         }
@@ -274,6 +280,7 @@
           results = [];
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
+            rows.orderNo = i + 1;
             rows.path = angular.copy(node.path);
             results.push(modelPush(rows, rows.path));
           }
@@ -309,11 +316,8 @@
           return results;
         }
       };
-      cancel = function() {
-        return $mdDialog.cancel();
-      };
       editProject = function(event) {
-        var i, model;
+        var i, j, len, model, ref, rows;
         model = {};
         $scope.saveData = [];
         modelPush($scope.nodes);
@@ -327,8 +331,15 @@
             i++;
           }
         }
+        ref = model.data;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if (rows.path) {
+            rows.pid = rows.path[rows.path.length - 2];
+          }
+        }
         if (!vm.updateAble) {
-          return dataModuleService.createModule(model.data, module.attrRules, module.template).then(function(res) {
+          return dataModuleService.createModule(model.data, module.attrRules, vm.parameter.objectId).then(function(res) {
             unupdateAbleAlert(model);
             return getVersionList();
           }, function(res) {});
@@ -352,35 +363,8 @@
           getVersionList();
         });
       };
-      getModuleInfo = function() {
-        return dataModuleService.getModuleInfo(vm.parameter.moduleId).then(function(res) {
-          module = res;
-          if (!module) {
-            initId = 1;
-            return $scope.nodes = {
-              "name": "record",
-              "objectId": initId,
-              "type": "record",
-              "fileData": {
-                defaultData: [],
-                customData: []
-              },
-              "metaData": {
-                defaultData: [],
-                customData: []
-              },
-              "children": []
-            };
-          } else {
-            $scope.nodes = angular.copy(module.containers[0]);
-            jsonToObj($scope.nodes);
-            return initId = findMaxId($scope.nodes);
-          }
-        }, function(res) {});
-      };
       vm.getModuleInfo = getModuleInfo;
       vm.editProject = editProject;
-      vm.cancel = cancel;
       init();
     }
   ]).controller('updateAbleAlertController', [

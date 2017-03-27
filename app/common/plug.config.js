@@ -4,7 +4,7 @@
     '$logProvider', 'RestangularProvider', '$httpProvider', '$provide', 'hsTpl', function($logProvider, RestangularProvider, $httpProvider, $provide, hsTpl) {
       if (window.hsConfig.debugEnabled) {
         $logProvider.debugEnabled(true);
-        RestangularProvider.setBaseUrl(window.hsConfig.baseUrl);
+        return RestangularProvider.setBaseUrl(window.hsConfig.baseUrl);
       } else {
         $logProvider.debugEnabled(false);
         $provide.decorator('$log', [
@@ -25,12 +25,8 @@
             return $delegate;
           }
         ]);
-        RestangularProvider.setBaseUrl(window.hsConfig.baseUrl);
+        return RestangularProvider.setBaseUrl(window.hsConfig.baseUrl);
       }
-      RestangularProvider.setJsonp(true);
-      return RestangularProvider.setDefaultRequestParams('jsonp', {
-        callback: 'JSON_CALLBACK'
-      });
     }
   ]).config([
     '$translateProvider', 'Cookies', function($translateProvider, Cookies) {

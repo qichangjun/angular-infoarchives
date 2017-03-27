@@ -2,23 +2,19 @@
        name="form_login"
       ng-submit="form_login.$valid?vm.login(vm.user):vm.form_login.submit=true">
   <div id="loading-bar-container"></div>
-  <!--<div class="top&#45;&#45;logo&#45;&#45;box">-->
-    <!--<div class="caption&#45;&#45;box">-->
-      <!--&lt;!&ndash;<img class="caption&#45;&#45;box__logo" src="images/toolbar-logo.png" alt=""/>&ndash;&gt;-->
-    <!--</div>-->
-  <!--</div>-->
+    <div class="logon--location">InfoArchives</div>
   <div class="input-content-wrapper">
-    <div class="caption">inforArchives</div>
+    <div class="caption">登录</div>
     <div class="input-content--box">
       <div class="form-group user-login-input">
         <div abc-def>
           <md-input-container class="md-block">
-            <label class="title" translate="登录名"></label>
+            <label class="title" translate="用户名"></label>
             <input type="text"
                    name="loginName"
                    ng-model="vm.user.loginName"
                    class="form-control user-login-input__input"
-                   placeholder="account"
+                   placeholder="Account"
                    required
                    md-no-asterisk
             >
@@ -31,13 +27,13 @@
       </div>
       <div class="form-group user-login-input ">
         <md-input-container class="md-block">
-          <label class="title" translate="密码"></label>
+          <label class="title" translate="">密　码</label>
           <input type="password" name="password"
                  ng-model="vm.user.password"
                  md-no-asterisk
                  class="form-control user-login-input__input"
                  placeholder="Password"
-                 minlength="6"
+                 minlength="1"
                  maxlength="18"
                  required
           >
@@ -49,8 +45,7 @@
         </md-input-container>
       </div>
       <div class="form-group user-login-input ">
-        <label class="select--language--title">选择语言</label>
-        <md-input-container class="select--language--box">
+        <label class="select--language--title">语　言</label><md-input-container class="select--language--box">
           <md-select class="select--language--box__select" ng-model="vm.user.language" ng-init="vm.user.language = 'cn'">
             <md-option  value="en" >
               English

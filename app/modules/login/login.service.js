@@ -7,8 +7,8 @@
         var deferred;
         deferred = $q.defer();
         Restangular.one(hsAPI['userLogin']).get({
-          userLoginName: c_user.loginName,
-          userPassword: c_user.password
+          username: c_user.loginName,
+          password: c_user.password
         }).then(function(res) {
           var c_currentUser;
           $log.info('用户登录', res);
@@ -32,20 +32,8 @@
       userLogout = function() {
         var deferred;
         deferred = $q.defer();
-        Restangular.one(hsAPI['userLogout']).get({
-          accessUser: hsAuth.getAccessKey(),
-          accessToken: hsAuth.getAccessToken()
-        }).then(function(res) {
-          $log.info('用户注销', res);
-          if (res.code === '1') {
-            hsAuth.removeUser();
-            return deferred.resolve('用户注销成功');
-          } else {
-            return deferred.reject(res.message);
-          }
-        }, function(res) {
-          return deferred.reject('用户注销：系统错误，请稍候再试');
-        });
+        hsAuth.removeUser();
+        deferred.resolve('用户注销成功');
         return deferred.promise;
       };
       getCurrentUser = function() {

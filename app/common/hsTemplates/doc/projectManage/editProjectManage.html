@@ -10,7 +10,7 @@
         </md-toolbar>
 
         <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
-        <md-dialog-content class="edit--project--manage--wrapper">
+        <md-dialog-content >
 
             <div class="md-dialog-content base--info--content">
                 <form  editable-form ng-cloak name="newProject" action="">
@@ -90,7 +90,7 @@
                     <md-button ng-disabled="vm.loading" ng-click="vm.cancel()">
                         取消
                     </md-button>
-                    <md-button ng-disabled="vm.loading" ng-click="vm.editProject()" class="md-raised md-button green--btn">
+                    <md-button ng-disabled="vm.loading" ng-click="vm.editProject()" class="green--btn">
                         保存
                     </md-button>
                 </md-dialog-actions>
@@ -105,7 +105,7 @@
                         业务模板能够帮助您梳理业务流程，建立业务归档信息，并根据模板规则将业务信息填入到归档数据模型对应的位置上。
                     </div>
                     <div class="new--project--box__btn--box">
-                        <md-button class="md-warn md-raised md-button red--btn new--project--box__btn"  ng-click="vm.newModule($event)">
+                        <md-button class="red--btn new--project--box__btn"  ng-click="vm.newModule($event)">
                             <span class="glyphicon glyphicon-plus ng-scope"></span>
                             新建模版
                         </md-button>

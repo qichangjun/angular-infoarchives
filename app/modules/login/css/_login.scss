@@ -115,6 +115,8 @@
   }
 }
 
+
+
 .normal--user--login{
   width: 100%;
   height: 100%;
@@ -145,26 +147,37 @@
       }
     }
   }
+  .logon--location{
+    font-size: 24px;
+    text-align: center;
+    color: #ffffff;
+    margin-top: 90px;
+  }
   .input-content-wrapper{
     width: 420px;
-    margin: 160px auto 0;
+    margin: 40px auto 0;
     font-size: 14px !important;
     //background: #ffffff;
     border-radius: 5px;
     padding: 30px;
     box-shadow: 0 0 6px 2px rgba(0, 0, 0, 0.1);
     background: rgba(255, 255, 255, 0.65);
+    color: rgba(0,0,0,0.54);
     .caption{
       display: inline-block;
       font-size: 18px;
       width: 100%;
       color: #000;
       text-align: center;
-      padding: 10px 0 20px 0;
+      padding: 0 0 20px 0;
     }
     .input-content--box{
-      padding: 10px 0px;
+      padding: 10px 0;
       .user-login-input{
+        margin-bottom: 10px;
+        &:first-child{
+          margin-bottom: 15px;
+        }
         .title{
           font-weight: normal;
           transform: none;
@@ -179,20 +192,20 @@
         .select--language--title{
           font-weight: normal;
           transform: none;
-          color: rgba(0,0,0,0.54);
           width: 75px;
           vertical-align: text-top;
         }
         .select--language--box{
-          margin: 0px;
+          margin: 0;
           &__select{
-            margin: 0px;
-            width: 270px;
+            margin: 0;
+            width: 280px;
+            background: #fff;
           }
         }
       }
       .user-login-checkbox{
-        margin: 20px 0;
+        margin: 20px 0 10px 0;
       }
     }
     .user-login-btn{

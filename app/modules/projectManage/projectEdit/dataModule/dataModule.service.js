@@ -2,7 +2,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("dataModuleService", [
-    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular) {
+    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$http', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $http) {
       var createModule, editModule, getModuleInfo, getModuleVersionList, updateVersion;
       getModuleVersionList = function(id) {
         var deferred;
@@ -10,7 +10,7 @@
         MockRestangular.one(hsAPI['getModuleVersionList']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
-          objectId: id
+          projectId: id
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
@@ -24,14 +24,17 @@
         });
         return deferred.promise;
       };
-      createModule = function(data) {
-        var deferred;
+      createModule = function(containers, attrRules, id) {
+        var deferred, obj;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['createModule']).get({
-          accessUser: hsAuth.getAccessKey(),
-          accessToken: hsAuth.getAccessToken(),
-          data: data
-        }).then(function(res) {
+        obj = {
+          "containers": containers,
+          "attrRules": attrRules,
+          "template": {
+            projectId: id
+          }
+        };
+        MockRestangular.all(hsAPI['createModule'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post(obj).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res.data);
             return mdToastService.showToast(res.message);
@@ -48,9 +51,7 @@
       updateVersion = function(containers, attrRules, template) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['updateVersion']).post("upgrade", {
-          "accessUser": hsAuth.getAccessKey(),
-          "accessToken": hsAuth.getAccessToken(),
+        MockRestangular.all(hsAPI['updateVersion'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
           "containers": containers,
           "attrRules": attrRules,
           "template": template
@@ -71,9 +72,7 @@
       editModule = function(containers, attrRules, template) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['editModule']).post("update", {
-          "accessUser": hsAuth.getAccessKey(),
-          "accessToken": hsAuth.getAccessToken(),
+        MockRestangular.one(hsAPI['editModule'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
           "containers": containers,
           "attrRules": attrRules,
           "template": template
