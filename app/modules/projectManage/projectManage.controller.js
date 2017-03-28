@@ -38,14 +38,14 @@
         event.stopPropagation();
         return mdDialogService.initConfirmDialog(event, '删除项目', '确定要删除该项目吗?').then(function() {
           vm.loading = true;
-          return projectManageService.deleteProject(item.objectId).then(function(res) {
+          return projectManageService.deleteProject(item.id).then(function(res) {
             var i, j, len, ref, results, rows;
             vm.loading = false;
             ref = vm.projectLists;
             results = [];
             for (i = j = 0, len = ref.length; j < len; i = ++j) {
               rows = ref[i];
-              if (rows.objectId === item.objectId) {
+              if (rows.id === item.id) {
                 vm.projectLists.splice(i, 1);
                 break;
               } else {
@@ -58,7 +58,7 @@
       };
       serfToEdit = function(item) {
         return $state.go('infoArchives.projectEdit.basicData', {
-          objectId: item.objectId
+          objectId: item.id
         });
       };
       vm.serfToEdit = serfToEdit;
@@ -84,8 +84,7 @@
         vm.loading = true;
         return projectManageService.newProject(vm.entity).then(function(res) {
           vm.loading = false;
-          vm.entity.objectId = res.objectId;
-          return $mdDialog.hide(vm.entity);
+          return $mdDialog.hide(res);
         }, function(res) {
           vm.loading = false;
         });

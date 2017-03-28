@@ -47,7 +47,7 @@
       saveRule = function(fileds, codingPolicy) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['saveRule']).get({
+        Restangular.one(hsAPI['saveRule']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           data: {
@@ -71,7 +71,7 @@
       createRule = function(fileds, projectId) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['createRule']).get({
+        Restangular.one(hsAPI['createRule']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           data: {

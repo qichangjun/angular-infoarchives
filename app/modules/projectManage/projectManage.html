@@ -14,12 +14,12 @@
             </md-list-item>
         </md-list>
     </md-content>
-    <md-content class="project--manage--data--list--wrapper">
-        <md-content class="md-padding " layout-xs="column" layout="row">
-            <div flex-xs flex-gt-xs="50" layout="row">
+    <div class="project--manage--data--list--wrapper">
+        <md-content class="md-padding">
+            <div >
                 <md-card
                         ng-click="vm.serfToEdit(item)"
-                        style="transition-duration: 0.5s"
+                        style="transition-duration: 0.5s;width: 218px;float: left;"
                         ng-mouseover="item.isHover = true"
                         ng-mouseleave="item.isHover = false"
                         ng-class="{'md-whiteframe-12dp': item.isHover}"
@@ -52,4 +52,6 @@
                 </md-card>
             </div>
         </md-content>
+    </div>
+
 </div>

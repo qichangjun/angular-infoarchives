@@ -7,10 +7,10 @@
       getProjectInfo = function(id) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['getProjectInfo']).get({
+        Restangular.one(hsAPI['getProjectInfo']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
-          objectId: id
+          id: id
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
@@ -29,7 +29,7 @@
         deferred = $q.defer();
         parameter.accessUser = hsAuth.getAccessKey();
         parameter.accessToken = hsAuth.getAccessToken();
-        MockRestangular.one(hsAPI['editProject']).get(parameter).then(function(res) {
+        Restangular.one(hsAPI['editProject']).get(parameter).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res);
             return mdToastService.showToast(res.message);

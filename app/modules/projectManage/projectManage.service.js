@@ -8,7 +8,7 @@
       getProjectList = function() {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['getProjectList']).get({
+        Restangular.one(hsAPI['getProjectList']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken()
         }).then(function(res) {
@@ -27,7 +27,9 @@
       getDataBaseList = function() {
         var deferred;
         deferred = $q.defer();
-        Restangular.one(hsAPI['getDataBaseList']).get({
+        Restangular.one(hsAPI['getDataBaseList']).withHttpConfig({
+          ignoreLoadingBar: true
+        }).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken()
         }).then(function(res) {
@@ -48,7 +50,7 @@
         deferred = $q.defer();
         parameter.accessUser = hsAuth.getAccessKey();
         parameter.accessToken = hsAuth.getAccessToken();
-        MockRestangular.one(hsAPI['newProject']).get(parameter).then(function(res) {
+        Restangular.one(hsAPI['newProject']).get(parameter).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res.data);
             return mdToastService.showToast(res.message);
@@ -65,10 +67,10 @@
       deleteProject = function(objectId) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['deleteProject']).get({
+        Restangular.one(hsAPI['deleteProject']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
-          objectId: objectId
+          id: objectId
         }).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res);

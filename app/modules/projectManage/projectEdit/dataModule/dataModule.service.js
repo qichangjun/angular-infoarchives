@@ -72,7 +72,7 @@
       editModule = function(containers, attrRules, template) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['editModule'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+        MockRestangular.one(hsAPI['editModule']).post({
           "containers": containers,
           "attrRules": attrRules,
           "template": template
