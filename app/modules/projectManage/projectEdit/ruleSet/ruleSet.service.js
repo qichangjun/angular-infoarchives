@@ -7,27 +7,7 @@
       getRule = function(id) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['getRule']).get({
-          accessUser: hsAuth.getAccessKey(),
-          accessToken: hsAuth.getAccessToken(),
-          objectId: id
-        }).then(function(res) {
-          if (res.code === '1') {
-            return deferred.resolve(res.data);
-          } else {
-            deferred.reject(res);
-            return mdToastService.showToast(res.message);
-          }
-        }, function(res) {
-          deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
-        });
-        return deferred.promise;
-      };
-      getProperty = function(id) {
-        var deferred;
-        deferred = $q.defer();
-        MockRestangular.one(hsAPI['getProperty']).get({
+        Restangular.one(hsAPI['getRule']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           projectId: id
@@ -44,16 +24,32 @@
         });
         return deferred.promise;
       };
-      saveRule = function(fileds, codingPolicy) {
+      getProperty = function(id) {
         var deferred;
         deferred = $q.defer();
-        Restangular.one(hsAPI['saveRule']).get({
+        Restangular.one(hsAPI['getProperty']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
-          data: {
-            fileds: fileds,
-            codingPolicy: codingPolicy
+          projectId: id
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
           }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      saveRule = function(fields, codingPolicy) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.all(hsAPI['saveRule'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          fields: fields,
+          codingPolicy: codingPolicy
         }).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res.data);
@@ -68,16 +64,15 @@
         });
         return deferred.promise;
       };
-      createRule = function(fileds, projectId) {
+      createRule = function(fields, projectId) {
         var deferred;
         deferred = $q.defer();
-        Restangular.one(hsAPI['createRule']).get({
-          accessUser: hsAuth.getAccessKey(),
-          accessToken: hsAuth.getAccessToken(),
-          data: {
-            fileds: fileds
-          },
-          projectId: projectId
+        Restangular.all(hsAPI['createRule'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          fields: fields,
+          codingPolicy: {
+            projectId: projectId,
+            codingPolicyName: 'default'
+          }
         }).then(function(res) {
           if (res.code === '1') {
             deferred.resolve(res.data);
@@ -95,7 +90,7 @@
       getRetentionPeriodId = function(id) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['getRetentionPeriodId']).get({
+        Restangular.one(hsAPI['getRetentionPeriodId']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           projectId: id
@@ -115,7 +110,7 @@
       getRetentionPeriodList = function() {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['getRetentionPeriodList']).get({
+        Restangular.one(hsAPI['getRetentionPeriodList']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken()
         }).then(function(res) {
@@ -134,11 +129,11 @@
       saveRetentionPeriod = function(retentionPeriodId, projectId) {
         var deferred;
         deferred = $q.defer();
-        MockRestangular.one(hsAPI['saveRetentionPeriod']).get({
+        Restangular.one(hsAPI['saveRetentionPeriod']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           projectId: projectId,
-          retentionPeriodId: retentionPeriodId
+          id: retentionPeriodId
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);

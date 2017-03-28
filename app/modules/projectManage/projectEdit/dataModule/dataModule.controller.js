@@ -157,11 +157,6 @@
       };
       deleteNode = function(node, id) {
         var i, j, len, ref, rows;
-        if (node.objectId === id) {
-          $timeout(function() {
-            node = {};
-          });
-        }
         if (node.children) {
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
@@ -387,7 +382,7 @@
       var addCustomData, cancel, deleteCustomdata, init, saveCustomData, vm;
       vm = this;
       init = function() {
-        vm.typeLists = ['char', 'int', 'string', 'boolean'];
+        vm.typeLists = ['date', 'int', 'string', 'boolean'];
         vm.entity = property;
         return vm.containerId = containerId;
       };
@@ -397,7 +392,7 @@
       addCustomData = function() {
         return vm.entity.push({
           displayName: '自定义元数据',
-          attributeType: 'char',
+          attributeType: 'string',
           attributeLength: 1,
           required: true,
           containerId: vm.containerId,
@@ -421,7 +416,7 @@
       var addCustomData, cancel, deleteCustomdata, init, saveCustomData, vm;
       vm = this;
       init = function() {
-        vm.typeLists = ['char', 'int', 'string', 'boolean'];
+        vm.typeLists = ['date', 'int', 'string', 'boolean'];
         vm.entity = property;
         vm.fileLists = fileLists;
         return vm.currentFileId = vm.fileLists[0].objectId;
@@ -432,10 +427,11 @@
       addCustomData = function() {
         return vm.entity.push({
           displayName: '自定义元数据',
-          attributeType: 'char',
+          attributeType: 'string',
           attributeLength: 1,
           required: true,
-          containerId: vm.currentFileId
+          containerId: vm.currentFileId,
+          systemAttribute: false
         });
       };
       deleteCustomdata = function(index) {

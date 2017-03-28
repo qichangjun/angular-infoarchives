@@ -19,7 +19,11 @@
       };
       getRetentionPeriodId = function() {
         return ruleSetService.getRetentionPeriodId(vm.parameter.objectId).then(function(res) {
-          return vm.retentionPeriod = res.retentionPeriodId;
+          if (res && res.id) {
+            return vm.retentionPeriod = res.id;
+          } else {
+            return vm.retentionPeriod = null;
+          }
         }, function(res) {});
       };
       getRetentionPeriodList = function() {
@@ -40,7 +44,6 @@
         return ruleSetService.getRule(vm.parameter.objectId).then(function(res) {
           vm.ruleProperty = res.fields;
           vm.codingPolicy = res.codingPolicy;
-          vm.ruleProperty = [];
           if (vm.ruleProperty.length === 0) {
             vm.createRule = true;
           } else {
@@ -59,8 +62,9 @@
           create: true
         });
       };
-      showAdd = function(index) {
+      showAdd = function(e) {
         var i, j, len, ref, rows;
+        e.stopPropagation();
         ref = vm.ruleProperty;
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
@@ -92,8 +96,9 @@
           return getRetentionPeriodId();
         }, function(res) {});
       };
-      showEdit = function(index) {
+      showEdit = function(e, index) {
         var i, j, len, ref, rows;
+        e.stopPropagation();
         ref = vm.ruleProperty;
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
@@ -108,10 +113,12 @@
         results = [];
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
-          if (!index && (rows.attributeName === vm.entity.attrName)) {
-            results.push(vm.entity.attrDisplayName = rows.attributeValue);
-          } else if (index && (rows.attributeName === vm.ruleProperty[index].attrName)) {
-            results.push(vm.ruleProperty[index].attrDisplayName = rows.attributeValue);
+          if (angular.isUndefined(index) && (rows.attrName === vm.entity.attrName)) {
+            vm.entity.attrDisplayName = rows.displayName;
+            break;
+          } else if ((index >= 0) && (rows.attrName === vm.ruleProperty[index].attrName)) {
+            vm.ruleProperty[index].attrDisplayName = rows.displayName;
+            break;
           } else {
             results.push(void 0);
           }

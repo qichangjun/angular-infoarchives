@@ -29,13 +29,20 @@
                     <div class="attribute--wrapper rule--set">
                         <span class="attribute--row--box__title">档号规则</span>
                         <div class="new--project--row--box">
-                        <div class="attribute--row">
+                        <div class="attribute--row" style="margin-left: 50px;margin-top: 20px;">
                             <span ng-repeat="rule in vm.ruleProperty track by $index" style="position: relative">
-                                <a ng-if="rule.fieldType == 0" ng-click="vm.showEdit($index)">{{rule.attrDisplayName}}</a>
-                                <a ng-if="rule.fieldType == 1" ng-click="vm.showEdit($index)">{{rule.fieldValue}}</a>
-                                <a ng-if="rule.fieldType == 2" ng-click="vm.showEdit($index)">流水号</a>
-                                <div ng-if="rule.showEdit" class="md-whiteframe-12dp" style="border: 1px solid black;
-                                    border-radius: 10px;position: absolute;width: 300px;z-index:70;background-color: white;left: 10px;">
+                                <a ng-if="rule.fieldType == 0" class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">{{rule.attrDisplayName}} </a>
+                                <a ng-if="rule.fieldType == 1" class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">{{rule.fieldValue}}</a>
+                                <a ng-if="rule.fieldType == 2" class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">流水号</a>
+                                <div ng-init="rule.showEdit = false"
+                                     ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[rule.showEdit]"
+                                     class="md-whiteframe-12dp"
+                                     style="position: absolute;
+                                    background-color: white;left: 10px;
+                                    transition-duration: 0.2s;
+                                    transition-timing-function: ease-in-out;
+                                    transition-property: all;"
+                                     click-outside-hide hide-parameter="rule.showEdit">
                                     <md-button aria-label="Open menu with custom trigger" class="md-icon-button" ng-click="vm.deleteRule($index)">
                                         <span class="glyphicon glyphicon-trash"></span>
                                     </md-button>
@@ -66,7 +73,7 @@
                                                             hs-form-message-show="vm.addRule.submit"
                                                             hs-form-message-template="addRule_attrName.html"
                                                 >
-                                                    <md-option ng-value="ruleType.attributeName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attributeValue}}</md-option>
+                                                    <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.displayName}}</md-option>
                                                 </md-select>
                                             </div>
                                             <div ng-if="rule.fieldType == 1">
@@ -99,12 +106,22 @@
                                     </div>
                                 </div>
                             </span>
-                            <div style="position:relative;">
-                                <md-button class="green--btn" aria-label="Open menu with custom trigger"  ng-click="vm.showAdd()">
+                            <div style="position:relative;" >
+                                <md-button  class="green--btn" aria-label="Open menu with custom trigger" style="top: 65px;position: absolute;" ng-click="vm.showAdd($event)">
                                     <span >添加规则</span>
                                 </md-button>
-                                <div ng-if="vm.showLastAdd" class="md-whiteframe-12dp" style="position: absolute;width: 300px;z-index:70;background-color: white;left: 10px;border-radius: 10px;">
-                                            <div style="border:solid 1px black;padding: 10px;border-radius: 10px;">
+                                <div ng-init="vm.showLastAdd=false"
+                                     ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[vm.showLastAdd]"
+                                      class="md-whiteframe-12dp"
+                                      style="position: absolute;
+                                      top: 105px;
+                                      background-color: white;
+                                      left: 10px;
+                                      transition-duration: 0.2s;
+                                      transition-timing-function: ease-in-out;
+                                      transition-property: all;"
+                                      click-outside-hide hide-parameter="vm.showLastAdd">
+                                            <div style="">
                                                 <form ng-cloak
                                                       name="addRule"
                                                       novalidate
@@ -131,7 +148,7 @@
                                                                     hs-form-message-show="vm.addRule.submit"
                                                                     hs-form-message-template="addRule_attrName.html"
                                                                     ng-change="vm.changeAttr()">
-                                                            <md-option ng-value="ruleType.attributeName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attributeValue}}</md-option>
+                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.displayName}}</md-option>
                                                         </md-select>
                                                     </div>
                                                     <div ng-if="vm.entity.fieldType == 1">
@@ -161,7 +178,6 @@
                                                         <span >确定</span>
                                                     </md-button>
                                                 </form>
-
                                             </div>
                                         </div>
                             </div>
@@ -180,7 +196,7 @@
                                     name="attrName"
                                     required
                         >
-                            <md-option ng-value="retentionPeriod.retentionPeriodId" ng-repeat="retentionPeriod in vm.retentionPeriodList">{{retentionPeriod.retentionPeriodName}}</md-option>
+                            <md-option ng-value="retentionPeriod.id" ng-repeat="retentionPeriod in vm.retentionPeriodList">{{retentionPeriod.periodName}}</md-option>
                         </md-select>
                     </div>
                 </section>

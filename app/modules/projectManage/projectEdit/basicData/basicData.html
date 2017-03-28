@@ -1,4 +1,4 @@
-<div class="anim-slide-left ">
+<div class="anim-slide-left " >
     <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
@@ -44,11 +44,11 @@
                                 </div>
                                 <div class="attribute--row--box">
                                     <span class="attribute--row--box__title">创建时间</span>
-                                    <div class="popover-wrapper attribute--row--box__value">{{vm.entity.createDate}}</div>
+                                    <div class="popover-wrapper attribute--row--box__value">{{vm.entity.createDate | date:'yyyy年MM月dd日'}}</div>
                                 </div>
                                 <div class="attribute--row--box">
                                     <span class="attribute--row--box__title">上次修改时间</span>
-                                    <div class="popover-wrapper attribute--row--box__value">{{vm.entity.modifyDate}}</div>
+                                    <div class="popover-wrapper attribute--row--box__value">{{vm.entity.modifyDate | date:'yyyy年MM月dd日'}}</div>
                                 </div>
                                 <div class="attribute--row--box">
                                     <span class="attribute--row--box__title">创建者</span>

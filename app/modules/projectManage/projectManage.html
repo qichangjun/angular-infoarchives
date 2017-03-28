@@ -1,4 +1,4 @@
-<div  class="anim-slide-below-fade project--manage--main--content--wrapper"  >
+<div  class="anim-slide-left project--manage--main--content--wrapper"  >
     <md-content class="new--project--wrapper">
         <md-list >
             <md-list-item class="md-2-line new--project--btn--box" >
@@ -28,7 +28,7 @@
                     <md-card-title class="card--title--box">
                         <md-card-title-text >
                             <span class="md-headline">{{item.projectName}}</span>
-                            <span class="md-subhead">{{item.createDate}}</span>
+                            <span class="md-subhead">{{item.createDate  | date:'yyyy年MM月dd日'}}</span>
                         </md-card-title-text>
                         <md-card-title-media>
                             <div class="md-media-xl card-media"></div>

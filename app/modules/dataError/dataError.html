@@ -1,6 +1,6 @@
-<div class="anim-slide-right data--base--sidenav data--error" >
+<div class="anim-slide-left data--base--sidenav data--error" >
     <md-sidenav
-            class="md-sidenav-right pull--left data--base--wrapper "
+            class="anim-slide-left pull--left data--base--wrapper "
             md-component-id="left"
             md-is-locked-open="true"
             md-whiteframe="4"
@@ -67,21 +67,21 @@
             <div class="single--attribute--box time--frame">
                 <span class="attribute--title">时间范围</span>
                 <div  layout="row" class="attribute--value">
-                    <p class="input-group">
+                    <div class="input-group">
                         <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateFrom" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
-                    </p>
+                    </div>
                 </div>
                 <span class="time--frame__sign">-</span>
                 <div  layout="row" class="attribute--value">
-                    <p class="input-group">
+                    <div class="input-group">
                         <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateTo" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
-                    </p>
+                    </div>
                 </div>
             </div>
             <div class="search--location--box">

@@ -17,6 +17,7 @@
     }
   }
   .project--manage--data--list--wrapper{
+    height: 100%;
     .card--title--box{
       background: #2D7D9A;
       padding:11px 14px 6px 14px;
@@ -147,4 +148,20 @@
       padding: 4px 40px;
     }
   }
+}
+.rule--set--re--rules--wrap{
+  display: inline-block;
+  vertical-align: middle;
+  .rule--Property--box{
+    display: inline-block;
+    position: relative;
+    .delete--btn{
+      min-width: inherit;
+    }
+  }
+}
+.rule--set--add--rule--wrap{
+  display: inline-block;
+  vertical-align: middle;
+  position: relative;
 }
