@@ -45,3 +45,29 @@
     background: #de421b !important;
   }
 }
+.gray--btn{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 88px;
+  line-height: 36px;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+  border-radius: 2px;
+  box-sizing: border-box;
+  outline: none;
+  border: 0;
+  background: #cacaca !important;
+  color: #4a4a4a !important;
+  padding: 0 12px;
+  box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+  margin: 0 8px;
+  &:hover{
+    background: #999999 !important;
+  }
+}
+.md-button{
+  font-size: inherit;
+}

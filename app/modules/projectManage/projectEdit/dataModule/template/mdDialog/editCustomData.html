@@ -17,18 +17,20 @@
                             <tr class="table__th--tr">
                                 <th>序号</th>
                                 <th>元数据</th>
+                                <th>属性名</th>
                                 <th>类型</th>
-                                <th>长度</th>
-                                <th>必填</th>
+                                <th width="60">长度</th>
+                                <th width="71">必填</th>
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="data in vm.entity" ng-if="data.containerId == vm.containerId && data.systemAttribute">
+                            <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='1'">
                                 <td>{{$index}}</td>
                                 <td>{{data.displayName}}</td>
-                                <td>{{data.attributeType}}</td>
-                                <td>{{data.attributeLength}}</td>
-                                <td>{{data.required}}</td>
+                                <td>{{data.attrName}}</td>
+                                <td>{{data.attrType}}</td>
+                                <td>{{data.attrLength}}</td>
+                                <td>{{data.isRequired}}</td>
                             </tr>
                             </tbody>
                         </table>
@@ -40,14 +42,15 @@
                             <tr class="table__th--tr">
                                 <th></th>
                                 <th>元数据</th>
+                                <th>属性名</th>
                                 <th>类型</th>
-                                <th>长度</th>
-                                <th>必填</th>
+                                <th width="60">长度</th>
+                                <th width="60">必填</th>
                             </tr>
                             </thead>
                             <tbody>
 
-                            <tr ng-repeat="data in vm.entity" ng-if="data.containerId == vm.containerId && !data.systemAttribute">
+                            <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='0'">
                                 <td class="add--attribute--btn--td">
                                     <button class="fa fa-minus delete--attribute--btn" ng-click="vm.deleteCustomdata($index)"></button>
                                 </td>
@@ -57,8 +60,13 @@
                                     </div>
                                 </td>
                                 <td>
+                                    <div class="md-block edit--custom--data--modal__input--box">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="data.attrName">
+                                    </div>
+                                </td>
+                                <td>
                                     <md-input-container class="md-block edit--custom--data--modal__select--box" flex-gt-sm>
-                                        <md-select class="edit--custom--data--modal__select" ng-model="data.attributeType">
+                                        <md-select class="edit--custom--data--modal__select" ng-model="data.attrType">
                                             <md-option ng-repeat="type in vm.typeLists" value="{{type}}">
                                                 {{type}}
                                             </md-option>
@@ -67,16 +75,16 @@
                                 </td>
                                 <td>
                                     <div class="md-block edit--custom--data--modal__input--box">
-                                        <input ng-model="data.attributeLength" class="form-control edit--custom--data--modal__input">
+                                        <input ng-model="data.attrLength" class="form-control edit--custom--data--modal__input">
                                     </div>
                                 </td>
                                 <td>
                                     <md-input-container class="md-block edit--custom--data--modal__select--box" flex-gt-sm>
-                                        <md-select ng-model="data.required" class="edit--custom--data--modal__select">
-                                            <md-option  value="true">
+                                        <md-select ng-model="data.isRequired" class="edit--custom--data--modal__select">
+                                            <md-option  value="1">
                                                 是
                                             </md-option>
-                                            <md-option  value="false">
+                                            <md-option  value="0">
                                                 否
                                             </md-option>
                                         </md-select>

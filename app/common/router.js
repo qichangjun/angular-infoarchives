@@ -37,10 +37,10 @@
         data: {
           access_level: 2
         }
-      }).state("infoArchives.dataError", {
+      }).state("infoArchives.batch", {
         url: "batch/:objectId?systemSource&unit&dataType&dateFrom&dateTo&dataError&currentPage",
-        templateUrl: "modules/dataError/dataError.html?" + window.hsConfig.bust,
-        controller: "dataErrorController",
+        templateUrl: "modules/batch/batch.html?" + window.hsConfig.bust,
+        controller: "batchController",
         controllerAs: "vm",
         data: {
           access_level: 2

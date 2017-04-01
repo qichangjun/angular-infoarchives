@@ -139,7 +139,8 @@
       color: #797979;
     }
     .project--manage--head{
-      color: #2d7d9a;
+      //color: #2d7d9a;
+      color: #337ab7;
       padding: 0 7px;
     }
     .current--column{
@@ -156,6 +157,7 @@
         vertical-align: middle;
         &__select{
           display: inline-block;
+          margin-left: 10px;
         }
       }
     }
@@ -187,6 +189,9 @@
     //overflow: hidden;
     //width: 235px;
     height: calc(100% - 115px);
+    position: absolute;
+    top: 115px;
+    bottom: 0;
     ul,li{
       padding: 0;
       margin: 0;
@@ -194,7 +199,7 @@
     .data--base--column--box{
       position: absolute;
       background: #f7f7f7;
-      height: inherit;
+      height: 100%;
       /*border-left: 1px solid #E5E5E5;*/
       border-right: 1px solid #d7d7d7;
       width: 235px;

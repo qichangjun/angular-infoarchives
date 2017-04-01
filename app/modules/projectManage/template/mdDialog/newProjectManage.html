@@ -8,10 +8,9 @@
             <div class="md-toolbar-tools">
                 <h2>新建项目</h2>
                 <span flex></span>
-                <md-button class="md-icon-button" ng-click="vm.cancel()">
-                <span class="glyphicon glyphicon-remove">
-                </span>
-                </md-button>
+                <button class="close" ng-click="vm.cancel()">
+                    <span class="glyphicon glyphicon-remove"></span>
+                </button>
             </div>
         </md-toolbar>
         <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
@@ -62,7 +61,7 @@
                                             hs-form-message-show="vm.newProject.submit"
                                             hs-form-message-template="newProject_databaseName.html"
                                 >
-                                    <md-option ng-value="dataBase.databaseName" ng-repeat="dataBase in vm.dataBases">{{dataBase.databaseName}}</md-option>
+                                    <md-option ng-value="dataBase" ng-repeat="dataBase in vm.dataBaseDisplayLists">{{dataBase}}</md-option>
                                 </md-select>
                             </div>
                             <div class="single--attribute--box">

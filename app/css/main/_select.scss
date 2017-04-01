@@ -4,10 +4,14 @@ md-select{
   border: 1px solid #cccccc;
   border-radius: 4px;
   height: 34px;
-  line-height: 29px;
+  line-height: 1.42857143;
 }
 .md-select-value{
   border-bottom-width: 0;
+  box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
+  padding: 2px;
+  color: #555555;
+  min-width: inherit;
 }
 md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
   border-bottom-color: transparent !important;
@@ -15,6 +19,11 @@ md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not
 }
 md-select-menu.md-default-theme md-content md-option[selected], md-select-menu md-content md-option[selected] {
   color: #337ab7 !important;
+}
+md-select.md-default-theme[disabled] .md-select-value, md-select[disabled] .md-select-value{
+  background-image: none;
+  background: #eee;
+  height: 28px;
 }
 
 

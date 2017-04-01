@@ -61,7 +61,7 @@
                             <span class="edit--project--row">源系统数据库信息</span>
                             <div class="attribute--wrapper">
                                 <div class="attribute--row--box select">
-                                    <span class="attribute--row--box__title"> 数据库类型 </span>
+                                    <span class="attribute--row--box__title"> 数据库类型</span>
                                     <div class="popover-wrapper attribute--row--box__value">
                                         <md-select  class="attribute--row--box__select"
                                                     ng-model="vm.entity.databaseName"
@@ -73,7 +73,7 @@
                                                     hs-form-message-show="vm.editProject.submit"
                                                     hs-form-message-template="editProject_databaseName.html"
                                                 >
-                                            <md-option ng-value="dataBase.databaseName" ng-repeat="dataBase in vm.dataBases">{{dataBase.databaseName}}</md-option>
+                                            <md-option ng-value="dataBase" ng-repeat="dataBase in vm.dataBaseDisplayLists">{{dataBase}}</md-option>
                                         </md-select>
                                     </div>
                                 </div>

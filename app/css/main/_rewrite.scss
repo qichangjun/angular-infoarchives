@@ -1,0 +1,8 @@
+@charset "utf-8";
+
+.md-toolbar-tools {
+  @media (max-width: 959px){
+    height: 64px;
+    max-height: 64px;
+  }
+}

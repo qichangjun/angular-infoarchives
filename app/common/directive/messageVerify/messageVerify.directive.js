@@ -1,3 +1,8 @@
+
+/*
+##  表单验证
+ */
+
 (function() {
   'use strict';
   angular.module("myApp").directive('hsFormMessage', [

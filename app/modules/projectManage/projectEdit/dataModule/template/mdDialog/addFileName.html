@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper">
+<md-dialog aria-label="Mango" class="add--file--name--modal--wrapper">
     <form ng-cloak
           name="newFileName"
           novalidate
@@ -6,12 +6,13 @@
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
                 <h2 class="modal--head--title">文档模版</h2>
-                <img class="modal--head--icon" src="images/edit--custom--data--modal--head--icon.png" alt=""/>
+                <!--<img class="modal&#45;&#45;head&#45;&#45;icon" src="images/edit&#45;&#45;custom&#45;&#45;data&#45;&#45;modal&#45;&#45;head&#45;&#45;icon.png" alt=""/>-->
                 <span flex></span>
             </div>
         </md-toolbar>
         <md-dialog-content>
-            <div class="md-dialog-content edit--custom--data--modal--content">
+            <div class="md-dialog-content add--file--name--modal--content">
+                <div class="attribute--row--box">
                     <span class="attribute--row--box__title">文档模版名称</span>
                     <div class="popover-wrapper attribute--row--box__value">
                         <input ng-model="vm.fileName"
@@ -21,12 +22,13 @@
                                hs-form-message
                                hs-form-message-show="vm.newFileName.submit"
                                hs-form-message-template="newFileName_Filename.html"
-                        >
+                                >
                     </div>
+                </div>
             </div>
         </md-dialog-content>
 
-        <md-dialog-actions layout="row"class="new--project--manage--modal--footer">
+        <md-dialog-actions layout="row" class="add--file--name--modal--footer">
             <span flex></span>
             <md-button  ng-click="vm.cancel()">
                 取消

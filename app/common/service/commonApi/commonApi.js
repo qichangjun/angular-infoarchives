@@ -18,6 +18,9 @@
     this["getRetentionPeriodList"] = "/project/retention_period/list";
     this["getRetentionPeriodId"] = "/project/retention_period/detail";
     this["saveRetentionPeriod"] = "/project/retention_period/create";
+    this["saveRetentionPolicy"] = "/project/retention_policy/create";
+    this["getRetentionPolicyId"] = "/project/retention_policy/detail";
+    this["getRetentionPolicyList"] = "/project/retention_policy/list";
     this["getModuleVersionList"] = "/project/template/version/list";
     this["createModule"] = "/project/template/create";
     this["updateVersion"] = "/project/template/upgrade";
@@ -27,4 +30,4 @@
 
 }).call(this);
 
-//# sourceMappingURL=hsApi.js.map
+//# sourceMappingURL=commonApi.js.map

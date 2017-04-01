@@ -21,7 +21,7 @@
           data: [
             {
               title: '批次查看',
-              url: 'infoArchives.dataError',
+              url: 'infoArchives.batch',
               img: 'fa fa-truck'
             }, {
               title: '数据仓库',

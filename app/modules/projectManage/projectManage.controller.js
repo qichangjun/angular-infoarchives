@@ -3,8 +3,9 @@
   'use strict';
   angular.module("myApp").controller("projectManageController", [
     '$scope', '$log', '$state', 'projectManageService', 'mdDialogService', '$timeout', '$mdToast', function($scope, $log, $state, projectManageService, mdDialogService, $timeout, $mdToast) {
-      var deleteProject, editModule, getProjectList, init, newProject, newProjectAlert, serfToEdit, vm;
+      var PAHT_OF_TEMPLATE_MDDIALOG, deleteProject, getProjectList, init, newProject, newProjectAlert, serfToEdit, vm;
       vm = this;
+      PAHT_OF_TEMPLATE_MDDIALOG = 'modules/projectManage/template/mdDialog/';
       init = function() {
         getProjectList();
       };
@@ -14,7 +15,7 @@
         }, function(res) {});
       };
       newProject = function(event) {
-        return mdDialogService.initCustomDialog('newProjectController', 'modules/projectManage/template/mdDialog/newProjectManage.html?' + window.hsConfig.bust, event, null).then(function(res) {
+        return mdDialogService.initCustomDialog('newProjectController', PAHT_OF_TEMPLATE_MDDIALOG + 'newProjectManage.html?' + window.hsConfig.bust, event, null).then(function(res) {
           if (res) {
             vm.projectLists.push(res);
           }
@@ -22,37 +23,18 @@
         }, function(res) {});
       };
       newProjectAlert = function() {
-        return mdDialogService.initCustomDialog('newProjectAlertController', 'modules/projectManage/template/mdDialog/newProjectAlert.html?' + window.hsConfig.bust, event, null).then(function(res) {}, function(res) {});
+        return mdDialogService.initCustomDialog('newProjectAlertController', PAHT_OF_TEMPLATE_MDDIALOG + 'newProjectAlert.html?' + window.hsConfig.bust, event, null).then(function(res) {}, function(res) {});
       };
-      editModule = function(event, item) {
-        return mdDialogService.initCustomDialog('customeModuleController', 'webComponents/common/hsTemplates/doc/projectManage/customeModule.html?' + window.hsConfig.bust, event, {
-          module: null
-        }).then(function(res) {
-          if (!item.module) {
-            item.module = [];
-          }
-          item.module.push(res);
-        }, function(res) {});
-      };
-      deleteProject = function(event, item) {
+      deleteProject = function(event, item, index) {
         event.stopPropagation();
-        return mdDialogService.initConfirmDialog(event, '删除项目', '确定要删除该项目吗?').then(function() {
+        return mdDialogService.initCustomDialog('deleteAlertController', PAHT_OF_TEMPLATE_MDDIALOG + 'deleteAlert.html?' + window.hsConfig.bust, event, {
+          title: '删除项目',
+          content: '确定要删除该项目吗?'
+        }).then(function() {
           vm.loading = true;
           return projectManageService.deleteProject(item.id).then(function(res) {
-            var i, j, len, ref, results, rows;
             vm.loading = false;
-            ref = vm.projectLists;
-            results = [];
-            for (i = j = 0, len = ref.length; j < len; i = ++j) {
-              rows = ref[i];
-              if (rows.id === item.id) {
-                vm.projectLists.splice(i, 1);
-                break;
-              } else {
-                results.push(void 0);
-              }
-            }
-            return results;
+            return vm.projectLists.splice(index, 1);
           }, function(res) {});
         });
       };
@@ -63,7 +45,6 @@
       };
       vm.serfToEdit = serfToEdit;
       vm.deleteProject = deleteProject;
-      vm.editModule = editModule;
       vm.newProject = newProject;
       init();
     }
@@ -91,7 +72,20 @@
       };
       loadDataBase = function() {
         return projectManageService.getDataBaseList().then(function(res) {
-          return vm.dataBases = res;
+          var i, j, len, ref, results, rows;
+          vm.dataBases = res;
+          vm.dataBaseDisplayLists = [];
+          ref = vm.dataBases;
+          results = [];
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if ($.inArray(rows.databaseName, vm.dataBaseDisplayLists) === -1) {
+              results.push(vm.dataBaseDisplayLists.push(rows.databaseName));
+            } else {
+              results.push(void 0);
+            }
+          }
+          return results;
         }, function(res) {});
       };
       getVersionList = function(dataBaseName) {
@@ -155,6 +149,24 @@
       cancel = function() {
         return $mdDialog.cancel();
       };
+      vm.cancel = cancel;
+      init();
+    }
+  ]).controller('deleteAlertController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'title', 'content', function($scope, $log, $stateParams, $mdDialog, title, content) {
+      var cancel, confirm, init, vm;
+      vm = this;
+      init = function() {
+        vm.title = title;
+        return vm.content = content;
+      };
+      cancel = function() {
+        return $mdDialog.cancel();
+      };
+      confirm = function() {
+        return $mdDialog.hide(true);
+      };
+      vm.confirm = confirm;
       vm.cancel = cancel;
       init();
     }

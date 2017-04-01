@@ -1,0 +1,79 @@
+@charset "utf-8";
+.tip-show-animate{
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+  transition-property: all;
+  background-color:rgba(15,15,15,0.7);
+  height: 100px;
+  z-index: 99;
+}
+.hiddenTreeTool{
+  padding: 0 !important;
+  width: 0;
+  overflow: hidden;
+}
+.showTreeTool{
+  width: 200px;
+}
+.show-set-rule-add-tool {
+  //height: 200px;
+  padding: 20px;
+  border-radius: 5px;
+  overflow: hidden;
+  opacity: 1;
+  z-index:70;
+  //width: 200px;
+}
+.hide-set-rule-add-tool {
+  padding: 0 !important;
+  height: 0px;
+  overflow: hidden;
+  opacity: 0;
+}
+.ruleSet-attr-name{
+  margin-right: 8px;
+  font-size: 13px;
+  cursor: pointer;
+  &.selected{
+    display: inline-block;
+    height: 36px;
+    line-height: 36px;
+    vertical-align: middle;
+    text-align: center;
+    border-radius: 2px;
+    box-sizing: border-box;
+    outline: none;
+    border: 0;
+    background: #40B98E !important;
+    color: #ffffff !important;
+    padding: 0 12px;
+    box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+    margin: 0;
+    text-decoration: none;
+    font-size: 13px;
+  }
+}
+.set-rule-add-tool-box{
+  position: absolute;
+  background-color: white;left: 10px;
+  transition-duration: 0.2s;
+  transition-timing-function: ease-in-out;
+  transition-property: all;
+  .et-rule-add-tool-row{
+    display: inline-block;
+    width: 220px;
+    margin-bottom: 10px;
+  }
+  .set-rule-add-tool_attr{
+    display: inline-block;
+    vertical-align: middle;
+    width: 60px;
+    margin-right: 6px;
+    text-align: right;
+  }
+  .set-rule-add-tool_value{
+    display: inline-block;
+    vertical-align: middle;
+    width: 145px;
+  }
+}

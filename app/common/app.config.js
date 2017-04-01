@@ -8,7 +8,7 @@
   }
 
   window.hsConfig = {
-    debugEnabled: false,
+    debugEnabled: !false,
     bust: '1_0_15'
   };
 

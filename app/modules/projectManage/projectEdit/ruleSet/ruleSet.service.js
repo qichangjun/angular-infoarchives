@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").service("ruleSetService", [
     '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular) {
-      var createRule, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRule, saveRetentionPeriod, saveRule;
+      var createRule, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRetentionPolicyId, getRetentionPolicyList, getRule, saveRetentionPeriod, saveRetentionPolicy, saveRule;
       getRule = function(id) {
         var deferred;
         deferred = $q.defer();
@@ -107,12 +107,72 @@
         });
         return deferred.promise;
       };
+      getRetentionPolicyId = function(id) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getRetentionPolicyId']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          projectId: id
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getRetentionPolicyList = function() {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getRetentionPolicyList']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
       getRetentionPeriodList = function() {
         var deferred;
         deferred = $q.defer();
         Restangular.one(hsAPI['getRetentionPeriodList']).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      saveRetentionPolicy = function(retentioPolicyId, projectId) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['saveRetentionPolicy']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          projectId: projectId,
+          id: retentioPolicyId
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
@@ -147,6 +207,9 @@
         });
         return deferred.promise;
       };
+      this.saveRetentionPolicy = saveRetentionPolicy;
+      this.getRetentionPolicyList = getRetentionPolicyList;
+      this.getRetentionPolicyId = getRetentionPolicyId;
       this.saveRetentionPeriod = saveRetentionPeriod;
       this.getRetentionPeriodId = getRetentionPeriodId;
       this.getRetentionPeriodList = getRetentionPeriodList;

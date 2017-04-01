@@ -5,8 +5,11 @@
 @import "main/body";
 @import "main/input";
 @import "main/select";
-@import "../common/hsTemplates/css/hsTemplates";
-@import "../common/hsUiGridTemplates/css/uiGridTemplates";
+@import "main/animation";
+@import "main/font-color";
+@import "main/rewrite";
+@import "main/template";
+@import "main/gridTemplates";
 @import "../common/directive/collapsibleTree/css/collapsibleTree";
 @import "../common/directive/messageVerify/css/formMessage";
 @import "../modules/dataBase/css/dataBase";

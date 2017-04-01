@@ -2,29 +2,36 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("dataModuleController", [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'dataModuleService', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, dataModuleService) {
-      var addContainer, deleteNode, editFile, editProject, findMaxId, getModuleInfo, getVersionList, init, initId, jsonToObj, listenEvent, modelPush, module, searchIdAddFile, unupdateAbleAlert, updateAbleAlert, updateName, vm;
+    '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'dataModuleService', 'uuid', 'basicDataService', 'commonMethodSerivce', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, dataModuleService, uuid, basicDataService, commonMethodSerivce) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, PAHT_OF_TEMPLATE_MDDIALOG_DELETE, addContainer, deleteNode, editFile, editProject, getModuleInfo, getProjectInfo, getVersionList, init, jsonToObj, listenEvent, modelPush, module, nameList, searchIdAddFile, searchIdDeleteFile, searchParent, unupdateAbleAlert, updateAbleAlert, updateName, vm;
       vm = this;
       vm.parameter = $stateParams;
       module = null;
       $scope.saveData = [];
-      initId = void 0;
-      $scope.module = module;
+      vm.moduleEditAble = true;
+      nameList = [];
+      PAHT_OF_TEMPLATE_MDDIALOG_DELETE = 'modules/projectManage/template/mdDialog/';
+      PAHT_OF_TEMPLATE_MDDIALOG = 'modules/projectManage/projectEdit/dataModule/template/mdDialog/';
       init = function() {
-        listenEvent();
-        return getVersionList();
+        getProjectInfo();
+        return listenEvent();
+      };
+      getProjectInfo = function() {
+        return basicDataService.getProjectInfo(vm.parameter.objectId).then(function(res) {
+          vm.projectName = res.projectName;
+          return getVersionList();
+        }, function(res) {});
       };
       getVersionList = function() {
         vm.afterLoad = false;
         return dataModuleService.getModuleVersionList(vm.parameter.objectId).then(function(res) {
           vm.afterLoad = true;
-          vm.versionList = res.template;
+          vm.versionList = res;
           if (vm.versionList.length === 0) {
             vm.updateAble = false;
-            initId = 1;
             $scope.nodes = {
-              "name": "record",
-              "objectId": initId,
+              "name": vm.projectName,
+              "code": uuid.v4(),
               "type": "record",
               "children": []
             };
@@ -38,8 +45,7 @@
             }
           } else {
             vm.updateAble = true;
-            vm.currentVesion = vm.versionList[vm.versionList.length - 1].versionNo;
-            vm.parameter.moduleId = vm.versionList[vm.versionList.length - 1].objectId;
+            vm.currentVesion = vm.versionList[vm.versionList.length - 1].id;
             return getModuleInfo();
           }
         }, function(res) {
@@ -47,25 +53,54 @@
         });
       };
       getModuleInfo = function() {
-        return dataModuleService.getModuleInfo(vm.parameter.moduleId).then(function(res) {
+        return dataModuleService.getModuleInfo(vm.currentVesion).then(function(res) {
+          var i, j, len, ref, rows;
+          if (vm.currentVesion !== vm.versionList[vm.versionList.length - 1].id) {
+            vm.moduleEditAble = false;
+          } else {
+            vm.moduleEditAble = true;
+          }
           module = res;
-          $scope.nodes = angular.copy(module.containers[0]);
-          jsonToObj($scope.nodes);
-          return initId = findMaxId($scope.nodes);
+          ref = module.containers;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (rows.type === 'record') {
+              $scope.nodes = angular.copy(rows);
+            }
+          }
+          return jsonToObj($scope.nodes);
         }, function(res) {});
       };
       listenEvent = function() {
         $scope.$on('node:delete', function(e, d) {
-          return mdDialogService.initConfirmDialog(e, '删除节点', '确定要删除该节点吗?').then(function() {
+          event.stopPropagation();
+          return mdDialogService.initCustomDialog('deleteAlertController', PAHT_OF_TEMPLATE_MDDIALOG_DELETE + 'deleteAlert.html?' + window.hsConfig.bust, event, {
+            title: '删除节点',
+            content: '确定要删除该节点吗?'
+          }).then(function() {
             return $timeout(function() {
-              return deleteNode($scope.nodes, d.objectId);
+              return deleteNode($scope.nodes, d.code);
             });
-          }, function() {});
+          });
         });
         $scope.$on('node:updateName', function(e, d) {
+          var brothersName, item;
+          nameList = [];
+          searchParent($scope.nodes, d.parent.code);
+          brothersName = (function() {
+            var j, len, results;
+            results = [];
+            for (j = 0, len = nameList.length; j < len; j++) {
+              item = nameList[j];
+              results.push(item.name);
+            }
+            return results;
+          })();
           return mdDialogService.initPromptDialog(event, '节点名', d.name).then(function(res) {
-            if (res) {
-              return updateName($scope.nodes, d.objectId, res);
+            if (res && !commonMethodSerivce.includeInArr(res, brothersName)) {
+              return updateName($scope.nodes, d.code, res);
+            } else if (res && commonMethodSerivce.includeInArr(res, brothersName)) {
+              return mdDialogService.initAlertDialog('节点名不能重复', '', '知道了', e);
             } else {
               return mdDialogService.initAlertDialog('节点名不能为空', '', '知道了', e);
             }
@@ -73,18 +108,22 @@
         });
         $scope.$on('add:node', function(e, d) {
           return $timeout(function() {
-            return addContainer($scope.nodes, d.objectId, 'node');
+            nameList = [];
+            searchParent($scope.nodes, d.code);
+            return addContainer($scope.nodes, d.code, 'node', nameList.length);
           });
         });
         $scope.$on('add:block', function(e, d) {
           return $timeout(function() {
-            return addContainer($scope.nodes, d.objectId, 'block');
+            nameList = [];
+            searchParent($scope.nodes, d.code);
+            return addContainer($scope.nodes, d.code, 'block', nameList.length);
           });
         });
         $scope.$on('node:addCustomData', function(e, d) {
-          return mdDialogService.initCustomDialog('editCustomDataController', 'modules/projectManage/projectEdit/dataModule/template/mdDialog/editCustomData.html?' + window.hsConfig.bust, e, {
+          return mdDialogService.initCustomDialog('editCustomDataController', PAHT_OF_TEMPLATE_MDDIALOG + 'editCustomData.html?' + window.hsConfig.bust, e, {
             property: module.attrRules,
-            containerId: d.objectId
+            containerId: d.code
           }).then(function(res) {
             module.attrRules = res;
           }, function(res) {
@@ -92,17 +131,15 @@
           });
         });
         $scope.$on('node:addFile', function(e, d) {
-          return mdDialogService.initCustomDialog('addFileNameController', 'modules/projectManage/projectEdit/dataModule/template/mdDialog/addFileName.html?' + window.hsConfig.bust, e).then(function(res) {
-            var hasFile;
-            initId = initId + 1;
+          return mdDialogService.initCustomDialog('addFileNameController', PAHT_OF_TEMPLATE_MDDIALOG + 'addFileName.html?' + window.hsConfig.bust, e).then(function(res) {
             module.attrRules.push({
-              pid: d.objectId,
+              parentCode: d.code,
               name: res,
               type: 'file',
-              objectId: initId
+              code: uuid.v4()
             });
-            hasFile = searchIdAddFile($scope.nodes, d.objectId);
-            $scope.$broadcast('update:fileNum', d, hasFile);
+            searchIdAddFile($scope.nodes, d.code);
+            $scope.$broadcast('node:cancelSelected', d);
             return editFile(e, d);
           }, function(res) {
             return console.log('cancel');
@@ -113,47 +150,81 @@
         });
       };
       editFile = function(e, d) {
-        var fileLists, i, j, len, ref, rows;
-        fileLists = [];
-        ref = module.attrRules;
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
-          rows = ref[i];
-          if (rows.pid === d.objectId) {
-            fileLists.push(rows);
+        var fileLists, item;
+        fileLists = (function() {
+          var j, len, ref, results;
+          ref = module.attrRules;
+          results = [];
+          for (j = 0, len = ref.length; j < len; j++) {
+            item = ref[j];
+            if (item.parentCode && item.parentCode === d.code) {
+              results.push(item);
+            }
           }
-        }
-        return mdDialogService.initCustomDialog('editFileDataController', 'modules/projectManage/projectEdit/dataModule/template/mdDialog/editFileData.html?' + window.hsConfig.bust, e, {
+          return results;
+        })();
+        return mdDialogService.initCustomDialog('editFileDataController', PAHT_OF_TEMPLATE_MDDIALOG + 'editFileData.html?' + window.hsConfig.bust, e, {
           fileLists: fileLists,
           property: module.attrRules
         }).then(function(res) {
-          return module.attrRules = res;
+          var i;
+          module.attrRules = res.attr;
+          i = 0;
+          while (i < module.attrRules.length) {
+            if (commonMethodSerivce.includeInArr(module.attrRules[i].code, res.deleteList)) {
+              module.attrRules.splice(i, 1);
+            } else {
+              i++;
+            }
+          }
+          searchIdDeleteFile($scope.nodes, d.code, res.deleteList.length);
+          return $scope.$broadcast('node:cancelSelected', d);
         }, function(res) {
           return console.log('canceled');
         });
       };
-      findMaxId = function(node) {
-        var forFindId, id;
-        id = 1;
-        forFindId = function(node) {
-          var i, j, len, ref, results, rows;
-          if (node.objectId > id) {
-            id = node.objectId;
-          }
-          if (node.children) {
-            ref = node.children;
-            results = [];
-            for (i = j = 0, len = ref.length; j < len; i = ++j) {
-              rows = ref[i];
-              if (rows.objectId > id) {
-                id = rows.objectId;
-              }
-              results.push(forFindId(rows));
+      searchParent = function(node, parentCode) {
+        var i, j, len, ref, results, rows;
+        if (node.code === parentCode) {
+          return nameList = angular.copy(node.children);
+        } else if (node.children) {
+          ref = node.children;
+          results = [];
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (rows.code === parentCode) {
+              results.push(nameList = angular.copy(rows.children));
+            } else {
+              results.push(searchParent(rows, parentCode));
             }
-            return results;
           }
-        };
-        forFindId(node);
-        return id;
+          return results;
+        }
+      };
+      searchIdDeleteFile = function(node, id, length) {
+        var i, j, len, ref, rows;
+        if (node.code === id) {
+          node.hasFile = node.hasFile * 1 - length;
+          if (node.hasFile < 0) {
+            node.hasFile = void 0;
+          }
+          return;
+        }
+        if (node.children) {
+          ref = node.children;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (rows.code === id) {
+              rows.hasFile = rows.hasFile * 1 - length;
+              if (rows.hasFile < 0) {
+                rows.hasFile = void 0;
+              }
+              return;
+            } else {
+              searchIdDeleteFile(rows, id, length);
+            }
+          }
+        }
       };
       deleteNode = function(node, id) {
         var i, j, len, ref, rows;
@@ -161,7 +232,7 @@
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.objectId === id) {
+            if (rows.code === id) {
               node.children.splice(i, 1);
               return;
             } else {
@@ -172,7 +243,7 @@
       };
       updateName = function(node, id, name) {
         var i, j, len, ref, rows;
-        if (node.objectId === id) {
+        if (node.code === id) {
           $timeout(function() {
             node.name = name;
             $scope.$broadcast('update:name', name, id);
@@ -182,7 +253,7 @@
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.objectId === id) {
+            if (rows.code === id) {
               $timeout(function() {
                 rows.name = name;
                 return $scope.$broadcast('update:name', name, id);
@@ -194,17 +265,15 @@
           }
         }
       };
-      addContainer = function(node, id, type) {
+      addContainer = function(node, id, type, name) {
         var i, j, len, ref, rows;
-        if (node.objectId === id) {
+        if (node.code === id) {
           $timeout(function() {
-            initId = initId * 1 + 1;
             return node.children.push({
-              "name": type,
-              "objectId": initId,
+              "name": type + name,
+              "code": uuid.v4(),
               "type": type,
-              "children": [],
-              "isNew": true
+              "children": []
             });
           });
           return;
@@ -213,29 +282,27 @@
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.objectId === id) {
+            if (rows.code === id) {
               $timeout(function() {
-                initId = initId * 1 + 1;
                 return rows.children.push({
-                  "name": type,
-                  "objectId": initId,
+                  "name": type + name,
+                  "code": uuid.v4(),
                   "type": type,
-                  "children": [],
-                  "isNew": true
+                  "children": []
                 });
               });
               break;
               return;
             } else {
-              addContainer(rows, id, type);
+              addContainer(rows, id, type, name);
             }
           }
         }
       };
       searchIdAddFile = function(node, id) {
         var i, j, len, ref, rows;
-        if (node.objectId === id) {
-          if (node.hasFile === void 0) {
+        if (node.code === id) {
+          if (angular.isUndefined(node.hasFile)) {
             node.hasFile = 1;
           } else if (typeof node.hasFile === 'number') {
             node.hasFile = node.hasFile + 1;
@@ -246,8 +313,8 @@
           ref = node.children;
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.objectId === id) {
-              if (rows.hasFile === void 0) {
+            if (rows.code === id) {
+              if (angular.isUndefined(rows.hasFile)) {
                 rows.hasFile = 1;
               } else if (typeof rows.hasFile === 'number') {
                 rows.hasFile = rows.hasFile + 1;
@@ -263,9 +330,9 @@
         var i, j, len, node_b, ref, results, rows;
         if (parent_path) {
           node.path = angular.copy(parent_path);
-          node.path.push(node.objectId);
+          node.path.push(node.code);
         } else {
-          node.path = [node.objectId];
+          node.path = [node.code];
         }
         node_b = angular.copy(node);
         delete node_b.children;
@@ -288,11 +355,11 @@
         ref = module.containers;
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
-          if (rows.pid === node.objectId) {
+          if (rows.parentCode === node.code) {
             if (rows.type !== 'file') {
               node.children.push(rows);
             } else {
-              if (node.hasFile === void 0) {
+              if (angular.isUndefined(node.hasFile)) {
                 node.hasFile = 1;
               } else if (typeof node.hasFile === 'number') {
                 node.hasFile = node.hasFile + 1;
@@ -330,7 +397,7 @@
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
           if (rows.path) {
-            rows.pid = rows.path[rows.path.length - 2];
+            rows.parentCode = rows.path[rows.path.length - 2];
           }
         }
         if (!vm.updateAble) {
@@ -343,7 +410,7 @@
         }
       };
       updateAbleAlert = function(data, attrRules, template) {
-        return mdDialogService.initCustomDialog('updateAbleAlertController', 'modules/projectManage/projectEdit/dataModule/template/mdDialog/updateModule.html?' + window.hsConfig.bust, event, null).then(function(res) {
+        return mdDialogService.initCustomDialog('updateAbleAlertController', PAHT_OF_TEMPLATE_MDDIALOG + 'updateModule.html?' + window.hsConfig.bust, event, null).then(function(res) {
           return dataModuleService.updateVersion(data, attrRules, template).then(function(res) {
             return getVersionList();
           }, function(res) {});
@@ -354,7 +421,7 @@
         });
       };
       unupdateAbleAlert = function(model) {
-        return mdDialogService.initCustomDialog('newProjectAlertController', 'modules/projectManage/projectEdit/dataModule/template/mdDialog/newModule.html?' + window.hsConfig.bust, event, null).then(function(res) {
+        return mdDialogService.initCustomDialog('newProjectAlertController', PAHT_OF_TEMPLATE_MDDIALOG + 'newModule.html?' + window.hsConfig.bust, event, null).then(function(res) {
           getVersionList();
         });
       };
@@ -378,7 +445,7 @@
       init();
     }
   ]).controller('editCustomDataController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'property', 'mdDialogService', 'containerId', function($scope, $log, $stateParams, $mdDialog, property, mdDialogService, containerId) {
+    '$scope', '$log', '$stateParams', '$mdDialog', 'property', 'mdDialogService', 'containerId', 'mdToastService', 'commonMethodSerivce', function($scope, $log, $stateParams, $mdDialog, property, mdDialogService, containerId, mdToastService, commonMethodSerivce) {
       var addCustomData, cancel, deleteCustomdata, init, saveCustomData, vm;
       vm = this;
       init = function() {
@@ -392,18 +459,36 @@
       addCustomData = function() {
         return vm.entity.push({
           displayName: '自定义元数据',
-          attributeType: 'string',
-          attributeLength: 1,
-          required: true,
-          containerId: vm.containerId,
-          systemAttribute: false
+          attrType: 'string',
+          attrName: 'defualt',
+          attrLength: 1,
+          isRequired: "1",
+          containerCode: vm.containerId,
+          isSys: "0"
         });
       };
       deleteCustomdata = function(index) {
         return vm.entity.splice(index, 1);
       };
       saveCustomData = function() {
-        return $mdDialog.hide(vm.entity);
+        var attrName_List, item;
+        attrName_List = (function() {
+          var j, len, ref, results;
+          ref = vm.entity;
+          results = [];
+          for (j = 0, len = ref.length; j < len; j++) {
+            item = ref[j];
+            if (item.attrName && item.containerCode === vm.containerId) {
+              results.push(item.attrName);
+            }
+          }
+          return results;
+        })();
+        if (commonMethodSerivce.isArrRepeat(attrName_List)) {
+          return $mdDialog.hide(vm.entity);
+        } else {
+          return mdToastService.showToast('属性名不能重复');
+        }
       };
       vm.saveCustomData = saveCustomData;
       vm.deleteCustomdata = deleteCustomdata;
@@ -412,14 +497,15 @@
       init();
     }
   ]).controller('editFileDataController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'property', 'mdDialogService', 'fileLists', function($scope, $log, $stateParams, $mdDialog, property, mdDialogService, fileLists) {
-      var addCustomData, cancel, deleteCustomdata, init, saveCustomData, vm;
+    '$scope', '$log', '$stateParams', '$mdDialog', 'property', 'mdDialogService', 'fileLists', 'mdToastService', 'commonMethodSerivce', function($scope, $log, $stateParams, $mdDialog, property, mdDialogService, fileLists, mdToastService, commonMethodSerivce) {
+      var addCustomData, cancel, deleteCustomdata, deleteFile, init, saveCustomData, vm;
       vm = this;
       init = function() {
         vm.typeLists = ['date', 'int', 'string', 'boolean'];
         vm.entity = property;
         vm.fileLists = fileLists;
-        return vm.currentFileId = vm.fileLists[0].objectId;
+        vm.currentFileId = vm.fileLists[0].code;
+        return vm.deleteLists = [];
       };
       cancel = function() {
         return $mdDialog.cancel();
@@ -427,19 +513,69 @@
       addCustomData = function() {
         return vm.entity.push({
           displayName: '自定义元数据',
-          attributeType: 'string',
-          attributeLength: 1,
-          required: true,
-          containerId: vm.currentFileId,
-          systemAttribute: false
+          attrType: 'string',
+          attrLength: 1,
+          attrName: 'default',
+          isRequired: "1",
+          containerCode: vm.currentFileId,
+          isSys: "0"
         });
       };
       deleteCustomdata = function(index) {
         return vm.entity.splice(index, 1);
       };
       saveCustomData = function() {
-        return $mdDialog.hide(vm.entity);
+        var attrName_List, item;
+        attrName_List = (function() {
+          var j, len, ref, results;
+          ref = vm.entity;
+          results = [];
+          for (j = 0, len = ref.length; j < len; j++) {
+            item = ref[j];
+            if (item.attrName && item.containerCode === vm.currentFileId) {
+              results.push(item.attrName);
+            }
+          }
+          return results;
+        })();
+        if (commonMethodSerivce.isArrRepeat(attrName_List)) {
+          return $mdDialog.hide({
+            deleteList: vm.deleteLists,
+            attr: vm.entity
+          });
+        } else {
+          return mdToastService.showToast('属性名不能重复');
+        }
       };
+      deleteFile = function() {
+        var i, j, len, ref, rows;
+        ref = vm.fileLists;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if (rows.code === vm.currentFileId) {
+            vm.deleteLists.push(rows.code);
+            vm.fileLists.splice(i, 1);
+            break;
+          }
+        }
+        i = 0;
+        while (i < vm.entity.length) {
+          if (vm.entity[i].containerCode === vm.currentFileId) {
+            vm.entity.splice(i, 1);
+          } else {
+            i++;
+          }
+        }
+        if (vm.fileLists.length === 0) {
+          return $mdDialog.hide({
+            deleteList: vm.deleteLists,
+            attr: vm.entity
+          });
+        } else {
+          return vm.currentFileId = vm.fileLists[0].code;
+        }
+      };
+      vm.deleteFile = deleteFile;
       vm.saveCustomData = saveCustomData;
       vm.deleteCustomdata = deleteCustomdata;
       vm.addCustomData = addCustomData;

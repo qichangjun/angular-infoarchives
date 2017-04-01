@@ -33,12 +33,11 @@
                     <span class="current--column">数据模版</span>
                     <div class="save--template--box">
                         <div class="current--vesion">
-                            <span>版本号</span>
-                            <md-select placeholder="1.0" class="current--vesion__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
-                                <md-option ng-value="versionList.versionNo" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
+                            <span>版本号</span><md-select placeholder="1.0" class="current--vesion__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
+                                <md-option ng-value="versionList.id" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
                             </md-select>
                         </div>
-                        <md-button class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)">
+                        <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)">
                             保存模版
                         </md-button>
                     </div>
@@ -52,18 +51,11 @@
                     <div class="md-dialog-content">
                         <form name="newProject" action="">
                             <div layout-gt-sm="row" id="container" >
-                                <collapsible-tree style="position:relative;overflow: scroll;height: 787px;width: 100%;"  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490'>
+                                <collapsible-tree style="position:relative;overflow: scroll;height: 787px;width: 100%;"  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble">
                                 </collapsible-tree>
                             </div>
                         </form>
                     </div>
-                </div>
-                <div >
-                    <span flex></span>
-
-                    <md-button ng-disabled="vm.loading" ng-show="module" ng-click="vm.editProject($event,'update')">
-                        升版模版
-                    </md-button>
                 </div>
             </form>
         </div>

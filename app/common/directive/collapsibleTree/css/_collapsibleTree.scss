@@ -2,18 +2,34 @@
 .node rect{
   cursor:pointer;
   stroke:#8bd7c8;
-  stroke-width:2px
+  stroke-width:2px;
+  fill:#1ab394
 }
 .node rect.block{
   cursor:pointer;
   stroke:#8cc0e1;
-  stroke-width:1.5px
+  stroke-width:1.5px;
+  fill:#1c84c6
 }
 .node rect.node{
   cursor:pointer;
   stroke:#fad4aa;
-  stroke-width:1.5px
+  stroke-width:1.5px;
+  fill:#f8ac59;
 }
+.nodeTool {
+  transition: 0.3s linear all; -webkit-transition: 0.3s linear all;
+  transform: translateY(-50px);
+  opacity: 0
+ }
+.nodeTool-animate {
+  transform: translateY(0px);
+  opacity: 1
+}
+.nodeTool.ng-enter {opacity: 0;transform: translateY(30px);}
+.nodeTool.ng-enter.ng-enter-active { opacity: 1; }
+.nodeTool.ng-leave {opacity: 1;}
+.nodeTool.ng-leave.ng-leave-active { opacity: 0; transform: translateY(30px);}
 .node text{
   font-size:11px
 }
@@ -27,7 +43,13 @@ path.link{
   stroke-width:1.5px;
   cursor:pointer;
 }
-.cursor-pointer {
+.cursor-pointer{
   cursor:pointer;
-  font-size : 16px !important;
+  &:hover{
+    text-decoration: underline;
+  }
+}
+.icon-size{
+  font-size: 15px !important;
+  cursor: pointer;
 }

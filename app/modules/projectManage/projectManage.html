@@ -19,7 +19,7 @@
             <div >
                 <md-card
                         ng-click="vm.serfToEdit(item)"
-                        style="transition-duration: 0.5s;width: 218px;float: left;"
+                        class="project--data--list--card"
                         ng-mouseover="item.isHover = true"
                         ng-mouseleave="item.isHover = false"
                         ng-class="{'md-whiteframe-12dp': item.isHover}"
@@ -45,7 +45,7 @@
 
                         <div class="card--actions--pull--right">
                             <div class="icon--button project-icon-tool" aria-label="More">
-                                <span class="glyphicon glyphicon-trash" ng-click="vm.deleteProject($event,item)"></span>
+                                <span class="glyphicon glyphicon-trash" ng-click="vm.deleteProject($event,item,$index)"></span>
                             </div>
                         </div>
                     </md-card-actions>
