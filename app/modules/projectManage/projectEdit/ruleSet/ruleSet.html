@@ -1,12 +1,12 @@
-<div class="anim-slide-left">
-    <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
+<div class="anim-slide-left data--module--new--prompt--wrap">
+    <md-toolbar ng-show="vm.versionList.length > 0" class="md-menu-toolbar edit--project--manage--head-box">
         <div class="md-toolbar-tools">
             <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
                 <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
             </md-button>
             <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
             <span> > </span>
-            <span class="current--column">行政审批系统</span>
+            <span class="current--column">{{vm.projectName}}</span>
             <span> | </span>
             <span class="current--column">策略设置</span>
             <!--<md-button  ng-click="vm.save()">-->
@@ -16,11 +16,23 @@
     </md-toolbar>
     <div ng-show="!vm.afterLoad">正在加载...</div>
     <div ng-show="vm.afterLoad">
-        <div ng-show="vm.versionList.length == 0" class="clearfix batch--info--box" style="width:100%;margin-bottom: 10px;">
-            <h1>您还没有创建数据模版,无法配置归档策略</h1>
-            <md-button class="  red--btn new--project--box__btn"  ng-click="vm.serfToCreateModule()">
-                立刻创建
-            </md-button>
+        <div ng-show="vm.versionList.length == 0">
+            <div class="new--prompt--box">
+                <div class="new--prompt--box__head">
+                    <img src="images/edit--project--manage--modal--new.png" alt=""/>
+                    还需要创建数据模板
+                </div>
+                <div class="prompt-content">
+                    您还没有创建数据模版，无法配置归档策略
+                </div>
+            </div>
+            <div class="new--prompt__btn--box">
+                <img src="images/create--rule--template--icon.png" alt=""/>
+                <h4 class="title--content">该项目还没有定义策略</h4>
+                <md-button class="red--btn"  ng-click="vm.serfToCreateModule()">
+                    立刻创建
+                </md-button>
+            </div>
         </div>
         <div ng-show="vm.versionList.length != 0" class="edit--project--manage--wrapper">
             <div class="base--info--content">

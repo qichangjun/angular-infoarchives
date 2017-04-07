@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("ruleSetController", [
-    '$scope', '$log', '$state', '$timeout', '$stateParams', 'ruleSetService', 'dataModuleService', 'mdToastService', function($scope, $log, $state, $timeout, $stateParams, ruleSetService, dataModuleService, mdToastService) {
-      var STRING_ATTR_VALUE_NOTNULL, STRING_ENTER_ATTR_NAME, STRING_ENTER_LENGTH_OF_SERIAL_NUM, addRule, changeAttr, checkRule, deleteRule, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRetentionPolicyId, getRetentionPolicyList, getRule, getVersionList, init, saveRetentionPeriod, saveRetentionPolicy, saveRule, serfToCreateModule, showAdd, showEdit, vm;
+    '$scope', '$log', '$state', '$timeout', '$stateParams', 'ruleSetService', 'dataModuleService', 'mdToastService', 'basicDataService', function($scope, $log, $state, $timeout, $stateParams, ruleSetService, dataModuleService, mdToastService, basicDataService) {
+      var STRING_ATTR_VALUE_NOTNULL, STRING_ENTER_ATTR_NAME, STRING_ENTER_LENGTH_OF_SERIAL_NUM, addRule, changeAttr, checkRule, deleteRule, getProjectInfo, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRetentionPolicyId, getRetentionPolicyList, getRule, getVersionList, init, saveRetentionPeriod, saveRetentionPolicy, saveRule, serfToCreateModule, showAdd, showEdit, vm;
       vm = this;
       vm.parameter = $stateParams;
       vm.entity = {
@@ -21,6 +21,12 @@
         getRetentionPolicyList();
         getRetentionPeriodId();
         getRetentionPolicyId();
+        getProjectInfo();
+      };
+      getProjectInfo = function() {
+        return basicDataService.getProjectInfo(vm.parameter.objectId).then(function(res) {
+          return vm.projectName = res.projectName;
+        }, function(res) {});
       };
       getRetentionPeriodId = function() {
         return ruleSetService.getRetentionPeriodId(vm.parameter.objectId).then(function(res) {

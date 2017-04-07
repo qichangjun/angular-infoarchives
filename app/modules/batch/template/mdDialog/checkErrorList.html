@@ -1,0 +1,15 @@
+<md-dialog aria-label="Mango">
+    <div>
+        <div>
+            <h1>异常数据列包</h1>
+        </div>
+        <div>
+            <div style="height: 50px;">
+                <md-button class="pull-right md-raised green--btn" ng-click="vm.forceSwitch()">强制转转</md-button>
+                <md-button class="pull-right md-raised green--btn" ng-click="vm.deleteData()">删除</md-button>
+            </div>
+            <div  ui-grid="gridOptions" style="height: 630px;width:800px;" class="common--uigrid--height batch-grid" ui-grid-infinite-scroll ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+        </div>
+    </div>
+
+</md-dialog>

@@ -1,0 +1,23 @@
+<div  class="hs-ui-grid-cell-contents hs-ui-grid-cell add-background-colors clearfix" >
+    <div ng-if="!row.entity.isChanging">
+
+        <span class="glyphicon glyphicon-play"
+              style="font-size: 20px"
+              ng-click="grid.appScope.vm.startService(row.entity,$event)"
+              ng-class="{'button-disabled': row.entity.jobStatus != 'PAUSED'}"
+            >
+
+        </span>
+        <span class="glyphicon glyphicon-pause"
+              style="font-size: 20px"
+              ng-click="grid.appScope.vm.stopService(row.entity,$event)"
+              ng-class="{'button-disabled': row.entity.jobStatus == 'PAUSED'}"
+        >
+
+        </span>
+
+    </div>
+    <div ng-if="row.entity.isChanging">
+        正在处理...
+    </div>
+</div>

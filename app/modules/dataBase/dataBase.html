@@ -1,100 +1,81 @@
-<div class="anim-slide-right data--base--sidenav">
-    <md-sidenav
-            class="md-sidenav-left pull--left data--base--wrapper "
-            md-component-id="left"
-            md-is-locked-open="true"
-            md-whiteframe="4"
-    >
-        <div class="select--data--source--box">
-            选择数据源
+<div class="anim-slide-left service--watch--wrap">
+   <div class="service--watch--prompt--wrap">
+        <div class="title">数据视图</div>
+        <div class="prompt--content">可以使用数据过滤浏览具体业务记录</div>
+       <div class="data--base--view--type--filter">
+           <span class="data--base--view--type--filter_title">视图类型：</span>
+           <md-radio-group class="radio--box" ng-model="vm.parameter.chartType" ng-change="vm.changeChartType(vm.parameter.chartType)">
+               <md-radio-button value="unit" class="md-primary">按业务单位</md-radio-button>
+               <md-radio-button value="source" class="md-primary"> 按系统来源 </md-radio-button>
+           </md-radio-group>
+       </div>
+   </div>
+    <div style="float:left; width: 400px;height: 100%;">
+        <div style="float: left;width:300px;height: 360px;background: gray;margin-left: 50px;margin-top: 50px">
+            <span>数据信息</span>
+            <div>
+                <label >  最新更新日期 </label>
+                <span> 2017/09/23 16:34:23 </span>
+            </div>
+            <div>
+                <label >对接系统数量</label>
+                <span>5</span>
+            </div>
+            <div>
+                <label >数据机构数量</label>
+                <span>119</span>
+            </div>
+            <div>
+                <label >业务数量</label>
+                <span>632</span>
+            </div>
+            <div>
+                <label >数据记录总量</label>
+                <span>2341412</span>
+            </div>
+            <div>
+                <label >数据总量</label>
+                <span>41512GB</span>
+            </div>
         </div>
-        <div  class="data--base--column--wrapper">
-            <ul class="data--base--column--box">
-                <!--<md-subheader class="md-no-sticky"></md-subheader>-->
-                <li class="each--column--box" ng-repeat="item in vm.dataBases" ng-click="vm.getBaseData(item.objectId)"  ng-class="{active: vm.parameter.objectId == item.objectId}">
-                 <a>
-                    <span class="fa fa-cubes" aria-hidden="true"></span>
-                    {{ item.displayName }}
-                 </a>
-                </li>
-            </ul>
-        </div>
-    </md-sidenav>
-</div>
-<div class="anim-slide-left data--base--sidenav--right--box">
-    <div class="data--filtering--wrapper">
-        <div class="data--filtering--head">
-            <span class="title">数据过滤</span>
-            <i ng-show="vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-down put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
-            <i ng-show="!vm.showMenu" ng-click="vm.showMenu=!vm.showMenu" class="fa fa-angle-right put--away--btn" style="cursor: pointer" aria-hidden="true"></i>
-        </div>
-        <div class="filter--properties--box" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]"  style="transition: all 0.3s ease-in-out;">
-            <div class="clearfix">
-                <div class="single--attribute--box">
-                <span class="attribute--title">按数据形态</span>
-                <div class="attribute--value">
-                    <ui-select multiple ng-model="vm.parameter.dataType" theme="bootstrap"  close-on-select="false"  title="Choose a color">
-                        <ui-select-match placeholder="按数据形态">{{$item}}</ui-select-match>
-                        <ui-select-choices repeat="dataType in vm.dataTypeList | filter:$select.search">
-                            {{dataType}}
-                        </ui-select-choices>
-                    </ui-select>
+        <div style="float: left;width: 300px;height: 360px;background: gray;margin-left: 50px;margin-top: 50px">
+            <span>数据过滤</span>
+            <div>
+                <label >  数据源 </label>
+                <div>
+                    <md-select ng-model="vm.parameter.dataSource"
+                    >
+                        <md-option ng-value="12345" >行政审批系统</md-option>
+                        <md-option ng-value="4552" >xxxxx</md-option>
+                    </md-select>
                 </div>
             </div>
-                <div class="single--attribute--box">
-                    <span class="attribute--title">按来源系统</span>
-                    <div class="attribute--value">
-                        <ui-select multiple ng-model="vm.parameter.systemSource" theme="bootstrap"  close-on-select="false"  title="Choose a color">
-                            <ui-select-match placeholder="按来源系统">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="system in vm.systemSourceLists | filter:$select.search">
-                                {{system}}
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-                <div class="single--attribute--box">
-                    <span class="attribute--title">按单位</span>
-                    <div class="attribute--value">
-                        <ui-select multiple ng-model="vm.parameter.unit" theme="bootstrap"   close-on-select="false"  title="Choose a color">
-                            <ui-select-match placeholder="按单位">{{$item}}</ui-select-match>
-                            <ui-select-choices repeat="unit in vm.unitList | filter:$select.search">
-                                {{unit}}
-                            </ui-select-choices>
-                        </ui-select>
-                    </div>
-                </div>
-                <div class="single--attribute--box time--frame">
-                    <span class="attribute--title">时间范围</span>
-                    <div  layout="row" class="attribute--value">
-                        <div class="input-group">
-                            <input type="text" class="form-control " uib-datepicker-popup ng-model="vm.parameter.dateFrom" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
-                        </div>
-                    </div>
-                    <span class="time--frame__sign">-</span>
-                    <div  layout="row" class="attribute--value">
-                        <div class="input-group">
-                            <input type="text" class="form-control " uib-datepicker-popup ng-model="vm.parameter.dateTo" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
-                        </div>
-                    </div>
+            <div>
+                <label >  业务事项 </label>
+                <div>
+                    <md-select ng-model="vm.parameter.dataSource"
+                    >
+                        <md-option ng-value="'企业项目投资核准'" >企业项目投资核准</md-option>
+                        <md-option ng-value="'vasvsv'" >vasvsv</md-option>
+                    </md-select>
                 </div>
             </div>
-
-            <div class="search--location--box">
-                <input type="checkbox" ng-click="vm.parameter.dataError = !vm.parameter.dataError" ng-checked="vm.parameter.dataError">
-                <span style="padding: 5px 0px">只显示有异常的批次</span>
-                <md-button class="pull-right green--btn" ng-click="vm.search()">搜索</md-button>
+            <div>
+                <md-button class="pull-right green--btn" ng-click="vm.search()">过滤</md-button>
             </div>
         </div>
     </div>
+    <div style="float: left;width: calc(100% - 400px);height: 100%;">
+        <tree-chart nodes="data" ng-if="vm.parameter.chartType=='unit'">
+        </tree-chart>
+        <div ng-if="vm.parameter.chartType=='source'">
+            <tree-for-angular   id="customModule" nodes = 'data' width = '200' height = '200' radius = '490'>
 
-    <div style="float:left;width: 100%;">
-        <div style="width: 100%;"  ui-grid="gridOptions" class="common--uigrid--height dataBase-grid" ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-resize-columns ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+            </tree-for-angular>
+        </div>
+        <md-sidenav id="tree-data-node-detail" class="md-sidenav-right right--sidebar--info--wrap" md-component-id="tree-data-node-detail" md-whiteframe="4">
+            <div ng-include="'./modules/dataBase/template/sideBar/sideBar.html'"></div>
+        </md-sidenav>
     </div>
 
 </div>

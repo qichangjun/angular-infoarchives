@@ -1,6 +1,16 @@
 <div  class="hs-ui-grid-cell-contents hs-ui-grid-cell add-background-colors clearfix" >
-    <div>
-        <span style="margin-left: 15px;" class="glyphicon glyphicon-new-window" ng-click="grid.appScope.vm.checkDetail(row.entity,$event)"></span>
-        <span style="margin-left: 15px;" class="glyphicon glyphicon-refresh" ng-click="grid.appScope.vm.checkErrorData(row.entity,$event)"></span>
+    <div class="hidd">
+        <span  class="glyphicon glyphicon-eye-open" ng-click="grid.appScope.vm.checkDetail(row.entity.id,$event)"></span>
+        <span  class="glyphicon glyphicon-tasks" ng-click="grid.appScope.vm.checkErrorData(row.entity,$event)"></span>
     </div>
 </div>
+<style>
+    .hidd{
+        transition: 0.1s linear all; -webkit-transition: 0.3s linear all;
+        transform: translateX(250px);
+    }
+    .ui-grid-row:hover .hidd{
+        transition: 0.1s linear all; -webkit-transition: 0.3s linear all;
+        transform: translateX(0px);
+    }
+</style>

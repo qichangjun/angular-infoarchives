@@ -2,96 +2,126 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("dataBaseController", [
-    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', '$timeout', 'batchService', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, $timeout, batchService) {
-      var getBaseData, getDataList, getGridData, init, listenEvent, loadDataType, loadSystemSource, loadUnit, search, vm;
+    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', '$timeout', 'batchService', '$mdSidenav', 'mdDialogService', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, $timeout, batchService, $mdSidenav, mdDialogService) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, changeChartType, checkData, getTreeData, init, listenEvent, vm;
       vm = this;
       vm.parameter = $stateParams;
-      $scope.totalItems = 64;
-      $scope.currentPage = 4;
+      if (!vm.parameter.chartType) {
+        vm.parameter.chartType = 'unit';
+      }
+      PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
       init = function() {
         $scope.gridOptions = {};
         initGrid.getScope($scope);
         initGrid.getGrid();
-        getDataList();
-        getGridData();
+        getTreeData();
         listenEvent();
-        loadSystemSource();
-        loadUnit();
-        loadDataType();
-        vm.showMenu = true;
+      };
+      getTreeData = function() {
+        if (vm.parameter.chartType === 'unit') {
+          return $scope.data = dataBaseService.getTreeData();
+        } else if (vm.parameter.chartType === 'source') {
+          return $scope.data = dataBaseService.getTreeDataOfSource();
+        }
       };
       listenEvent = function() {
-        return $scope.$on('getList:changePageAndSort', function(ev, parameter) {
-          vm.parameter.currentPage = parameter.currentPage;
-          $state.go('.', vm.parameter, {
-            notify: false
-          });
-          return getGridData();
+        return $scope.$on('treeChart:selectNode', function(ev, detail) {
+          return $mdSidenav('tree-data-node-detail').open();
         });
       };
-      getDataList = function() {
-        return dataBaseService.getDataList().then(function(res) {
-          vm.dataBases = res.data;
-          vm.parameter.objectId = res.data[0].objectId;
-          $state.go('.', vm.parameter, {
-            notify: false
-          });
-          return getBaseData(res.data[0].objectId);
-        }, function(res) {});
-      };
-      getBaseData = function(id) {
-        vm.parameter.objectId = id;
+      changeChartType = function(chartType) {
         $state.go('.', vm.parameter, {
           notify: false
         });
-        return getGridData();
+        return getTreeData();
+      };
+      checkData = function(event) {
+        return mdDialogService.initCustomDialog('checkDataController', PAHT_OF_TEMPLATE_MDDIALOG + 'checkData.html?' + window.hsConfig.bust, event, null).then(function(res) {}, function(res) {});
+      };
+      vm.checkData = checkData;
+      vm.changeChartType = changeChartType;
+      init();
+    }
+  ]).controller('checkDataController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'i18nService', 'hsTpl', 'mdDialogService', function($scope, $log, $stateParams, $mdDialog, dataBaseService, i18nService, hsTpl, mdDialogService) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, cancel, getGridData, init, initGrid, previewDoc, vm;
+      vm = this;
+      vm.parameter = {};
+      PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
+      init = function() {
+        getGridData();
+        return initGrid();
+      };
+      initGrid = function() {
+        i18nService.setCurrentLang('zh-cn');
+        return $scope.gridOptions = {
+          selectionRowHeaderWidth: 40,
+          enableRowSelection: true,
+          enableSelectAll: true,
+          rowTemplate: hsTpl.hsRowTemplate,
+          useExternalPagination: true,
+          useExternalSorting: true,
+          rowHeight: 40,
+          onRegisterApi: function(gridApi) {
+            $scope.cancelSelect = function(row) {
+              if (gridApi.selection) {
+                if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] === row) {
+                  return gridApi.selection.clearSelectedRows();
+                } else if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] !== row) {
+                  gridApi.selection.clearSelectedRows();
+                  return gridApi.selection.selectRow(row);
+                } else if (gridApi.selection.getSelectedRows().length < 1) {
+                  return gridApi.selection.selectRow(row);
+                } else if (gridApi.selection.getSelectedRows().length > 1) {
+                  gridApi.selection.clearSelectedRows();
+                  return gridApi.selection.selectRow(row);
+                }
+              }
+            };
+            return $scope.gridApi = gridApi;
+          }
+        };
       };
       getGridData = function() {
         vm.loading = true;
-        if (vm.parameter.objectId) {
-          return dataBaseService.getGridData(vm.parameter).then(function(res) {
-            var column, i, len, ref, results;
-            vm.loading = false;
-            $scope.gridOptions.data = res.data;
-            $scope.gridOptions.totalItems = 200;
-            $scope.gridOptions.columnDefs = dataBaseService.dataBase;
-            $scope.gridOptions.columnVirtualizationThreshold = dataBaseService.dataBase.length;
-            ref = $scope.gridOptions.columnDefs;
-            results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              column = ref[i];
-              results.push(column.enableColumnMenu = false);
-            }
-            return results;
-          }, function(res) {});
-        }
-      };
-      loadSystemSource = function() {
-        return batchService.getSystemSource().then(function(res) {
-          return vm.systemSourceLists = res.data;
+        return dataBaseService.getGridData().then(function(res) {
+          var column, i, len, ref, results;
+          vm.loading = false;
+          $scope.gridOptions.data = res.data;
+          $scope.gridOptions.totalItems = 200;
+          $scope.gridOptions.columnDefs = dataBaseService.dataBase;
+          $scope.gridOptions.columnVirtualizationThreshold = dataBaseService.dataBase.length;
+          ref = $scope.gridOptions.columnDefs;
+          results = [];
+          for (i = 0, len = ref.length; i < len; i++) {
+            column = ref[i];
+            results.push(column.enableColumnMenu = false);
+          }
+          return results;
         }, function(res) {});
       };
-      loadUnit = function() {
-        return batchService.getUnit().then(function(res) {
-          return vm.unitList = res.data;
-        }, function(res) {});
+      cancel = function() {
+        return $mdDialog.cancel();
       };
-      loadDataType = function() {
-        return batchService.getDataType().then(function(res) {
-          return vm.dataTypeList = res.data;
-        }, function(res) {});
+      previewDoc = function(event) {
+        return mdDialogService.initCustomDialog('previewDocController', PAHT_OF_TEMPLATE_MDDIALOG + 'previewDoc.html?' + window.hsConfig.bust, event, {
+          objectId: $scope.gridApi.selection.getSelectedRows()[0].objectId
+        }).then(function(res) {}, function(res) {});
       };
-      search = function() {
-        $state.go('.', vm.parameter, {
-          notify: false
-        });
-        return getGridData();
+      vm.previewDoc = previewDoc;
+      vm.cancel = cancel;
+      init();
+    }
+  ]).controller('previewDocController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'objectId', function($scope, $log, $stateParams, $mdDialog, dataBaseService, objectId) {
+      var cancel, init, vm;
+      vm = this;
+      vm.objectId = objectId;
+      init = function() {};
+      cancel = function() {
+        return $mdDialog.cancel();
       };
-      vm.search = search;
-      vm.loadDataType = loadDataType;
-      vm.loadUnit = loadUnit;
-      vm.loadSystemSource = loadSystemSource;
-      vm.getBaseData = getBaseData;
+      vm.cancel = cancel;
       init();
     }
   ]);

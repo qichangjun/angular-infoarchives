@@ -1,4 +1,8 @@
 @charset "utf-8";
+.button-disabled{
+  cursor: not-allowed;
+  color: gray;
+}
 .green--btn{
   display: inline-block;
   position: relative;

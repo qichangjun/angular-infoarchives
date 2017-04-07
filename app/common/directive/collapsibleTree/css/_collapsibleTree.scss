@@ -2,19 +2,19 @@
 .node rect{
   cursor:pointer;
   stroke:#8bd7c8;
-  stroke-width:2px;
+  stroke-width:0px;
   fill:#1ab394
 }
 .node rect.block{
   cursor:pointer;
   stroke:#8cc0e1;
-  stroke-width:1.5px;
+  stroke-width:0px;
   fill:#1c84c6
 }
 .node rect.node{
   cursor:pointer;
   stroke:#fad4aa;
-  stroke-width:1.5px;
+  stroke-width:0px;
   fill:#f8ac59;
 }
 .nodeTool {
@@ -52,4 +52,9 @@ path.link{
 .icon-size{
   font-size: 15px !important;
   cursor: pointer;
+}
+.new-rect{
+  stroke-width: 5px !important;
+  stroke: #ffffff !important;
+  fill: #1c84c6 !important;
 }

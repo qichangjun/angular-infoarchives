@@ -1,0 +1,136 @@
+<md-toolbar class="md-theme-indigo right--sidebar--info--head">
+    <div class="md-toolbar-tools">
+        <div class="head">详细信息</div>
+        <div class="title">{{vm.entity.id}}</div>
+        <button class="close" ng-click="vm.closeSideBar()">
+            <span class="glyphicon glyphicon-remove"></span>
+        </button>
+    </div>
+</md-toolbar>
+
+<md-content  class="right--sidebar--info--content">
+    <md-tabs md-dynamic-height md-border-bottom>
+        <md-tab label="批次基本信息">
+            <md-content class="">
+                <div class="attr--type--box">
+                    <!--<span>基本信息</span>-->
+                    <div class="single--attr--row">
+                        <label class="title">批次号</label>
+                        <span class="value">{{vm.entity.batchCode}}</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">业务系统ID</label>
+                        <span class="value">{{vm.entity.id}}</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">业务系统名称</label>
+                        <span class="value">{{vm.entity.YWUnit}}</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">状态</label>
+                        <span class="value">{{vm.entity.batchStatus}}</span>
+                    </div>
+                </div>
+                <div class="attr--type--box">
+                    <!--<span>阶段状态</span>-->
+                    <div class="single--attr--row">
+                        <label class="title ver-align-top">AIU -> SIP</label>
+                        <div class="value ver-align-top">
+                            <uib-progressbar class="progress-striped active" type="warning" value="vm.rate.AIUSIP">{{vm.rate.AIUSIP}}%</uib-progressbar>
+                            <div class="sidebar--progress--time">2016/01/23 13:19:39 - 2016/01/23 13:19:45</div>
+                        </div>
+
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title ver-align-top">SIP -> AIP</label>
+                        <div class="value ver-align-top">
+                            <uib-progressbar class="progress-striped active"  type="warning" value="vm.rate.SIPAIP">{{vm.rate.SIPAIP}}%</uib-progressbar>
+                            <div class="sidebar--progress--time">2016/01/23 13:19:39 - 2016/01/23 13:19:45</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="attr--type--box">
+                    <!--<span>数据量信息</span>-->
+                    <div class="single--attr--row">
+                        <span class="title">摄入AIU数量</span>
+                        <span class="value">{{vm.entity.aiuCount}}</span>
+                        <span class="title">出错数量</span>
+                        <span class="value">0</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <span class="title">AIU转换为SIP数量</span>
+                        <span class="value">{{vm.entity.aiu2sipSuccessCount}}</span>
+                        <span class="title">出错数量</span>
+                        <span class="value">{{vm.entity.aiu2sipFailCount}}</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <span class="title">SIP转换为AIP数量</span>
+                        <span class="value">{{vm.entity.aipCount}}</span>
+                        <span class="title">出错数量</span>
+                        <span class="value">0</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <span class="title">数据量</span>
+                        <span class="value">68.3MB</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <div class="data-volume-info-prompt">
+                            <span class="fa fa-exclamation-circle"></span>
+                            <span>此数据量是指本批次AIP数据包的容量大小</span>
+                        </div>
+                    </div>
+
+                </div>
+                <div class="attr--type--box">
+                    <!--<span>异常处理</span>-->
+                    <div class="single--attr--row">
+                        <span class="title">异常数据包类型</span>
+                        <span class="value">AIU</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <span class="title">异常数据包数量</span>
+                        <span class="value">5</span>
+                        <a ng-click="vm.checkErrorList()">点击查看</a>
+                    </div>
+                    <div class="single--attr--row">
+                        <span class="title">异常处理</span>
+                        <span class="value">待处理</span>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+        <md-tab label="异常处理记录">
+            <md-content class="">
+                <div class="attr--type--box">
+                    <div class="single--attr--row">
+                        <label class="title">异常数据包类型</label>
+                        <span class="value">AIU</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">异常数据包数量</label>
+                        <span class="value">5</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">处理时间</label>
+                        <span class="value">2017.03.31 18:09:34</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">处理动作</label>
+                        <span class="value">强制转换</span>
+                        <a ng-click="vm.checkErrorList()">查看数据</a>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">处理人</label>
+                        <span class="value">admin</span>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title">处理结果</label>
+                        <span>成功 5</span>
+                        <span>失败 0</span>
+                    </div>
+                </div>
+            </md-content>
+        </md-tab>
+    </md-tabs>
+
+</md-content>

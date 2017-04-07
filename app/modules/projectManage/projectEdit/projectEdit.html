@@ -16,20 +16,21 @@
                 创建了数据模板才能配置策略
             </div>
         </div>
-        <div class="data--base--column--wrapper">
+        <div class="data--base--column--wrapper project--edit">
             <ul class="data--base--column--box">
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.basicData')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.basicData'}">
+                    <a>
+                        <span class="fa fa-info-circle" aria-hidden="true"></span>
+                        项目基本信息
+                    </a>
+                </li>
                 <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.dataModule')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.dataModule'}">
                  <a>
                     <span class="fa fa-sitemap" aria-hidden="true"></span>
                     数据模版
                  </a>
                 </li>
-                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.basicData')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.basicData'}">
-                 <a>
-                    <span class="fa fa-info-circle" aria-hidden="true"></span>
-                    项目基本信息
-                 </a>
-                </li>
+
                 <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.ruleSet')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.ruleSet'}">
                  <a>
                     <span class="fa fa-map-signs" aria-hidden="true"></span>

@@ -1,0 +1,10 @@
+{
+  "version": 3,
+  "file": "jobRestangular.factory.js",
+  "sourceRoot": "",
+  "sources": [
+    "jobRestangular.factory.coffee"
+  ],
+  "names": [],
+  "mappings": ";AAAA;AAAA,EAAA,YAAA,CAAA;AAAA,EACA,OAAO,CAAC,MAAR,CAAe,OAAf,CACA,CAAC,OADD,CACS,gBADT,EAEE;IAAC,aAAD,EACE,SAAC,WAAD,GAAA;aACE,WAAW,CAAC,UAAZ,CAAuB,SAAC,qBAAD,GAAA;eACrB,qBAAqB,CAAC,UAAtB,CAAiC,MAAM,CAAC,QAAQ,CAAC,UAAjD,EADqB;MAAA,CAAvB,EADF;IAAA,CADF;GAFF,CADA,CAAA;AAAA"
+}

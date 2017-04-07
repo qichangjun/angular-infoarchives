@@ -1,0 +1,107 @@
+@charset "utf-8";
+.right--sidebar--info--wrap{
+  width: 400px;
+  background: #EDEDED;
+  .right--sidebar--info--head{
+    background: #000000;
+    .md-toolbar-tools{
+      display: block;
+      padding: 10px 16px;
+    }
+    .head{
+      display: block;
+      font-size: 14px;
+    }
+    .title{
+      display: block;
+      font-size: 16px;
+    }
+    .close{
+      color: #ffffff;
+      opacity: 1;
+      position: absolute;
+      right: 10px;
+      top:12px;
+    }
+  }
+}
+.right--sidebar--info--content{
+  background: inherit;
+  md-content{
+    background: inherit;
+  }
+  .attr--type--box{
+    margin: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #cccccc;
+    &:last-child{
+      border-bottom: none;
+    }
+    .single--attr--row{
+      padding: 5px 0;
+      .title{
+        display: inline-block;
+        vertical-align: middle;
+        width: 115px;
+        text-align: left;
+        color: #797979;
+        padding-right: 5px;
+        font-weight: normal;
+        margin: 0;
+      }
+      .value{
+        display: inline-block;
+        vertical-align: middle;
+        max-width: 255px;
+        min-width: 55px;
+        .progress-striped{
+          margin-bottom: 10px;
+        }
+      }
+      .sidebar--progress--time{
+        font-size: 12px;
+        color: #797979;
+      }
+      .data-volume-info-prompt{
+        font-size: 12px;
+        color: #797979;
+        .fa{
+          color: #ff9900;
+          font-size: 15px;
+          margin-right: 5px;
+        }
+      }
+    }
+  }
+}
+.batch--grid--wrap{
+  position: absolute;
+  top: 85px;
+  left: 15px;
+  right: 15px;
+  bottom: 0;
+  border: 1px solid #dbe1e4;
+  .operation--box{
+    background: #f5f5f5;
+    padding: 15px;
+  }
+  .ui-grid-header-cell-primary-focus{
+    background: #3a87ad ;
+    color: #ffffff;
+    font-weight: normal;
+  }
+  .ui-grid-header-cell .sortable{
+    border: none;
+  }
+  //.ui-grid-cell-contents{
+  //  &:first-child{
+  //    background: #3a87ad;
+  //  }
+  //}
+  //.ui-grid-row{
+  //  background-color: #fff;
+  //}
+  //.ui-grid-row:nth-child(odd) .ui-grid-cell{
+  //  background-color: #fff;
+  //}
+}
