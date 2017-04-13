@@ -1,15 +1,29 @@
-<md-dialog aria-label="Mango">
-    <div>
-        <div>
-            <h1>异常数据列包</h1>
-        </div>
-        <div>
-            <div style="height: 50px;">
-                <md-button class="pull-right md-raised green--btn" ng-click="vm.forceSwitch()">强制转转</md-button>
-                <md-button class="pull-right md-raised green--btn" ng-click="vm.deleteData()">删除</md-button>
-            </div>
-            <div  ui-grid="gridOptions" style="height: 630px;width:800px;" class="common--uigrid--height batch-grid" ui-grid-infinite-scroll ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
-        </div>
-    </div>
+<md-dialog aria-label="Mango" class="check--error--list--modal">
 
+        <md-toolbar class="md-menu-toolbar">
+            <div class="md-toolbar-tools">
+                <h2>异常数据列包</h2>
+                <span flex></span>
+                <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        </md-toolbar>
+        <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
+        <div class="operation--box clearfix">
+            <div class="pull-left">
+                <md-button class="green--btn" ng-click="vm.forceSwitch()">
+                    <span class="fa fa-refresh" aria-hidden="true"></span>
+                    <span>强制转换</span>
+                </md-button>
+                <md-button class="red--btn" ng-click="vm.deleteData()">
+                    <i class="glyphicon glyphicon-trash" aria-hidden="true"></i>
+                    <span>删除</span>
+                </md-button>
+            </div>
+        </div>
+        <md-dialog-content class="check--error--list--modal_content">
+            <div  ui-grid="gridOptions" style="width:800px;" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+        </md-dialog-content>
 </md-dialog>
+

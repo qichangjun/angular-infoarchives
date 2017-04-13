@@ -5,7 +5,7 @@
   background: #ffffff;
   .service--watch--prompt--wrap{
     height: 95px;
-    padding: 25px 20px;
+    padding: 25px 0 25px 24px;
     background: #f2f2f2;
     margin-bottom: 15px;
     .title{
@@ -17,11 +17,59 @@
   .service--watch--grid{
     position: absolute;
     top: 120px;
-    left: 0;
-    right: 0;
+    left: 24px;
+    right: 24px;
     bottom: 35px;
     .ui--grid{
       height: 100%;
+    }
+  }
+}
+.table>tbody+tbody {
+  border-top: none;
+}
+.service--watch--table{
+  .table__th--tr{
+    background: #4F93C5;
+    color: #fff;
+    th{
+      font-weight: normal;
+      padding: 12px 8px;
+      &:hover{
+        background: transparent;
+      }
+    }
+  }
+
+}
+.service--watch--sheet{
+  box-sizing: content-box;
+  height: 100%;
+  width: 100%;
+  overflow: auto;
+  .row--content--box{
+    width: 100%;
+    box-sizing: border-box;
+    overflow: hidden;
+    height: 41px;
+    &.head{
+      background: #4F93C5;
+      color: #fff;
+    }
+    .cell--content{
+      float: left;
+      display: inline-block;
+      box-sizing: border-box;
+      font-weight: normal;
+      height: 100%;
+      line-height: 30px;
+      width: auto;
+      min-width: 150px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      padding: 5px;
+      border-bottom: 1px solid #eeeeee;
     }
   }
 }

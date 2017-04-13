@@ -2,7 +2,7 @@
   'use strict';
   angular.module("myApp").service("dataModuleService", [
     '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$http', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $http) {
-      var createModule, editModule, getModuleInfo, getModuleVersionList, updateVersion;
+      var createModule, editModule, getModuleInfo, getModuleVersionList, getSysAttr, updateVersion;
       getModuleVersionList = function(id) {
         var deferred;
         deferred = $q.defer();
@@ -109,6 +109,27 @@
         });
         return deferred.promise;
       };
+      getSysAttr = function(type) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getSysAttr']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          type: type
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      this.getSysAttr = getSysAttr;
       this.getModuleInfo = getModuleInfo;
       this.editModule = editModule;
       this.updateVersion = updateVersion;

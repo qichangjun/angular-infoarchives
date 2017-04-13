@@ -1,6 +1,6 @@
 <div class="anim-slide-left data--module--new--prompt--wrap">
-    <div aria-label="customModule" ng-show="vm.afterLoad">
-        <div ng-show="vm.versionList.length == 0">
+    <div aria-label="customModule" ng-show="vm.afterLoad" style="height: 100%">
+        <div ng-show="vm.versionList.length == 0" style="height: 100%">
             <div class="new--prompt--box">
                 <div class="new--prompt--box__head">
                     <img src="images/edit--project--manage--modal--new.png" alt=""/>
@@ -18,14 +18,14 @@
                 </md-button>
             </div>
         </div>
-        <div ng-show="vm.versionList.length != 0">
+        <div ng-show="vm.versionList.length != 0" style="height: 100%">
             <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
                         <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
                     </md-button>
                     <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
-                    <span> > </span>
+                    <span class="fa fa-angle-right"></span>
                     <span class="current--column">{{vm.projectName}}</span>
                     <span> | </span>
                     <span class="current--column">数据模版</span>
@@ -41,18 +41,17 @@
                     </div>
                 </div>
             </md-toolbar>
+            <div class="two--px--line"></div>
+            <form class="edit--project--manage--wrapper" style="height: calc(100% - 86px);overflow: auto;"  >
 
-            <form class="edit--project--manage--wrapper" >
-                <div class="two--px--line"></div>
                 <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
                 <div>
                     <div class="md-dialog-content">
-                        <form name="newProject" action="">
+
                             <div layout-gt-sm="row" id="container" >
-                                <collapsible-tree style="position:absolute;top: 74px;left: 273px;right: 0;bottom: 0;overflow: auto;text-align: center"  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble">
+                                <collapsible-tree  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble">
                                 </collapsible-tree>
                             </div>
-                        </form>
                     </div>
                 </div>
             </form>

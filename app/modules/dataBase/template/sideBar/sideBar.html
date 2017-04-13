@@ -1,37 +1,41 @@
-<md-toolbar class="md-theme-indigo right--sidebar--info--head">
+<md-toolbar class="md-theme-indigo data--base--right--sidebar--info--head">
     <div class="md-toolbar-tools">
-        <div class="head">详细信息</div>
-        <button class="close" ng-click="vm.closeSideBar()">
-            <span class="glyphicon glyphicon-remove"></span>
+        <button type="button" class="close" ng-click="vm.closeSideBar()" aria-label="Close">
+            <span aria-hidden="true">×</span>
         </button>
+        <div class="head">详细信息</div>
     </div>
 </md-toolbar>
 
-<md-content  class="right--sidebar--info--content">
-   <div>
-       <label >业务单位</label>
-       <span>杭州使发改委</span>
+<md-content  class="data--base--right--sidebar--info--content">
+   <div class="attr--type--box">
+       <label class="title">业务单位</label>
+       <span class="attr--value">{{vm.entity.name}}</span>
    </div>
-    <div>
-        <label >业务事项</label>
-        <span>企业项目投资核准</span>
+    <div class="attr--type--box">
+        <label class="title">业务事项</label>
+        <span class="attr--value">企业项目投资核准</span>
     </div>
-    <div>
-        <label >数据源</label>
-        <span>杭州使发改委</span>
+    <div class="attr--type--box">
+        <label class="title">数据源</label>
+        <span class="attr--value">杭州使发改委</span>
     </div>
-    <div>
-        <label >总库</label>
-        <span>2017 11 23</span>
+    <div class="attr--type--box">
+        <label class="title">总库</label>
+        <span class="attr--value">2017 11 23</span>
     </div>
-    <div>
-        <label >记录数据</label>
-        <span>54.32</span>
+    <div class="attr--type--box">
+        <label class="title">记录数据</label>
+        <span class="attr--value">54.32</span>
     </div>
-    <div>
-        <label >归档数据量</label>
-        <span>432MB</span>
+    <div class="attr--type--box">
+        <label class="title">归档数据量</label>
+        <span class="attr--value">432MB</span>
     </div>
-    <md-button class="pull-right md-raised green--btn" ng-click="vm.checkData($event)">浏览数据</md-button>
+    <div class="browse--data--box">
+        <md-button class="green--btn " ng-click="vm.checkData($event)">浏览数据</md-button>
+    </div>
+
+
 
 </md-content>

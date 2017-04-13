@@ -5,6 +5,7 @@ md-select{
   border-radius: 4px;
   height: 34px;
   line-height: 1.42857143;
+  background: #ffffff;
 }
 .md-select-value{
   border-bottom-width: 0;
@@ -25,5 +26,25 @@ md-select.md-default-theme[disabled] .md-select-value, md-select[disabled] .md-s
   background: #eee;
   height: 28px;
 }
+md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon, md-checkbox:not([disabled]).md-primary.md-checked .md-icon {
+  background-color: #199ed8 ;
+}
 
 
+//.md-chips-select.md-focused{
+//  box-shadow:0 2px rgb(63,81,181)
+//}
+.md-tab{
+  &.md-active{
+    color: #333333 !important;
+    padding: 12px 16px;
+  }
+}
+md-tabs.md-default-theme, md-tabs{
+  md-ink-bar{
+    top: 0;
+    height: 5px;
+    color: #333333;
+    background: #40B98E;
+  }
+}

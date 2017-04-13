@@ -88,7 +88,10 @@
         });
       };
       changeLanguage = function() {
-        return $translate.use(vm.language);
+        $translate.use(vm.language);
+        return $state.go('.', {}, {
+          reload: true
+        });
       };
       vm.changeLanguage = changeLanguage;
       vm.loginOut = loginOut;

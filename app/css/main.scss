@@ -1,14 +1,14 @@
 @charset "utf-8";
 
 
+@import "main/alert";
+@import "main/animation";
 @import "main/buttons";
 @import "main/body";
 @import "main/input";
 @import "main/select";
-@import "main/animation";
 @import "main/font-color";
 @import "main/rewrite";
-@import "main/template";
 @import "main/gridTemplates";
 @import "../common/directive/collapsibleTree/css/collapsibleTree";
 @import "../common/directive/messageVerify/css/formMessage";

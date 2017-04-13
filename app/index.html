@@ -20,6 +20,7 @@
     <link rel="stylesheet" href="bower_components/angular-ui-select/dist/select.min.css"/>
     <link rel="stylesheet" href="bower_components/angular-loading-bar/build/loading-bar.min.css"/>
     <link rel="stylesheet" href="bower_components/angular-xeditable/dist/css/xeditable.min.css"/>
+    <link rel="stylesheet" href="bower_components/sweetalert/dist/sweetalert.css"/>
     <link rel="stylesheet" href="custom_components/angular-ui-grid-3.0.7/less/main.css" />
 
 
@@ -30,7 +31,7 @@
     <!-- build:css(app) css/main.css -->
     <link rel="stylesheet" href="css/main.css" />
 
-    <link rel="stylesheet" href="common/directive/d3treeForAngular/css/d3treeForAngular.css" />
+    <link rel="stylesheet" href="common/directive/straightTree/css/d3treeForAngular.css" />
     <!--<link rel="stylesheet" href="common/hsUiGridTemplates/css/uiGridTemplates.css" />-->
     <!--<link rel="stylesheet" href="common/hsTemplates/css/hsTemplates.css" />-->
     <!--<link rel="stylesheet" href="common/directive/collapsibleTree/collapsibleTree.css" />-->
@@ -41,7 +42,7 @@
   </head>
   <body>
 
-    <div id="ui-view-main-contant" ui-view  class="hs-ui-view" style="height: 100%;overflow-y: hidden;"></div>
+    <div id="ui-view-main-contant" ui-view  class="hs-ui-view" style="height: 100%;overflow: hidden;"></div>
 
     <!--Gulp need-->
     <!-- build:js(app) js/main.js -->
@@ -69,6 +70,8 @@
     <script src="bower_components/angular-ui-select/dist/select.min.js"></script>
     <script src="bower_components/angular-loading-bar/build/loading-bar.min.js"></script>
     <script src="bower_components/angular-xeditable/dist/js/xeditable.min.js"></script>
+    <script src="bower_components/angular-websocket/dist/angular-websocket.js"></script>
+    <script src="bower_components/sweetalert/dist/sweetalert.min.js"></script>
     <script src="custom_components/angular-uuid/angular-uuid.js"></script>
     <script src="custom_components/d3-architecutreTree/d3.architectureTree.js"></script>
 
@@ -83,10 +86,11 @@
     <script src="common/factory/languageStorage.factory.js"></script>
     <script src="common/factory/MockRestangular.factory.js"></script>
     <script src="common/factory/jobRestangular.factory.js"></script>
+    <!--<script src="common/factory/testSocket.factory.js"></script>-->
 
     <script src="common/directive/collapsibleTree/angular-d3-tree.directive.js"></script>
-    <script src="common/directive/treeChart/treeChart.directive.js"></script>
-    <script src="common/directive/d3treeForAngular/d3treeForAngular.directive.js"></script>
+    <script src="common/directive/straightTree/straightTree.directive.js"></script>
+    <script src="common/directive/circleTree/circleTree.directive.js"></script>
     <script src="common/directive/systemSideBar/systemSideBar.directive.js"></script>
     <script src="common/directive/messageVerify/messageVerify.directive.js"></script>
     <script src="common/directive/clickOutsideHide/clickOutsideHide.directive.js"></script>

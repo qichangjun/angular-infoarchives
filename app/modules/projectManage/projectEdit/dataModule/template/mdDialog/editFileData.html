@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper">
+<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper lg-modal">
     <form ng-cloak>
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
@@ -21,7 +21,8 @@
                             <thead>
                             <tr class="table__th--tr">
                                 <th>序号</th>
-                                <th>元数据</th>
+                                <th>中文名</th>
+                                <th>英文名</th>
                                 <th>属性名</th>
                                 <th>类型</th>
                                 <th width="60">长度</th>
@@ -31,7 +32,8 @@
                             <tbody>
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.currentFileId && data.isSys==1">
                                 <td>{{$index}}</td>
-                                <td>{{data.displayName}}</td>
+                                <td>{{data.attrNameCn}}</td>
+                                <td>{{data.attrNameEn}}</td>
                                 <td>{{data.attrName}}</td>
                                 <td>{{data.attrType}}</td>
                                 <td>{{data.attrLength}}</td>
@@ -46,7 +48,8 @@
                             <thead>
                             <tr class="table__th--tr">
                                 <th></th>
-                                <th>元数据</th>
+                                <th>中文名</th>
+                                <th>英文名</th>
                                 <th>属性名</th>
                                 <th>类型</th>
                                 <th width="60">长度</th>
@@ -60,7 +63,12 @@
                                 </td>
                                 <td>
                                     <div class="md-block edit--custom--data--modal__input--box">
-                                        <input class="form-control edit--custom--data--modal__input" ng-model="customData.displayName">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="customData.attrNameCn">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-block edit--custom--data--modal__input--box">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="customData.attrNameEn">
                                     </div>
                                 </td>
                                 <td>
@@ -71,8 +79,8 @@
                                 <td>
                                     <md-input-container class="md-block edit--custom--data--modal__select--box" flex-gt-sm>
                                         <md-select class="edit--custom--data--modal__select" ng-model="customData.attrType">
-                                            <md-option ng-repeat="type in vm.typeLists" value="{{type}}">
-                                                {{type}}
+                                            <md-option ng-repeat="type in vm.typeLists" value="{{type.value}}">
+                                                {{type.name}}
                                             </md-option>
                                         </md-select>
                                     </md-input-container>

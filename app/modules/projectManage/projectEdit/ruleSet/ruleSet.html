@@ -5,7 +5,7 @@
                 <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
             </md-button>
             <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
-            <span> > </span>
+            <span class="fa fa-angle-right"></span>
             <span class="current--column">{{vm.projectName}}</span>
             <span> | </span>
             <span class="current--column">策略设置</span>
@@ -91,7 +91,7 @@
                                                                     hs-form-message-show="vm.addRule.submit"
                                                                     hs-form-message-template="addRule_attrName.html"
                                                                 >
-                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.displayName}}</md-option>
+                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
                                                         </md-select>
                                                     </div>
                                                     <div ng-if="rule.fieldType == 1" class="et-rule-add-tool-row">
@@ -157,7 +157,7 @@
                                                                     hs-form-message-show="vm.addRule.submit"
                                                                     hs-form-message-template="addRule_attrName.html"
                                                                     ng-change="vm.changeAttr()">
-                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.displayName}}</md-option>
+                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
                                                         </md-select>
                                                     </div>
                                                     <div ng-if="vm.entity.fieldType == 1" class="et-rule-add-tool-row">

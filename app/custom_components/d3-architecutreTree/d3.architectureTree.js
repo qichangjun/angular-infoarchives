@@ -31,6 +31,8 @@ d3.chart.architectureTree = function() {
         activeNode = null;
 
         svg.call(updateData, nodes, links);
+
+
     }
 
     /**
@@ -38,6 +40,27 @@ d3.chart.architectureTree = function() {
      * @param {Object} container
      * @param {Array}  nodes
      */
+    var toggleAll = function (d) {
+        if (d.children) {
+            d.children.forEach(toggleAll);
+            toggle(d);
+        }
+
+    };
+
+    var toggle = function(d) {
+        if (d) {
+            console.log (d)
+            if (d.children) {
+                d._children = d.children;
+                d.children = null;
+            } else {
+                d.children = d._children;
+                d._children = null;
+            }
+        }
+    };
+
     var updateData = function(container, nodes, links) {
 
         var diagonal = d3.svg.diagonal.radial()
@@ -49,16 +72,21 @@ d3.chart.architectureTree = function() {
 
         linkSelection.exit().remove();
 
-        linkSelection.enter().append("path")
+        linkSelection.enter().insert("path")
             .attr("class", "link")
-            .attr("d", diagonal);
+            .attr("d", diagonal)
+            .transition().duration(5000);
+
+        linkSelection.transition().duration(5000).attr('d', diagonal);
 
         var nodeSelection = container.selectAll(".node").data(nodes, function(d) {
             return d.name + Math.random();  // always update node
         });
         nodeSelection.exit().remove();
 
-
+        $('#graph').on('click',function(){
+            unselect()
+        });
 
         var node = nodeSelection.enter().append("g")
             .attr("class", "node")
@@ -78,7 +106,9 @@ d3.chart.architectureTree = function() {
                 fontSize('11px')(d)
             })
             .on('click', function(d) {
+                event.stopPropagation();
                 select(d.name);
+                toggle(d)
             });
 
         node.append("circle")
@@ -156,6 +186,7 @@ d3.chart.architectureTree = function() {
     var unselect = function() {
         if (activeNode == null) return;
         fade(1)(activeNode);
+        fontSize('11px')(activeNode);
         d3.select('#node-active').attr("id", null);
         activeNode = null;
     };
@@ -174,7 +205,6 @@ d3.chart.architectureTree = function() {
         diameter = value;
         return chart;
     };
-
 
 
     return chart;

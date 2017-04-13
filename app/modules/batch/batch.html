@@ -34,34 +34,41 @@
             <div class="single--attribute--box">
                 <span class="attribute--title">批次状态</span>
                 <div class="attribute--value">
-                    <md-select ng-model="vm.parameter.batchStatus"
+                    <md-select ng-model="vm.parameter.batch_status"
                     >
-                        <md-option ng-value="0" >结束</md-option>
-                        <md-option ng-value="1" >开始</md-option>
+                        <md-option ng-value="'0,1,2,3,4'" >运行中</md-option>
+                        <md-option ng-value="'5'" >已完成</md-option>
+                        <md-option ng-value="'6'" >异常</md-option>
+                        <md-option ng-value="'all'" >所有</md-option>
                     </md-select>
                 </div>
             </div>
-            <div class="single--attribute--box">
+            <div class="single--attribute--box" ng-if="vm.parameter.batch_status == 'all' || !vm.parameter.batch_status ">
                 <span class="attribute--title">异常处置：</span>
                 <div class="attribute--value">
-                    <input type="checkbox" ng-checked="vm.parameter.errorOperation == 'forceSwitch'" ng-click="vm.parameter.errorOperation = 'forceSwitch'">
-                    <span >强制转换</span>
-                    <input type="checkbox" ng-checked="vm.parameter.errorOperation == 'delete'" ng-click="vm.parameter.errorOperation = 'delete'">
-                    <span >删除</span>
+                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);" aria-label="Checkbox 1">
+                        <span >强制转换</span>
+                    </md-checkbox>
+                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);" aria-label="Checkbox 1">
+                        <span >删除</span>
+                    </md-checkbox>
                 </div>
             </div>
             <md-button class="pull-right green--btn" ng-click="vm.search()">过滤</md-button>
             <div class="single--attribute--box time--frame">
-                <span class="attribute--title">时间范围</span><div  layout="row" class="attribute--value">
+                <span class="attribute--title">时间范围</span>
+                <div  layout="row" class="attribute--value">
                     <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateFrom" is-open="popup2.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control"   uib-datepicker-popup ng-model="vm.parameter.start_date" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="关闭" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                     </div>
-                </div><span class="time--frame__sign">-</span><div  layout="row" class="attribute--value">
+                </div>
+                <span class="time--frame__sign">-</span>
+                <div  layout="row" class="attribute--value">
                     <div class="input-group">
-                        <input type="text" class="form-control" uib-datepicker-popup ng-model="vm.parameter.dateTo" is-open="popup3.opened" datepicker-options="dateOptions" ng-required="true" close-text="Close" />
+                        <input type="text" class="form-control"  uib-datepicker-popup ng-model="vm.parameter.end_date" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="关闭" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
@@ -76,9 +83,10 @@
             <md-button class="pull-left md-raised green--btn" ng-click="vm.search()">强制转换</md-button>
             <md-button class="pull-left md-raised red--btn" ng-click="vm.search()">删除异常数据</md-button>
         </div>
-        <div  ui-grid="gridOptions" style="height: calc(100% - 100px);" class="common--uigrid--height batch-grid" ui-grid-infinite-scroll ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+        <div ng-if="gridOptions.data.length > 0" ui-grid="gridOptions" style="height: calc(100% - 100px);" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
+        <div ng-if="gridOptions.data.length == 0" class="no--data">没有数据</div>
     </div>
-    <md-sidenav class="md-sidenav-right right--sidebar--info--wrap" md-component-id="right" md-whiteframe="4">
+    <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
         <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>
     </md-sidenav>
 </div>

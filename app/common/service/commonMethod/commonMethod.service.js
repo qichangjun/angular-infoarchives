@@ -2,7 +2,7 @@
   'use strict';
   angular.module("myApp").service("commonMethodSerivce", [
     '$log', function($log) {
-      var includeInArr, isArrRepeat;
+      var includeInArr, initColumn, isArrRepeat;
       isArrRepeat = function(arr) {
         var counts, i, item, len, out;
         len = arr.length;
@@ -29,6 +29,15 @@
         }
         return false;
       };
+      initColumn = function(name, predicate, type, value) {
+        return {
+          name: name,
+          predicate: predicate,
+          type: type,
+          value: value
+        };
+      };
+      this.initColumn = initColumn;
       this.includeInArr = includeInArr;
       this.isArrRepeat = isArrRepeat;
     }

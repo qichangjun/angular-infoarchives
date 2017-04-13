@@ -20,7 +20,7 @@
           ],
           data: [
             {
-              title: '批次查看',
+              title: '数据批次',
               url: 'infoArchives.batch',
               img: 'fa fa-truck'
             }, {

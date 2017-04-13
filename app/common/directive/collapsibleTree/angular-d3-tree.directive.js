@@ -33,7 +33,15 @@
             return clickContainer(d);
           });
           scope.$on('update:name', function(e, name, id) {
-            return $('#' + id + 'text').text(name);
+            return $('#' + 'text' + id).text(function() {
+              if (name.length > 8) {
+                return name.substring(0, 8) + '...';
+              } else {
+                return name;
+              }
+            }).attr('x', function() {
+              return '1em';
+            });
           });
           scope.$on('node:updateNodes', function(e, d) {
             return $timeout(function() {
@@ -62,9 +70,9 @@
               append_addNodeButton(toolContainer, d);
               append_addDeleteButton(deleteContainer, d);
               append_addFileButton(editContainer, d);
+              append_addBlockButton(toolContainer, d);
             }
             append_editFileButton(editContainer, d);
-            append_addBlockButton(toolContainer, d);
             append_editCustomButton(editContainer, d);
           };
           clearSelected = function() {
@@ -118,7 +126,7 @@
           };
           append_addDeleteButton = function(deleteContainer, d) {
             if (d.type !== 'record') {
-              return deleteContainer.append('svg:text').attr('x', -75).attr('y', 13).text('\uf1f8').attr("font-family", "FontAwesome").attr('class', 'icon-size').on('click', function(d) {
+              return deleteContainer.append('svg:text').attr('x', -75).attr('y', 13).text('\uf1f8').attr("font-family", "FontAwesome").attr('class', 'icon-size').style('fill', 'DE6262').on('click', function(d) {
                 scope.$emit('node:delete', d);
                 return window.event.stopPropagation();
               });
@@ -194,10 +202,16 @@
             nodeEnter.append('svg:rect').attr('width', 140).attr('height', 47).attr('rx', 23).attr('x', -50).attr('y', -15).attr('class', function(d) {
               return d.type;
             });
-            nodeEnter.append('svg:text').attr('x', -10).attr('dy', '1em').attr('id', function(d) {
-              return d.code + 'text';
-            }).attr('text-anchor', 'start').text(function(d) {
-              return d.name;
+            nodeEnter.append('svg:text').attr('x', function(d) {
+              return '1em';
+            }).attr('dy', '1em').attr('id', function(d) {
+              return 'text' + d.code;
+            }).attr('text-anchor', 'middle').text(function(d) {
+              if (d.name.length > 8) {
+                return d.name.substring(0, 8) + '...';
+              } else {
+                return d.name;
+              }
             }).style('fill', 'white').style('font-size', '13px').on('click', function(d) {
               if (d.type !== 'record' && scope.editAble) {
                 scope.$emit('node:updateName', d);

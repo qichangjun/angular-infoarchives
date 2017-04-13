@@ -16,7 +16,7 @@
 
   window.hsConfig.baseUrl = 'http://' + 'demo.docworks.cn' + '/infoarchivesapi';
 
-  window.hsConfig.jobBaseUrl = 'http://' + 'ia.docworks.cn:8003' + '/jobapi';
+  window.hsConfig.jobBaseUrl = 'http://' + 'ia.docworks.cn:8003' + '/infoarchivesjobapi';
 
   window.hsConfig.webUrl = 'http://' + window.location.host + '/infoarchives';
 
@@ -27,7 +27,7 @@
   } else {
     window.hsConfig.bust = "bust" + (new Date()).getTime();
     window.hsConfig.baseUrl = 'http://' + window.location.host + '/infoarchivesapi';
-    window.hsConfig.jobBaseUrl = 'http://' + 'ia.docworks.cn:8003' + '/jobapi';
+    window.hsConfig.jobBaseUrl = 'http://' + window.location.host + '/infoarchivesjobapi';
     window.hsConfig.webUrl = 'http://' + window.location.host + '/infoarchives';
   }
 

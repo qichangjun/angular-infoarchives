@@ -1,15 +1,32 @@
 <md-dialog aria-label="Mango">
-    <div class="new-project-alert-modal-wrapper">
-        <div class="new-project-alert-prompt">
-            <h1>异常数据列表</h1>
+    <md-toolbar class="md-menu-toolbar">
+        <div class="md-toolbar-tools">
+            <h2></h2>
+            <span flex></span>
+            <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+                <span aria-hidden="true">×</span>
+            </button>
         </div>
-        <div class="success--tips">
-            <md-button  ng-disabled="vm.loading" ng-click="vm.deleteData()" class="green--btn md-fab">
+    </md-toolbar>
+    <div class="check--error--data-modal-content">
+        <div class="prompt--box">
+            <h2>批次详细数据列表</h2>
+            <p>如果有异常数据的话，询问是否要对异常数据进行处理</p>
+        </div>
+        <div class="operation--box">
+            <div class="operation--box_btn">
+                <md-button  ng-disabled="vm.loading" ng-click="vm.deleteData()" class="red--btn md-fab">
                 <span class="glyphicon glyphicon-trash"></span>
-            </md-button>
-            <md-button  ng-disabled="vm.loading" ng-click="vm.forceChange()" class="green--btn md-fab">
-                <span class="glyphicon glyphicon-refresh"></span>
-            </md-button>
+                </md-button>
+                <span class="btn--name">删除异常数据</span>
+            </div>
+            <div class="operation--box_btn">
+                <md-button  ng-disabled="vm.loading" ng-click="vm.forceChange()" class="blue--btn md-fab">
+                    <span class="glyphicon glyphicon-refresh"></span>
+                </md-button>
+                <span class="btn--name">强制转换</span>
+            </div>
+
         </div>
     </div>
 

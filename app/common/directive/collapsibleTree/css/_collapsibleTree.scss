@@ -44,6 +44,7 @@ path.link{
   cursor:pointer;
 }
 .cursor-pointer{
+  fill:#5B646E;
   cursor:pointer;
   &:hover{
     text-decoration: underline;
@@ -52,9 +53,17 @@ path.link{
 .icon-size{
   font-size: 15px !important;
   cursor: pointer;
+  fill:#5B646E;
 }
 .new-rect{
   stroke-width: 5px !important;
   stroke: #ffffff !important;
   fill: #1c84c6 !important;
+}
+.inside--text{
+  display: inline-block;
+  width: 80px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }

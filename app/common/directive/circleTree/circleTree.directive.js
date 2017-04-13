@@ -18,32 +18,31 @@
         nodes: '='
       },
       link: function(scope, element) {
-        var diagonal, h, i, m, root, toggle, tree, update, vis, w;
+        var diagonal, diameter, h, i, m, root, toggle, tree, update, vis, w;
         m = [20, 120, 20, 120];
         w = 1280 - m[1] - m[3];
         h = 800 - m[0] - m[2];
         i = 0;
+        diameter = 960;
         root = void 0;
-        tree = d3.layout.tree().size([h, w]);
-        diagonal = d3.svg.diagonal().projection(function(d) {
-          return [d.y, d.x];
+        tree = void 0;
+        diagonal = d3.svg.diagonal.radial().projection(function(d) {
+          return [d.y, d.x / 180 * Math.PI];
         });
-        vis = d3.select('tree-for-angular').append('svg:svg').attr('width', w + m[1] + m[3]).attr('height', h + m[0] + m[2]).append('svg:g').attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
+        vis = d3.select('circle-tree').append('svg:svg').attr('width', diameter).attr('height', diameter).append('g').attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
         update = function(source) {
           var duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;
           duration = d3.event && d3.event.altKey ? 5000 : 500;
           nodes = tree.nodes(root).reverse();
-          nodes.forEach(function(d) {
-            d.y = d.depth * 180;
-          });
           node = vis.selectAll('g.node').data(nodes, function(d) {
             return d.id || (d.id = ++i);
           });
-          nodeEnter = node.enter().append('svg:g').attr('class', 'node').attr('transform', function(d) {
-            return 'translate(' + source.y0 + ',' + source.x0 + ')';
+          nodeEnter = node.enter().append('svg:g').attr("class", "node").attr("transform", function(d) {
+            return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
           }).on('click', function(d) {
             toggle(d);
             update(d);
+            scope.$emit('treeChart:selectNode', d);
           }).on('mouseover', function(d) {
             return scope.$emit('node:mouseover', d);
           }).on('mouseout', function(d) {
@@ -56,23 +55,23 @@
               return '#fff';
             }
           });
-          nodeEnter.append('svg:text').attr('x', function(d) {
-            if (d.children || d._children) {
-              return -10;
-            } else {
-              return 10;
-            }
-          }).attr('dy', '.35em').attr('text-anchor', function(d) {
-            if (d.children || d._children) {
-              return 'end';
-            } else {
+          nodeEnter.append('text').attr('dy', '.31em').attr('text-anchor', function(d) {
+            if (d.x < 180) {
               return 'start';
+            } else {
+              return 'end';
+            }
+          }).attr('transform', function(d) {
+            if (d.x < 180) {
+              return 'translate(8)';
+            } else {
+              return 'rotate(180)translate(-8)';
             }
           }).text(function(d) {
             return d.name;
           }).style('fill-opacity', 1e-6);
-          nodeUpdate = node.transition().duration(duration).attr('transform', function(d) {
-            return 'translate(' + d.y + ',' + d.x + ')';
+          nodeUpdate = node.transition().duration(duration).attr("transform", function(d) {
+            return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
           });
           nodeUpdate.select('circle').attr('r', 4.5).style('fill', function(d) {
             if (d._children) {
@@ -136,14 +135,12 @@
             }
           };
           if (scope.nodes) {
+            tree = d3.layout.tree().size([360, diameter / 2 - 120]).separation(function(a, b) {
+              return (a.parent === b.parent ? 1 : 2) / a.depth;
+            });
             root = angular.copy(scope.nodes);
             root.x0 = h / 2;
             root.y0 = 0;
-            root.children.forEach(toggleAll);
-            toggle(root.children[1]);
-            toggle(root.children[1].children[2]);
-            toggle(root.children[9]);
-            toggle(root.children[9].children[0]);
             update(root);
           }
         }), true);
@@ -153,10 +150,10 @@
 
   'use strict';
 
-  angular.module('myApp').directive('treeForAngular', ['$timeout', collapsibleTree]);
+  angular.module('myApp').directive('circleTree', ['$timeout', collapsibleTree]);
 
   collapsibleTree.$inject = [];
 
 }).call(this);
 
-//# sourceMappingURL=d3treeForAngular.directive.js.map
+//# sourceMappingURL=circleTree.directive.js.map

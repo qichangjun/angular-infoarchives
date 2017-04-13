@@ -9,8 +9,9 @@
 }
 
 .project-icon-tool{
-  opacity: 0.5;
+  //opacity: 0.5;
   transition-duration: 0.5s;
+  color: #C2CBD8;
 }
 .project-icon-tool:hover {
   opacity: 1 !important;
@@ -124,6 +125,7 @@
     .md-toolbar-tools{
       font-size: 13px;
       color: #e0e1e5;
+      padding: 0 6px;
     }
     .edit--project--manage--head--btn{
       font-size: 13px;
@@ -164,7 +166,8 @@
     //dataModule
     .save--template--box{
       position: absolute;
-      right: 12px;
+      top: 14px;
+      right: 0;
       .current--vesion{
         display: inline-block;
         color: #333333;
@@ -179,8 +182,10 @@
 }
 //dataModule
 .two--px--line{
-  width: 100%;
+  width: calc(100% - 16px);
   height: 2px;
+  //margin: 10px 8px;
+  margin: 0 8px;
   background: #d7d7d7;
 }
 
@@ -225,8 +230,8 @@
         border-left: 5px solid transparent;
         width: 235px;
         padding-left: 20px;
-        border-top: 1px solid #f7f7f7;
-        border-bottom: 1px solid #f7f7f7;
+        border-top: 1px solid transparent;
+        border-bottom: 1px solid transparent;
         &:hover{
           //background: #bebebe;
           a{
@@ -285,7 +290,7 @@
 .data--base--view--type--filter{
   position: absolute;
   top: 40px;
-  right: 25px;
+  right: 20px;
   &_title{
     display: inline-block;
     vertical-align: middle;
@@ -297,12 +302,121 @@
       display: inline-block;
       vertical-align: middle;
       margin: 0;
+      padding-right: 5px;
     }
     .md-radio-button.md-default-theme.md-checked .md-off, md-radio-button.md-checked .md-off {
       border-color: #199ed8;
     }
     .md-radio-button.md-default-theme.md-checked .md-on, md-radio-button.md-checked .md-on {
       background: #199ed8;
+    }
+  }
+}
+
+.data--base--filter--condition--wrap{
+  float: left;
+  width: 300px;
+  height: 100%;
+  padding: 10px 20px 0;
+  .data--info--box{
+    float: left;
+    width:260px;
+    background: #f2f2f0;
+    border-radius: 5px;
+    padding: 20px 13px;
+    &:first-child{
+      margin-bottom: 10px;
+    }
+    &_head{
+      padding-bottom: 3px;
+      padding-left: 5px;
+      border-bottom: 1px solid #cccccc;
+      margin-bottom: 5px;
+      color: #999999;
+    }
+    .attr--row--box{
+      padding: 3px 5px 0;
+      .title{
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: normal;
+        width: 100px;
+        text-align: left;
+        color: #797979;
+        margin: 0;
+      }
+      .value{
+        display: inline-block;
+        vertical-align: middle;
+      }
+    }
+    .select--attr--box{
+      padding: 3px 5px 5px;
+      .title{
+        display: block;
+        font-weight: normal;
+        margin: 0;
+        color: #797979;
+        padding-bottom: 5px;
+      }
+    }
+    .filter--btn--box{
+      margin: 15px 0 10px;
+      .md-button{
+        margin: 0 5px;
+      }
+    }
+  }
+}
+.data--base--right--sidebar--info--wrap{
+  width: 280px;
+  background: #EDEDED;
+  .data--base--right--sidebar--info--head{
+    background: #464646;
+    .md-toolbar-tools{
+      display: inline-block;
+      vertical-align: middle;
+      padding: 10px 16px;
+      line-height: 44px;
+    }
+    .head{
+      display: inline-block;
+      vertical-align: middle;
+      font-size: 16px;
+    }
+    .title{
+      display: block;
+      font-size: 16px;
+    }
+    .close{
+      color: #ffffff;
+      opacity: 1;
+      position: absolute;
+      right: 10px;
+      top:18px;
+    }
+  }
+  .data--base--right--sidebar--info--content{
+    background: transparent;
+    padding: 10px;
+    .attr--type--box{
+      padding: 10px 0 10px 10px;
+      border-bottom: 1px solid #cccccc;
+      &:last-child{
+        border-bottom: none;
+      }
+      .title{
+        display: block;
+        color: #999999;
+        font-weight: normal;
+      }
+      .attr--value{
+        padding-left: 25px;
+      }
+    }
+    .browse--data--box{
+      margin-top: 25px;
+      text-align: center;
     }
   }
 }

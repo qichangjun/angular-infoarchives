@@ -17,11 +17,15 @@
       font-size: 16px;
     }
     .close{
-      color: #ffffff;
+      color: #eaeaea;
       opacity: 1;
-      position: absolute;
-      right: 10px;
-      top:12px;
+      //position: absolute;
+      //right: 10px;
+      //top:18px;
+      //font-size: 19.5px;
+      &:hover{
+        color: #ffffff;
+      }
     }
   }
 }
@@ -31,9 +35,12 @@
     background: inherit;
   }
   .attr--type--box{
-    margin: 20px;
-    padding-bottom: 20px;
-    border-bottom: 1px solid #cccccc;
+    margin: 20px 10px;
+    padding-top: 20px;
+    border-top: 1px solid #cccccc;
+    &:first-child{
+      margin-top: 0;
+    }
     &:last-child{
       border-bottom: none;
     }
@@ -45,22 +52,26 @@
         width: 115px;
         text-align: left;
         color: #797979;
-        padding-right: 5px;
+        padding: 0 5px;
         font-weight: normal;
         margin: 0;
       }
       .value{
         display: inline-block;
         vertical-align: middle;
-        max-width: 255px;
+        max-width: 245px;
         min-width: 55px;
         .progress-striped{
-          margin-bottom: 10px;
+          display: inline-block;
+          height: 11px;
+          width: 100px;
+          margin: 0 5px 0 0;
         }
       }
       .sidebar--progress--time{
         font-size: 12px;
         color: #797979;
+        padding-top: 5px;
       }
       .data-volume-info-prompt{
         font-size: 12px;
@@ -72,6 +83,10 @@
         }
       }
     }
+  }
+  md-tabs[md-border-bottom] md-tabs-wrapper{
+    border-width: 0;
+
   }
 }
 .batch--grid--wrap{
@@ -104,4 +119,61 @@
   //.ui-grid-row:nth-child(odd) .ui-grid-cell{
   //  background-color: #fff;
   //}
+}
+.check--error--list--modal{
+  .operation--box{
+    margin: 10px 0 12px 0;
+  }
+  &_content{
+    .ui-grid-header-cell .sortable {
+      border: none;
+    }
+    .ui-grid-header-cell-primary-focus {
+      background: #3a87ad;
+      color: #ffffff;
+      font-weight: normal;
+    }
+  }
+}
+
+.no--data{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 16px;
+  color: #ab0909;
+}
+
+.check--error--data-modal-content{
+  padding: 30px;
+  text-align: center;
+  .prompt--box{
+    h2{
+      //font-size: 36px;
+      color: #999999;
+      margin-bottom: 20px;
+    }
+    p{
+      font-size: 16px;
+      color: #333333;
+    }
+  }
+  .operation--box{
+    margin: 40px 0 30px 0 ;
+    &_btn{
+      display: inline-block;
+      .btn--name{
+        display: block;
+        margin-top: 10px;
+        color: #666666;
+        font-size: 12px;
+      }
+    }
+  }
 }

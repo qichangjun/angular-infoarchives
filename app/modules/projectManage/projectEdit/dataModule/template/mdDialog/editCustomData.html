@@ -10,13 +10,14 @@
         <md-dialog-content>
             <div class="md-dialog-content edit--custom--data--modal--content">
                 <form name="customData" action="">
-                    <div class="attribute--row--box">
+                    <div class="attribute--row--box" ng-show="vm.containerType != 'block'">
                         <div class="attribute--row--box__header">默认数据项</div>
                         <table class="table attribute--row--box__table">
                             <thead>
                             <tr class="table__th--tr">
                                 <th>序号</th>
-                                <th>元数据</th>
+                                <th>中文名</th>
+                                <th>英文名</th>
                                 <th>属性名</th>
                                 <th>类型</th>
                                 <th width="60">长度</th>
@@ -26,7 +27,8 @@
                             <tbody>
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='1'">
                                 <td>{{$index}}</td>
-                                <td>{{data.displayName}}</td>
+                                <td>{{data.attrNameCn}}</td>
+                                <td>{{data.attrNameEn}}</td>
                                 <td>{{data.attrName}}</td>
                                 <td>{{data.attrType}}</td>
                                 <td>{{data.attrLength}}</td>
@@ -41,7 +43,8 @@
                             <thead>
                             <tr class="table__th--tr">
                                 <th></th>
-                                <th>元数据</th>
+                                <th>中文名</th>
+                                <th>英文名</th>
                                 <th>属性名</th>
                                 <th>类型</th>
                                 <th width="60">长度</th>
@@ -56,7 +59,12 @@
                                 </td>
                                 <td>
                                     <div class="md-block edit--custom--data--modal__input--box">
-                                        <input class="form-control edit--custom--data--modal__input" ng-model="data.displayName">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="data.attrNameCn">
+                                    </div>
+                                </td>
+                                <td>
+                                    <div class="md-block edit--custom--data--modal__input--box">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="data.attrNameEn">
                                     </div>
                                 </td>
                                 <td>
@@ -67,8 +75,8 @@
                                 <td>
                                     <md-input-container class="md-block edit--custom--data--modal__select--box" flex-gt-sm>
                                         <md-select class="edit--custom--data--modal__select" ng-model="data.attrType">
-                                            <md-option ng-repeat="type in vm.typeLists" value="{{type}}">
-                                                {{type}}
+                                            <md-option ng-repeat="type in vm.typeLists" value="{{type.value}}">
+                                                {{type.name}}
                                             </md-option>
                                         </md-select>
                                     </md-input-container>

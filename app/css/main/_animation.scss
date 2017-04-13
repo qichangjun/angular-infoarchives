@@ -1,4 +1,18 @@
 @charset "utf-8";
+.missionList{
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+  transition-property: all;
+
+}
+.missionList.ng-show{
+  opacity: 1;
+  transform: translateX(0px);
+}
+.missionList.ng-hide{
+  opacity: 0;
+  transform: translateX(-50px);
+}
 .tip-show-animate{
   transition-duration: 0.4s;
   transition-timing-function: ease-in-out;
@@ -55,7 +69,9 @@
 }
 .set-rule-add-tool-box{
   position: absolute;
-  background-color: white;left: 10px;
+  top: 38px;
+  left: 8px;
+  background-color: white;
   transition-duration: 0.2s;
   transition-timing-function: ease-in-out;
   transition-property: all;

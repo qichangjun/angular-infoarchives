@@ -25,8 +25,11 @@
     this["updateVersion"] = "/project/template/upgrade";
     this["editModule"] = "/project/template/update";
     this["getModuleInfo"] = "/project/template/detail";
+    this["getSysAttr"] = "/project/template/system_attribute/list";
     this["getBatchList"] = "/batch/list";
     this["getBatchDetail"] = "/batch/detail";
+    this["getErrorList"] = "/exception/exception_record/detail";
+    this["getErrorGridData"] = "/exception/exception_item/list";
     this["getServiceList"] = "/job/list";
     this["startService"] = "/job/start";
     this["stopService"] = "/job/stop";

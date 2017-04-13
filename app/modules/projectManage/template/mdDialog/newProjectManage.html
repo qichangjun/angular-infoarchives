@@ -8,8 +8,8 @@
             <div class="md-toolbar-tools">
                 <h2>新建项目</h2>
                 <span flex></span>
-                <button class="close" ng-click="vm.cancel()">
-                    <span class="glyphicon glyphicon-remove"></span>
+                <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+                    <span aria-hidden="true">×</span>
                 </button>
             </div>
         </md-toolbar>
@@ -20,8 +20,7 @@
                         <div class="new--project--row">基本信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">项目名称</label>
-                                <input ng-model="vm.entity.projectName"
+                                <label class="single--attribute--box__title">项目名称</label><input ng-model="vm.entity.projectName"
                                        class="form-control single--attribute--box__input"
                                        name="projectName"
                                        required
@@ -37,8 +36,7 @@
                         </div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">所属系统</label>
-                                <input ng-model="vm.entity.systemName"
+                                <label class="single--attribute--box__title">所属系统</label><input ng-model="vm.entity.systemName"
                                        class="form-control single--attribute--box__input"
                                        name="systemName"
                                 >
@@ -50,8 +48,7 @@
                         <div class="new--project--row">源系统数据库信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库类型 </span>
-                                <md-select  class="single--attribute--box__select"
+                                <span class="single--attribute--box__title"> 数据库类型 </span><md-select  class="single--attribute--box__select"
                                             ng-model="vm.entity.databaseName"
                                             ng-change="vm.getVersionList(vm.entity.databaseName)"
                                             md-on-open="vm.loadDataBase()"
@@ -65,8 +62,7 @@
                                 </md-select>
                             </div>
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库版本 </span>
-                                <md-select  class="single--attribute--box__select"
+                                <span class="single--attribute--box__title"> 数据库版本 </span><md-select  class="single--attribute--box__select"
                                             ng-model="vm.entity.databaseVersion"
                                             ng-disabled="!vm.entity.databaseName"
                                             name="dataBaseVersion"
@@ -84,8 +80,7 @@
                         <div class="new--project--row">数据抽取方式</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据抽取方式 </span>
-                                <md-select  class="single--attribute--box__select" ng-model="vm.entity.extractionMethod" ng-init="vm.entity.extractionMethod=0" >
+                                <span class="single--attribute--box__title"> 数据抽取方式 </span><md-select  class="single--attribute--box__select" ng-model="vm.entity.extractionMethod" ng-init="vm.entity.extractionMethod=0" >
                                     <md-option ng-value="0" >ETL数据抽取</md-option>
                                     <md-option ng-value="1" >AIP接口</md-option>
                                 </md-select>

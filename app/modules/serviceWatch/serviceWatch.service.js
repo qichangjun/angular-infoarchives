@@ -26,7 +26,9 @@
       startService = function(id) {
         var deferred;
         deferred = $q.defer();
-        JobRestangular.one(hsAPI['startService']).get({
+        JobRestangular.one(hsAPI['startService']).withHttpConfig({
+          ignoreLoadingBar: true
+        }).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           id: id
@@ -47,7 +49,9 @@
       stopService = function(id) {
         var deferred;
         deferred = $q.defer();
-        JobRestangular.one(hsAPI['stopService']).get({
+        JobRestangular.one(hsAPI['stopService']).withHttpConfig({
+          ignoreLoadingBar: true
+        }).get({
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           id: id
