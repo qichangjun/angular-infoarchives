@@ -1,0 +1,185 @@
+<div class="col-md-8" style="width: 100%;">
+    <div view-source="simple"></div>
+    <ul>
+        <!-- The toolbox only allows to copy objects, not move it. After a new
+             element was created, dnd-copied is invoked and we generate the next id -->
+        <li ng-repeat="item in models.templates"
+            dnd-draggable="item"
+            dnd-effect-allowed="move"
+            dnd-moved="models.templates.splice($index, 1)"
+            style="
+                  float: left;
+                  background-color: #fff;
+                  border: 1px solid #ddd;
+                  border-top-right-radius: 4px;
+                  border-top-left-radius: 4px;
+                  display: block;
+                  padding: 10px 15px;
+                  margin-bottom: -1px;
+                  width: 150px;
+                "
+        >
+            <span  >{{item.type}}:{{item.id}}</span>
+        </li>
+    </ul>
+    <div style="width: 100%;
+    float: left;
+    margin-top: 20px;
+    margin-left: 31px;">
+        <md-button class="green--btn" ng-click="models.lists.push({name:i,data:[],style:{width:'400',height:'400',backgroundColor:'#fff'}});i=i+1">增加表单</md-button>
+        <md-button class="green--btn" ng-click="vm.checkData()">查看数据</md-button>
+    </div>
+
+    <div class="row" style="margin-left: 11px;float:left;width:100%;height: 1000px;
+    overflow: scroll;">
+        <div ng-repeat="list in models.lists" class="col-md-6" ng-style="{'margin-top': '20px','width':list.style.width + 'px'}" >
+            <div class="panel panel-info">
+                <div class="panel-heading">
+                    <h3 class="panel-title">
+                        <md-menu>
+                            <md-button aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
+                                {{list.name}}
+                            </md-button>
+                            <md-menu-content width="4">
+                                <md-menu-item>
+                                    <span class="single--attribute--box__title">模块名</span><div class="single--attribute--box__value">
+                                    <input ng-model="list.name"
+                                           class="form-control single--attribute--box__value-input"
+                                           name="projectName"
+                                    >
+                                </div>
+                                </md-menu-item>
+                            </md-menu-content>
+                        </md-menu>
+                    </h3>
+                    <span ng-click="models.lists.splice($index, 1)">删除</span>
+                    <!--<span ng-click="vm.edtiStyle(list)">编辑样式</span>-->
+                    <md-menu>
+                        <md-button aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
+                            编辑样式
+                        </md-button>
+                        <md-menu-content width="4">
+                            <md-menu-item>
+                                <span class="single--attribute--box__title">宽度</span><div class="single--attribute--box__value">
+                                <input ng-model="list.style.width"
+                                       class="form-control single--attribute--box__value-input"
+                                       name="projectName"
+                                >
+                            </div>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <span class="single--attribute--box__title">高度</span><div class="single--attribute--box__value">
+                                <input ng-model="list.style.height"
+                                       class="form-control single--attribute--box__value-input"
+                                       name="projectName"
+                                >
+                            </div>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <span class="single--attribute--box__title">背景色</span><div class="single--attribute--box__value">
+                                <input ng-model="list.style.backgroundColor"
+                                       class="form-control single--attribute--box__value-input"
+                                       name="projectName"
+                                >
+                            </div>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <span class="single--attribute--box__title">属性间隔-横</span><div class="single--attribute--box__value">
+                                <input ng-model="list.style.maringX"
+                                       class="form-control single--attribute--box__value-input"
+                                       name="projectName"
+                                >
+                            </div>
+                            </md-menu-item>
+                            <md-menu-item>
+                                <span class="single--attribute--box__title">属性间隔-纵</span><div class="single--attribute--box__value">
+                                <input ng-model="list.style.maringY"
+                                       class="form-control single--attribute--box__value-input"
+                                       name="projectName"
+                                >
+                            </div>
+                            </md-menu-item>
+                        </md-menu-content>
+                    </md-menu>
+                </div>
+                <div class="panel-body" ng-style="{'background-color':list.style.backgroundColor}">
+                    <ul dnd-list="list.data" ng-style="{'margin-top': '20px','height':list.style.height + 'px','padding-left':'0px'}">
+                        <li ng-repeat="item in list.data"
+                            ng-style="{
+                              'background-color': '#fff',
+                              'border-top-right-radius': '4px',
+                              'border-top-left-radius': '4px',
+                              'display': 'block',
+                              'padding': '10px 15px',
+                              'margin-bottom': list.style.maringY+'px',
+                              'margin-left':list.style.maringX+'px',
+                              'float': 'left',
+                              'position': 'relative',
+                              'width': item.style.width + 'px',
+                              'height': item.style.height + 'px'
+                              }
+                            "
+                            dnd-draggable="item"
+                            dnd-moved="list.data.splice($index, 1)"
+                            dnd-effect-allowed="move"
+                            dnd-selected="models.selected = item"
+                            ng-class="{'selected': models.selected === item}"
+                        >
+                            item: {{item.id}}
+                            <div style="top: 0px;position: absolute;right: -39px;z-index: 29" ng-show="models.selected === item">
+                                <md-menu>
+
+                                    <span ng-click="vm.openMenu($mdMenu, $event)" class="glyphicon glyphicon-cog"></span>
+
+                                    <md-menu-content width="4">
+                                        <md-menu-item>
+                                            <span class="single--attribute--box__title">宽度</span><div class="single--attribute--box__value">
+                                            <input ng-model="item.style.width"
+                                                   class="form-control single--attribute--box__value-input"
+                                                   name="projectName"
+                                            >
+                                        </div>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <span class="single--attribute--box__title">高度</span><div class="single--attribute--box__value">
+                                            <input ng-model="item.style.height"
+                                                   class="form-control single--attribute--box__value-input"
+                                                   name="projectName"
+                                            >
+                                        </div>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <span class="single--attribute--box__title">背景色</span><div class="single--attribute--box__value">
+                                            <input ng-model="item.style.backgroundColor"
+                                                   class="form-control single--attribute--box__value-input"
+                                                   name="projectName"
+                                            >
+                                        </div>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <span class="single--attribute--box__title">属性间隔-横</span><div class="single--attribute--box__value">
+                                            <input ng-model="item.style.maringX"
+                                                   class="form-control single--attribute--box__value-input"
+                                                   name="projectName"
+                                            >
+                                        </div>
+                                        </md-menu-item>
+                                        <md-menu-item>
+                                            <span class="single--attribute--box__title">属性间隔-纵</span><div class="single--attribute--box__value">
+                                            <input ng-model="item.style.maringY"
+                                                   class="form-control single--attribute--box__value-input"
+                                                   name="projectName"
+                                            >
+                                        </div>
+                                        </md-menu-item>
+                                    </md-menu-content>
+                                </md-menu>
+                                <span class="glyphicon glyphicon-remove" style="float: right;color:red" ng-click="list.data.splice($index, 1)"></span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

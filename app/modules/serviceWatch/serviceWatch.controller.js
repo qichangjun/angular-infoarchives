@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("serviceWatchController", [
-    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', 'JobRestangular', 'serviceWatchService', 'batchService', 'hsTpl', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, JobRestangular, serviceWatchService, batchService, hsTpl) {
+    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', 'JobRestangular', 'serviceWatchService', 'batchService', 'hsTpl', '$interval', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, JobRestangular, serviceWatchService, batchService, hsTpl, $interval) {
       var checkMission, getList, init, startService, stopService, vm;
       vm = this;
       vm.gridOptions = {};
@@ -51,7 +51,7 @@
         }
       };
       checkMission = function(row, e) {
-        var parameter;
+        var loadRate, parameter;
         if (row.jobName === 'AIP封装') {
           parameter = {
             batch_status: 4
@@ -65,9 +65,22 @@
             batch_status: 2
           };
         }
-        return batchService.getGridData(parameter).then(function(res) {
+        batchService.getGridData(parameter).then(function(res) {
           return row.missionList = res.content;
         }, function(res) {});
+        $interval.cancel(loadRate);
+        $scope.$on("$destroy", function() {
+          return $interval.cancel(loadRate);
+        });
+        return loadRate = $interval(function() {
+          if (!row.showMission) {
+            $interval.cancel(loadRate);
+            return;
+          }
+          return batchService.getGridData(parameter).then(function(res) {
+            return row.missionList = res.content;
+          }, function(res) {});
+        }, 5000, 0);
       };
       vm.checkMission = checkMission;
       vm.stopService = stopService;

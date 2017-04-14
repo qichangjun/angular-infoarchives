@@ -20,6 +20,7 @@
 .data--base--sidenav--right--box{
   float: left;
   width: calc(100% - 237px);
+  //min-width: 890px;
   height: 100%;
   padding: 0 15px;
   .data--filtering--wrapper{
@@ -44,6 +45,7 @@
         margin-right: 5px;
         vertical-align: middle;
         //min-height: 34px;
+        color: #797979;
         &.time--frame{
           float: right;
           width: 340px;
@@ -72,8 +74,14 @@
           display: inline-block;
           vertical-align: middle;
           md-select{
-            width: 70px;
+            //max-width: 81px;
             background: #ffffff;
+          }
+          md-checkbox{
+            margin-bottom: 0;
+          }
+          md-checkbox:not([disabled]).md-primary:not(.md-checked) .md-icon{
+            border-color: #797979 !important;
           }
           .ui-select-container {
             width: 100px;
@@ -126,6 +134,7 @@
       font-size: 13px;
       color: #e0e1e5;
       padding: 0 6px;
+      line-height: 1;
     }
     .edit--project--manage--head--btn{
       font-size: 13px;
@@ -168,15 +177,18 @@
       position: absolute;
       top: 14px;
       right: 0;
-      .current--vesion{
+      .current--version{
         display: inline-block;
-        color: #333333;
+        color: #4A4A4A;
         vertical-align: middle;
         &__select{
           display: inline-block;
           margin-left: 10px;
         }
       }
+    }
+    .fa{
+      font-size: 14px;
     }
   }
 }

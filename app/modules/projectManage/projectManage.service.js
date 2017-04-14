@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("projectManageService", [
-    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular) {
+    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state) {
       var deleteProject, getDataBaseList, getProjectList, newProject;
       $log.info("projectManageService");
       getProjectList = function() {
@@ -13,6 +13,9 @@
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
+          } else if (res.code === '10004') {
+            hsAuth.removeUser();
+            return $state.go('login');
           } else {
             deferred.reject(res);
             return mdToastService.showToast(res.message);

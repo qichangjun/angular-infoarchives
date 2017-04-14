@@ -43,13 +43,17 @@
                     </md-select>
                 </div>
             </div>
-            <div class="single--attribute--box" ng-if="vm.parameter.batch_status == 'all' || !vm.parameter.batch_status ">
+            <div class="single--attribute--box" ng-if="vm.parameter.batch_status == '5' || vm.parameter.batch_status=='all' ">
                 <span class="attribute--title">异常处置：</span>
                 <div class="attribute--value">
-                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);" aria-label="Checkbox 1">
+                    <!--ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);"-->
+                    <!--ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);"-->
+                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('1')" ng-click="vm.changeBehavior('1')"
+                                 aria-label="Checkbox 1">
                         <span >强制转换</span>
                     </md-checkbox>
-                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);" aria-label="Checkbox 1">
+                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('2')" ng-click="vm.changeBehavior('2')"
+                                 aria-label="Checkbox 1">
                         <span >删除</span>
                     </md-checkbox>
                 </div>
@@ -79,12 +83,12 @@
     </div>
     <div class="batch--grid--wrap">
         <div class="clearfix operation--box">
-            <md-button class="pull-left md-raised green--btn" ng-click="vm.search()">导出批次清单</md-button>
-            <md-button class="pull-left md-raised green--btn" ng-click="vm.search()">强制转换</md-button>
-            <md-button class="pull-left md-raised red--btn" ng-click="vm.search()">删除异常数据</md-button>
+            <md-button class="pull-left md-raised green--btn" ng-click="vm.exportList()">导出批次清单</md-button>
+            <md-button class="pull-left md-raised green--btn" ng-disabled="!vm.selectIsError" ng-click="vm.forceSwitch()">强制转换</md-button>
+            <md-button class="pull-left md-raised red--btn" ng-disabled="!vm.selectIsError" ng-click="vm.deleteBatch()">删除异常数据</md-button>
         </div>
         <div ng-if="gridOptions.data.length > 0" ui-grid="gridOptions" style="height: calc(100% - 100px);" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
-        <div ng-if="gridOptions.data.length == 0" class="no--data">没有数据</div>
+        <div ng-if="gridOptions.data.length == 0" class="no--data"><span class="fa fa-exclamation-circle"></span>没有数据</div>
     </div>
     <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
         <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>

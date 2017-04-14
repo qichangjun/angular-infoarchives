@@ -30,8 +30,8 @@
                     <span> | </span>
                     <span class="current--column">数据模版</span>
                     <div class="save--template--box">
-                        <div class="current--vesion">
-                            <span>版本号</span><md-select placeholder="1.0" class="current--vesion__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
+                        <div class="current--version">
+                            <span class="vertical-middle--inline-block">版本号</span><md-select placeholder="1.0" class="current--version__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
                                 <md-option ng-value="versionList.id" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
                             </md-select>
                         </div>
@@ -57,8 +57,6 @@
             </form>
         </div>
     </div>
-    <div ng-show="!vm.afterLoad">
-    正在加载...
-    </div>
+    <div ng-show="!vm.afterLoad" class="loading">正在加载...</div>
 
 </div>

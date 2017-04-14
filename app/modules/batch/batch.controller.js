@@ -11,7 +11,7 @@
     };
   }).controller("batchController", [
     '$scope', '$log', '$state', '$timeout', '$stateParams', 'batchService', 'dataBaseService', 'i18nService', 'hsTpl', '$mdSidenav', '$interval', 'mdDialogService', 'projectManageService', 'basicDataService', function($scope, $log, $state, $timeout, $stateParams, batchService, dataBaseService, i18nService, hsTpl, $mdSidenav, $interval, mdDialogService, projectManageService, basicDataService) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, SIDE_BAR_NAME, changeBehavior, checkDetail, checkErrorData, checkErrorList, closeSideBar, getBaseData, getBatchInfo, getDataList, getErrorList, getGridData, getProjectInfo, init, initGrid, search, vm;
+      var PAHT_OF_TEMPLATE_MDDIALOG, SIDE_BAR_NAME, changeBehavior, checkDetail, checkDetailData, checkErrorList, closeSideBar, deleteBatch, exists, exportList, forceSwitch, getBaseData, getBatchInfo, getDataList, getErrorList, getGridData, getProjectInfo, init, initGrid, listenEvent, loadRate, search, vm, watchSelectedItem;
       vm = this;
       vm.systemSource;
       vm.unit;
@@ -20,6 +20,7 @@
       vm.parameter.pageSize = Number(vm.parameter.pageSize) || 50;
       vm.parameter.currentPage = Number(vm.parameter.currentPage) || 1;
       vm.parameter.batch_status = vm.parameter.batch_status || 'all';
+      vm.parameter.exception_handle_behavior = vm.parameter.exception_handle_behavior || [];
       if (!vm.parameter.start_date) {
         vm.parameter.start_date = "";
       } else {
@@ -32,9 +33,16 @@
       }
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/batch/template/mdDialog/';
       SIDE_BAR_NAME = 'batch_detail';
+      loadRate = null;
       init = function() {
         initGrid();
         getDataList();
+        listenEvent();
+      };
+      listenEvent = function() {
+        return $scope.$on("$destroy", function() {
+          return $interval.cancel(loadRate);
+        });
       };
       initGrid = function() {
         i18nService.setCurrentLang('zh-cn');
@@ -45,8 +53,6 @@
           paginationCurrentPage: Number(vm.parameter.currentPage),
           enableRowSelection: true,
           enableSelectAll: true,
-          infiniteScrollRowsFromEnd: 30,
-          infiniteScrollDown: true,
           rowTemplate: hsTpl.hsRowTemplate,
           useExternalPagination: true,
           useExternalSorting: true,
@@ -55,16 +61,17 @@
             $scope.cancelSelect = function(row) {
               if (gridApi.selection) {
                 if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] === row) {
-                  return gridApi.selection.clearSelectedRows();
+                  gridApi.selection.clearSelectedRows();
                 } else if (gridApi.selection.getSelectedRows().length === 1 && gridApi.selection.getSelectedRows()[0] !== row) {
                   gridApi.selection.clearSelectedRows();
-                  return gridApi.selection.selectRow(row);
+                  gridApi.selection.selectRow(row);
                 } else if (gridApi.selection.getSelectedRows().length < 1) {
-                  return gridApi.selection.selectRow(row);
+                  gridApi.selection.selectRow(row);
                 } else if (gridApi.selection.getSelectedRows().length > 1) {
                   gridApi.selection.clearSelectedRows();
-                  return gridApi.selection.selectRow(row);
+                  gridApi.selection.selectRow(row);
                 }
+                return watchSelectedItem();
               }
             };
             $scope.gridApi = gridApi;
@@ -102,8 +109,9 @@
       getBatchInfo = function() {
         return batchService.getDetailInfo(vm.currentId).then(function(res) {
           vm.batchInfo = res.batch;
-          vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.aiuCount) * 100);
-          vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.sip2aipFailCount / vm.batchInfo.aiu2sipSuccessCount) * 100);
+          vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
+          vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
+          vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
         }, function(res) {});
       };
       getErrorList = function() {
@@ -112,7 +120,6 @@
         }, function(res) {});
       };
       checkDetail = function(id) {
-        var loadRate;
         vm.currentId = id;
         getProjectInfo();
         getBatchInfo(id);
@@ -121,8 +128,9 @@
         loadRate = $interval(function() {
           return batchService.getDetailInfo(vm.currentId).then(function(res) {
             vm.batchInfo = res.batch;
-            vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.aiuCount) * 100);
-            vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.sip2aipFailCount / vm.batchInfo.aiu2sipSuccessCount) * 100);
+            vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
+            vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
+            vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
             if ((vm.batchInfo.AIU2SIP === 100 && vm.batchInfo.SIP2AIP === 100) || !$mdSidenav(SIDE_BAR_NAME).isOpen()) {
               return $interval.cancel(loadRate);
             }
@@ -156,7 +164,7 @@
         vm.loading = true;
         if (vm.parameter.projectId) {
           return batchService.getGridData(vm.parameter).then(function(res) {
-            var column, i, len, ref, results;
+            var column, j, len, ref, results;
             vm.loading = false;
             $scope.gridOptions.data = res.content;
             $scope.gridOptions.totalItems = res.totalElements;
@@ -164,8 +172,8 @@
             $scope.gridOptions.columnVirtualizationThreshold = batchService.batch.length;
             ref = $scope.gridOptions.columnDefs;
             results = [];
-            for (i = 0, len = ref.length; i < len; i++) {
-              column = ref[i];
+            for (j = 0, len = ref.length; j < len; j++) {
+              column = ref[j];
               results.push(column.enableColumnMenu = false);
             }
             return results;
@@ -174,15 +182,15 @@
       };
       search = function() {
         if (vm.parameter.batch_status === '0,1,2,3,4' || vm.parameter.batch_status === '6') {
-          vm.parameter.exception_handle_behavior = null;
+          vm.parameter.exception_handle_behavior = [];
         }
         $state.go('.', vm.parameter, {
           notify: false
         });
         return getGridData();
       };
-      checkErrorData = function(info, event) {
-        return mdDialogService.initCustomDialog('checkErrorDataController', 'modules/batch/template/mdDialog/checkErrorData.html?' + window.hsConfig.bust, event, {
+      checkDetailData = function(info, event) {
+        return mdDialogService.initCustomDialog('checkDetailDataController', 'modules/batch/template/mdDialog/checkDetailData.html?' + window.hsConfig.bust, event, {
           info: info
         }).then(function(res) {}, function(res) {});
       };
@@ -195,46 +203,87 @@
         }).then(function(res) {}, function(res) {});
       };
       changeBehavior = function(value) {
-        if (vm.parameter.exception_handle_behavior === value) {
-          return vm.parameter.exception_handle_behavior = null;
+        var idx;
+        idx = vm.parameter.exception_handle_behavior.indexOf(value);
+        if (idx > -1) {
+          return vm.parameter.exception_handle_behavior.splice(idx, 1);
         } else {
-          return vm.parameter.exception_handle_behavior = value;
+          return vm.parameter.exception_handle_behavior.push(value);
         }
       };
+      exportList = function() {
+        return batchService.exportList(vm.parameter).then(function(res) {
+          return console.log(res);
+        }, function(res) {});
+      };
+      exists = function(value) {
+        return vm.parameter.exception_handle_behavior.indexOf(value) > -1;
+      };
+      forceSwitch = function() {
+        return console.log($scope.gridApi.selection.getSelectedRows());
+      };
+      deleteBatch = function() {
+        var ids, item;
+        ids = (function() {
+          var j, len, ref, results;
+          ref = $scope.gridApi.selection.getSelectedRows();
+          results = [];
+          for (j = 0, len = ref.length; j < len; j++) {
+            item = ref[j];
+            results.push(item.id);
+          }
+          return results;
+        })();
+        return batchService.deleteBatch(ids).then(function(res) {
+          return getGridData();
+        }, function(res) {});
+      };
+      watchSelectedItem = function() {
+        var i, j, len, ref, results, rows;
+        vm.selectIsError = false;
+        ref = $scope.gridApi.selection.getSelectedRows();
+        results = [];
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if (rows.batchStatus === 6) {
+            results.push(vm.selectIsError = true);
+          } else {
+            vm.selectIsError = false;
+            break;
+          }
+        }
+        return results;
+      };
+      $scope.$watch('gridApi.selection.getSelectedRows().length', function(newValue, oldValue, scope) {
+        if ($scope.gridApi) {
+          return watchSelectedItem();
+        }
+      });
+      vm.deleteBatch = deleteBatch;
+      vm.forceSwitch = forceSwitch;
+      vm.exists = exists;
+      vm.exportList = exportList;
       vm.changeBehavior = changeBehavior;
       vm.checkErrorList = checkErrorList;
       vm.closeSideBar = closeSideBar;
-      vm.checkErrorData = checkErrorData;
+      vm.checkDetailData = checkDetailData;
       vm.checkDetail = checkDetail;
       vm.getBaseData = getBaseData;
       vm.search = search;
       init();
     }
-  ]).controller('checkErrorDataController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'info', function($scope, $log, $stateParams, $mdDialog, info) {
-      var deleteData, forceChange, init, vm;
+  ]).controller('checkDetailDataController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'info', 'i18nService', 'hsTpl', 'batchService', function($scope, $log, $stateParams, $mdDialog, info, i18nService, hsTpl, batchService) {
+      var cancel, getGridData, init, initGrid, vm;
       vm = this;
       vm.entity = info;
-      init = function() {
-        return console.log(vm.entity);
-      };
-      deleteData = function() {};
-      forceChange = function() {};
-      vm.forceChange = forceChange;
-      vm.deleteData = deleteData;
-      init();
-    }
-  ]).controller('checkErrorListController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'i18nService', 'hsTpl', 'batchService', 'objectId', function($scope, $log, $stateParams, $mdDialog, i18nService, hsTpl, batchService, objectId) {
-      var cancel, deleteData, forceSwitch, getGridData, init, initGrid, vm;
-      vm = this;
       vm.parameter = {};
-      vm.parameter.objectId = objectId;
+      vm.parameter.batchId = info.id;
       vm.parameter.currentPage = vm.parameter.currentPage || 1;
       vm.parameter.pageSize = vm.parameter.pageSize || 50;
       init = function() {
         initGrid();
-        getGridData();
+        return getGridData();
       };
       initGrid = function() {
         i18nService.setCurrentLang('zh-cn');
@@ -245,8 +294,6 @@
           paginationCurrentPage: Number(vm.parameter.currentPage),
           enableRowSelection: true,
           enableSelectAll: true,
-          infiniteScrollRowsFromEnd: 30,
-          infiniteScrollDown: true,
           rowTemplate: hsTpl.hsRowTemplate,
           useExternalPagination: true,
           useExternalSorting: true,
@@ -280,8 +327,68 @@
       };
       getGridData = function() {
         vm.loading = true;
+        return batchService.getPackageList(vm.parameter).then(function(res) {
+          var column, j, len, ref, results;
+          vm.loading = false;
+          $scope.gridOptions.data = res.recordList;
+          $scope.gridOptions.totalItems = res.pageInfo.totalCount;
+          $scope.gridOptions.columnDefs = batchService.packageList;
+          $scope.gridOptions.columnVirtualizationThreshold = batchService.packageList.length;
+          ref = $scope.gridOptions.columnDefs;
+          results = [];
+          for (j = 0, len = ref.length; j < len; j++) {
+            column = ref[j];
+            results.push(column.enableColumnMenu = false);
+          }
+          return results;
+        }, function(res) {
+          vm.loading = false;
+        });
+      };
+      cancel = function() {
+        return $mdDialog.hide();
+      };
+      vm.cancel = cancel;
+      init();
+    }
+  ]).controller('checkErrorListController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'i18nService', 'hsTpl', 'batchService', 'objectId', function($scope, $log, $stateParams, $mdDialog, i18nService, hsTpl, batchService, objectId) {
+      var cancel, getGridData, init, initGrid, vm;
+      vm = this;
+      vm.parameter = {};
+      vm.parameter.objectId = objectId;
+      vm.parameter.currentPage = vm.parameter.currentPage || 1;
+      vm.parameter.pageSize = vm.parameter.pageSize || 50;
+      init = function() {
+        initGrid();
+        getGridData();
+      };
+      initGrid = function() {
+        i18nService.setCurrentLang('zh-cn');
+        return $scope.gridOptions = {
+          totalItems: vm.parameter.pageSize * vm.parameter.currentPage,
+          paginationPageSize: Number(vm.parameter.pageSize),
+          paginationCurrentPage: Number(vm.parameter.currentPage),
+          rowTemplate: hsTpl.hsRowTemplate,
+          useExternalPagination: true,
+          useExternalSorting: true,
+          rowHeight: 40,
+          onRegisterApi: function(gridApi) {
+            $scope.gridApi = gridApi;
+            return gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
+              if (!(vm.parameter.currentPage === newPage && vm.parameter.pageSize === pageSize)) {
+                vm.parameter.currentPage = newPage;
+                vm.parameter.pageSize = pageSize;
+                return getGridData();
+              }
+            });
+          }
+        };
+      };
+      getGridData = function() {
+        vm.loading = true;
         return batchService.getErrorGridData(vm.parameter).then(function(res) {
-          var column, i, len, ref, results;
+          var column, j, len, ref, results;
           vm.loading = false;
           $scope.gridOptions.data = res.exceptionItemList;
           $scope.gridOptions.totalItems = res.pageInfo.totalCount;
@@ -289,25 +396,19 @@
           $scope.gridOptions.columnVirtualizationThreshold = batchService.batchErrorList.length;
           ref = $scope.gridOptions.columnDefs;
           results = [];
-          for (i = 0, len = ref.length; i < len; i++) {
-            column = ref[i];
+          for (j = 0, len = ref.length; j < len; j++) {
+            column = ref[j];
             results.push(column.enableColumnMenu = false);
           }
           return results;
-        }, function(res) {});
-      };
-      deleteData = function() {
-        console.log($scope.gridApi.selection.getSelectedRows());
-      };
-      forceSwitch = function() {
-        console.log($scope.gridApi.selection.getSelectedRows());
+        }, function(res) {
+          vm.loading = false;
+        });
       };
       cancel = function() {
         return $mdDialog.hide();
       };
       vm.cancel = cancel;
-      vm.deleteData = deleteData;
-      vm.forceSwitch = forceSwitch;
       init();
     }
   ]);

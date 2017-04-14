@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("loginService", [
-    '$q', 'Restangular', 'hsAPI', 'Cookies', '$log', 'hsAuth', function($q, Restangular, hsAPI, Cookies, $log, hsAuth) {
+    '$q', 'Restangular', 'hsAPI', 'Cookies', '$log', 'hsAuth', '$state', function($q, Restangular, hsAPI, Cookies, $log, hsAuth, $state) {
       var getCurrentUser, userLogin, userLogout;
       userLogin = function(c_user, cookiePara) {
         var deferred;
@@ -33,6 +33,7 @@
         var deferred;
         deferred = $q.defer();
         hsAuth.removeUser();
+        $state.go('login');
         deferred.resolve('用户注销成功');
         return deferred.promise;
       };

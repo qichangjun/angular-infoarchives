@@ -18,3 +18,40 @@ a:focus, a:hover{
   cursor: pointer;
 
 }
+.vertical-middle--inline-block{
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.no--data{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 16px;
+  color: #ab0909;
+  .fa{
+    padding-right: 5px;
+  }
+}
+.loading{
+  width: 50%;
+  height: 50%;
+  position: absolute;
+  text-align: center;
+  margin: auto;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  font-size: 16px;
+  color: #199ed8;
+  .fa{
+    padding-right: 5px;
+  }
+}

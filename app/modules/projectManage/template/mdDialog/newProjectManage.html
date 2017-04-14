@@ -20,26 +20,31 @@
                         <div class="new--project--row">基本信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">项目名称</label><input ng-model="vm.entity.projectName"
-                                       class="form-control single--attribute--box__input"
-                                       name="projectName"
-                                       required
-                                       hs-form-message
-                                       hs-form-message-show="vm.newProject.submit"
-                                       hs-form-message-template="newProject_projectName.html"
-                                >
+                                <span class="single--attribute--box__title">项目名称</span><div class="single--attribute--box__value">
+                                    <input ng-model="vm.entity.projectName"
+                                           class="form-control single--attribute--box__value-input"
+                                           name="projectName"
+                                           required
+                                           hs-form-message
+                                           hs-form-message-show="vm.newProject.submit"
+                                           hs-form-message-template="newProject_projectName.html"
+                                            >
+                                </div>
+
                             </div>
                             <div class="single--attribute--box">
                                 <label class="single--attribute--box__title">业务编号</label>
-                                {{vm.entity.businessCode}}
+                                <div class="single--attribute--box__value">{{vm.entity.businessCode}}</div>
                             </div>
                         </div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">所属系统</label><input ng-model="vm.entity.systemName"
-                                       class="form-control single--attribute--box__input"
+                                <label class="single--attribute--box__title">所属系统</label><div class="single--attribute--box__value">
+                                <input ng-model="vm.entity.systemName"
+                                       class="form-control single--attribute--box__value-input"
                                        name="systemName"
-                                >
+                                        ></div>
+
                             </div>
 
                         </div>
@@ -48,7 +53,8 @@
                         <div class="new--project--row">源系统数据库信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库类型 </span><md-select  class="single--attribute--box__select"
+                                <span class="single--attribute--box__title"> 数据库类型 </span><div class="single--attribute--box__value">
+                                <md-select  class="single--attribute--box__value-select"
                                             ng-model="vm.entity.databaseName"
                                             ng-change="vm.getVersionList(vm.entity.databaseName)"
                                             md-on-open="vm.loadDataBase()"
@@ -57,12 +63,15 @@
                                             hs-form-message
                                             hs-form-message-show="vm.newProject.submit"
                                             hs-form-message-template="newProject_databaseName.html"
-                                >
+                                        >
                                     <md-option ng-value="dataBase" ng-repeat="dataBase in vm.dataBaseDisplayLists">{{dataBase}}</md-option>
                                 </md-select>
                             </div>
+
+                            </div>
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库版本 </span><md-select  class="single--attribute--box__select"
+                                <span class="single--attribute--box__title"> 数据库版本 </span><div class="single--attribute--box__value">
+                                <md-select  class="single--attribute--box__value-select"
                                             ng-model="vm.entity.databaseVersion"
                                             ng-disabled="!vm.entity.databaseName"
                                             name="dataBaseVersion"
@@ -70,9 +79,10 @@
                                             hs-form-message
                                             hs-form-message-show="vm.newProject.submit"
                                             hs-form-message-template="newProject_dataBaseVersion.html"
-                                >
+                                        >
                                     <md-option ng-value="version" ng-repeat="version in vm.versionList">{{version}}</md-option>
                                 </md-select>
+                            </div>
                             </div>
                         </div>
                     </div>
@@ -80,10 +90,12 @@
                         <div class="new--project--row">数据抽取方式</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据抽取方式 </span><md-select  class="single--attribute--box__select" ng-model="vm.entity.extractionMethod" ng-init="vm.entity.extractionMethod=0" >
+                                <span class="single--attribute--box__title"> 数据抽取方式 </span><div class="single--attribute--box__value">
+                                <md-select  class="single--attribute--box__value-select" ng-model="vm.entity.extractionMethod" ng-init="vm.entity.extractionMethod=0" >
                                     <md-option ng-value="0" >ETL数据抽取</md-option>
                                     <md-option ng-value="1" >AIP接口</md-option>
                                 </md-select>
+                                </div>
                             </div>
                         </div>
                     </div>

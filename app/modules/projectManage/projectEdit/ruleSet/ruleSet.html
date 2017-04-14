@@ -14,7 +14,7 @@
             <!--</md-button>-->
         </div>
     </md-toolbar>
-    <div ng-show="!vm.afterLoad">正在加载...</div>
+    <div ng-show="!vm.afterLoad" class="loading">正在加载...</div>
     <div ng-show="vm.afterLoad">
         <div ng-show="vm.versionList.length == 0">
             <div class="new--prompt--box">
@@ -76,7 +76,7 @@
                                                                     hs-form-message-template="addRule_fieldType.html"
                                                                 >
                                                             <md-option ng-value="0" >属性</md-option>
-                                                            <md-option ng-value="1" >分隔符</md-option>
+                                                            <md-option ng-value="1" >字符串</md-option>
                                                             <md-option ng-value="2" >流水号</md-option>
                                                         </md-select>
                                                     </div>
@@ -91,7 +91,8 @@
                                                                     hs-form-message-show="vm.addRule.submit"
                                                                     hs-form-message-template="addRule_attrName.html"
                                                                 >
-                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                            <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                            <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
                                                         </md-select>
                                                     </div>
                                                     <div ng-if="rule.fieldType == 1" class="et-rule-add-tool-row">
@@ -143,7 +144,7 @@
                                                                     hs-form-message-template="addRule_fieldType.html"
                                                                 >
                                                             <md-option ng-value="0" >属性</md-option>
-                                                            <md-option ng-value="1" >分隔符</md-option>
+                                                            <md-option ng-value="1" >字符串</md-option>
                                                             <md-option ng-value="2" >流水号</md-option>
                                                         </md-select>
                                                     </div>
@@ -157,7 +158,8 @@
                                                                     hs-form-message-show="vm.addRule.submit"
                                                                     hs-form-message-template="addRule_attrName.html"
                                                                     ng-change="vm.changeAttr()">
-                                                            <md-option ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                            <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                            <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
                                                         </md-select>
                                                     </div>
                                                     <div ng-if="vm.entity.fieldType == 1" class="et-rule-add-tool-row">

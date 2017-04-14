@@ -9,6 +9,7 @@
   margin: 0 auto;
   height: 100%;
   position: relative;
+  border-right: 1px solid #e4e4e4;
   .info--archive--sidebar--wrapper{
     height: 100%;
     width: 178px;
@@ -98,6 +99,7 @@
     left: 178px;
     right: 0;
     bottom: 0;
+    //border-right: 1px solid #e4e4e4;
     .top--head--box{
       height: 57px;
       max-width: 1742px;

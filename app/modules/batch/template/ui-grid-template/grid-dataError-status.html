@@ -1,11 +1,8 @@
 <div  class="hs-ui-grid-cell-contents hs-ui-grid-cell add-background-colors clearfix" >
     <div class="" >
-        <span  style="color:green;font-size:18px" ng-if="row.entity.batchStatus == 0" class="fa fa-check-circle-o"></span>
-        <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 1" class="fa fa-exclamation-triangle"></span>
-        <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 2" class="fa fa-exclamation-triangle"></span>
-        <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 3" class="fa fa-exclamation-triangle"></span>
-        <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 4" class="fa fa-exclamation-triangle"></span>
-        <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 5" class="fa fa-exclamation-triangle"></span>
+        <span  style="color:green;font-size:18px" ng-if="row.entity.batchStatus == 5" class="fa fa-check-circle-o"></span>
+        <span  style="color:#3a87ad;font-size:18px" ng-if="row.entity.batchStatus != 5 && row.entity.batchStatus != 6" class="glyphicon glyphicon-cog"></span>
+
         <span  style="color:#FF9900;font-size:18px" ng-if="row.entity.batchStatus == 6" class="fa fa-exclamation-triangle"></span>
     </div>
 

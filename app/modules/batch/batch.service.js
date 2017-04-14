@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").service("batchService", [
     '$log', '$q', '$timeout', '$mdToast', 'hsAuth', 'Restangular', 'hsAPI', 'hsTpl', 'mdToastService', 'MockRestangular', 'commonMethodSerivce', function($log, $q, $timeout, $mdToast, hsAuth, Restangular, hsAPI, hsTpl, mdToastService, MockRestangular, commonMethodSerivce) {
-      var batch, batchErrorList, getDataType, getDetailInfo, getErrorGridData, getErrorList, getGridData, getSystemSource, getUnit;
+      var batch, batchErrorList, deleteBatch, exportList, getDataType, getDetailInfo, getErrorGridData, getErrorList, getGridData, getPackageList, getSystemSource, getUnit, packageList;
       getSystemSource = function() {
         var deferred, res;
         deferred = $q.defer();
@@ -58,8 +58,8 @@
         if (parameter.end_date) {
           columns.push(commonMethodSerivce.initColumn('package_aip_end_date', 'LESS_THAN', 'date', info.end_date));
         }
-        if (parameter.exception_handle_behavior) {
-          columns.push(commonMethodSerivce.initColumn('exception_handle_behavior', 'EQUAL', 'int', info.exception_handle_behavior));
+        if (parameter.exception_handle_behavior && parameter.exception_handle_behavior.length > 0) {
+          columns.push(commonMethodSerivce.initColumn('exception_handle_behavior', 'IN', 'int', info.exception_handle_behavior.join(',')));
         }
         if (parameter.batch_status && parameter.batch_status !== 'all') {
           columns.push(commonMethodSerivce.initColumn('batch_status', 'IN', 'int', info.batch_status));
@@ -82,6 +82,42 @@
         });
         return deferred.promise;
       };
+      exportList = function(parameter) {
+        var columns, deferred, info;
+        info = angular.copy(parameter);
+        deferred = $q.defer();
+        columns = [];
+        if (info.projectId) {
+          columns.push(commonMethodSerivce.initColumn('project_id', 'EQUAL', 'string', info.projectId));
+        }
+        if (parameter.start_date) {
+          columns.push(commonMethodSerivce.initColumn('package_aiu_start_date', 'GREATER_THAN', 'date', info.start_date));
+        }
+        if (parameter.end_date) {
+          columns.push(commonMethodSerivce.initColumn('package_aip_end_date', 'LESS_THAN', 'date', info.end_date));
+        }
+        if (parameter.exception_handle_behavior) {
+          columns.push(commonMethodSerivce.initColumn('exception_handle_behavior', 'EQUAL', 'int', info.exception_handle_behavior));
+        }
+        if (parameter.batch_status && parameter.batch_status !== 'all') {
+          columns.push(commonMethodSerivce.initColumn('batch_status', 'IN', 'int', info.batch_status));
+        }
+        Restangular.all(hsAPI['exportBatchList'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          columns: columns
+        }).then(function(res) {
+          if (res.code === '1') {
+            deferred.resolve(res.data);
+            return mdToastService.showToast(res.message);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
       getErrorList = function(id) {
         var deferred;
         deferred = $q.defer();
@@ -92,6 +128,27 @@
         }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      deleteBatch = function(ids) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['deleteBatch']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          ids: ids
+        }).then(function(res) {
+          if (res.code === '1') {
+            deferred.resolve(res.data);
+            return mdToastService.showToast(res.message);
           } else {
             deferred.reject(res);
             return mdToastService.showToast(res.message);
@@ -131,6 +188,28 @@
           accessUser: hsAuth.getAccessKey(),
           accessToken: hsAuth.getAccessToken(),
           exceptionRecordId: parameter.objectId,
+          currentPage: parameter.currentPage,
+          pageSize: parameter.pageSize
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getPackageList = function(parameter) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getPackageList']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          batchId: parameter.batchId,
           currentPage: parameter.currentPage,
           pageSize: parameter.pageSize
         }).then(function(res) {
@@ -242,6 +321,55 @@
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-dealAction.html'
         }
       ];
+      packageList = [
+        {
+          name: 'archivalId',
+          headerCellFilter: 'translate',
+          displayName: '档号',
+          minWidth: 200,
+          cellTemplate: hsTpl.hsCellTemplate
+        }, {
+          name: 'batchCode',
+          headerCellFilter: 'translate',
+          displayName: '批次号',
+          minWidth: 100,
+          cellTemplate: hsTpl.hsCellTemplate
+        }, {
+          name: 'businessCode',
+          headerCellFilter: 'translate',
+          displayName: '业务流水号',
+          width: 50,
+          cellTemplate: hsTpl.hsCellTemplate
+        }, {
+          name: 'name',
+          headerCellFilter: 'translate',
+          displayName: '事项名称',
+          minWidth: 50,
+          cellTemplate: hsTpl.hsCellTemplate
+        }, {
+          name: 'recordCode',
+          headerCellFilter: 'translate',
+          displayName: '证照编号',
+          minWidth: 50,
+          cellTemplate: hsTpl.hsCellTemplate
+        }, {
+          name: 'createDate',
+          headerCellFilter: 'translate',
+          displayName: '创建时间',
+          minWidth: 50,
+          cellTemplate: 'modules/batch/template/ui-grid-template/grid-packageList-createDate.html'
+        }, {
+          name: 'modifyDate',
+          headerCellFilter: 'translate',
+          displayName: '修改时间',
+          minWidth: 50,
+          cellTemplate: 'modules/batch/template/ui-grid-template/grid-packageList-modifyDate.html'
+        }
+      ];
+      this.deleteBatch = deleteBatch;
+      this.packageList = packageList;
+      this.getPackageList = getPackageList;
+      this.exportList = exportList;
       this.getErrorList = getErrorList;
       this.getDetailInfo = getDetailInfo;
       this.getErrorGridData = getErrorGridData;

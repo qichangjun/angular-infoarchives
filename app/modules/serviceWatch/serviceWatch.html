@@ -22,7 +22,7 @@
                         <td>{{data.id}}</td>
                         <td>{{data.jobName}}</td>
                         <td>{{data.glueRemark}}</td>
-                        <td>{{data.startDate}}</td>
+                        <td>{{data.startDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
                         <td><span >{{data.keepDay}}天 </span>
                             <span >{{data.keepHour}}小时 </span>
                             <span >{{data.keepMinute}}分 </span>
@@ -69,69 +69,8 @@
                         </td>
                     </tr>
                 </tbody>
-
             </table>
     </div>
-
 </div>
 
-
-<!--div 布局-->
-<!--<div class="service&#45;&#45;watch&#45;&#45;sheet">-->
-<!--<div class="row&#45;&#45;content&#45;&#45;box head clearfix">-->
-<!--<div class="cell&#45;&#45;content">ID</div>-->
-<!--<div class="cell&#45;&#45;content">JOB名称</div>-->
-<!--<div class="cell&#45;&#45;content">秒数</div>-->
-<!--<div class="cell&#45;&#45;content">启动时间</div>-->
-<!--<div class="cell&#45;&#45;content">持续运行时间</div>-->
-<!--<div class="cell&#45;&#45;content">当前状态</div>-->
-<!--<div class="cell&#45;&#45;content">操作</div>-->
-<!--</div>-->
-<!--<div ng-repeat="data in vm.gridOptions.data">-->
-<!--<div class="row&#45;&#45;content&#45;&#45;box clearfix" ng-click="vm.checkMission(data,$event)" >-->
-<!--<div class="cell&#45;&#45;content">{{data.id}}</div>-->
-<!--<div class="cell&#45;&#45;content">{{data.jobName}}</div>-->
-<!--<div class="cell&#45;&#45;content">{{data.glueRemark}}</div>-->
-<!--<div class="cell&#45;&#45;content">{{data.startDate}}</div>-->
-<!--<div class="cell&#45;&#45;content"><span >{{data.keepDay}}天 </span>-->
-<!--<span >{{data.keepHour}}小时 </span>-->
-<!--<span >{{data.keepMinute}}分 </span>-->
-<!--</div>-->
-<!--<div class="cell&#45;&#45;content">-->
-<!--<span ng-if="data.jobStatus == 'PAUSED'"> 服务停止 </span>-->
-<!--<span ng-if="data.jobStatus != 'PAUSED'"> 运行正常 </span>-->
-<!--</div>-->
-<!--<div class="cell&#45;&#45;content">-->
-<!--<div ng-if="!data.isChanging">-->
-<!--<span class="glyphicon glyphicon-play"-->
-<!--style="font-size: 20px"-->
-<!--ng-click="vm.startService(data,$event)"-->
-<!--ng-class="{'button-disabled': data.jobStatus != 'PAUSED'}"-->
-<!-->
-<!--</span>-->
-<!--<span class="glyphicon glyphicon-pause"-->
-<!--style="font-size: 20px"-->
-<!--ng-click="vm.stopService(data,$event)"-->
-<!--ng-class="{'button-disabled': data.jobStatus == 'PAUSED'}"-->
-<!-->
-<!--</span>-->
-<!--</div>-->
-<!--<div ng-if="data.isChanging">-->
-<!--<md-progress-circular  class="md-hue-2" md-diameter="20px"></md-progress-circular>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--<div class="row&#45;&#45;content&#45;&#45;box clearfix" ng-repeat="missionList in data.missionList">-->
-<!--<div>-->
-<!--<span>ID:{{missionList.id}}</span>-->
-<!--<span>批次号:{{missionList.batchCode}}</span>-->
-<!--<span>任务开始时间 : {{missionList.startDate}}</span>-->
-<!--<span>数据包熟练 : {{missionList.num}}</span>-->
-<!--<span>进度 :-->
-<!--<uib-progressbar  class="progress-striped active" type="success" value="missionList.progress"></uib-progressbar>{{missionList.progress}}%-->
-<!--</span>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
-<!--</div>-->
 

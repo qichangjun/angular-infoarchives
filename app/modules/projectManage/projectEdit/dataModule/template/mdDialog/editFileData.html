@@ -32,7 +32,7 @@
                             <tbody>
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.currentFileId && data.isSys==1">
                                 <td>{{$index}}</td>
-                                <td>{{data.attrNameCn}}</td>
+                                <td>{{data.attrNameZh}}</td>
                                 <td>{{data.attrNameEn}}</td>
                                 <td>{{data.attrName}}</td>
                                 <td>{{data.attrType}}</td>
@@ -63,7 +63,7 @@
                                 </td>
                                 <td>
                                     <div class="md-block edit--custom--data--modal__input--box">
-                                        <input class="form-control edit--custom--data--modal__input" ng-model="customData.attrNameCn">
+                                        <input class="form-control edit--custom--data--modal__input" ng-model="customData.attrNameZh">
                                     </div>
                                 </td>
                                 <td>

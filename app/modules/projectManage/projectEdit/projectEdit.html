@@ -1,4 +1,4 @@
-<div class="anim-slide-right data--base--sidenav project--edit" >
+<div class="anim-slide-left data--base--sidenav project--edit" >
     <md-sidenav
             class="md-sidenav-right pull--left data--base--wrapper "
             md-component-id="left"
@@ -36,6 +36,12 @@
                     <span class="fa fa-map-signs" aria-hidden="true"></span>
                     策略设置
                  </a>
+                </li>
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.moduleTemplate')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.moduleTemplate'}">
+                    <a>
+                        <span class="fa fa-map-signs" aria-hidden="true"></span>
+                        模版展现
+                    </a>
                 </li>
             </ul>
         </div>

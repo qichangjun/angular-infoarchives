@@ -61,6 +61,14 @@
         data: {
           access_level: 2
         }
+      }).state("infoArchives.projectEdit.moduleTemplate", {
+        url: "moduleTemplate/:objectId",
+        templateUrl: "modules/projectManage/projectEdit/moduleTemplate/moduleTemplate.html?" + window.hsConfig.bust,
+        controller: "moduleTemplateController",
+        controllerAs: "vm",
+        data: {
+          access_level: 3
+        }
       }).state("infoArchives.projectEdit.basicData", {
         url: "basicData/:objectId",
         templateUrl: "modules/projectManage/projectEdit/basicData/basicData.html?" + window.hsConfig.bust,

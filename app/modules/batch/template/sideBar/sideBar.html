@@ -39,19 +39,25 @@
                     </div>
                 </div>
                 <div class="attr--type--box">
-                    <!--<span>阶段状态</span>-->
                     <div class="single--attr--row">
-                        <label class="title ver-align-top">AIU <span class="fa fa-long-arrow-right"></span> SIP</label><div class="value ver-align-top">
-                            <uib-progressbar  class="progress-striped active" type="warning" value="vm.batchInfo.AIU2SIP"></uib-progressbar>{{vm.batchInfo.AIU2SIP}}%
-                            <div class="sidebar--progress--time">{{vm.batchInfo.packageAiuStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAiuEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
-                        </div>
+                        <label class="title ver-align-top">生成AIU</label><div class="value ver-align-top">
+                        <uib-progressbar  class="progress-striped active" type="warning" value="vm.batchInfo.DATA2AIU"></uib-progressbar><span>{{vm.batchInfo.DATA2AIU}}%</span>
+                        <div class="sidebar--progress--time">{{vm.batchInfo.packageAiuStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAiuEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
+                    </div>
 
                     </div>
                     <div class="single--attr--row">
-                        <label class="title ver-align-top">SIP <span class="fa fa-long-arrow-right"></span> AIP</label><div class="value ver-align-top">
-                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>=2" class="progress-striped active"  type="warning" value="vm.batchInfo.SIP2AIP"></uib-progressbar><span ng-if="vm.batchInfo.batchStatus>=2">{{vm.batchInfo.SIP2AIP}}%</span>
-                            <span ng-if="vm.batchInfo.batchStatus<2">未开始</span>
+                        <label class="title ver-align-top">AIU <span class="fa fa-long-arrow-right"></span> SIP</label><div class="value ver-align-top">
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>1"  class="progress-striped active" type="warning" value="vm.batchInfo.AIU2SIP"></uib-progressbar><span ng-show="vm.batchInfo.batchStatus>1">{{vm.batchInfo.AIU2SIP}}%</span>
+                            <span ng-if="vm.batchInfo.batchStatus<=1">未开始</span>
                             <div class="sidebar--progress--time">{{vm.batchInfo.packageSipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageSipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
+                        </div>
+                    </div>
+                    <div class="single--attr--row">
+                        <label class="title ver-align-top">SIP <span class="fa fa-long-arrow-right"></span> AIP</label><div class="value ver-align-top">
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>=4" class="progress-striped active"  type="warning" value="vm.batchInfo.SIP2AIP"></uib-progressbar><span ng-if="vm.batchInfo.batchStatus>=4">{{vm.batchInfo.SIP2AIP}}%</span>
+                            <span ng-if="vm.batchInfo.batchStatus<4">未开始</span>
+                            <div class="sidebar--progress--time">{{vm.batchInfo.packageAipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                         </div>
                     </div>
                 </div>
@@ -73,11 +79,11 @@
                         <span class="title">SIP转换为AIP数量</span>
                         <span class="value">{{vm.batchInfo.aipCount}}</span>
                         <span class="title">出错数量</span>
-                        <span class="value">0</span>
+                        <span class="value">{{vm.batchInfo.sip2aipFailCount}}</span>
                     </div>
                     <div class="single--attr--row">
                         <span class="title">数据量</span>
-                        <span class="value">68.3MB</span>
+                        <span class="value">{{vm.batchInfo.aipCapacity}}MB</span>
                     </div>
                     <div class="single--attr--row">
                         <div class="data-volume-info-prompt">
@@ -87,7 +93,7 @@
                     </div>
 
                 </div>
-                <div class="attr--type--box" ng-show="vm.errorInfo">
+                <div class="attr--type--box" ng-show="vm.errorInfo.packageCount > 0">
                     <div class="single--attr--row">
                         <span class="title">异常数据包类型</span>
                         <span class="value" ng-if="vm.errorInfo.packageType == 0">AIU</span>
@@ -107,7 +113,7 @@
                 </div>
             </md-content>
         </md-tab>
-        <md-tab label="异常处理记录" ng-if="vm.errorInfo">
+        <md-tab label="异常处理记录" ng-if="vm.errorInfo.packageCount > 0">
             <md-content class="">
                 <div class="attr--type--box">
                     <div class="single--attr--row">

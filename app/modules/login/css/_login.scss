@@ -189,30 +189,40 @@
           height: 40px;
           line-height: 40px;
           border: 1px solid #e1e1e1;
-          border-radius: 5px;
+          border-radius: 4px;
           background: #ffffff;
+          padding: 6px;
         }
         .select--language--title{
           font-weight: normal;
           transform: none;
-          width: 75px;
-          vertical-align: text-top;
+          width: 76px;
+          vertical-align: middle;
+          margin: 0;
+          padding-left: 3px;
         }
         .select--language--box{
           margin: 0;
           &__select{
+            display: inline-block;
+            vertical-align: 1px;
             margin: 0;
             width: 280px;
             background: #fff;
+          }
+          .md-select-value>span{
+            transform: none;
           }
         }
       }
       .user-login-checkbox{
         margin: 20px 0 10px 0;
+        padding-left: 3px;
       }
     }
     .user-login-btn{
-      width: 100%;
+      width: calc(100% - 4px);
+      margin: 0 2px;
       height: 40px;
     }
   }

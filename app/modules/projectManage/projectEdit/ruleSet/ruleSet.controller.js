@@ -49,12 +49,18 @@
       };
       getRetentionPolicyList = function() {
         return ruleSetService.getRetentionPolicyList().then(function(res) {
-          return vm.retentionPolicyList = res;
+          vm.retentionPolicyList = res;
+          return $timeout(function() {
+            return vm.retentionPolicy = vm.retentionPolicy || vm.retentionPolicyList[0].id;
+          });
         }, function(res) {});
       };
       getRetentionPeriodList = function() {
         return ruleSetService.getRetentionPeriodList().then(function(res) {
-          return vm.retentionPeriodList = res;
+          vm.retentionPeriodList = res;
+          return $timeout(function() {
+            return vm.retentionPeriod = vm.retentionPeriod || vm.retentionPeriodList[0].id;
+          });
         }, function(res) {});
       };
       getVersionList = function() {
@@ -134,11 +140,21 @@
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
           if (angular.isUndefined(index) && (rows.attrName === vm.entity.attrName)) {
-            vm.entity.attrDisplayName = rows.attrNameEn;
-            break;
+            if (vm.language === 'cn') {
+              vm.entity.attrDisplayName = rows.attrNameZh;
+              break;
+            } else {
+              vm.entity.attrDisplayName = rows.attrNameEn;
+              break;
+            }
           } else if ((index >= 0) && (rows.attrName === vm.ruleProperty[index].attrName)) {
-            vm.ruleProperty[index].attrDisplayName = rows.attrNameEn;
-            break;
+            if (vm.language === 'cn') {
+              vm.ruleProperty[index].attrDisplayName = rows.attrNameZh;
+              break;
+            } else {
+              vm.ruleProperty[index].attrDisplayName = rows.attrNameEn;
+              break;
+            }
           } else {
             results.push(void 0);
           }
@@ -180,11 +196,7 @@
             return console.log(vm.ruleProperty);
           });
         } else {
-          return ruleSetService.createRule(vm.ruleProperty, vm.parameter.objectId).then(function(res) {
-            vm.codingPolicy = res.codingPolicy;
-            vm.ruleProperty = res.fields;
-            vm.createRule = false;
-          }, function(res) {
+          return ruleSetService.createRule(vm.ruleProperty, vm.parameter.objectId).then(function(res) {}, function(res) {
             return console.log(vm.ruleProperty);
           });
         }
