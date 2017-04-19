@@ -34,7 +34,7 @@
     color: #fff;
     th{
       font-weight: normal;
-      padding: 12px 8px;
+      padding: 11px 8px;
       &:hover{
         background: transparent;
       }
@@ -70,6 +70,26 @@
       text-overflow: ellipsis;
       padding: 5px;
       border-bottom: 1px solid #eeeeee;
+    }
+  }
+}
+
+.mission--list--spread--box{
+  display: flex;
+  display: -webkit-flex;
+
+  box-sizing: border-box;
+  padding: 0 30px;
+
+  .attr--box{
+    display: inline-block;
+    flex: initial;
+    -webkit-flex: initial;
+    width: 200px;
+    min-width: 100px;
+    padding: 8px;
+    &.date{
+      flex: 3;
     }
   }
 }

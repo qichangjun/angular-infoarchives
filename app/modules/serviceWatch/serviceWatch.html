@@ -19,7 +19,7 @@
                 </thead>
                 <tbody  ng-repeat="data in vm.gridOptions.data">
                     <tr ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
-                        <td>{{data.id}}</td>
+                        <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
                         <td>{{data.jobName}}</td>
                         <td>{{data.glueRemark}}</td>
                         <td>{{data.startDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
@@ -51,20 +51,30 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="missionList" ng-show="data.missionList.length > 0 && data.showMission" >
+                    <tr class="missionList" ng-show="data.missionList.length > 0 && data.showMission">
+
+                            <!--<td><span>ID：{{missionList.id}}</span></td>-->
+                            <!--<td><span>批次号：{{missionList.batchCode}}</span></td>-->
+                            <!--<td><span ng-if="missionList.batchStatus==4">任务开始时间：{{missionList.packageAipStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span></td>-->
+                            <!--<td><span ng-if="missionList.batchStatus==0">任务开始时间：{{missionList.packageAiuStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span></td>-->
+                            <!--<td><span ng-if="missionList.batchStatus==2">任务开始时间：{{missionList.packageSipStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span></td>-->
+                            <!--<td><span>数据包熟练：{{missionList.aiu2sipSuccessCount}}</span></td>-->
+                            <!--<td><span >进度：-->
+                                        <!--<uib-progressbar style="display: inline-block;vertical-align: middle;width: 150px;margin: 0;" class="progress-striped active" type="success" value="(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100"></uib-progressbar>{{(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100}}%-->
+                                    <!--</span>-->
+                            <!--</td>-->
+
                         <td colspan="7">
-                            <div ng-repeat="missionList in data.missionList">
-                                <div>
-                                    <span>ID：{{missionList.id}}</span>
-                                    <span>批次号：{{missionList.batchCode}}</span>
-                                    <span ng-if="missionList.batchStatus==4">任务开始时间：{{missionList.packageAipStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-                                    <span ng-if="missionList.batchStatus==0">任务开始时间：{{missionList.packageAiuStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-                                    <span ng-if="missionList.batchStatus==2">任务开始时间：{{missionList.packageSipStartDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</span>
-                                    <span>数据包熟练：{{missionList.aiu2sipSuccessCount}}</span>
-                                    <span >进度：
-                                        <uib-progressbar style="display: inline-block;vertical-align: middle;width: 150px;margin: 0;" class="progress-striped active" type="success" value="(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100"></uib-progressbar>{{(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100}}%
-                                    </span>
-                                </div>
+                            <div ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
+                                <span class="attr--box">ID：{{missionList.id}}</span>
+                                <span class="attr--box">批次号：{{missionList.batchCode}}</span>
+                                <span class="attr--box date" ng-if="missionList.batchStatus==4">任务开始时间：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box date" ng-if="missionList.batchStatus==0">任务开始时间：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box date" ng-if="missionList.batchStatus==2">任务开始时间：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box">数据包熟练：{{missionList.aiu2sipSuccessCount}}</span>
+                                <span class="attr--box">进度：
+                                    <uib-progressbar style="display: inline-block;vertical-align: middle;width:100px;margin: 0;" class="progress-striped active" type="success" value="(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100"></uib-progressbar>{{(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100}}%
+                                </span>
                             </div>
                         </td>
                     </tr>

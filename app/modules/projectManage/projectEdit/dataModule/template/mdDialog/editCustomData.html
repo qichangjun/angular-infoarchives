@@ -1,4 +1,4 @@
-<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper">
+<md-dialog aria-label="Mango" class="edit--custom--data--modal--wrapper lg-modal">
     <form ng-cloak>
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
@@ -26,13 +26,15 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='1'">
-                                <td>{{$index}}</td>
+                                <td>{{$index + 1}}</td>
                                 <td>{{data.attrNameZh}}</td>
                                 <td>{{data.attrNameEn}}</td>
                                 <td>{{data.attrName}}</td>
-                                <td>{{data.attrType}}</td>
+                                <td>{{data.attrType=='string'?'字符型':data.attrType=='int'?'数字型':data.attrType=='boolean'?'布尔型':'日期型'}}</td>
                                 <td>{{data.attrLength}}</td>
-                                <td>{{data.isRequired}}</td>
+                                <td>
+                                    {{data.isRequired==1?'是':'否'}}
+                                </td>
                             </tr>
                             </tbody>
                         </table>

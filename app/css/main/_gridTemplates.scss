@@ -191,18 +191,18 @@ div.ui-grid-cell input.edit-input{
 }
 
 .ui-grid-header-cell-primary-focus {
-  background: #3a87ad;
+  background: #4F93C5;
   color: #ffffff;
   font-weight: normal;
-  border-bottom: 1px solid #3a87ad;
+  border-bottom: 1px solid #4F93C5;
   padding: 7px 5px 3px 5px;
 }
 
 .ui-grid-header-cell{
   &:first-child{
-    border-color: #3a87ad;
+    border-color: #4F93C5;
     .ui-grid-cell-contents{
-      background: #3a87ad;
+      background: #4F93C5;
       md-checkbox:not([disabled]).md-primary:not(.md-checked) .md-icon{
         border-color: #cccecf ;
         background: #ffffff;
@@ -213,7 +213,8 @@ div.ui-grid-cell input.edit-input{
   }
 }
 .ui-grid-pinned-container.ui-grid-pinned-container-left .ui-grid-header-cell:last-child{
-  border-color: #3a87ad !important;
+  border-color: #4F93C5 !important;
+
 }
 
 md-checkbox:not([disabled]).md-primary:not(.md-checked) .md-icon{

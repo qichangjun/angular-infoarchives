@@ -4,11 +4,8 @@
 
 
 <div class="anim-slide-right data--base--sidenav--right--box" style="position:relative">
-    <div class="tip-show-animate md-whiteframe-12dp" ng-class="{true: 'showTreeTool', false: 'hiddenTreeTool'}[tipTool.isShow == 1]"  ng-style="{'top':tipTool.x,'left':tipTool.y,'position':'absolute','opacity':tipTool.isShow}">
-        名字 :    {{tipTool.name}}
-        id : {{tipTool.id}}
-    </div>
-    <tree-for-angular   id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490'>
+    <common-upload-file files="files" upload-url="'upload'">
 
-    </tree-for-angular>
+    </common-upload-file>
 </div>
+

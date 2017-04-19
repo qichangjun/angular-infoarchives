@@ -1,0 +1,37 @@
+<div>
+    Multiple files
+    <div class="button" ngf-select="uploadFiles($files)" ng-model="oddFiles" ngf-multiple="true">Select</div>
+    Drop files: <div ngf-drop="uploadFiles($files)" class="drop-box">Drop</div>
+    <table class="table attribute--row--box__table" ng-show="files.length > 0">
+        <thead>
+        <tr class="table__th--tr">
+            <th>序号</th>
+            <th>文件名</th>
+            <th>类型</th>
+            <th>大小</th>
+            <th style="width: 150px">进度</th>
+            <th>状态</th>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="file in files" >
+            <td>{{$index}}</td>
+            <td>{{file.name}}</td>
+            <td>{{file.type}}</td>
+            <td>{{file.size}}</td>
+            <td>
+                <uib-progressbar  class="progress-striped active" type="warning" value="file.progress" ng-show="file.status == 2">
+                    {{file.progress}}%
+                </uib-progressbar>
+            </td>
+            <td>{{file.status == 2 ? '上传中' : file.status == 1 ? '上传成功' : '上传失败'}}</td>
+            <td>
+                <a ng-click="file.upload.abort()" ng-show="file.status == 2">终止</a>
+                <a ng-click="uploadFiles([file],true)" ng-show="file.status == 0">重新开始</a>
+                <!--<a ng-click="file.upload.pause()">暂停</a>-->
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>

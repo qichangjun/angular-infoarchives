@@ -14,7 +14,7 @@
       },
       link: function(scope, element) {
         $timeout(function() {
-          var append_addBlockButton, append_addDeleteButton, append_addFileButton, append_addNodeButton, append_editCustomButton, append_editFileButton, checkisNodeChild, clearSelected, clickContainer, diagonal, h, horizontalSeparationBetweenNodes, i, m, maxDepth, nodeHeight, nodeWidth, root, tree, update, verticalSeparationBetweenNodes, vis, w;
+          var append_addBlockButton, append_addDeleteButton, append_addFileButton, append_addNodeButton, append_editCustomButton, append_editFileButton, checkisNodeChild, clearSelected, clickContainer, diagonal, h, horizontalSeparationBetweenNodes, i, m, maxDepth, nodeHeight, nodeWidth, root, stringGetLength, tree, update, verticalSeparationBetweenNodes, vis, w;
           maxDepth = 0;
           m = [20, 120, 20, 120];
           w = 900 - m[1] - m[3];
@@ -41,6 +41,9 @@
                 return name;
               }
             }).attr('x', function() {
+              if (name.length > 8) {
+                name = name.substring(0, 8) + '...';
+              }
               return '1em';
             });
           });
@@ -49,6 +52,23 @@
               return clickContainer(d);
             });
           });
+          stringGetLength = function(str) {
+            var charCode, len, realLength;
+            realLength = 0;
+            len = str.length;
+            charCode = -1;
+            i = 0;
+            while (i < len) {
+              charCode = str.charCodeAt(i);
+              if (charCode >= 0 && charCode <= 128) {
+                realLength++;
+              } else {
+                realLength = realLength + 2;
+              }
+              i++;
+            }
+            return realLength;
+          };
           checkisNodeChild = function(toolContainer, d, parent) {
             if (parent) {
               if (parent.type === 'node') {
@@ -88,9 +108,9 @@
             append_editCustomButton(editContainer, d);
           };
           clearSelected = function() {
-            var j, len, rects, rows;
+            var j, len1, rects, rows;
             rects = element[0].querySelectorAll('rect');
-            for (i = j = 0, len = rects.length; j < len; i = ++j) {
+            for (i = j = 0, len1 = rects.length; j < len1; i = ++j) {
               rows = rects[i];
               rows.style.strokeWidth = '0px';
             }
@@ -215,6 +235,10 @@
               return d.type;
             });
             nodeEnter.append('svg:text').attr('x', function(d) {
+              if (d.name.length > 8) {
+                d.name = d.name.substring(0, 8) + '...';
+              }
+              console.log(stringGetLength(d.name));
               return '1em';
             }).attr('dy', '1em').attr('id', function(d) {
               return 'text' + d.code;

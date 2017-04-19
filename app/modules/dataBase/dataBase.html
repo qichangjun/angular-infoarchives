@@ -3,11 +3,7 @@
         <div class="title">数据视图</div>
         <div class="prompt--content">可以使用数据过滤浏览具体业务记录</div>
        <div class="data--base--view--type--filter">
-           <span class="data--base--view--type--filter_title">单位数量：</span>
-           <input type="text" ng-model="vm.unitNums">
-           <span class="data--base--view--type--filter_title">每个单位下的事项数量：</span>
-           <input type="text" ng-model="vm.shixiangNums">
-           <button ng-click="vm.getData()">模拟数据</button>
+           <button ng-click="vm.getTreeData()">随机模拟数据</button>
            <span class="data--base--view--type--filter_title">视图类型：</span>
            <md-radio-group class="radio--box" ng-model="vm.parameter.chartType" ng-change="vm.changeChartType(vm.parameter.chartType)">
                <md-radio-button value="unit" class="md-primary">按业务单位</md-radio-button>
@@ -46,22 +42,24 @@
         <div class="data--info--box">
             <div class="data--info--box_head">数据过滤</div>
             <div class="select--attr--box">
-                <label class="title">  数据源 </label>
+                <label class="title">  单位 </label>
                 <div class="select--value">
-                    <md-select ng-model="vm.parameter.dataSource"
+                    <md-select ng-model="vm.parameter.unit"
+                               ng-change="vm.filterData()"
                     >
-                        <md-option ng-value="12345" >行政审批系统</md-option>
-                        <md-option ng-value="4552" >xxxxx</md-option>
+                        <md-option ng-repeat="unitLists in vm.unitLists" ng-value="unitLists.objectId" >{{unitLists.name}}</md-option>
+                        <md-option ng-value="'all'" >所有</md-option>
                     </md-select>
                 </div>
             </div>
             <div class="select--attr--box">
                 <label class="title">  业务事项 </label>
                 <div class="select--value">
-                    <md-select ng-model="vm.parameter.dataSource"
+                    <md-select ng-model="vm.parameter.item"
+                               ng-change="vm.filterData()"
                     >
-                        <md-option ng-value="'企业项目投资核准'" >企业项目投资核准</md-option>
-                        <md-option ng-value="'vasvsv'" >vasvsv</md-option>
+                        <md-option ng-repeat="itemLists in vm.itemLists" ng-value="itemLists.objectId" >{{itemLists.name}}</md-option>
+                        <md-option ng-value="'all'" >所有</md-option>
                     </md-select>
                 </div>
             </div>

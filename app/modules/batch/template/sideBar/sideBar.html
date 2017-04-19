@@ -41,21 +41,26 @@
                 <div class="attr--type--box">
                     <div class="single--attr--row">
                         <label class="title ver-align-top">生成AIU</label><div class="value ver-align-top">
-                        <uib-progressbar  class="progress-striped active" type="warning" value="vm.batchInfo.DATA2AIU"></uib-progressbar><span>{{vm.batchInfo.DATA2AIU}}%</span>
+                        <uib-progressbar ng-show="vm.batchInfo.DATA2AIU!=100" class="progress-striped active" type="warning" value="vm.batchInfo.DATA2AIU"></uib-progressbar>
+                        <uib-progressbar ng-show="vm.batchInfo.DATA2AIU==100" class="progress-striped active" type="success" value="vm.batchInfo.DATA2AIU"></uib-progressbar><span>{{vm.batchInfo.DATA2AIU}}%</span>
                         <div class="sidebar--progress--time">{{vm.batchInfo.packageAiuStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAiuEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                     </div>
 
                     </div>
                     <div class="single--attr--row">
                         <label class="title ver-align-top">AIU <span class="fa fa-long-arrow-right"></span> SIP</label><div class="value ver-align-top">
-                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>1"  class="progress-striped active" type="warning" value="vm.batchInfo.AIU2SIP"></uib-progressbar><span ng-show="vm.batchInfo.batchStatus>1">{{vm.batchInfo.AIU2SIP}}%</span>
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>1 && vm.batchInfo.AIU2SIP!=100"  class="progress-striped active" type="warning" value="vm.batchInfo.AIU2SIP"></uib-progressbar>
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>1 && vm.batchInfo.AIU2SIP==100" class="progress-striped active" type="success" value="vm.batchInfo.AIU2SIP"></uib-progressbar>
+                            <span ng-show="vm.batchInfo.batchStatus>1">{{vm.batchInfo.AIU2SIP}}%</span>
                             <span ng-if="vm.batchInfo.batchStatus<=1">未开始</span>
                             <div class="sidebar--progress--time">{{vm.batchInfo.packageSipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageSipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                         </div>
                     </div>
                     <div class="single--attr--row">
                         <label class="title ver-align-top">SIP <span class="fa fa-long-arrow-right"></span> AIP</label><div class="value ver-align-top">
-                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>=4" class="progress-striped active"  type="warning" value="vm.batchInfo.SIP2AIP"></uib-progressbar><span ng-if="vm.batchInfo.batchStatus>=4">{{vm.batchInfo.SIP2AIP}}%</span>
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>=4 && vm.batchInfo.SIP2AIP!=100" class="progress-striped active"  type="warning" value="vm.batchInfo.SIP2AIP"></uib-progressbar>
+                            <uib-progressbar ng-show="vm.batchInfo.batchStatus>=4 && vm.batchInfo.SIP2AIP==100" class="progress-striped active"  type="success" value="vm.batchInfo.SIP2AIP"></uib-progressbar>
+                            <span ng-if="vm.batchInfo.batchStatus>=4">{{vm.batchInfo.SIP2AIP}}%</span>
                             <span ng-if="vm.batchInfo.batchStatus<4">未开始</span>
                             <div class="sidebar--progress--time">{{vm.batchInfo.packageAipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                         </div>

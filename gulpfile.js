@@ -39,6 +39,17 @@ gulp.task('coffee', function () {
         .pipe(gulp.dest('app/'));
 });
 
+gulp.task('common-html', function () {
+    return gulp.src('app/common/**/*.html')
+        .pipe(plugins.minifyHtml({
+            empty: true,
+            spare: true,
+            quotes: true,
+            conditionals: true
+        }))
+        .pipe(gulp.dest('dist/common'))
+});
+
 
 gulp.task('html', function () {
     return gulp.src('app/modules/**/*.html')
@@ -98,7 +109,7 @@ gulp.task('venderStyle', function () {
         .pipe(gulp.dest('dist/css/img'));
 });
 
-gulp.task('build', ['coffee','styles','fonts','images','html','transJson','venderStyle','xmlStyle'], function () {
+gulp.task('build', ['coffee','styles','fonts','images','html','transJson','venderStyle','xmlStyle','common-html'], function () {
     var htmlFilter = plugins.filter('*.html',{restore: true});
     var jsFilter = plugins.filter('**/*.js',{restore: true});
     var cssFilter = plugins.filter('**/*.css',{restore: true});

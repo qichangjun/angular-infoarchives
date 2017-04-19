@@ -31,13 +31,17 @@
                             </thead>
                             <tbody>
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.currentFileId && data.isSys==1">
-                                <td>{{$index}}</td>
+                                <td>{{$index + 1}}</td>
                                 <td>{{data.attrNameZh}}</td>
                                 <td>{{data.attrNameEn}}</td>
                                 <td>{{data.attrName}}</td>
-                                <td>{{data.attrType}}</td>
+                                <td>
+                                    {{data.attrType=='string'?'字符型':data.attrType=='int'?'数字型':data.attrType=='boolean'?'布尔型':'日期型'}}
+                                </td>
                                 <td>{{data.attrLength}}</td>
-                                <td>{{data.isRequired}}</td>
+                                <td>
+                                    {{data.isRequired==1?'是':'否'}}
+                                </td>
                             </tr>
                             </tbody>
                         </table>
@@ -116,7 +120,6 @@
         </md-dialog-content>
 
         <md-dialog-actions layout="row" class="new--project--manage--modal--footer">
-            <span flex></span>
             <md-button  ng-click="vm.deleteFile()">
                 删除
             </md-button>

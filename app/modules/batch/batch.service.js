@@ -2,7 +2,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("batchService", [
-    '$log', '$q', '$timeout', '$mdToast', 'hsAuth', 'Restangular', 'hsAPI', 'hsTpl', 'mdToastService', 'MockRestangular', 'commonMethodSerivce', function($log, $q, $timeout, $mdToast, hsAuth, Restangular, hsAPI, hsTpl, mdToastService, MockRestangular, commonMethodSerivce) {
+    '$log', '$q', '$timeout', '$mdToast', 'hsAuth', 'Restangular', 'hsAPI', 'hsTpl', 'mdToastService', 'MockRestangular', 'commonMethodSerivce', '$state', function($log, $q, $timeout, $mdToast, hsAuth, Restangular, hsAPI, hsTpl, mdToastService, MockRestangular, commonMethodSerivce, $state) {
       var batch, batchErrorList, deleteBatch, exportList, getDataType, getDetailInfo, getErrorGridData, getErrorList, getGridData, getPackageList, getSystemSource, getUnit, packageList;
       getSystemSource = function() {
         var deferred, res;
@@ -56,7 +56,7 @@
           columns.push(commonMethodSerivce.initColumn('package_aiu_start_date', 'GREATER_THAN', 'date', info.start_date));
         }
         if (parameter.end_date) {
-          columns.push(commonMethodSerivce.initColumn('package_aip_end_date', 'LESS_THAN', 'date', info.end_date));
+          columns.push(commonMethodSerivce.initColumn('package_aiu_start_date', 'LESS_THAN', 'date', info.end_date));
         }
         if (parameter.exception_handle_behavior && parameter.exception_handle_behavior.length > 0) {
           columns.push(commonMethodSerivce.initColumn('exception_handle_behavior', 'IN', 'int', info.exception_handle_behavior.join(',')));
@@ -248,13 +248,13 @@
           width: 50,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-status.html'
         }, {
-          name: 'start_date',
+          name: 'package_aiu_start_date',
           headerCellFilter: 'translate',
           displayName: '起始时间',
           minWidth: 150,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-startDate.html'
         }, {
-          name: 'end_date',
+          name: 'package_aip_end_date',
           headerCellFilter: 'translate',
           displayName: '结束区间',
           minWidth: 150,
