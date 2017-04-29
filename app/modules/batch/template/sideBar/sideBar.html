@@ -84,11 +84,11 @@
                         <span class="title" translate="MODULES_BATCH_SIP_CONVERSION_TO_AIP_NUMBER">SIP转换为AIP数量</span>
                         <span class="value">{{vm.batchInfo.aipCount}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
-                        <span class="value">{{vm.batchInfo.sip2aipFailCount}}</span>
+                        <span class="value">{{vm.batchInfo.sip2aipFailCount || 0}}</span>
                     </div>
                     <div class="single--attr--row">
                         <span class="title" translate="MODULES_BATCH_DATA_QUANTITY">数据量</span>
-                        <span class="value">{{vm.batchInfo.aipCapacity}}MB</span>
+                        <span class="value">{{vm.batchInfo.aipCapacity || 0 | formatByte}}</span>
                     </div>
                     <div class="single--attr--row">
                         <div class="data-volume-info-prompt">

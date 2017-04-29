@@ -242,48 +242,48 @@
           field: 'batchCode',
           name: 'batchCode',
           headerCellFilter: 'translate',
-          displayName: '批次号',
+          displayName: 'MODULES_BATCH_BATCH_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'id',
           name: 'id',
           headerCellFilter: 'translate',
-          displayName: '业务系统ID',
+          displayName: 'MODULES_BATCH_BUSINESS_SYSTEM_ID',
           minWidth: 250,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'batchStatus',
           headerCellClass: 'background',
           headerCellFilter: 'translate',
-          displayName: '状态',
-          width: 100,
+          displayName: 'MODULES_BATCH_STATE',
+          width: 60,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-status.html'
         }, {
           name: 'packageAiuStartDate',
           headerCellFilter: 'translate',
-          displayName: '起始时间',
-          minWidth: 150,
+          displayName: 'MODULES_BATCH_PACKAGE_AIU_START_DATE',
+          minWidth: 200,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-startDate.html'
         }, {
           name: 'packageAipEndDate',
           headerCellFilter: 'translate',
-          displayName: '结束时间',
-          minWidth: 150,
+          displayName: 'MODULES_BATCH_PACKAGE_AIU_END_DATE',
+          minWidth: 200,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-endDate.html'
         }, {
           field: 'packageCount',
           name: 'packageCount',
           headerCellFilter: 'translate',
-          displayName: '数据包数量',
-          minWidth: 60,
+          displayName: 'MODULES_BATCH_PACKAGE_COUNT',
+          minWidth: 110,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'aipCount',
           name: 'aipCount',
           headerCellFilter: 'translate',
-          displayName: '数据量',
-          minWidth: 60,
+          displayName: 'MODULES_BATCH_AIP_COUNT',
+          minWidth: 100,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'operation',
@@ -298,37 +298,37 @@
         {
           name: 'batchCode',
           headerCellFilter: 'translate',
-          displayName: '批次号',
+          displayName: 'MODULES_BATCH_BATCH_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'id',
           headerCellFilter: 'translate',
-          displayName: '业务系统ID',
+          displayName: 'MODULES_BATCH_BUSINESS_SYSTEM_ID',
           minWidth: 250,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'recordName',
           headerCellFilter: 'translate',
-          displayName: '申报名称',
+          displayName: 'MODULES_BATCH_RECORD_NAME',
           width: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'exceptionDesc',
           headerCellFilter: 'translate',
-          displayName: '异常说明',
+          displayName: 'MODULES_BATCH_EXCEPTION_DESC',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'exceptionHandleBehavior',
           headerCellFilter: 'translate',
-          displayName: '异常处理',
+          displayName: 'MODULES_BATCH_EXCEPTION_HANDLE_BEHAVIOR',
           minWidth: 60,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-exceptionHandleBehavior.html'
         }, {
           name: 'dealAction',
           headerCellFilter: 'translate',
-          displayName: '处理动作',
+          displayName: 'MODULES_BATCH_DEAL_ACTION',
           minWidth: 60,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-dealAction.html'
         }
@@ -337,43 +337,43 @@
         {
           name: 'archivalId',
           headerCellFilter: 'translate',
-          displayName: '档号',
+          displayName: 'MODULES_BATCH_ARCHIVAL_ID',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'batchCode',
           headerCellFilter: 'translate',
-          displayName: '批次号',
+          displayName: 'MODULES_BATCH_BATCH_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'businessCode',
           headerCellFilter: 'translate',
-          displayName: '业务流水号',
+          displayName: 'MODULES_DATABASE_BUSINESS_TRANSACTION',
           width: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'name',
           headerCellFilter: 'translate',
-          displayName: '事项名称',
+          displayName: 'MODULES_BATCH_NAME',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'recordCode',
           headerCellFilter: 'translate',
-          displayName: '证照编号',
+          displayName: 'MODULES_BATCH_RECORD_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'createDate',
           headerCellFilter: 'translate',
-          displayName: '创建时间',
+          displayName: 'MODULES_BATCH_CREATE_DATE',
           minWidth: 150,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-packageList-createDate.html'
         }, {
           name: 'modifyDate',
           headerCellFilter: 'translate',
-          displayName: '修改时间',
+          displayName: 'MODULES_BATCH_MODIFY_DATE',
           minWidth: 150,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-packageList-modifyDate.html'
         }

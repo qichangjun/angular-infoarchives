@@ -16,17 +16,17 @@
             <div class="md-dialog-content edit--custom--data--modal--content">
                 <form name="customData" action="">
                     <div class="attribute--row--box">
-                        <div class="attribute--row--box__header">默认数据项</div>
+                        <div class="attribute--row--box__header" translate="MODULES_PROJECTMANAGE_DEFAULT_DATA_ITEM">默认数据项</div>
                         <table class="table attribute--row--box__table">
                             <thead>
                             <tr class="table__th--tr">
-                                <th>序号</th>
-                                <th>中文名</th>
-                                <th>英文名</th>
-                                <th>属性名</th>
-                                <th>类型</th>
-                                <th width="60">长度</th>
-                                <th width="71">必填</th>
+                                <th translate="MODULES_PROJECTMANAGE_SEQUENCE_NUMBER">序号</th>
+                                <th translate="MODULES_PROJECTMANAGE_CHINESE_NAME">中文名</th>
+                                <th translate="MODULES_PROJECTMANAGE_ENGLISH_NAME">英文名</th>
+                                <th translate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</th>
+                                <th translate="MODULES_PROJECTMANAGE_TYPE">类型</th>
+                                <th width="60" translate="MODULES_PROJECTMANAGE_LENGTH">长度</th>
+                                <th width="71" translate="MODULES_PROJECTMANAGE_REQUIRED">必填</th>
                             </tr>
                             </thead>
                             <tbody>
@@ -47,17 +47,17 @@
                         </table>
                     </div>
                     <div class="attribute--row--box">
-                        <div class="attribute--row--box__header">自定义元数据</div>
+                        <div class="attribute--row--box__header"  translate="MODULES_PROJECTMANAGE_CUSTOMIZE_METADATA">自定义元数据</div>
                         <table class="table attribute--row--box__table">
                             <thead>
                             <tr class="table__th--tr">
                                 <th></th>
-                                <th>中文名</th>
-                                <th>英文名</th>
-                                <th>属性名</th>
-                                <th>类型</th>
-                                <th width="60">长度</th>
-                                <th width="60">必填</th>
+                                <th translate="MODULES_PROJECTMANAGE_CHINESE_NAME">中文名</th>
+                                <th translate="MODULES_PROJECTMANAGE_ENGLISH_NAME">英文名</th>
+                                <th translate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</th>
+                                <th translate="MODULES_PROJECTMANAGE_TYPE">类型</th>
+                                <th width="60" translate="MODULES_PROJECTMANAGE_LENGTH">长度</th>
+                                <th width="60" translate="MODULES_PROJECTMANAGE_REQUIRED">必填</th>
                             </tr>
                             </thead>
                             <tbody class="input--data--tbody">
@@ -97,10 +97,10 @@
                                 <td>
                                     <md-input-container class="md-block edit--custom--data--modal__select--box" flex-gt-sm>
                                         <md-select ng-model="customData.isRequired" class="edit--custom--data--modal__select">
-                                            <md-option  value="1">
+                                            <md-option  value="1" translate="MODULES_PROJECTMANAGE_YES">
                                                 是
                                             </md-option>
-                                            <md-option  value="0">
+                                            <md-option  value="0" translate="MODULES_PROJECTMANAGE_NO">
                                                 否
                                             </md-option>
                                         </md-select>
@@ -123,10 +123,10 @@
             <md-button  ng-click="vm.deleteFile()" translate="MODULES_BATCH_DELETE">
                 删除
             </md-button>
-            <md-button  ng-click="vm.cancel()">
+            <md-button  ng-click="vm.cancel()" translate="MODULES_PROJECTMANAGE_CANCEL">
                 取消
             </md-button>
-            <md-button  ng-click="vm.saveCustomData()" class="green--btn">
+            <md-button  ng-click="vm.saveCustomData()" class="green--btn" translate="MODULES_PROJECTMANAGE_CONFIRM">
                 确定
             </md-button>
         </md-dialog-actions>

@@ -195,6 +195,13 @@
   //padding: 0 15px;
   .data--module--new--prompt--box{
     padding: 0 15px;
+    height: 100%;
+  }
+  .new--prompt--box--wrap{
+    height: 100%;
+  }
+  .data--module--content--wrap{
+    height: 100%;
   }
   .new--prompt--box{
     color: #337ab7;
@@ -399,6 +406,12 @@
 
 .edit--project--manage--wrapper{
   padding: 0 8px;
+  &.data--module{
+    height: calc(100% - 70px);
+    overflow: auto;
+    padding: 0;
+    margin-right: -15px;
+  }
   .base--info--content{
 
     //float: left;
@@ -635,7 +648,9 @@
     position: absolute;
     top: 0;
     right: 10px;
+    bottom: 0;
     width: 286px;
+    overflow-y: auto;
     .models--list--box{
       padding: 20px 0 20px 20px;
       background: #f2f2f0;
@@ -646,8 +661,16 @@
       }
       ul{
         list-style-type: none;
+        padding-left: 25px;
         li{
-          padding-top: 5px;
+          padding: 2px 0;
+        }
+      }
+      .angular-ui-tree-nodes{
+        padding-left: 20px;
+        &:first-child{
+          padding-left: 0;
+
         }
       }
     }

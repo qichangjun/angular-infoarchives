@@ -5,7 +5,7 @@
           ng-submit="newFileName.$valid?vm.update():vm.newFileName.submit=true">
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
-                <h2 class="modal--head--title">修改节点名</h2>
+                <h2 class="modal--head--title" translate="MODULES_PROJECTMANAGE_MODIFY_NODE_NAME">修改节点名</h2>
                 <!--<img class="modal&#45;&#45;head&#45;&#45;icon" src="images/edit&#45;&#45;custom&#45;&#45;data&#45;&#45;modal&#45;&#45;head&#45;&#45;icon.png" alt=""/>-->
                 <span flex></span>
             </div>
@@ -13,7 +13,7 @@
         <md-dialog-content>
             <div class="md-dialog-content add--file--name--modal--content">
                 <div class="attribute--row--box">
-                    <span class="attribute--row--box__title">节点名称</span>
+                    <span class="attribute--row--box__title" translate="MODULES_PROJECTMANAGE_NODE_NAME">节点名称</span>
                     <div class="popover-wrapper attribute--row--box__value">
                         <input ng-model="vm.nodeName"
                                class="form-control"
@@ -30,10 +30,10 @@
 
         <md-dialog-actions layout="row" class="add--file--name--modal--footer">
             <span flex></span>
-            <md-button  ng-click="vm.cancel()">
+            <md-button  ng-click="vm.cancel()" translate="MODULES_PROJECTMANAGE_CANCEL">
                 取消
             </md-button>
-            <md-button  type="submit" class="green--btn">
+            <md-button  type="submit" class="green--btn" translate="MODULES_PROJECTMANAGE_CONFIRM">
                 确定
             </md-button>
         </md-dialog-actions>
@@ -43,7 +43,7 @@
     <div ng-show="vm.newFileName.submit">
         <div  ng-show="newFileName.Filename.$error.required" >
             <div hs-form-message-chrome-bubble  >
-                <span >请输入名称</span>
+                <span><span translate="MODULES_PROJECTMANAGE_PLEASE_FILL_IN">请填写</span><span translate="MODULES_PROJECTMANAGE_NODE_NAME">名称</span></span>
             </div>
         </div>
     </div>

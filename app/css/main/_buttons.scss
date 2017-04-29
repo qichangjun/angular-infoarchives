@@ -72,6 +72,33 @@
     background: #999999 !important;
   }
 }
+.default--btn{
+  display: inline-block;
+  position: relative;
+  cursor: pointer;
+  min-height: 36px;
+  min-width: 88px;
+  line-height: 100%;
+  vertical-align: middle;
+  align-items: center;
+  text-align: center;
+  border-radius: 4px;
+  box-sizing: border-box;
+  outline: none;
+  color: #4a4a4a !important;
+  border-style: solid;
+  border-width: 1px;
+  border-color: #ccc;
+  background-color: #ffffff;
+  padding: 0 12px;
+  box-shadow: 0 1px 5px 0 rgba(0,0,0,.2);
+  margin: 0 8px;
+  &:hover{
+    color: #4a4a4a;
+    background-color: #e6e6e6;
+    border-color: #adadad;
+  }
+}
 .blue--btn{
   display: inline-block;
   position: relative;

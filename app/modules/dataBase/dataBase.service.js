@@ -249,26 +249,26 @@
         {
           name: 'SipId',
           headerCellFilter: 'translate',
-          displayName: '批次号',
+          displayName: 'MODULES_DATABASE_SIP_ID',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'dataPath',
           headerCellFilter: 'translate',
-          displayName: '数据位置',
+          displayName: 'MODULES_DATABASE_DATA_PATH',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'dataSize',
           headerCellFilter: 'translate',
-          displayName: '数据大小',
-          minWidth: 60,
+          displayName: 'MODULES_DATABASE_DATA_SIZE',
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'startData',
           headerCellFilter: 'translate',
-          displayName: '开始事件',
-          minWidth: 60,
+          displayName: 'MODULES_DATABASE_START_DATA',
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }
       ];
@@ -276,43 +276,43 @@
         {
           field: 'archivalId',
           headerCellFilter: 'translate',
-          displayName: '档号',
-          minWidth: 50,
+          displayName: 'MODULES_BATCH_ARCHIVAL_ID',
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'batchCode',
           headerCellFilter: 'translate',
-          displayName: '批次号',
+          displayName: 'MODULES_BATCH_BATCH_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'businessCode',
           headerCellFilter: 'translate',
-          displayName: '业务流水号',
+          displayName: 'MODULES_DATABASE_BUSINESS_TRANSACTION',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'name',
           headerCellFilter: 'translate',
-          displayName: '事项名称',
+          displayName: 'MODULES_BATCH_NAME',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'recordCode',
           headerCellFilter: 'translate',
-          displayName: '证照编号',
+          displayName: 'MODULES_BATCH_RECORD_CODE',
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'createDate',
           headerCellFilter: 'translate',
-          displayName: '创建时间',
+          displayName: 'MODULES_BATCH_CREATE_DATE',
           minWidth: 150,
           cellTemplate: 'modules/dataBase/template/ui-grid-template/grid-recordList-createDate.html'
         }, {
           field: 'modifyDate',
           headerCellFilter: 'translate',
-          displayName: '修改时间',
+          displayName: 'MODULES_BATCH_MODIFY_DATE',
           minWidth: 150,
           cellTemplate: 'modules/dataBase/template/ui-grid-template/grid-recordList-modifyDate.html'
         }

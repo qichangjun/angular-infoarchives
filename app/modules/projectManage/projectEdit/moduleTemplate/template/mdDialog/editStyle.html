@@ -6,7 +6,7 @@
     >
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
-                <h2>新建项目</h2>
+                <h2 translate="MODULES_PROJECTMANAGE_SYSTEM_ACCESS">系统接入</h2>
                 <span flex></span>
                 <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -17,10 +17,10 @@
         <md-dialog-content class="new--project--content">
             <div class="md-dialog-content ">
                 <div class="new--project--row--box">
-                    <div class="new--project--row">基本信息</div>
+                    <div class="new--project--row" translate="MODULES_DATABASE_ESSENTIAL_INFORMATION">基本信息</div>
                     <div layout-gt-sm="row" class="attribute--row">
                         <div class="single--attribute--box">
-                            <span class="single--attribute--box__title">宽度</span><div class="single--attribute--box__value">
+                            <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_WIDTH">宽度</span><div class="single--attribute--box__value">
                             <input ng-model="vm.entity.width"
                                    class="form-control single--attribute--box__value-input"
                                    name="projectName"
@@ -33,10 +33,10 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" class="new--project--manage--modal--footer">
             <span flex></span>
-            <md-button ng-disabled="vm.loading" ng-click="vm.cancel()">
+            <md-button ng-disabled="vm.loading" ng-click="vm.cancel()" translate="MODULES_PROJECTMANAGE_CANCEL">
                 取消
             </md-button>
-            <md-button ng-disabled="vm.loading" type="submit" class="green--btn">
+            <md-button ng-disabled="vm.loading" type="submit" class="green--btn" translate="MODULES_PROJECTMANAGE_CONFIRM">
                 确定
             </md-button>
         </md-dialog-actions>

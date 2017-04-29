@@ -39,7 +39,7 @@
             </div>
             <div class="attr--row--box">
                 <label class="title" translate="MODULES_DATABASE_TOTAL_DATA_CAPACITY">数据总容量</label>
-                <span class="value">{{vm.basicInfo.recordCapacity}}GB</span>
+                <span class="value">{{vm.basicInfo.recordCapacity || 0 | formatByte}}</span>
             </div>
         </div>
         <div class="data--info--box">

@@ -2,8 +2,8 @@
     <md-content>
         <md-list-item class="md-2-line service--watch--prompt--wrap">
             <div class="md-list-item-text">
-                <h3 class="title">服务监控</h3>
-                <p class="prompt--content">InfoArchives的服务状态在此显示</p>
+                <h3 class="title" translate="MODULES_SERVICEWATCH_SERVICE_MONITORING">服务监控</h3>
+                <p class="prompt--content" translate="MODULES_SERVICEWATCH_SERVICE_STATUS_OF_INFOARCHIVES_IS_HERE">InfoArchives的服务状态在此显示</p>
             </div>
         </md-list-item>
     </md-content>
@@ -12,12 +12,12 @@
                 <thead>
                 <tr class="table__th--tr">
                     <th>ID</th>
-                    <th>JOB名称</th>
-                    <th>描述</th>
-                    <th>启动时间</th>
-                    <th>持续运行时间</th>
-                    <th >当前状态</th>
-                    <th >操作</th>
+                    <th translate="MODULES_SERVICEWATCH_JOB_NAME">JOB名称</th>
+                    <th translate="MODULES_SERVICEWATCH_DESCRIPTION">描述</th>
+                    <th translate="MODULES_SERVICEWATCH_START_TIME">启动时间</th>
+                    <th translate="MODULES_SERVICEWATCH_CONTINUOUS_RUNNING_TIME">持续运行时间</th>
+                    <th translate="MODULES_SERVICEWATCH_CURRENT_STATE">当前状态</th>
+                    <th translate="MODULES_SERVICEWATCH_OPERATION">操作</th>
                 </tr>
                 </thead>
                 <tbody  ng-repeat="data in vm.gridOptions.data">
@@ -25,25 +25,23 @@
                         <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
                         <td>{{data.jobName}}</td>
                         <td>{{data.jobDesc}}</td>
-                        <td>{{data.startDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
-                        <td><span >{{data.keepDay}}天 </span>
-                            <span >{{data.keepHour}}小时 </span>
-                            <span >{{data.keepMinute}}分 </span>
+                        <td>{{data.startDate | date:'yyyy.MM.dd HH:mm:ss'}}</td>
+                        <td><span >{{data.keepDay}} <span translate="MODULES_SERVICEWATCH_DAY">天</span></span>
+                            <span >{{data.keepHour}} <span translate="MODULES_SERVICEWATCH_HOUR">小时</span> </span>
+                            <span >{{data.keepMinute}} <span translate="MODULES_SERVICEWATCH_MINUTE">分</span> </span>
                         </td>
                         <td>
-                            <span ng-if="data.jobStatus == 'PAUSED'"> 服务停止 </span>
-                            <span ng-if="data.jobStatus != 'PAUSED'"> 运行正常 </span>
+                            <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus == 'PAUSED'" translate="MODULES_SERVICEWATCH_SERVICE_STOP"> 停止 </span>
+                            <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus != 'PAUSED'" translate="MODULES_SERVICEWATCH_NORMAL_OPERATION"> 正常 </span>
                         </td>
-                        <td>
+                        <td class="service--watch--list--operation--box">
                             <div ng-if="!data.isChanging">
-                            <span class="glyphicon glyphicon-play"
-                                  style="font-size: 20px"
+                            <span class="glyphicon glyphicon-play star--btn"
                                   ng-click="vm.startService(data,$event)"
                                   ng-class="{'button-disabled': data.jobStatus != 'PAUSED'}"
                                     >
                             </span>
-                            <span class="glyphicon glyphicon-pause"
-                                  style="font-size: 20px"
+                            <span class="fa fa-circle stop--btn"
                                   ng-click="vm.stopService(data,$event)"
                                   ng-class="{'button-disabled': data.jobStatus == 'PAUSED'}"
                                     >
@@ -71,11 +69,11 @@
                             <div ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
                                 <span class="attr--box">ID：{{missionList.id}}</span>
                                 <span class="attr--box"><span translate="MODULES_BATCH_BATCH_NUMBER">批次号</span>：{{missionList.batchCode}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==4">任务开始时间：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==0">任务开始时间：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==2">任务开始时间：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box">数据包熟练：{{missionList.aiu2sipSuccessCount}}</span>
-                                <span class="attr--box">进度：
+                                <span class="attr--box date" ng-if="missionList.batchStatus==4"><span class="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box date" ng-if="missionList.batchStatus==0"><span class="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box date" ng-if="missionList.batchStatus==2"><span class="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                                <span class="attr--box"><span class="MODULES_SERVICEWATCH_PACKET_PROFICIENCY">数据包熟练</span>：{{missionList.aiu2sipSuccessCount}}</span>
+                                <span class="attr--box"><span class="MODULES_SERVICEWATCH_SCHEDULE">进度</span>：
                                     <uib-progressbar style="display: inline-block;vertical-align: middle;width:100px;margin: 0;" class="progress-striped active" type="success" value="(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100"></uib-progressbar>{{(missionList.aiu2sipSuccessCount/missionList.aiuCount)*100}}%
                                 </span>
                             </div>
@@ -86,11 +84,11 @@
         <div class="service--watch--grid__prompt--box">
             <div class="prompt--content">
                 <span class="fa fa-exclamation-circle"></span>
-                <span>目前每个服务下只能运行一个任务，攻城狮正在全力开发多任务</span>
+                <span translate="MODULES_SERVICEWATCH_SERVICE_CAN_ONLY_RUN_TAS">目前每个服务下只能运行一个任务，攻城狮正在全力开发多任务</span>
             </div>
             <div class="prompt--content">
                 <span class="fa fa-exclamation-circle"></span>
-                <span>此处只显示正在运行的任务，已完成的任务记录请进入<a ui-sref="infoArchives.batch">数据批次</a>查看</span>
+                <span><span translate="MODULES_SERVICEWATCH_SHOWS_ONLY_TASKS_THAT_ARE_RUNNING">此处只显示正在运行的任务，已完成的任务记录请进入</span>&nbsp;<a ui-sref="infoArchives.batch" translate="MODULES_SERVICEWATCH_DATA_BATCH">数据批次</a>&nbsp;<span translate="MODULES_SERVICEWATCH_FOR_VIEWING">查看</span></span>
             </div>
         </div>
     </div>

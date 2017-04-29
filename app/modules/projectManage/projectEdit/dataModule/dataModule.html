@@ -1,48 +1,48 @@
 <div class="anim-slide-left data--module--new--prompt--wrap">
-    <div aria-label="customModule" class="data--module--new--prompt--box" ng-show="vm.afterLoad" style="height: 100%">
-        <div ng-show="vm.versionList.length == 0" style="height: 100%">
+    <div aria-label="customModule" class="data--module--new--prompt--box" ng-show="vm.afterLoad">
+        <div ng-show="vm.versionList.length == 0" class="new--prompt--box--wrap">
             <div class="new--prompt--box">
                 <div class="new--prompt--box__head">
                     <img src="images/edit--project--manage--modal--new.png" alt=""/>
-                    还需要创建数据模板
+                    <span translate="MODULES_PROJECTMANAGE_NEED_TO_CREATE_DATA_TEMPLATE">还需要创建数据模板</span>
                 </div>
-                <div class="prompt-content">
+                <div class="prompt-content" translate="MODULES_PROJECTMANAGE_NEED_TO_CREATE_DATA_TEMPLATE_PROMPT">
                     业务模板能够帮助您梳理业务流程，建立业务归档信息，并根据模板规则将业务信息填入到归档数据模型对应的位置上。
                 </div>
             </div>
             <div class="new--prompt__btn--box">
                 <img src="images/create--data--template--icon.png" alt=""/>
-                <h4 class="title--content">该项目还没有定义数据模板</h4>
-                <md-button class="red--btn"  ng-click="vm.versionList.push({versionNo:1.0});vm.currentVesion=1.0">
+                <h4 class="title--content" translate="MODULES_PROJECTMANAGE_PROJECT_HAS_NOT_YET_DEFINED_TEMPLATE">该项目还没有定义数据模板</h4>
+                <md-button class="red--btn"  ng-click="vm.versionList.push({versionNo:1.0});vm.currentVesion=1.0" translate="MODULES_PROJECTMANAGE_CREATE_DATA_TEMPLATE">
                     创建数据模板
                 </md-button>
             </div>
         </div>
-        <div ng-show="vm.versionList.length != 0" style="height: 100%">
+        <div ng-show="vm.versionList.length != 0" class="data--module--content--wrap">
             <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
                 <div class="md-toolbar-tools">
                     <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
                         <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
                     </md-button>
-                    <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
+                    <a  ui-sref="infoArchives.projectManage" class="project--manage--head" translate="MODULES_PROJECTMANAGE_SYSTEM_ACCESS">系统接入</a>
                     <span class="fa fa-angle-right"></span>
                     <span class="current--column">{{vm.projectName}}</span>
                     <span> | </span>
-                    <span class="current--column">数据模板</span>
+                    <span class="current--column" translate="MODULES_PROJECTMANAGE_DATA_TEMPLATE">数据模板</span>
                     <div class="save--template--box">
                         <div class="current--version">
-                            <span class="vertical-middle--inline-block">版本号</span><md-select placeholder="1.0" class="current--version__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
+                            <span class="vertical-middle--inline-block" translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span><md-select placeholder="1.0" class="current--version__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
                                 <md-option ng-value="versionList.id" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
                             </md-select>
                         </div>
-                        <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)">
+                        <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)" translate="MODULES_PROJECTMANAGE_SAVE_TEMPLATE">
                             保存模板
                         </md-button>
                     </div>
                 </div>
             </md-toolbar>
             <div class="two--px--line"></div>
-            <form class="edit--project--manage--wrapper" style="height: calc(100% - 86px);overflow: auto;"  >
+            <form class="edit--project--manage--wrapper data--module">
 
                 <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
                 <div>
@@ -57,6 +57,6 @@
             </form>
         </div>
     </div>
-    <div ng-show="!vm.afterLoad" class="loading">正在加载...</div>
+    <div ng-show="!vm.afterLoad" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
 
 </div>

@@ -57,6 +57,8 @@
           useExternalPagination: true,
           useExternalSorting: true,
           rowHeight: 50,
+          columnDefs: batchService.batch,
+          columnVirtualizationThreshold: batchService.batch.length,
           onRegisterApi: function(gridApi) {
             $scope.cancelSelect = function(row) {
               if (gridApi.selection) {
@@ -109,6 +111,9 @@
       getBatchInfo = function() {
         return batchService.getDetailInfo(vm.currentId).then(function(res) {
           vm.batchInfo = res.batch;
+          if (!vm.batchInfo.aipCount) {
+            vm.batchInfo.aipCount = 0;
+          }
           vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
           vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
           vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
@@ -171,8 +176,6 @@
             vm.loading = false;
             $scope.gridOptions.data = res.content;
             $scope.gridOptions.totalItems = res.totalElements;
-            $scope.gridOptions.columnDefs = batchService.batch;
-            $scope.gridOptions.columnVirtualizationThreshold = batchService.batch.length;
             ref = $scope.gridOptions.columnDefs;
             results = [];
             for (j = 0, len = ref.length; j < len; j++) {
@@ -322,6 +325,8 @@
           useExternalPagination: true,
           useExternalSorting: true,
           rowHeight: 40,
+          columnDefs: dataBaseService.recordList,
+          columnVirtualizationThreshold: dataBaseService.recordList.length,
           onRegisterApi: function(gridApi) {
             $scope.cancelSelect = function(row) {
               if (gridApi.selection) {
@@ -366,8 +371,6 @@
           vm.loading = false;
           $scope.gridOptions.data = res.content;
           $scope.gridOptions.totalItems = res.totalElements;
-          $scope.gridOptions.columnDefs = dataBaseService.recordList;
-          $scope.gridOptions.columnVirtualizationThreshold = dataBaseService.recordList.length;
           ref = $scope.gridOptions.columnDefs;
           results = [];
           for (j = 0, len = ref.length; j < len; j++) {
@@ -388,7 +391,7 @@
         }, function(res) {});
       };
       previewDoc = function(event) {
-        return $window.open($state.href('previewRecord', {
+        $window.open($state.href('previewRecord', {
           templateId: $scope.gridApi.selection.getSelectedRows()[0].templateId,
           recordId: $scope.gridApi.selection.getSelectedRows()[0].recordCode,
           businessCode: $scope.gridApi.selection.getSelectedRows()[0].businessCode
@@ -434,6 +437,8 @@
           useExternalPagination: true,
           useExternalSorting: true,
           rowHeight: 40,
+          columnDefs: batchService.batchErrorList,
+          columnVirtualizationThreshold: batchService.batchErrorList.length,
           onRegisterApi: function(gridApi) {
             $scope.gridApi = gridApi;
             return gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
@@ -453,8 +458,6 @@
           vm.loading = false;
           $scope.gridOptions.data = res.exceptionItemList;
           $scope.gridOptions.totalItems = res.pageInfo.totalCount;
-          $scope.gridOptions.columnDefs = batchService.batchErrorList;
-          $scope.gridOptions.columnVirtualizationThreshold = batchService.batchErrorList.length;
           ref = $scope.gridOptions.columnDefs;
           results = [];
           for (j = 0, len = ref.length; j < len; j++) {

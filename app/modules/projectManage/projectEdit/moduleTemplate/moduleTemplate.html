@@ -1,20 +1,17 @@
 <div class=" anim-slide-left col-md-8 module--Template--wrap">
     <div view-source="simple"></div>
 
-    <div class="models--list--wrap" style="max-height: 800px;
-    overflow: auto;">
+    <div class="models--list--wrap">
         <div class="models--list--box" ng-show="!vm.loadingAttrLists">
             <script type="text/ng-template" id="nodes_renderer.html">
-                <div ui-tree-handle>
-
-                    <a class="btn btn-success btn-xs" ng-if="(node.children && node.children.length > 0) || (node.attributes && node.attributes.length > 0)" data-nodrag ng-click="vm.toggle(this)"><span
-                            class="glyphicon"
-                            ng-class="{
-                      'glyphicon-chevron-right': collapsed,
-                      'glyphicon-chevron-down': !collapsed
-                    }"></span></a>
+                <div >
+                    <a class="drop--group--box" ng-if="(node.children && node.children.length > 0) || (node.attributes && node.attributes.length > 0)" data-nodrag ng-click="vm.toggle(this)">
+                        <span class="drop--group" ng-class="{'drop--off': collapsed,'drop--on': !collapsed}">
+                            <span class="core"></span>
+                        </span>
+                    </a>
                     {{node.name}}
-                    <ul dnd-list="node.attributes"  style="min-height: 30px">
+                    <ul dnd-list="node.attributes" >
                         <li ng-repeat="item in node.attributes"
                             ng-class="{hidden: collapsed}"
                             dnd-draggable="item"
@@ -39,28 +36,26 @@
                 </ul>
             </div>
         </div>
-        <div  class="models--list--box" ng-show="vm.loadingAttrLists">
-            加载中...
-        </div>
-
+        <div  class="models--list--box" ng-show="vm.loadingAttrLists" translate="MODULES_DATABASE_LOADING"></div>
     </div>
     <div class="module--Template--wrap__show-wrap">
         <div class="module--Template--wrap__show-box">
             <div class="operation--btn--box">
                 <div class="btn-group" uib-dropdown is-open="status.isopen">
                     <button id="single-button" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" type="button" class="btn btn-success green--btn" uib-dropdown-toggle>
-                        增加表单<span class="caret"></span>
+                        <span translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</span><span class="caret"></span>
                     </button>
                     <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a ng-click="vm.addContainer()">增加表单</a></li>
-                        <li role="menuitem"><a ng-click="vm.addProcessContainer()">增加业务过程信息</a></li>
+                        <li role="menuitem"><a ng-click="vm.addContainer()" translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</a></li>
+                        <li role="menuitem"><a ng-click="vm.addProcessContainer()" translate="MODULES_PROJECTMANAGE_INCREASE_BUSINESS_PROCESS_INFORMATION">增加业务过程信息</a></li>
                     </ul>
+                    <ul class="dropdown-menu" uib-dropdown-menu  role="menu" aria-labelledby="single-button"></ul>
                 </div>
-                <md-button class="blue--btn" ng-click="vm.previewForm()" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id">生成预览</md-button>
+                <md-button class="blue--btn" ng-click="vm.previewForm()" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" translate="MODULES_PROJECTMANAGE_GENERATE_PREVIEW">生成预览</md-button>
                 <div>
                     <md-select style="width:100px;" class="edit--custom--data--modal__select" ng-change="vm.changeVersion()" ng-model="vm.parameter.templateId">
                         <md-option  ng-repeat="versionList in vm.versionList" value="{{versionList.id}}">
-                            版本号：{{versionList.versionNo}}
+                            <span translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span>：{{versionList.versionNo}}
                         </md-option>
                     </md-select>
                 </div>
@@ -81,7 +76,7 @@
                                     </a>
                                     <md-menu-content width="4">
                                         <md-menu-item>
-                                            <span class="single--attribute--box__title">模块名</span><div class="single--attribute--box__value">
+                                            <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_MODULE_NAME">模块名</span><div class="single--attribute--box__value">
                                             <input ng-model="list.name"
                                                    class="form-control single--attribute--box__value-input"
                                                    name="projectName"

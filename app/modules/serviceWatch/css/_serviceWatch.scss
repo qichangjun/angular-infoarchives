@@ -42,6 +42,22 @@
     }
   }
 }
+.current--state--info{
+  display: inline-block;
+  padding: 2px 14px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: normal;
+  &.normal--state{
+    background: #009933;
+  }
+  &.stop--state{
+    background: #e54c40;
+  }
+}
+
 .table>tbody+tbody {
   border-top: none;
 }
@@ -106,6 +122,23 @@
     &.date{
       flex: 1;
       min-width: 250px;
+    }
+  }
+}
+
+.service--watch--list--operation--box{
+  font-size: 16px;
+  color: #797979;
+  .star--btn{
+    color: #009933;
+    &.button-disabled{
+      color: #797979;
+    }
+  }
+  .stop--btn{
+    color: #ff0000;
+    &.button-disabled{
+      color: #797979;
     }
   }
 }

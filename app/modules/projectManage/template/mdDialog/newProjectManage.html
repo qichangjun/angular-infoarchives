@@ -6,7 +6,7 @@
     >
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
-                <h2>新建项目</h2>
+                <h2 translate="MODULES_PROJECTMANAGE_SYSTEM_ACCESS">系统接入</h2>
                 <span flex></span>
                 <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -17,10 +17,10 @@
         <md-dialog-content class="new--project--content">
             <div class="md-dialog-content ">
                     <div class="new--project--row--box">
-                        <div class="new--project--row">基本信息</div>
+                        <div class="new--project--row" translate="MODULES_DATABASE_ESSENTIAL_INFORMATION">基本信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title">项目名称</span><div class="single--attribute--box__value">
+                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_PROJECT_NAME">项目名称</span><div class="single--attribute--box__value">
                                     <input ng-model="vm.entity.projectName"
                                            class="form-control single--attribute--box__value-input"
                                            name="projectName"
@@ -33,13 +33,13 @@
 
                             </div>
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">业务编号</label>
+                                <label class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_SERVICE_NUMBER">业务编号</label>
                                 <div class="single--attribute--box__value">{{vm.entity.businessCode}}</div>
                             </div>
                         </div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <label class="single--attribute--box__title">所属系统</label><div class="single--attribute--box__value">
+                                <label class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_SUBORDINATE_SYSTEM">所属系统</label><div class="single--attribute--box__value">
                                 <input ng-model="vm.entity.systemName"
                                        class="form-control single--attribute--box__value-input"
                                        name="systemName"
@@ -50,10 +50,10 @@
                         </div>
                     </div>
                     <div class="new--project--row--box">
-                        <div class="new--project--row">源系统数据库信息</div>
+                        <div class="new--project--row" translate="MODULES_PROJECTMANAGE_SOURCE_SYSTEM_DATABASE_INFORMATION">源系统数据库信息</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库类型 </span><div class="single--attribute--box__value">
+                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_DATABASE_TYPE"> 数据库类型 </span><div class="single--attribute--box__value">
                                 <md-select  class="single--attribute--box__value-select"
                                             ng-model="vm.entity.databaseName"
                                             ng-change="vm.getVersionList(vm.entity.databaseName)"
@@ -70,7 +70,7 @@
 
                             </div>
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据库版本 </span><div class="single--attribute--box__value">
+                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_DATABASE_VERSION"> 数据库版本 </span><div class="single--attribute--box__value">
                                 <md-select  class="single--attribute--box__value-select"
                                             ng-model="vm.entity.databaseVersion"
                                             ng-disabled="!vm.entity.databaseName"
@@ -87,13 +87,13 @@
                         </div>
                     </div>
                     <div class="new--project--row--box">
-                        <div class="new--project--row">数据抽取方式</div>
+                        <div class="new--project--row" translate="MODULES_PROJECTMANAGE_DATA_EXTRACTION_METHOD">数据抽取方式</div>
                         <div layout-gt-sm="row" class="attribute--row">
                             <div class="single--attribute--box">
-                                <span class="single--attribute--box__title"> 数据抽取方式 </span><div class="single--attribute--box__value">
+                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_DATA_EXTRACTION_METHOD"> 数据抽取方式 </span><div class="single--attribute--box__value">
                                 <md-select  class="single--attribute--box__value-select" ng-model="vm.entity.extractionMethod" ng-init="vm.entity.extractionMethod=0" >
-                                    <md-option ng-value="0" >ETL数据抽取</md-option>
-                                    <md-option ng-value="1" >AIP接口</md-option>
+                                    <md-option ng-value="0" translate="MODULES_PROJECTMANAGE_ETL_DATA_EXTRACTION">ETL数据抽取</md-option>
+                                    <md-option ng-value="1" translate="MODULES_PROJECTMANAGE_AIP_INTERFACE">AIP接口</md-option>
                                 </md-select>
                                 </div>
                             </div>
@@ -104,10 +104,10 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" class="new--project--manage--modal--footer">
             <span flex></span>
-            <md-button ng-disabled="vm.loading" ng-click="vm.cancel()">
+            <md-button ng-disabled="vm.loading" ng-click="vm.cancel()" translate="MODULES_PROJECTMANAGE_CANCEL">
                 取消
             </md-button>
-            <md-button ng-disabled="vm.loading" type="submit" class="green--btn">
+            <md-button ng-disabled="vm.loading" type="submit" class="green--btn" translate="MODULES_PROJECTMANAGE_CONFIRM">
                 确定
             </md-button>
         </md-dialog-actions>
@@ -118,7 +118,7 @@
     <div ng-show="vm.newProject.submit">
         <div  ng-show="newProject.dataBaseVersion.$error.required" >
             <div hs-form-message-chrome-bubble  >
-                <span >请选择数据库版本</span>
+                <span ><span translate="MODULES_PROJECTMANAGE_PLEASE_SELECT">请选择</span><span translate="MODULES_PROJECTMANAGE_DATABASE_VERSION"> 数据库版本</span></span>
             </div>
         </div>
     </div>
@@ -127,7 +127,7 @@
     <div ng-show="vm.newProject.submit">
         <div  ng-show="newProject.databaseName.$error.required" >
             <div hs-form-message-chrome-bubble  >
-                <span >请选择数据库</span>
+                <span ><span translate="MODULES_PROJECTMANAGE_PLEASE_SELECT">请选择</span><span translate="MODULES_PROJECTMANAGE_DATABASE_TYPE"> 数据库类型</span></span>
             </div>
         </div>
     </div>
@@ -136,7 +136,7 @@
     <div ng-show="vm.newProject.submit">
         <div  ng-show="newProject.systemName.$error.required" >
             <div hs-form-message-chrome-bubble  >
-                <span >请填写所属系统</span>
+                <span ><span translate="MODULES_PROJECTMANAGE_PLEASE_FILL_IN">请填写</span><span translate="MODULES_PROJECTMANAGE_SUBORDINATE_SYSTEM">所属系统</span></span>
             </div>
         </div>
     </div>
@@ -145,7 +145,7 @@
     <div ng-show="vm.newProject.submit">
         <div  ng-show="newProject.projectName.$error.required" >
             <div hs-form-message-chrome-bubble  >
-                <span >请填写项目名称</span>
+                <span ><span translate="MODULES_PROJECTMANAGE_PLEASE_FILL_IN">请填写</span><span translate="MODULES_PROJECTMANAGE_PROJECT_NAME">项目名称</span></span>
             </div>
         </div>
     </div>
