@@ -1,0 +1,49 @@
+<div class="anim-slide-left service--watch--wrap">
+    <div style="width: 100%;float: left;height: 100px;">
+        <div style="width: 25%;float: left;">
+            对接系统数量
+            <span>2个</span>
+        </div>
+        <div style="width: 25%;float: left;">
+            归档记录数量
+            <span>15436条</span>
+        </div>
+        <div style="width: 25%;float: left;">
+            数据总量
+            <span>25GB</span>
+        </div>
+        <div style="width: 25%;float: left;">
+            数据被调用次数
+            <span>233次</span>
+        </div>
+    </div>
+    <div style="width: 100%;float: left;height: 80%;overflow: auto;position: relative">
+        <connect-map-tree nodes="data">
+        </connect-map-tree>
+        <div ng-show="vm.tiptool.show" ng-style="{position:'absolute','left':vm.tiptool.y + 130,'top':vm.tiptool.x - 70}">
+            <div>
+                <table class="table table-striped">
+                    <thead>
+                        <tr class="table__th--tr">
+                            <th>ID</th>
+                            <th>JOB名称</th>
+                            <th>耗时(秒)</th>
+                            <th>状态</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="detailInfo in vm.detailInfos">
+                            <td>{{detailInfo.id}}</td>
+                            <td>{{detailInfo.job}}</td>
+                            <td>{{detailInfo.keepTime}}</td>
+                            <td>{{detailInfo.status}}</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>
+
+

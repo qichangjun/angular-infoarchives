@@ -1,236 +1,238 @@
 <div class="anim-slide-left data--module--new--prompt--wrap">
-    <md-toolbar ng-show="vm.versionList.length > 0" class="md-menu-toolbar edit--project--manage--head-box">
-        <div class="md-toolbar-tools">
-            <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
-                <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
-            </md-button>
-            <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
-            <span class="fa fa-angle-right"></span>
-            <span class="current--column">{{vm.projectName}}</span>
-            <span> | </span>
-            <span class="current--column">策略设置</span>
-            <!--<md-button  ng-click="vm.save()">-->
-               <!--保存-->
-            <!--</md-button>-->
-        </div>
-    </md-toolbar>
-    <div ng-show="!vm.afterLoad" class="loading">正在加载...</div>
-    <div ng-show="vm.afterLoad">
-        <div ng-show="vm.versionList.length == 0">
-            <div class="new--prompt--box">
-                <div class="new--prompt--box__head">
-                    <img src="images/edit--project--manage--modal--new.png" alt=""/>
-                    还需要创建数据模板
-                </div>
-                <div class="prompt-content">
-                    您还没有创建数据模版，无法配置归档策略
-                </div>
-            </div>
-            <div class="new--prompt__btn--box">
-                <img src="images/create--rule--template--icon.png" alt=""/>
-                <h4 class="title--content">该项目还没有定义策略</h4>
-                <md-button class="red--btn"  ng-click="vm.serfToCreateModule()">
-                    立刻创建
+    <div class="data--module--new--prompt--box">
+        <md-toolbar ng-show="vm.versionList.length > 0" class="md-menu-toolbar edit--project--manage--head-box">
+            <div class="md-toolbar-tools">
+                <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
+                    <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
                 </md-button>
+                <a  ui-sref="infoArchives.projectManage" class="project--manage--head">项目管理</a>
+                <span class="fa fa-angle-right"></span>
+                <span class="current--column">{{vm.projectName}}</span>
+                <span> | </span>
+                <span class="current--column">策略设置</span>
+                <!--<md-button  ng-click="vm.save()">-->
+                <!--保存-->
+                <!--</md-button>-->
             </div>
-        </div>
-        <div ng-show="vm.versionList.length != 0" class="edit--project--manage--wrapper">
-            <div class="base--info--content">
-                <section layout="row"  layout-align="start center" layout-wrap class="edit--project--row--box">
-                    <span class="edit--project--row">归档策略</span>
-                    <div class="rule--set--content--wrap" style="height: auto">
-                        <div class="attribute--wrapper rule--set">
-                            <div class="attribute--row--box auto--height">
-                                <span class="attribute--row--box__title">档号规则</span>
-                                <div class="rule--set--re--rules--wrap">
-                                    <div class="rule--Property--box" ng-repeat="rule in vm.ruleProperty track by $index">
-                                        <a ng-if="rule.fieldType == 0"
-                                           ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
-                                           class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">
-                                            {{rule.attrDisplayName || '未指定'}}
-                                        </a>
-                                        <a ng-if="rule.fieldType == 1"
-                                           ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
-                                           class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">{{rule.fieldValue || '未指定'}}</a>
-                                        <a ng-if="rule.fieldType == 2"
-                                           ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
-                                           class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">流水号</a>
-                                        <md-button ng-if="rule.showEdit" aria-label="Open menu with custom trigger" class="red--btn delete--btn" ng-click="vm.deleteRule($index)">
-                                            <span class="glyphicon glyphicon-trash"></span>
-                                        </md-button>
-                                        <div ng-init="rule.showEdit = false"
-                                             ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[rule.showEdit]"
-                                             class="md-whiteframe-12dp set-rule-add-tool-box" click-outside-hide hide-parameter="rule.showEdit">
-                                            <div >
-                                                <form ng-cloak
-                                                      name="addRule"
-                                                      novalidate
-                                                      ng-submit="addRule.$valid?rule.showEdit = false:vm.addRule.submit=true">
-                                                    <div class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">元素类型</span>
-                                                        <md-select  class="set-rule-add-tool_value" ng-model="rule.fieldType"
-                                                                    name="fieldType"
-                                                                    required
-                                                                    hs-form-message
-                                                                    hs-form-message-show="vm.addRule.submit"
-                                                                    hs-form-message-template="addRule_fieldType.html"
-                                                                >
-                                                            <md-option ng-value="0" >属性</md-option>
-                                                            <md-option ng-value="1" >字符串</md-option>
-                                                            <md-option ng-value="2" >流水号</md-option>
-                                                        </md-select>
-                                                    </div>
+        </md-toolbar>
+        <div ng-show="!vm.afterLoad" class="loading">正在加载...</div>
+        <div ng-show="vm.afterLoad" >
+            <div ng-show="vm.versionList.length == 0">
+                <div class="new--prompt--box">
+                    <div class="new--prompt--box__head">
+                        <img src="images/edit--project--manage--modal--new.png" alt=""/>
+                        还需要创建数据模板
+                    </div>
+                    <div class="prompt-content">
+                        您还没有创建数据模板，无法配置归档策略
+                    </div>
+                </div>
+                <div class="new--prompt__btn--box">
+                    <img src="images/create--rule--template--icon.png" alt=""/>
+                    <h4 class="title--content">该项目还没有定义策略</h4>
+                    <md-button class="red--btn"  ng-click="vm.serfToCreateModule()">
+                        立刻创建
+                    </md-button>
+                </div>
+            </div>
+            <div ng-show="vm.versionList.length != 0" class="edit--project--manage--wrapper">
+                <div class="base--info--content">
+                    <section layout="row"  layout-align="start center" layout-wrap class="edit--project--row--box">
+                        <span class="edit--project--row">归档策略</span>
+                        <div class="rule--set--content--wrap" style="height: auto">
+                            <div class="attribute--wrapper rule--set">
+                                <div class="attribute--row--box auto--height">
+                                    <span class="attribute--row--box__title">档号规则</span>
+                                    <div class="rule--set--re--rules--wrap">
+                                        <div class="rule--Property--box" ng-repeat="rule in vm.ruleProperty track by $index">
+                                            <a ng-if="rule.fieldType == 0"
+                                               ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
+                                               class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">
+                                                {{rule.attrDisplayName || '未指定'}}
+                                            </a>
+                                            <a ng-if="rule.fieldType == 1"
+                                               ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
+                                               class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">{{rule.fieldValue || '未指定'}}</a>
+                                            <a ng-if="rule.fieldType == 2"
+                                               ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
+                                               class="ruleSet-attr-name" ng-click="vm.showEdit($event,$index)">流水号</a>
+                                            <md-button ng-if="rule.showEdit" aria-label="Open menu with custom trigger" class="red--btn delete--btn" ng-click="vm.deleteRule($index)">
+                                                <span class="glyphicon glyphicon-trash"></span>
+                                            </md-button>
+                                            <div ng-init="rule.showEdit = false"
+                                                 ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[rule.showEdit]"
+                                                 class="md-whiteframe-12dp set-rule-add-tool-box" click-outside-hide hide-parameter="rule.showEdit">
+                                                <div >
+                                                    <form ng-cloak
+                                                          name="addRule"
+                                                          novalidate
+                                                          ng-submit="addRule.$valid?rule.showEdit = false:vm.addRule.submit=true">
+                                                        <div class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">元素类型</span>
+                                                            <md-select  class="set-rule-add-tool_value" ng-model="rule.fieldType"
+                                                                        name="fieldType"
+                                                                        required
+                                                                        hs-form-message
+                                                                        hs-form-message-show="vm.addRule.submit"
+                                                                        hs-form-message-template="addRule_fieldType.html"
+                                                                    >
+                                                                <md-option ng-value="0" >属性</md-option>
+                                                                <md-option ng-value="1" >字符串</md-option>
+                                                                <md-option ng-value="2" >流水号</md-option>
+                                                            </md-select>
+                                                        </div>
 
-                                                    <div ng-if="rule.fieldType == 0" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">字段</span>
-                                                        <md-select  class="set-rule-add-tool_value" ng-model="rule.attrName"
-                                                                    ng-change="vm.changeAttr($index)"
-                                                                    name="attrName"
-                                                                    required
-                                                                    hs-form-message
-                                                                    hs-form-message-show="vm.addRule.submit"
-                                                                    hs-form-message-template="addRule_attrName.html"
-                                                                >
-                                                            <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
-                                                            <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
-                                                        </md-select>
-                                                    </div>
-                                                    <div ng-if="rule.fieldType == 1" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">字段</span>
-                                                        <input type="text" ng-model="rule.fieldValue"
-                                                               class="form-control set-rule-add-tool_value"
-                                                               name="fieldValue"
-                                                               required
-                                                               hs-form-message
-                                                               hs-form-message-show="vm.addRule.submit"
-                                                               hs-form-message-template="addRule_fieldValue.html"
-                                                                >
-                                                    </div>
-                                                    <div ng-if="rule.fieldType == 2" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">长度</span>
-                                                        <input type="number" ng-model="rule.fieldSize"
-                                                               class="form-control set-rule-add-tool_value"
-                                                               name="fieldSize"
-                                                               required
-                                                               hs-form-message
-                                                               hs-form-message-show="vm.addRule.submit"
-                                                               hs-form-message-template="addRule_fieldSize.html"
-                                                                >
-                                                    </div>
-                                                    <md-button class="green--btn pull-right" aria-label="Open menu with custom trigger" type="submit" >确定</md-button>
-                                                </form>
+                                                        <div ng-if="rule.fieldType == 0" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">字段</span>
+                                                            <md-select  class="set-rule-add-tool_value" ng-model="rule.attrName"
+                                                                        ng-change="vm.changeAttr($index)"
+                                                                        name="attrName"
+                                                                        required
+                                                                        hs-form-message
+                                                                        hs-form-message-show="vm.addRule.submit"
+                                                                        hs-form-message-template="addRule_attrName.html"
+                                                                    >
+                                                                <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                                <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
+                                                            </md-select>
+                                                        </div>
+                                                        <div ng-if="rule.fieldType == 1" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">字段</span>
+                                                            <input type="text" ng-model="rule.fieldValue"
+                                                                   class="form-control set-rule-add-tool_value"
+                                                                   name="fieldValue"
+                                                                   required
+                                                                   hs-form-message
+                                                                   hs-form-message-show="vm.addRule.submit"
+                                                                   hs-form-message-template="addRule_fieldValue.html"
+                                                                    >
+                                                        </div>
+                                                        <div ng-if="rule.fieldType == 2" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">长度</span>
+                                                            <input type="number" ng-model="rule.fieldSize"
+                                                                   class="form-control set-rule-add-tool_value"
+                                                                   name="fieldSize"
+                                                                   required
+                                                                   hs-form-message
+                                                                   hs-form-message-show="vm.addRule.submit"
+                                                                   hs-form-message-template="addRule_fieldSize.html"
+                                                                    >
+                                                        </div>
+                                                        <md-button class="green--btn pull-right" aria-label="Open menu with custom trigger" type="submit" >确定</md-button>
+                                                    </form>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="rule--set--add--rule--wrap" >
+                                            <md-button  class="green--btn" aria-label="Open menu with custom trigger"  ng-click="vm.showAdd($event)">
+                                                <span >添加规则</span>
+                                            </md-button>
+                                            <div ng-init="vm.showLastAdd=false"
+                                                 ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[vm.showLastAdd]"
+                                                 class="md-whiteframe-12dp set-rule-add-tool-box" click-outside-hide hide-parameter="vm.showLastAdd">
+                                                <div >
+                                                    <form ng-cloak
+                                                          name="addRule"
+                                                          novalidate
+                                                          ng-submit="addRule.$valid?vm.addRule(vm.entity):vm.addRule.submit=true">
+                                                        <div class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">元素类型</span>
+                                                            <md-select  class="set-rule-add-tool_value" ng-model="vm.entity.fieldType"
+                                                                        name="fieldType"
+                                                                        required
+                                                                        hs-form-message
+                                                                        hs-form-message-show="vm.addRule.submit"
+                                                                        hs-form-message-template="addRule_fieldType.html"
+                                                                    >
+                                                                <md-option ng-value="0" >属性</md-option>
+                                                                <md-option ng-value="1" >字符串</md-option>
+                                                                <md-option ng-value="2" >流水号</md-option>
+                                                            </md-select>
+                                                        </div>
+                                                        <div ng-if="vm.entity.fieldType == 0" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">字段</span>
+                                                            <md-select  class="set-rule-add-tool_value"
+                                                                        ng-model="vm.entity.attrName"
+                                                                        name="attrName"
+                                                                        required
+                                                                        hs-form-message
+                                                                        hs-form-message-show="vm.addRule.submit"
+                                                                        hs-form-message-template="addRule_attrName.html"
+                                                                        ng-change="vm.changeAttr()">
+                                                                <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
+                                                                <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
+                                                            </md-select>
+                                                        </div>
+                                                        <div ng-if="vm.entity.fieldType == 1" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">字段</span>
+                                                            <input type="text"
+                                                                   ng-model="vm.entity.fieldValue"
+                                                                   class="form-control set-rule-add-tool_value"
+                                                                   name="fieldValue"
+                                                                   required
+                                                                   hs-form-message
+                                                                   hs-form-message-show="vm.addRule.submit"
+                                                                   hs-form-message-template="addRule_fieldValue.html"
+                                                                    >
+                                                        </div>
+                                                        <div ng-if="vm.entity.fieldType == 2" class="et-rule-add-tool-row">
+                                                            <span class="set-rule-add-tool_attr">长度</span>
+                                                            <input type="number" ng-model="vm.entity.fieldSize"
+                                                                   class="form-control set-rule-add-tool_value"
+                                                                   name="fieldSize"
+                                                                   required
+                                                                   hs-form-message
+                                                                   hs-form-message-show="vm.addRule.submit"
+                                                                   hs-form-message-template="addRule_fieldSize.html"
+                                                                    >
+                                                        </div>
+                                                        <md-button class="green--btn pull-right" aria-label="Open menu with custom trigger"  type="submit">确定</md-button>
+                                                    </form>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="rule--set--add--rule--wrap" >
-                                        <md-button  class="green--btn" aria-label="Open menu with custom trigger"  ng-click="vm.showAdd($event)">
-                                            <span >添加规则</span>
-                                        </md-button>
-                                        <div ng-init="vm.showLastAdd=false"
-                                             ng-class="{true: 'show-set-rule-add-tool', false: 'hide-set-rule-add-tool'}[vm.showLastAdd]"
-                                             class="md-whiteframe-12dp set-rule-add-tool-box" click-outside-hide hide-parameter="vm.showLastAdd">
-                                            <div >
-                                                <form ng-cloak
-                                                      name="addRule"
-                                                      novalidate
-                                                      ng-submit="addRule.$valid?vm.addRule(vm.entity):vm.addRule.submit=true">
-                                                    <div class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">元素类型</span>
-                                                        <md-select  class="set-rule-add-tool_value" ng-model="vm.entity.fieldType"
-                                                                    name="fieldType"
-                                                                    required
-                                                                    hs-form-message
-                                                                    hs-form-message-show="vm.addRule.submit"
-                                                                    hs-form-message-template="addRule_fieldType.html"
-                                                                >
-                                                            <md-option ng-value="0" >属性</md-option>
-                                                            <md-option ng-value="1" >字符串</md-option>
-                                                            <md-option ng-value="2" >流水号</md-option>
-                                                        </md-select>
-                                                    </div>
-                                                    <div ng-if="vm.entity.fieldType == 0" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">字段</span>
-                                                        <md-select  class="set-rule-add-tool_value"
-                                                                    ng-model="vm.entity.attrName"
-                                                                    name="attrName"
-                                                                    required
-                                                                    hs-form-message
-                                                                    hs-form-message-show="vm.addRule.submit"
-                                                                    hs-form-message-template="addRule_attrName.html"
-                                                                    ng-change="vm.changeAttr()">
-                                                            <md-option ng-if="vm.language == 'en'" ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameEn}}</md-option>
-                                                            <md-option ng-if="vm.language == 'cn'"  ng-value="ruleType.attrName" ng-repeat="ruleType in vm.ruleType">{{ruleType.attrNameZh}}</md-option>
-                                                        </md-select>
-                                                    </div>
-                                                    <div ng-if="vm.entity.fieldType == 1" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">字段</span>
-                                                        <input type="text"
-                                                               ng-model="vm.entity.fieldValue"
-                                                               class="form-control set-rule-add-tool_value"
-                                                               name="fieldValue"
-                                                               required
-                                                               hs-form-message
-                                                               hs-form-message-show="vm.addRule.submit"
-                                                               hs-form-message-template="addRule_fieldValue.html"
-                                                                >
-                                                    </div>
-                                                    <div ng-if="vm.entity.fieldType == 2" class="et-rule-add-tool-row">
-                                                        <span class="set-rule-add-tool_attr">长度</span>
-                                                        <input type="number" ng-model="vm.entity.fieldSize"
-                                                               class="form-control set-rule-add-tool_value"
-                                                               name="fieldSize"
-                                                               required
-                                                               hs-form-message
-                                                               hs-form-message-show="vm.addRule.submit"
-                                                               hs-form-message-template="addRule_fieldSize.html"
-                                                                >
-                                                    </div>
-                                                    <md-button class="green--btn pull-right" aria-label="Open menu with custom trigger"  type="submit">确定</md-button>
-                                                </form>
-                                            </div>
-                                        </div>
+
+                                </div>
+                                <div class="attribute--row--box select">
+                                    <span class="attribute--row--box__title blue--font">示例</span>
+                                    <div class="attribute--row--box__value blue--font">YW001-J010-001-2017-0001</div>
+                                </div>
+                                <div class="attribute--row--box select">
+                                    <span class="attribute--row--box__title ">保管期限</span>
+                                    <div class="attribute--row--box__value">
+                                        <md-select  class="attribute--row--box__select" ng-model="vm.retentionPeriod"
+                                                    name="attrName"
+                                                    required>
+                                            <md-option ng-value="retentionPeriod.id" ng-repeat="retentionPeriod in vm.retentionPeriodList">{{retentionPeriod.periodName}}</md-option>
+                                        </md-select>
                                     </div>
                                 </div>
-
-                            </div>
-                            <div class="attribute--row--box select">
-                                <span class="attribute--row--box__title blue--font">示例</span>
-                                <div class="attribute--row--box__value blue--font">YW001-J010-001-2017-0001</div>
-                            </div>
-                            <div class="attribute--row--box select">
-                                <span class="attribute--row--box__title ">保管期限</span>
-                                <div class="attribute--row--box__value">
-                                    <md-select  class="attribute--row--box__select" ng-model="vm.retentionPeriod"
-                                                name="attrName"
-                                                required>
-                                        <md-option ng-value="retentionPeriod.id" ng-repeat="retentionPeriod in vm.retentionPeriodList">{{retentionPeriod.periodName}}</md-option>
-                                    </md-select>
+                                <div class="attribute--row--box select">
+                                    <span class="attribute--row--box__title ">保留策略</span>
+                                    <div class="attribute--row--box__value">
+                                        <md-select  class="attribute--row--box__select" ng-model="vm.retentionPolicy"
+                                                    name="attrName"
+                                                    required>
+                                            <md-option ng-value="retentionPolicy.id" ng-repeat="retentionPolicy in vm.retentionPolicyList">{{retentionPolicy.policyName}}</md-option>
+                                        </md-select>
+                                    </div>
                                 </div>
+                            </div><div class="archive--policy--prompt--wrap">
+                            <div class="head">
+                                <img src="images/edit--project--manage--modal--new.png" alt=""/>归档策略
                             </div>
-                            <div class="attribute--row--box select">
-                                <span class="attribute--row--box__title ">保留策略</span>
-                                <div class="attribute--row--box__value">
-                                    <md-select  class="attribute--row--box__select" ng-model="vm.retentionPolicy"
-                                                name="attrName"
-                                                required>
-                                        <md-option ng-value="retentionPolicy.id" ng-repeat="retentionPolicy in vm.retentionPolicyList">{{retentionPolicy.policyName}}</md-option>
-                                    </md-select>
-                                </div>
-                            </div>
-                        </div><div class="archive--policy--prompt--wrap">
-                        <div class="head">
-                            <img src="images/edit--project--manage--modal--new.png" alt=""/>归档策略
+                            <div class="prompt">通过定义一系列的归档策略，可以让系统通过定义好的规则对归档数据进行自动化赋予档号和保管期限。</div>
                         </div>
-                        <div class="prompt">通过定义一系列的归档策略，可以让系统通过定义好的规则对归档数据进行自动化赋予档号和保管期限。</div>
-                    </div>
-                    </div>
-                </section>
+                        </div>
+                    </section>
+                </div>
+                <md-dialog-actions layout="row" class="edit--project--manage--footer">
+                    <md-button class="green--btn" aria-label="Open menu with custom trigger"  ng-click="vm.saveRule()">
+                        <span >保存配置</span>
+                    </md-button>
+                </md-dialog-actions>
             </div>
-            <md-dialog-actions layout="row" class="edit--project--manage--footer">
-                <md-button class="green--btn" aria-label="Open menu with custom trigger"  ng-click="vm.saveRule()">
-                    <span >保存配置</span>
-                </md-button>
-            </md-dialog-actions>
         </div>
     </div>
 </div>

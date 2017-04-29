@@ -8,14 +8,14 @@
 (function() {
   var collapsibleTree;
 
-  collapsibleTree = function() {
+  collapsibleTree = function($timeout) {
     return {
       restrict: 'E',
       scope: {
         nodes: '='
       },
       link: function(scope, element) {
-        var diagonal, diameter, h, i, m, root, selectedItem, tree, update, vis, w;
+        var changeFont, diagonal, diameter, filterNode, h, i, item, m, root, selectedItem, tree, unit, update, vis, w, zoom, zoomed;
         m = [20, 120, 20, 120];
         w = 1280 - m[1] - m[3];
         h = 800 - m[0] - m[2];
@@ -23,11 +23,18 @@
         diameter = 960;
         root = void 0;
         tree = void 0;
+        unit = 'all';
+        item = 'all';
         diagonal = d3.svg.diagonal.radial().projection(function(d) {
           return [d.y, d.x / 180 * Math.PI];
         });
         selectedItem = null;
-        vis = d3.select('circle-tree').append('svg:svg').attr('width', diameter).attr('height', diameter).append('g').attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
+        zoomed = function() {
+          console.log(d3.event.scale);
+          return d3.select('#circle-tree-g').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };
+        zoom = d3.behavior.zoom().translate([460, 460]).scale(1).scaleExtent([1, 20]).on("zoom", zoomed);
+        vis = d3.select('circle-tree').append('svg:svg').attr('viewBox', '0 0 960 960').attr('id', 'circleTree').attr('width', diameter).attr('height', diameter).append('svg:g').attr('id', 'circle-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
         update = function(source) {
           var duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;
           duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -41,15 +48,12 @@
             if (d.type === 'items') {
               if (!selectedItem || selectedItem !== d) {
                 selectedItem = d;
-                vis.selectAll('text').style('font-size', '11px');
-                vis.selectAll('text').style('fill-opacity', '0.3');
-                vis.select('#text' + d.objectId).style('font-size', '15px');
-                vis.select('#text' + d.objectId).style('fill-opacity', '1');
+                changeFont(false, '11px', '0.3', 'black');
+                changeFont(d.objectId, '12px', '1', 'blue');
                 scope.$emit('treeChart:selectNode', d);
               } else {
                 selectedItem = null;
-                vis.selectAll('text').style('font-size', '11px');
-                vis.selectAll('text').style('fill-opacity', '1');
+                changeFont(false, '11px', '1', 'black');
                 scope.$emit('treeChart:selectNode', false);
               }
             }
@@ -127,10 +131,9 @@
             return d.y0 = d.y;
           });
         };
-        scope.$on('tree:filter', (function(e, unit, item) {
+        filterNode = function() {
           var items, j, k, len, len1, ref, ref1, results, results1, rows, x;
-          vis.selectAll('text').style('font-size', '11px');
-          vis.selectAll('text').style('fill-opacity', '0.3');
+          changeFont(false, '11px', '0.3', 'black');
           if (item !== 'all') {
             ref = root.children;
             results = [];
@@ -144,10 +147,8 @@
                   for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
                     items = ref1[x];
                     if (items.objectId === item) {
-                      vis.select('#text' + item).style('font-size', '15px');
-                      vis.select('#text' + item).style('fill-opacity', '1');
-                      vis.select('#text' + rows.objectId).style('font-size', '15px');
-                      results1.push(vis.select('#text' + rows.objectId).style('fill-opacity', '1'));
+                      changeFont(item, '12px', '1', 'blue');
+                      results1.push(changeFont(rows.objectId, '12px', '1', 'blue'));
                     } else {
                       results1.push(void 0);
                     }
@@ -165,8 +166,7 @@
             for (i = k = 0, len1 = ref1.length; k < len1; i = ++k) {
               rows = ref1[i];
               if (rows.objectId === unit) {
-                vis.select('#text' + unit).style('font-size', '15px');
-                vis.select('#text' + unit).style('fill-opacity', '1');
+                changeFont(unit, '12px', '1', 'blue');
                 if (rows.children) {
                   results1.push((function() {
                     var l, len2, ref2, results2;
@@ -174,8 +174,7 @@
                     results2 = [];
                     for (x = l = 0, len2 = ref2.length; l < len2; x = ++l) {
                       items = ref2[x];
-                      vis.select('#text' + items.objectId).style('font-size', '15px');
-                      results2.push(vis.select('#text' + items.objectId).style('fill-opacity', '1'));
+                      results2.push(changeFont(items.objectId, '12px', '1', 'blue'));
                     }
                     return results2;
                   })());
@@ -188,9 +187,24 @@
             }
             return results1;
           } else if (item === 'all' && unit === 'all') {
-            vis.selectAll('text').style('font-size', '11px');
-            return vis.selectAll('text').style('fill-opacity', '1');
+            return changeFont(false, '11px', '1', 'black');
           }
+        };
+        changeFont = function(id, size, opacity, fill) {
+          if (!id) {
+            vis.selectAll('text').style('font-size', size);
+            vis.selectAll('text').style('fill-opacity', opacity);
+            return vis.selectAll('text').style('fill', fill);
+          } else {
+            vis.select('#text' + id).style('font-size', size);
+            vis.select('#text' + id).style('fill-opacity', opacity);
+            return vis.select('#text' + id).style('fill', fill);
+          }
+        };
+        scope.$on('tree:filter', (function(e, _unit, _item) {
+          unit = _unit;
+          item = _item;
+          return filterNode();
         }));
         scope.$watch('nodes', (function() {
           if (scope.nodes) {

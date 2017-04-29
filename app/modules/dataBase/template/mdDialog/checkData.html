@@ -1,8 +1,11 @@
-<md-dialog aria-label="Mango" class="new--project--manage--modal">
-
+<md-dialog aria-label="Mango" class="check--data--modal">
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
-                <h2>杭州市发改委 > 企业项目投资核准</h2>
+                <h2>
+                    <span ng-show="vm.parameter.source_unit">{{vm.parameter.source_unit}}</span>
+                    <span ng-show="vm.parameter.source_unit">{{vm.parameter.system_name}}</span><span class="fa fa-angle-right"></span>
+                    <span> {{vm.parameter.business_matter}} </span>
+                </h2>
                 <span flex></span>
                 <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -10,39 +13,37 @@
             </div>
         </md-toolbar>
         <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
-        <md-dialog-content class="new--project--content">
-            <div>
-                <div class="single--attribute--box time--frame">
-                    <span class="attribute--title">时间范围</span>
-                    <div  layout="row" class="attribute--value">
+        <md-dialog-content class="check--data--content">
+            <div class="search--wrap">
+                <div class="time--frame-box">
+                    <span class="time--frame--title" translate="MODULES_BATCH_TIME_FRAME">时间范围</span>
+                    <div layout="row" class="time--frame--value" >
                         <div class="input-group">
-                            <input type="text" class="form-control " uib-datepicker-popup ng-model="vm.parameter.dateFrom" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
+                              <input type="text" class="form-control " placeholder="{{'MODULES_BATCH_START_DATE'|translate}}" ng-change="vm.getGridData()" uib-datepicker-popup ng-model="vm.parameter.startDate" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
                         </div>
                     </div>
-                    <span class="time--frame__sign">-</span>
-                    <div  layout="row" class="attribute--value">
+                    <span class="time--frame__sign" >-</span>
+                    <div  layout="row" class="time--frame--value" >
                         <div class="input-group">
-                            <input type="text" class="form-control " uib-datepicker-popup ng-model="vm.parameter.dateTo" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="Close" />
-                          <span class="input-group-btn">
-                            <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
-                          </span>
+                              <input type="text" class="form-control " placeholder="{{'MODULES_BATCH_DEADLINE'|translate}}" ng-change="vm.getGridData()" uib-datepicker-popup ng-model="vm.parameter.endDate" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
+                              <span class="input-group-btn">
+                                <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
+                              </span>
                         </div>
                     </div>
-                    <div>
-                        <input type="text" ng-model="vm.parameter.keywords">
-                    </div>
-
+                </div>
+                <div class="search--box">
+                    <input type="text" class="form-control " ng-change="vm.getGridData()" ng-model="vm.parameter.name">
                 </div>
             </div>
-            <div>
-                <div style="height: 50px;">
-                    <md-button class="pull-right green--btn" ng-click="vm.search()">导出清单</md-button>
-                    <md-button class="pull-right green--btn" ng-click="vm.search()">下载</md-button>
-                    <md-button class="pull-right green--btn" ng-disabled="gridApi.selection.getSelectedRows().length != 1" ng-click="vm.previewDoc($event)">预览</md-button>
-                    <md-button class="pull-right green--btn" ng-click="vm.search()">导出至pdf</md-button>
+            <div class="check--data--grid--wrap">
+                <div class="operation--box">
+                    <md-button class=" green--btn" ng-click="vm.exportList()" translate="MODULES_BATCH_EXPORT_LIST">导出清单</md-button>
+                    <md-button class=" green--btn" ng-click="vm.downloadFile()" translate="MODULES_BATCH_DOWNLOAD">下载</md-button>
+                    <md-button class=" green--btn" ng-disabled="gridApi.selection.getSelectedRows().length != 1" ng-click="vm.previewDoc($event)" translate="MODULES_BATCH_PREVIEW">预览</md-button>
                 </div>
                 <div style="width: 100%;"  ui-grid="gridOptions" class="common--uigrid--height" ui-grid-auto-resize ui-grid-resize-columns  ui-grid-exporter  ui-grid-move-columns ui-grid-save-state  ui-grid-resize-columns ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
             </div>
@@ -50,11 +51,8 @@
         </md-dialog-content>
         <md-dialog-actions layout="row" class="new--project--manage--modal--footer">
             <span flex></span>
-            <md-button ng-disabled="vm.loading" ng-click="vm.cancel()">
-                取消
-            </md-button>
-            <md-button ng-disabled="vm.loading" type="submit" class="green--btn">
-                确定
+            <md-button class="gay--btn" ng-disabled="vm.loading" ng-click="vm.cancel()" translate="MODULES_BATCH_CLOSE">
+                关闭
             </md-button>
         </md-dialog-actions>
 

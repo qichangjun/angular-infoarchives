@@ -18,18 +18,25 @@
         nodes: '='
       },
       link: function(scope, element) {
-        var diagonal, h, i, m, root, toggle, tree, update, vis, w;
+        var changeFont, diagonal, filterNode, h, i, item, m, root, selectedItem, tree, unit, update, vis, w, zoom, zoomed;
         m = [20, 120, 20, 120];
         w = 1280 - m[1] - m[3];
-        h = 800 - m[0] - m[2];
+        h = 1100 - m[0] - m[2];
         i = 0;
         root = void 0;
         tree = void 0;
+        unit = 'all';
+        item = 'all';
+        selectedItem = void 0;
+        zoomed = function() {
+          return d3.select('#straight-tree-g').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
+        };
+        zoom = d3.behavior.zoom().scaleExtent([1, 20]).on("zoom", zoomed);
+        vis = d3.select('straight-tree').append('svg:svg').attr('id', 'straight-tree').attr('width', w + m[1] + m[3]).attr('height', h + m[0] + m[2]).append('svg:g').attr('id', 'straight-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
         tree = d3.layout.tree().size([h, w]);
         diagonal = d3.svg.diagonal().projection(function(d) {
           return [d.y, d.x];
         });
-        vis = d3.select('straight-tree').append('svg:svg').attr('id', 'straight-tree').attr('width', w + m[1] + m[3]).attr('height', h + m[0] + m[2]).append('svg:g').attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
         update = function(source) {
           var duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;
           duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -43,8 +50,18 @@
           nodeEnter = node.enter().append('svg:g').attr('class', 'node').attr('transform', function(d) {
             return 'translate(' + source.y0 + ',' + source.x0 + ')';
           }).on('click', function(d) {
-            toggle(d);
-            update(d);
+            if (d.type === 'items') {
+              if (!selectedItem || selectedItem !== d) {
+                selectedItem = d;
+                changeFont(false, '11px', '0.3', 'black');
+                changeFont(d.objectId, '12px', '1', 'blue');
+                scope.$emit('treeChart:selectNode', d);
+              } else {
+                selectedItem = null;
+                changeFont(false, '11px', '1', 'black');
+                scope.$emit('treeChart:selectNode', false);
+              }
+            }
           }).on('mouseover', function(d) {
             return scope.$emit('node:mouseover', d);
           }).on('mouseout', function(d) {
@@ -57,7 +74,9 @@
               return '#fff';
             }
           });
-          nodeEnter.append('svg:text').attr('x', function(d) {
+          nodeEnter.append('svg:text').attr('id', function(d) {
+            return 'text' + d.objectId;
+          }).attr('x', function(d) {
             if (d.children || d._children) {
               return -10;
             } else {
@@ -119,28 +138,86 @@
             d.y0 = d.y;
           });
         };
-        toggle = function(d) {
-          if (d.children) {
-            d._children = d.children;
-            d.children = null;
+        changeFont = function(id, size, opacity, fill) {
+          if (!id) {
+            vis.selectAll('text').style('font-size', size);
+            vis.selectAll('text').style('fill-opacity', opacity);
+            return vis.selectAll('text').style('fill', fill);
           } else {
-            d.children = d._children;
-            d._children = null;
+            vis.select('#text' + id).style('font-size', size);
+            vis.select('#text' + id).style('fill-opacity', opacity);
+            return vis.select('#text' + id).style('fill', fill);
           }
         };
-        scope.$watch('nodes', (function() {
-          var toggleAll;
-          toggleAll = function(d) {
-            if (d.children) {
-              d.children.forEach(toggleAll);
-              toggle(d);
+        filterNode = function() {
+          var items, j, k, len, len1, ref, ref1, results, results1, rows, x;
+          changeFont(false, '11px', '0.3', 'black');
+          if (item !== 'all') {
+            ref = root.children;
+            results = [];
+            for (i = j = 0, len = ref.length; j < len; i = ++j) {
+              rows = ref[i];
+              if (rows.children) {
+                results.push((function() {
+                  var k, len1, ref1, results1;
+                  ref1 = rows.children;
+                  results1 = [];
+                  for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
+                    items = ref1[x];
+                    if (items.objectId === item) {
+                      changeFont(item, '12px', '1', 'blue');
+                      results1.push(changeFont(rows.objectId, '12px', '1', 'blue'));
+                    } else {
+                      results1.push(void 0);
+                    }
+                  }
+                  return results1;
+                })());
+              } else {
+                results.push(void 0);
+              }
             }
-          };
+            return results;
+          } else if (item === 'all' && unit !== 'all') {
+            ref1 = root.children;
+            results1 = [];
+            for (i = k = 0, len1 = ref1.length; k < len1; i = ++k) {
+              rows = ref1[i];
+              if (rows.objectId === unit) {
+                changeFont(unit, '12px', '1', 'blue');
+                if (rows.children) {
+                  results1.push((function() {
+                    var l, len2, ref2, results2;
+                    ref2 = rows.children;
+                    results2 = [];
+                    for (x = l = 0, len2 = ref2.length; l < len2; x = ++l) {
+                      items = ref2[x];
+                      results2.push(changeFont(items.objectId, '12px', '1', 'blue'));
+                    }
+                    return results2;
+                  })());
+                } else {
+                  results1.push(void 0);
+                }
+              } else {
+                results1.push(void 0);
+              }
+            }
+            return results1;
+          } else if (item === 'all' && unit === 'all') {
+            return changeFont(false, '11px', '1', 'black');
+          }
+        };
+        scope.$on('tree:filter', function(e, _unit, _item) {
+          unit = _unit;
+          item = _item;
+          return filterNode();
+        });
+        scope.$watch('nodes', (function() {
           if (scope.nodes) {
             root = angular.copy(scope.nodes);
             root.x0 = h / 2;
             root.y0 = 0;
-            root.children.forEach(toggleAll);
             update(root);
           }
         }), true);

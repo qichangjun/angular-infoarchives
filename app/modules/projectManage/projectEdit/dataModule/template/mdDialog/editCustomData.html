@@ -25,7 +25,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='1'">
+                            <tr ng-repeat="data in vm.systemAttrs">
                                 <td>{{$index + 1}}</td>
                                 <td>{{data.attrNameZh}}</td>
                                 <td>{{data.attrNameEn}}</td>
@@ -53,7 +53,7 @@
                                 <th width="60">必填</th>
                             </tr>
                             </thead>
-                            <tbody>
+                            <tbody class="input--data--tbody">
 
                             <tr ng-repeat="data in vm.entity" ng-if="data.containerCode == vm.containerId && data.isSys=='0'">
                                 <td class="add--attribute--btn--td">

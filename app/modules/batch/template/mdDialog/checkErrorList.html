@@ -1,7 +1,7 @@
 <md-dialog aria-label="Mango" class="check--error--list--modal">
         <md-toolbar class="md-menu-toolbar">
             <div class="md-toolbar-tools">
-                <h2>异常数据列包</h2>
+                <h2 translate="MODULES_BATCH_ABNORMAL_DATA_COLUMNS">异常数据列包</h2>
                 <span flex></span>
                 <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
                     <span aria-hidden="true">×</span>
@@ -9,9 +9,8 @@
             </div>
         </md-toolbar>
         <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
-
         <md-dialog-content class="check--error--list--modal_content">
-            <div  ui-grid="gridOptions" style="width:800px;" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
+            <div  ui-grid="gridOptions" style="height: 100%" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
         </md-dialog-content>
 </md-dialog>
 

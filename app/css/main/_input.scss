@@ -24,5 +24,9 @@ md-input-container{
 
 .form-control{
   font-size: inherit;
-  padding: 5px 6px 6px 6px;
+  padding: 6px 6px 6px 6px;
+  line-height: 35px;
+}
+.input-group .input-group-btn .glyphicon-calendar{
+  color: #797979;
 }

@@ -1,0 +1,89 @@
+<md-dialog aria-label="Mango" class="preview--template--form--modal">
+    <form ng-cloak
+          name="newProject"
+          novalidate
+          ng-submit="newProject.$valid?vm.newProject():vm.newProject.submit=true"
+    >
+        <md-toolbar class="md-menu-toolbar">
+            <div class="md-toolbar-tools">
+                <div class="preview--template--form--head">
+                    <img src="images/preview--box--icon.png" alt=""/>
+                    <div class="title--box">
+                        <div class="title">{{vm.entity.name}}</div>
+                    </div>
+                </div>
+                <span flex></span>
+                <button type="button" class="close" ng-click="vm.cancel()" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+        </md-toolbar>
+        <md-dialog-content class="preview--template--form--modal__content md-dialog-content clearfix">
+            <div >
+                <div class="new--project--row--box">
+                    <div class="row show--results-wrap">
+                        <div class="row show--results-wrap">
+                            <div  class="show--results-box">
+                                <div class="head--box">
+                                    <span class="head--content" translate="MODULES_DATABASE_ESSENTIAL_INFORMATION">基本信息</span>
+                                </div>
+                                <div class="panel-body show--results--body" >
+                                    <div class="attr-item">
+                                        <div >
+                                            <span><span translate="MODULES_DATABASE_NODE_NAME">节点名称</span> : {{vm.entity.name}}</span>
+                                            <span>{{attr.value[0]}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="attr-item">
+                                        <div >
+                                            <span><span translate="MODULES_DATABASE_OPERATION_DATE">操作日期</span> : {{vm.entity.operate_date}}</span>
+                                        </div>
+                                    </div>
+                                    <div class="attr-item">
+                                        <div >
+                                            <span><span translate="MODULES_DATABASE_OPERATOR">操作人</span> : {{vm.entity.operator}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row show--results-wrap" ng-repeat="blockList in vm.blockLists">
+                            <div  class="show--results-box">
+                                <div class="head--box">
+                                    <span class="head--content">{{blockList.name}}</span>
+                                </div>
+                                <div class="panel-body show--results--body" >
+                                    <div >
+                                        <div class="attr-item" ng-repeat="attrList in blockList.property">
+                                            <span>{{attrList.name}} : {{attrList.content}}</span>
+                                        </div>
+                                        <table class="preview--template--form--modal__table">
+                                            <tbody>
+                                            <tr ng-repeat="fileValue in blockList.file">
+                                                <td><img src="images/doc.png" alt=""/></td>
+                                                <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
+                                                <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
+                                                <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
+                                                <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
+                                            </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </md-dialog-content>
+        <md-dialog-actions layout="row" class="new--project--manage--modal--footer">
+            <span flex></span>
+            <md-button ng-click="vm.cancel()" class="gay--btn" translate="MODULES_BATCH_CLOSE">
+                关闭
+            </md-button>
+        </md-dialog-actions>
+    </form>
+</md-dialog>
+

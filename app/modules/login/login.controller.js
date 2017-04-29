@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("loginController", [
-    'loginService', '$timeout', '$state', 'hsAuth', 'mdToastService', 'Cookies', function(loginService, $timeout, $state, hsAuth, mdToastService, Cookies) {
+    'loginService', '$timeout', '$state', 'hsAuth', 'mdToastService', 'Cookies', '$translate', function(loginService, $timeout, $state, hsAuth, mdToastService, Cookies, $translate) {
       var init, login, vm;
       vm = this;
       init = function() {};

@@ -1,21 +1,21 @@
 <div  class="anim-slide-left project--manage--main--content--wrapper"  >
     <md-content class="new--project--wrapper">
-        <md-list >
-            <md-list-item class="md-2-line new--project--btn--box" >
-                <div class="md-list-item-text">
-                    <h3 class="title">项目管理</h3>
-                    <p class="prompt-content">建立项目针对每个归档系统建立归档策略和业务模版</p>
-                </div>
-                <md-button ng-click="vm.newProject($event)" class="red--btn new--project--btn">
+        <md-list-item class="md-2-line new--project--btn--wrap" >
+            <div class="md-list-item-text">
+                <h3 class="title" translate="MODULES_PROJECTMANAGE_PROJECT_MANAGEMENT">项目管理</h3>
+                <p class="prompt-content" translate="MODULES_PROJECTMANAGE_PROJECT_MANAGEMENT_PROMPT">建立项目针对每个归档系统建立归档策略和业务模板</p>
+            </div>
+            <div class="new--project--btn--box">
+                <button ng-click="vm.newProject($event)" class="red--btn new--project--btn">
                     <span class="glyphicon glyphicon-plus"></span>
                     <span translate="PROJECT_MANAGE_NEW_PROJECT">新建项目</span>
-                </md-button>
-                <md-divider ng-if="!$last"></md-divider>
-            </md-list-item>
-        </md-list>
+                </button>
+            </div>
+            <!--<md-divider ng-if="!$last"></md-divider>-->
+        </md-list-item>
     </md-content>
     <div class="project--manage--data--list--wrapper">
-        <md-content class="md-padding">
+        <md-content class="md-padding list--wrap">
             <div >
                 <md-card
                         ng-click="vm.serfToEdit(item)"
@@ -28,7 +28,7 @@
                     <md-card-title class="card--title--box">
                         <md-card-title-text >
                             <span class="md-headline">{{item.projectName}}</span>
-                            <span class="md-subhead">{{item.createDate  | date:'yyyy年MM月dd日'}}创建</span>
+                            <span class="md-subhead">{{item.createDate  | date:'yyyy.MM.dd'}} <span translate="MODULES_PROJECTMANAGE_CREATE">创建</span></span>
                         </md-card-title-text>
                         <md-card-title-media>
                             <div class="md-media-xl card-media"></div>

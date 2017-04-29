@@ -1,0 +1,38 @@
+@charset "utf-8";
+md-checkbox .md-label{
+  line-height: normal;
+  margin-left: 28px;
+}
+md-checkbox .md-container{
+  width: 18px;
+  height: 18px;
+}
+md-checkbox .md-icon{
+  width: 18px;
+  height: 18px;
+  border-width: 1px;
+  border-color: #cccccc;
+  box-shadow: inset 0 1px 1px rgba(0, 0, 0, 0.075);
+}
+md-checkbox:not([disabled]).md-primary:not(.md-checked) .md-icon{
+  border-color:#cccccc;
+  background: #ffffff;
+}
+
+
+md-radio-button .md-container{
+  top: 49%;
+  width: 18px;
+  height: 18px;
+}
+md-radio-button .md-off, md-radio-button .md-on{
+  width: 18px;
+  height: 18px;
+  border-width: 1px;
+}
+md-radio-button .md-off{
+  border-width: 1px;
+}
+md-radio-button .md-label{
+  margin-left: 28px;
+}

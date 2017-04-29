@@ -2,39 +2,75 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("moduleTemplateController", [
-    '$scope', '$log', '$state', '$timeout', '$stateParams', '$rootScope', 'mdDialogService', 'uuid', function($scope, $log, $state, $timeout, $stateParams, $rootScope, mdDialogService, uuid) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, addContainer, checkData, init, openMenu, vm;
+    '$scope', '$log', '$state', '$timeout', '$stateParams', '$rootScope', 'mdDialogService', 'uuid', 'moduleTemplateService', 'dataModuleService', function($scope, $log, $state, $timeout, $stateParams, $rootScope, mdDialogService, uuid, moduleTemplateService, dataModuleService) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, addContainer, addProcessContainer, changeVersion, getAttributeList, getTemplate, getVersionList, init, jsonToObj, openMenu, previewForm, toggle, vm;
       vm = this;
-      $scope.i = 0;
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/projectManage/projectEdit/moduleTemplate/template/mdDialog/';
+      vm.parameter = $stateParams;
+      vm.loadingAttrLists = true;
       init = function() {
-        var i;
         $scope.models = {
           selected: null,
           templates: [],
-          lists: [
-            {
-              name: 'A',
-              id: '32323232',
-              data: []
-            }, {
-              name: 'B',
-              id: '4344232',
-              data: []
-            }
-          ]
+          lists: []
         };
-        i = 0;
-        while (i < 50) {
-          $scope.models.templates.push({
-            type: "item",
-            id: '属性' + i
-          });
-          i++;
+        getVersionList();
+      };
+      getVersionList = function() {
+        return dataModuleService.getModuleVersionList(vm.parameter.objectId).then(function(res) {
+          vm.versionList = res;
+          vm.parameter.templateId = res[res.length - 1].id;
+          getAttributeList();
+          return getTemplate();
+        }, function(res) {});
+      };
+      changeVersion = function() {
+        getAttributeList();
+        return getTemplate();
+      };
+      getTemplate = function() {
+        return moduleTemplateService.getTemplate(vm.parameter.templateId).then(function(res) {
+          if (res) {
+            return $scope.models.lists = JSON.parse(res.showTemplate);
+          } else {
+            return $scope.models.lists = [];
+          }
+        }, function(res) {});
+      };
+      jsonToObj = function(node, module) {
+        var i, j, k, len, len1, ref, results, rows;
+        node.children = [];
+        for (i = j = 0, len = module.length; j < len; i = ++j) {
+          rows = module[i];
+          if (rows.parentCode === node.code) {
+            node.children.push(rows);
+          }
+        }
+        if (node.children.length > 0) {
+          ref = node.children;
+          results = [];
+          for (i = k = 0, len1 = ref.length; k < len1; i = ++k) {
+            rows = ref[i];
+            results.push(jsonToObj(rows, module));
+          }
+          return results;
         }
       };
-      checkData = function() {
-        return console.log($scope.models.lists);
+      getAttributeList = function() {
+        return moduleTemplateService.getAttributeList(vm.parameter.templateId).then(function(res) {
+          var i, j, len, rows;
+          vm.loadingAttrLists = false;
+          for (i = j = 0, len = res.length; j < len; i = ++j) {
+            rows = res[i];
+            if (rows.type === 'record') {
+              $scope.models.templates = angular.copy(rows);
+            }
+          }
+          jsonToObj($scope.models.templates, res);
+          return $scope.models.templates = [$scope.models.templates];
+        }, function(res) {
+          vm.loadingAttrLists = false;
+        });
       };
       openMenu = function($mdMenu, ev) {
         var originatorEv;
@@ -42,28 +78,179 @@
         return $mdMenu.open(ev);
       };
       addContainer = function() {
-        $scope.models.lists.push({
-          name: $scope.i,
+        return $scope.models.lists.push({
+          type: 'record',
+          name: '信息',
           id: uuid.v4(),
           data: []
         });
-        return $scope.i = $scope.i + 1;
       };
+      addProcessContainer = function() {
+        return $scope.models.lists.push({
+          type: 'process',
+          name: '业务过程信息',
+          id: uuid.v4(),
+          data: []
+        });
+      };
+      previewForm = function() {
+        return mdDialogService.initCustomDialog('previewTemplateFormCon', PAHT_OF_TEMPLATE_MDDIALOG + 'previewTemplateForm.html?' + window.hsConfig.bust, event, {
+          data: $scope.models.lists,
+          templateId: vm.parameter.templateId
+        }).then(function(res) {
+          getTemplate();
+        }, function(res) {});
+      };
+      toggle = function(scope) {
+        return scope.toggle();
+      };
+      vm.changeVersion = changeVersion;
+      vm.toggle = toggle;
+      vm.previewForm = previewForm;
+      vm.addProcessContainer = addProcessContainer;
       vm.addContainer = addContainer;
       vm.openMenu = openMenu;
-      vm.checkData = checkData;
       init();
     }
-  ]).controller('editStyleController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'info', function($scope, $log, $stateParams, $mdDialog, info) {
-      var cancel, init, vm;
+  ]).controller('previewTemplateFormCon', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'data', 'moduleTemplateService', 'templateId', function($scope, $log, $stateParams, $mdDialog, data, moduleTemplateService, templateId) {
+      var cancel, i, init, saveTemplate, vm;
       vm = this;
-      vm.entity = info.style;
-      console.log(vm.entity);
-      init = function() {};
+      $scope.data = data;
+      $scope.json = {
+        "record": {
+          "version_no": 3,
+          "record_code": "330000191510201000757",
+          "fonds": "J010",
+          "system_name": "行政审批系统",
+          "business_code": "IA20174101491794727000",
+          "project_name": "行政审批",
+          "batch_code": "001",
+          "archival_id": "",
+          "project_id": "80d6ff59-8b70-4ed1-b6de-f513986b48d4",
+          "name": "关于葛航勇申请施工单位的专职安全生产管理人员安全任职资格审批2",
+          "property": [
+            {
+              "name": "qlsx",
+              "content": "行政审批"
+            }, {
+              "name": "qlsx_name",
+              "content": "专职安全生产管理人员安全任职资格审批"
+            }
+          ],
+          "template_id": "1d250b83-c293-47cf-80eb-d098dcff72a1",
+          "block": {
+            "node": {
+              "comments": "",
+              "operate_date": "2012-11-11  10:11:11",
+              "name": "申报",
+              "property": [
+                {
+                  "name": "phase_name",
+                  "content": "申报"
+                }, {
+                  "name": "phase_code",
+                  "content": "01"
+                }
+              ],
+              "block": [
+                {
+                  "name": "申报者信息",
+                  "property": [
+                    {
+                      "name": "applyname",
+                      "content": "葛航勇"
+                    }, {
+                      "name": "apply_cardnumber",
+                      "content": 430121198787872345
+                    }
+                  ]
+                }, {
+                  "file": [
+                    {
+                      "size": 100,
+                      "name": "行政许可申请表.xls",
+                      "property": [
+                        {
+                          "name": "fileno",
+                          "content": "01"
+                        }, {
+                          "name": "get_way",
+                          "content": "纸质收取"
+                        }, {
+                          "name": "is_geted",
+                          "content": "是"
+                        }
+                      ],
+                      "type": "申报材料",
+                      "url": "行政许可申请表.xls",
+                      "md5": "d44802e15732664a8ab1eca0105b9e02"
+                    }, {
+                      "size": 200,
+                      "name": "浙江省收件凭证.pdf",
+                      "property": {
+                        "name": "card_no",
+                        "content": "02"
+                      },
+                      "type": "凭证",
+                      "url": "浙江省收件凭证.pdf",
+                      "md5": "c5541a192e061fee98f2fd675f3d743f"
+                    }
+                  ],
+                  "name": "申报材料"
+                }
+              ],
+              "id": 12345678888,
+              "operator": "周旭"
+            },
+            "name": "业务信息"
+          },
+          "id": 12345678976,
+          "create_date": "2012-11-11 10:11:11",
+          "modify_date": "2012-11-12 10:12:12",
+          "source_unit": "杭州市统计局"
+        }
+      };
+      console.log(jsonPath($scope.json, "$.record.block.node.property[?(@.name=='phase_name')]"));
+      vm.processLists = [];
+      i = 0;
+      while (i < 13) {
+        vm.processLists.push({
+          title: '申请' + i,
+          detail: '申请人：葛航勇',
+          date: '2015.10.20 14:50:07'
+        });
+        i++;
+      }
+      init = function() {
+        var j, len, ref, rows;
+        ref = vm.processLists;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if ((i + 1) % 5 === 1 && parseInt((i + 1) / 5) % 2 !== 0) {
+            rows["class"] = '_last';
+          } else if ((i + 1) % 5 === 1 && parseInt((i + 1) / 5) % 2 === 0) {
+            rows["class"] = '_first';
+          } else if ((((i + 1) % 5) === 0 && parseInt((i + 1) / 5) % 2 !== 0) || (i === vm.processLists.length - 1 && parseInt((i + 1) / 5) % 2 === 0)) {
+            rows["class"] = 'last';
+          } else if ((((i + 1) % 5) === 0 && parseInt((i + 1) / 5) % 2 === 0) || (i === vm.processLists.length - 1 && parseInt((i + 1) / 5) % 2 !== 0)) {
+            rows["class"] = 'first';
+          } else if (parseInt((i + 1) / 5) % 2 === 0) {
+            rows["class"] = 'middle';
+          } else {
+            rows["class"] = '_middle';
+          }
+        }
+      };
       cancel = function() {
         return $mdDialog.cancel();
       };
+      saveTemplate = function() {
+        return moduleTemplateService.createTemplate($scope.data, templateId).then(function(res) {
+          return $mdDialog.hide();
+        }, function(res) {});
+      };
+      vm.saveTemplate = saveTemplate;
       vm.cancel = cancel;
       init();
     }

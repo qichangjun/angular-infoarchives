@@ -12,7 +12,7 @@
     bust: '1_0_15'
   };
 
-  window.hsConfig.baseUrl = 'http://' + '192.168.0.209:8080' + '/infoarchivesapi';
+  window.hsConfig.baseUrl = 'http://' + '192.168.0.156:8080' + '/infoarchivesapi';
 
   window.hsConfig.baseUrl = 'http://' + 'demo.docworks.cn' + '/infoarchivesapi';
 

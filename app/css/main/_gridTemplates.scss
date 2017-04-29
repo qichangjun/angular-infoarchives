@@ -107,7 +107,7 @@ div.ui-grid-cell input.edit-input{
   border-right: none !important;
 }
 .ui-grid-top-panel{
-  background: #ffffff !important;
+  background: #4f93c5 !important;
 }
 .ui-grid-header{
   //border-bottom: none;
@@ -176,8 +176,9 @@ div.ui-grid-cell input.edit-input{
 //}
 
 .ui-grid-pager-control{
-  margin-left: 0px;
+  margin-left: 0;
   margin-top: 18px;
+  margin-right: 8px;
 }
 
 .pagination{
@@ -216,11 +217,13 @@ div.ui-grid-cell input.edit-input{
   border-color: #4F93C5 !important;
 
 }
-
-md-checkbox:not([disabled]).md-primary:not(.md-checked) .md-icon{
-  border-color:#cccecf;
-  background: #ffffff;
-}
 .ui-grid-selection-row-header-buttons{
   opacity: 1;
+}
+.ui-grid-pager-panel{
+  //height: auto;
+  line-height: normal;
+  width: 280px;
+  left: calc(100% - 280px);
+  top: -72px;
 }

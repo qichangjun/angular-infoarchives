@@ -6,14 +6,14 @@
             md-whiteframe="4"
     >
         <div class="select--data--source--box">
-            项目设置
+            <span translate="MODULES_PROJECTMANAGE_PROJECT_SETTINGS">项目设置</span>
             <div class="select--data--source--box__prompt">
                 <span class="fa fa-exclamation-circle"></span>
-                请先创建数据模板
+                <span translate="MODULES_PROJECTMANAGE_PLEASE_CREATE_A_DATA_TEMPLATE">请先创建数据模板</span>
             </div>
             <div class="select--data--source--box__prompt">
                 <span class="fa fa-exclamation-circle"></span>
-                创建了数据模板才能配置策略
+                <span translate="MODULES_PROJECTMANAGE_CREATE_A_DATA_TEMPLATE_TO">创建了数据模板才能配置策略</span>
             </div>
         </div>
         <div class="data--base--column--wrapper project--edit">
@@ -21,26 +21,26 @@
                 <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.basicData')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.basicData'}">
                     <a>
                         <span class="fa fa-info-circle" aria-hidden="true"></span>
-                        项目基本信息
+                        <span translate="MODULES_PROJECTMANAGE_PROJECT_BASIC_INFORMATION">项目基本信息</span>
                     </a>
                 </li>
                 <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.dataModule')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.dataModule'}">
                  <a>
                     <span class="fa fa-sitemap" aria-hidden="true"></span>
-                    数据模版
+                    <span translate="MODULES_PROJECTMANAGE_DATA_TEMPLATE">数据模板</span>
                  </a>
                 </li>
 
-                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.ruleSet')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.ruleSet'}">
-                 <a>
-                    <span class="fa fa-map-signs" aria-hidden="true"></span>
-                    策略设置
-                 </a>
-                </li>
                 <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.moduleTemplate')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.moduleTemplate'}">
                     <a>
+                        <span class="fa fa-th-large" aria-hidden="true"></span>
+                        <span translate="MODULES_PROJECTMANAGE_DISPLAY_TEMPLATE">显示模板</span>
+                    </a>
+                </li>
+                <li class="each--column--box" ng-click="vm.serfTo('infoArchives.projectEdit.ruleSet')" ng-class="{active: vm.currentState == 'infoArchives.projectEdit.ruleSet'}">
+                    <a>
                         <span class="fa fa-map-signs" aria-hidden="true"></span>
-                        模版展现
+                        <span translate="MODULES_PROJECTMANAGE_POLICY_SETTINGS">策略设置</span>
                     </a>
                 </li>
             </ul>

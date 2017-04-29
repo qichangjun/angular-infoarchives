@@ -14,8 +14,8 @@
           if (res.code === '1') {
             return deferred.resolve(res.data);
           } else if (res.code === '10004') {
-            hsAuth.removeUser();
-            return $state.go('login');
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
           } else {
             deferred.reject(res);
             return mdToastService.showToast(res.message);

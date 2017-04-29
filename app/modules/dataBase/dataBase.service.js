@@ -2,33 +2,237 @@
 (function() {
   'use strict';
   angular.module("myApp").service("dataBaseService", [
-    '$log', '$q', '$timeout', 'Restangular', 'hsAPI', 'MockRestangular', 'hsTpl', 'hsAuth', 'mdToastService', 'uuid', function($log, $q, $timeout, Restangular, hsAPI, MockRestangular, hsTpl, hsAuth, mdToastService, uuid) {
-      var dataBase, getDataList, getGridData, getTreeData, recordList;
-      getDataList = function() {
-        var deferred, res;
-        deferred = $q.defer();
-        res = {};
-        res.data = [
-          {
-            displayName: 'db_行政审批系统',
-            objectId: '1'
-          }, {
-            displayName: 'db_医学出生证明系统',
-            objectId: '2'
-          }, {
-            displayName: 'db_婚姻登记系统',
-            objectId: '3'
-          }
-        ];
-        deferred.resolve(res);
-        return deferred.promise;
-      };
-      getGridData = function(info) {
+    '$log', '$q', '$timeout', 'Restangular', 'hsAPI', 'MockRestangular', 'hsTpl', 'hsAuth', 'mdToastService', 'uuid', 'commonMethodSerivce', function($log, $q, $timeout, Restangular, hsAPI, MockRestangular, hsTpl, hsAuth, mdToastService, uuid, commonMethodSerivce) {
+      var dataBase, downloadFile, exportList, getBasicInfo, getGridData, getRecordDetail, getRecordJson, getSourceData, getUnitData, recordList;
+      downloadFile = function(ids) {
         var deferred;
         deferred = $q.defer();
-        info.accessUser = hsAuth.getAccessKey();
-        info.accessToken = hsAuth.getAccessToken();
-        Restangular.one(hsAPI['getRecordList']).get(info).then(function(res) {
+        Restangular.one(hsAPI['recordDownload']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          ids: ids
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      exportList = function(parameter) {
+        var columns, deferred, info, orders;
+        info = angular.copy(parameter);
+        deferred = $q.defer();
+        if (parameter.sortField && parameter.sortWay) {
+          orders = [
+            {
+              column: parameter.sortField,
+              direction: parameter.sortWay
+            }
+          ];
+        } else {
+          orders = [];
+        }
+        columns = [];
+        if (info.source_unit) {
+          columns.push(commonMethodSerivce.initColumn('sourceUnit', 'EQUAL', 'string', info.source_unit));
+        }
+        if (info.system_name) {
+          columns.push(commonMethodSerivce.initColumn('systemName', 'EQUAL', 'string', info.system_name));
+        }
+        if (info.business_matter) {
+          columns.push(commonMethodSerivce.initColumn('businessMatter', 'EQUAL', 'string', info.business_matter));
+        }
+        if (info.startDate) {
+          columns.push(commonMethodSerivce.initColumn('createDate', 'GREATER_THAN', 'date', info.startDate));
+        }
+        if (info.endDate) {
+          columns.push(commonMethodSerivce.initColumn('createDate', 'LESS_THAN', 'date', info.endDate));
+        }
+        if (info.name) {
+          columns.push(commonMethodSerivce.initColumn('name', 'LIKE', 'string', info.name));
+        }
+        if (info.batchId) {
+          columns.push(commonMethodSerivce.initColumn('batchCode', 'EQUAL', 'string', info.batchId));
+        }
+        Restangular.all(hsAPI['recordExportList'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          columns: columns,
+          orders: orders,
+          page: info.currentPage,
+          length: info.pageSize
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getBasicInfo = function() {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getRecordCount']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getRecordDetail = function(parameter) {
+        var columns, deferred, info, orders;
+        info = angular.copy(parameter);
+        deferred = $q.defer();
+        orders = [];
+        columns = [];
+        if (info.source_unit) {
+          columns.push(commonMethodSerivce.initColumn('sourceUnit', 'EQUAL', 'string', info.source_unit));
+        }
+        if (info.system_name) {
+          columns.push(commonMethodSerivce.initColumn('systemName', 'EQUAL', 'string', info.system_name));
+        }
+        if (info.business_matter) {
+          columns.push(commonMethodSerivce.initColumn('businessMatter', 'EQUAL', 'string', info.business_matter));
+        }
+        Restangular.all(hsAPI['getRecordDetail'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          columns: columns,
+          orders: orders,
+          page: 1,
+          length: 50
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getGridData = function(parameter) {
+        var columns, deferred, info, orders;
+        info = angular.copy(parameter);
+        deferred = $q.defer();
+        if (parameter.sortField && parameter.sortWay) {
+          orders = [
+            {
+              column: parameter.sortField,
+              direction: parameter.sortWay
+            }
+          ];
+        } else {
+          orders = [];
+        }
+        columns = [];
+        if (info.source_unit) {
+          columns.push(commonMethodSerivce.initColumn('sourceUnit', 'EQUAL', 'string', info.source_unit));
+        }
+        if (info.system_name) {
+          columns.push(commonMethodSerivce.initColumn('systemName', 'EQUAL', 'string', info.system_name));
+        }
+        if (info.business_matter) {
+          columns.push(commonMethodSerivce.initColumn('businessMatter', 'EQUAL', 'string', info.business_matter));
+        }
+        if (info.startDate) {
+          columns.push(commonMethodSerivce.initColumn('create_Date', 'GREATER_THAN', 'date', info.startDate));
+        }
+        if (info.endDate) {
+          columns.push(commonMethodSerivce.initColumn('createDate', 'LESS_THAN', 'date', info.endDate));
+        }
+        if (info.name) {
+          columns.push(commonMethodSerivce.initColumn('name', 'LIKE', 'string', info.name));
+        }
+        if (info.batchId) {
+          columns.push(commonMethodSerivce.initColumn('batchCode', 'EQUAL', 'string', info.batchId));
+        }
+        if (info.batchStatus) {
+          columns.push(commonMethodSerivce.initColumn('batchStatus', 'EQUAL', 'int', info.batchStatus));
+        }
+        Restangular.all(hsAPI['getRecordList'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
+          columns: columns,
+          orders: orders,
+          page: info.currentPage,
+          length: info.pageSize
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getUnitData = function() {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getUnitData']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getSourceData = function() {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getSourceData']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      getRecordJson = function(recordCode) {
+        var deferred;
+        deferred = $q.defer();
+        Restangular.one(hsAPI['getRecordJson']).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken(),
+          recordCode: recordCode
+        }).then(function(res) {
           if (res.code === '1') {
             return deferred.resolve(res.data);
           } else {
@@ -46,109 +250,83 @@
           name: 'SipId',
           headerCellFilter: 'translate',
           displayName: '批次号',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'dataPath',
           headerCellFilter: 'translate',
           displayName: '数据位置',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'dataSize',
           headerCellFilter: 'translate',
           displayName: '数据大小',
-          minWidth: 50,
+          minWidth: 60,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'startData',
           headerCellFilter: 'translate',
           displayName: '开始事件',
-          minWidth: 50,
+          minWidth: 60,
           cellTemplate: hsTpl.hsCellTemplate
         }
       ];
-      getTreeData = function(units, shixiangnums) {
-        var data, i, x;
-        units = parseInt(Math.random() * 25 + 5, 10);
-        data = {
-          "name": "Root",
-          "objectId": uuid.v4(),
-          "children": []
-        };
-        i = 0;
-        while (i < units) {
-          data.children.push({
-            name: '单位' + i,
-            objectId: uuid.v4(),
-            type: 'unit',
-            children: []
-          });
-          x = 0;
-          shixiangnums = parseInt(Math.random() * 10, 10);
-          while (x < shixiangnums) {
-            data.children[i].children.push({
-              name: '单位' + i + '事项' + x,
-              type: 'items',
-              children: [],
-              objectId: uuid.v4()
-            });
-            x++;
-          }
-          i++;
-        }
-        return data;
-      };
       recordList = [
         {
-          name: 'archivalId',
+          field: 'archivalId',
           headerCellFilter: 'translate',
           displayName: '档号',
           minWidth: 50,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'batchCode',
+          field: 'batchCode',
           headerCellFilter: 'translate',
           displayName: '批次号',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'businessCode',
+          field: 'businessCode',
           headerCellFilter: 'translate',
           displayName: '业务流水号',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'name',
+          field: 'name',
           headerCellFilter: 'translate',
           displayName: '事项名称',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'recordCode',
+          field: 'recordCode',
           headerCellFilter: 'translate',
           displayName: '证照编号',
-          minWidth: 50,
+          minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'createDate',
+          field: 'createDate',
           headerCellFilter: 'translate',
           displayName: '创建时间',
-          minWidth: 50,
+          minWidth: 150,
           cellTemplate: 'modules/dataBase/template/ui-grid-template/grid-recordList-createDate.html'
         }, {
-          name: 'modifyDate',
+          field: 'modifyDate',
           headerCellFilter: 'translate',
           displayName: '修改时间',
-          minWidth: 50,
+          minWidth: 150,
           cellTemplate: 'modules/dataBase/template/ui-grid-template/grid-recordList-modifyDate.html'
         }
       ];
-      this.recordList = recordList;
-      this.getTreeData = getTreeData;
-      this.dataBase = dataBase;
+      this.getRecordJson = getRecordJson;
+      this.downloadFile = downloadFile;
+      this.getRecordDetail = getRecordDetail;
+      this.getBasicInfo = getBasicInfo;
+      this.getSourceData = getSourceData;
+      this.getUnitData = getUnitData;
       this.getGridData = getGridData;
-      this.getDataList = getDataList;
+      this.exportList = exportList;
+      this.dataBase = dataBase;
+      this.recordList = recordList;
     }
   ]);
 

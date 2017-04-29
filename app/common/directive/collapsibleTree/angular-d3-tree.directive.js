@@ -10,7 +10,8 @@
         height: '=',
         radius: '=',
         nodes: '=',
-        editAble: '='
+        editAble: '=',
+        hasNode: '='
       },
       link: function(scope, element) {
         $timeout(function() {
@@ -73,9 +74,13 @@
             if (parent) {
               if (parent.type === 'node') {
 
+              } else if (scope.hasNode === true && !d.hasNode) {
+
               } else {
                 return checkisNodeChild(toolContainer, d, parent.parent);
               }
+            } else if (scope.hasNode === true && !d.hasNode) {
+
             } else {
               return append_addNodeButton(toolContainer, d);
             }
@@ -238,7 +243,6 @@
               if (d.name.length > 8) {
                 d.name = d.name.substring(0, 8) + '...';
               }
-              console.log(stringGetLength(d.name));
               return '1em';
             }).attr('dy', '1em').attr('id', function(d) {
               return 'text' + d.code;

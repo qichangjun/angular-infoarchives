@@ -1,11 +1,11 @@
-<div class="anim-slide-right data--base--sidenav data--error " >
+<div class="anim-slide-left data--base--sidenav data--error " >
     <md-sidenav
-            class="anim-slide-right pull--left data--base--wrapper "
+            class=" pull--left data--base--wrapper "
             md-component-id="left"
             md-is-locked-open="true"
             md-whiteframe="4"
     >
-        <div class="select--data--source--box">
+        <div class="select--data--source--box" translate="MODULES_BATCH_SELECT_DATA_SOURCE">
             选择数据源
         </div>
         <div class="data--base--column--wrapper">
@@ -13,7 +13,7 @@
                 <!--<md-subheader class="md-no-sticky"></md-subheader>-->
                 <li class="each--column--box" ng-repeat="item in vm.dataBases" ng-click="vm.getBaseData(item.id)"  ng-class="{active: vm.parameter.projectId == item.id}">
                     <a>
-                        <span class="fa fa-database" aria-hidden="true"></span>
+                        <span class="fa fa-cube" aria-hidden="true"></span>
                         {{ item.projectName }}
                     </a>
                 </li>
@@ -32,50 +32,51 @@
         <!--</div>-->
         <div class="filter--properties--box clearfix" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]" style="transition: all 0.3s ease-in-out;">
             <div class="single--attribute--box">
-                <span class="attribute--title">批次状态</span>
-                <div class="attribute--value">
+                <span class="attribute--title" translate="MODULES_BATCH_BATCH_STATUS">批次状态</span><div class="attribute--value">
                     <md-select ng-model="vm.parameter.batch_status"
                     >
-                        <md-option ng-value="'0,1,2,3,4'" >运行中</md-option>
-                        <md-option ng-value="'5'" >已完成</md-option>
-                        <md-option ng-value="'6'" >异常</md-option>
-                        <md-option ng-value="'all'" >所有</md-option>
+                        <md-option ng-value="'0,1,2,3,4'" translate="MODULES_BATCH_IN_OPERATION">运行中</md-option>
+                        <md-option ng-value="'5'" translate="MODULES_BATCH_COMPLETED">已完成</md-option>
+                        <md-option ng-value="'6'" translate="MODULES_BATCH_ABNORMAL">异常</md-option>
+                        <md-option ng-value="'all'" translate="MODULES_BATCH_ALL">所有</md-option>
                     </md-select>
                 </div>
             </div>
             <div class="single--attribute--box" ng-if="vm.parameter.batch_status == '5' || vm.parameter.batch_status=='all' ">
-                <span class="attribute--title">异常处置：</span>
-                <div class="attribute--value">
+                <span class="attribute--title"><span translate="MODULES_BATCH_ABNORMAL_DISPOSAL">异常处置</span>：</span><div class="attribute--value">
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);"-->
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);"-->
                     <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('1')" ng-click="vm.changeBehavior('1')"
                                  aria-label="Checkbox 1">
-                        <span >强制转换</span>
+                        <span translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</span>
                     </md-checkbox>
                     <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('2')" ng-click="vm.changeBehavior('2')"
                                  aria-label="Checkbox 1">
-                        <span >删除</span>
+                        <span translate="MODULES_BATCH_DELETE">删除</span>
                     </md-checkbox>
                 </div>
             </div>
-            <md-button class="pull-right green--btn" ng-click="vm.search()">过滤</md-button>
+            <md-button class="pull-right green--btn" ng-click="vm.search()" translate="MODULES_BATCH_FILTER">过滤</md-button>
             <div class="single--attribute--box time--frame">
-                <span class="attribute--title">时间范围</span>
-                <div  layout="row" class="attribute--value">
-                    <div class="input-group">
-                        <input type="text" class="form-control"   uib-datepicker-popup ng-model="vm.parameter.start_date" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="关闭" />
+                <span class="let--middle--line"></span>
+                <div class="time--frame__box">
+                    <span class="attribute--title" translate="MODULES_BATCH_TIME_FRAME">时间范围</span>
+                    <div  layout="row" class="attribute--value">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="{{'MODULES_BATCH_START_DATE'|translate}}"  uib-datepicker-popup ng-model="vm.parameter.start_date" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
+                        </div>
                     </div>
-                </div>
-                <span class="time--frame__sign">-</span>
-                <div  layout="row" class="attribute--value">
-                    <div class="input-group">
-                        <input type="text" class="form-control"  uib-datepicker-popup ng-model="vm.parameter.end_date" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="关闭" />
+                    <span class="time--frame__sign">-</span>
+                    <div  layout="row" class="attribute--value">
+                        <div class="input-group">
+                            <input type="text" class="form-control" placeholder="{{'MODULES_BATCH_DEADLINE'|translate}}"  uib-datepicker-popup ng-model="vm.parameter.end_date" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup3.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -83,12 +84,12 @@
     </div>
     <div class="batch--grid--wrap">
         <div class="clearfix operation--box">
-            <md-button class="pull-left md-raised green--btn" ng-click="vm.exportList()">导出批次清单</md-button>
-            <md-button class="pull-left md-raised green--btn" ng-disabled="!vm.selectIsError" ng-click="vm.forceSwitch()">强制转换</md-button>
-            <md-button class="pull-left md-raised red--btn" ng-disabled="!vm.selectIsError" ng-click="vm.deleteBatch()">删除异常数据</md-button>
+            <md-button class="pull-left md-raised green--btn" ng-click="vm.exportList()" translate="MODULES_BATCH_EXPORT_BATCH_LIST">导出批次清单</md-button>
+            <md-button class="pull-left md-raised green--btn" ng-disabled="!vm.selectIsError" ng-click="vm.forceSwitch()" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</md-button>
+            <md-button class="pull-left md-raised red--btn" ng-disabled="!vm.selectIsError" ng-click="vm.deleteBatch()" translate="MODULES_BATCH_DELETE_ABNORMAL_DATA">删除异常数据</md-button>
         </div>
-        <div ng-show="gridOptions.data.length > 0 && !vm.loading" ui-grid="gridOptions" style="height: calc(100% - 100px);" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
-        <div ng-if="gridOptions.data.length == 0" class="no--data"><span class="fa fa-exclamation-circle"></span>没有数据</div>
+        <div ng-if="gridOptions.data.length > 0 && !vm.loading" ui-grid="gridOptions" style="height: calc(100% - 100px);" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
+        <div ng-if="gridOptions.data.length == 0" class="no--data"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span></div>
     </div>
     <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
         <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>

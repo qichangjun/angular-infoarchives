@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("dataBaseController", [
-    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', '$timeout', 'batchService', '$mdSidenav', 'mdDialogService', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, $timeout, batchService, $mdSidenav, mdDialogService) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, changeChartType, checkData, closeSideBar, filterData, getItems, getTreeData, getUnits, init, listenEvent, vm;
+    '$scope', '$log', 'dataBaseService', '$stateParams', '$state', 'initGrid', '$timeout', 'batchService', '$mdSidenav', 'mdDialogService', 'uuid', function($scope, $log, dataBaseService, $stateParams, $state, initGrid, $timeout, batchService, $mdSidenav, mdDialogService, uuid) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, biggerSvg, changeChartType, checkData, closeSideBar, createFilterFor, filterData, getBasicInfo, getItems, getTreeData, getUnits, init, listenEvent, querySearch, smallerSvg, vm;
       vm = this;
       vm.parameter = $stateParams;
       if (!vm.parameter.chartType) {
@@ -11,104 +11,236 @@
       }
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
       init = function() {
-        $scope.gridOptions = {};
-        initGrid.getScope($scope);
-        initGrid.getGrid();
         getTreeData();
         listenEvent();
+        getBasicInfo();
       };
       getTreeData = function() {
         return $timeout(function() {
-          vm.parameter.item = 'all';
-          vm.parameter.unit = 'all';
+          vm.parameter.item = {
+            objectId: 'all',
+            name: '所有'
+          };
+          vm.parameter.unit = {
+            objectId: 'all',
+            name: '所有'
+          };
           if (vm.parameter.chartType === 'unit') {
-            $scope.data = dataBaseService.getTreeData();
+            return dataBaseService.getUnitData().then(function(res) {
+              var i, items, j, k, len, len1, ref, rows, x;
+              for (i = j = 0, len = res.length; j < len; i = ++j) {
+                rows = res[i];
+                rows.objectId = uuid.v4();
+                if (rows.children) {
+                  ref = rows.children;
+                  for (x = k = 0, len1 = ref.length; k < len1; x = ++k) {
+                    items = ref[x];
+                    items.objectId = uuid.v4();
+                  }
+                }
+              }
+              $scope.data = {
+                name: 'Root',
+                children: res,
+                objectId: uuid.v4()
+              };
+              getUnits();
+              return getItems();
+            }, function(res) {});
           } else if (vm.parameter.chartType === 'source') {
-            $scope.data = dataBaseService.getTreeData();
+            return dataBaseService.getSourceData().then(function(res) {
+              var i, items, j, k, len, len1, ref, rows, x;
+              for (i = j = 0, len = res.length; j < len; i = ++j) {
+                rows = res[i];
+                rows.objectId = uuid.v4();
+                if (rows.children) {
+                  ref = rows.children;
+                  for (x = k = 0, len1 = ref.length; k < len1; x = ++k) {
+                    items = ref[x];
+                    items.objectId = uuid.v4();
+                  }
+                }
+              }
+              $scope.data = {
+                name: 'Root',
+                children: res,
+                objectId: uuid.v4()
+              };
+              getUnits();
+              return getItems();
+            }, function(res) {});
           }
-          getUnits();
-          return getItems();
         });
       };
+      getBasicInfo = function() {
+        return dataBaseService.getBasicInfo().then(function(res) {
+          return vm.basicInfo = res;
+        }, function(res) {});
+      };
       getItems = function() {
-        var i, items, j, len, ref, results, rows, x;
+        var i, items, j, len, ref, results1, rows, x;
         vm.itemLists = [];
-        ref = $scope.data.children;
-        results = [];
-        for (i = j = 0, len = ref.length; j < len; i = ++j) {
-          rows = ref[i];
-          if (vm.parameter.unit) {
-            if (rows.objectId === vm.parameter.unit) {
-              results.push((function() {
-                var k, len1, ref1, results1;
+        if ($scope.data) {
+          ref = $scope.data.children;
+          results1 = [];
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (vm.parameter.unit && vm.parameter.unit.objectId !== 'all') {
+              if (rows.objectId === vm.parameter.unit.objectId) {
+                results1.push((function() {
+                  var k, len1, ref1, results2;
+                  ref1 = rows.children;
+                  results2 = [];
+                  for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
+                    items = ref1[x];
+                    results2.push(vm.itemLists.push(items));
+                  }
+                  return results2;
+                })());
+              } else {
+                results1.push(void 0);
+              }
+            } else {
+              results1.push((function() {
+                var k, len1, ref1, results2;
                 ref1 = rows.children;
-                results1 = [];
+                results2 = [];
                 for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
                   items = ref1[x];
-                  results1.push(vm.itemLists.push(items));
+                  results2.push(vm.itemLists.push(items));
                 }
-                return results1;
+                return results2;
               })());
-            } else {
-              results.push(void 0);
             }
-          } else {
-            results.push((function() {
-              var k, len1, ref1, results1;
-              ref1 = rows.children;
-              results1 = [];
-              for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
-                items = ref1[x];
-                results1.push(vm.itemLists.push(items));
-              }
-              return results1;
-            })());
           }
+          return results1;
         }
-        return results;
       };
       getUnits = function() {
-        var i, j, len, ref, results, rows;
+        var i, j, len, ref, results1, rows;
         vm.unitLists = [];
         ref = $scope.data.children;
-        results = [];
+        results1 = [];
         for (i = j = 0, len = ref.length; j < len; i = ++j) {
           rows = ref[i];
-          results.push(vm.unitLists.push(rows));
+          results1.push(vm.unitLists.push(rows));
         }
-        return results;
+        return results1;
       };
       listenEvent = function() {
         return $scope.$on('treeChart:selectNode', function(ev, d) {
-          return $timeout(function() {
-            if (d.type === 'items') {
-              vm.entity = d;
-              $mdSidenav('tree-data-node-detail').open();
+          var parameter;
+          if (d.type === 'items') {
+            vm.parameter.unit = {
+              objectId: d.parent.objectId,
+              name: d.parent.name
+            };
+            vm.parameter.item = {
+              objectId: d.objectId,
+              name: d.name
+            };
+            getItems();
+            filterData();
+            if (vm.parameter.chartType === 'unit') {
+              parameter = {};
+              parameter.source_unit = d.parent.name;
+              parameter.business_matter = d.name;
+              vm.loadingDetail = true;
+              dataBaseService.getRecordDetail(parameter).then(function(res) {
+                vm.loadingDetail = false;
+                vm.entity = res;
+                vm.entity.unitName = parameter.source_unit;
+                vm.entity.itemName = parameter.business_matter;
+                return console.log(vm.entity);
+              }, function(res) {
+                vm.loadingDetail = false;
+              });
+            } else if (vm.parameter.chartType === 'source') {
+              parameter = {};
+              parameter.system_name = d.parent.name;
+              parameter.business_matter = d.name;
+              vm.loadingDetail = true;
+              dataBaseService.getRecordDetail(parameter).then(function(res) {
+                vm.loadingDetail = false;
+                vm.entity = res;
+                vm.entity.systemName = parameter.system_name;
+                return vm.entity.itemName = parameter.business_matter;
+              }, function(res) {
+                vm.loadingDetail = false;
+              });
             }
-            if (!d) {
-              vm.entity = {};
-              return $mdSidenav('tree-data-node-detail').close();
-            }
-          });
+            $mdSidenav('tree-data-node-detail').open();
+            return $timeout(function() {
+              return vm.parameter.item = {
+                objectId: d.objectId,
+                name: d.name
+              };
+            });
+          } else if (!d) {
+            vm.entity = {};
+            vm.parameter.item = {
+              objectId: 'all',
+              name: '所有'
+            };
+            vm.parameter.unit = {
+              objectId: 'all',
+              name: '所有'
+            };
+            return $mdSidenav('tree-data-node-detail').close();
+          }
         });
       };
       changeChartType = function(chartType) {
-        return $state.go('.', vm.parameter, {
+        $state.go('.', vm.parameter, {
           notify: false
         });
+        return getTreeData();
       };
       checkData = function(event) {
-        return mdDialogService.initCustomDialog('checkDataController', PAHT_OF_TEMPLATE_MDDIALOG + 'checkData.html?' + window.hsConfig.bust, event, null).then(function(res) {}, function(res) {});
+        return mdDialogService.initCustomDialog('checkDataController', PAHT_OF_TEMPLATE_MDDIALOG + 'checkData.html?' + window.hsConfig.bust, event, {
+          info: vm.entity
+        }).then(function(res) {}, function(res) {});
       };
       closeSideBar = function() {
         return $mdSidenav('tree-data-node-detail').close();
       };
       filterData = function() {
-        $scope.$broadcast('tree:filter', vm.parameter.unit, vm.parameter.item);
+        var _item, _unit;
+        if (!vm.parameter.unit) {
+          _unit = 'all';
+        } else {
+          _unit = vm.parameter.unit.objectId || 'all';
+        }
+        if (!vm.parameter.item) {
+          _item = 'all';
+        } else {
+          _item = vm.parameter.item.objectId || 'all';
+        }
+        $scope.$broadcast('tree:filter', _unit, _item);
         getItems();
-        vm.entity = {};
-        return $mdSidenav('tree-data-node-detail').close();
+        return vm.entity = {};
       };
+      biggerSvg = function() {
+        return $scope.$broadcast('svg:bigger');
+      };
+      smallerSvg = function() {
+        return $scope.$broadcast('svg:smaller');
+      };
+      querySearch = function(query, lists) {
+        var results;
+        results = query ? lists.filter(createFilterFor(query)) : lists;
+        return results;
+      };
+      createFilterFor = function(query) {
+        var lowercaseQuery;
+        lowercaseQuery = angular.lowercase(query);
+        return function(state) {
+          return state.name.indexOf(lowercaseQuery) >= 0;
+        };
+      };
+      vm.querySearch = querySearch;
+      vm.smallerSvg = smallerSvg;
+      vm.biggerSvg = biggerSvg;
       vm.getTreeData = getTreeData;
       vm.filterData = filterData;
       vm.closeSideBar = closeSideBar;
@@ -117,13 +249,16 @@
       init();
     }
   ]).controller('checkDataController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'i18nService', 'hsTpl', 'mdDialogService', function($scope, $log, $stateParams, $mdDialog, dataBaseService, i18nService, hsTpl, mdDialogService) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, cancel, getGridData, init, initGrid, previewDoc, vm;
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'i18nService', 'hsTpl', 'mdDialogService', '$timeout', 'info', '$window', '$state', function($scope, $log, $stateParams, $mdDialog, dataBaseService, i18nService, hsTpl, mdDialogService, $timeout, info, $window, $state) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, cancel, downloadFile, exportList, getGridData, init, initGrid, previewDoc, vm;
       vm = this;
       vm.parameter = {};
       vm.parameter.currentPage = 1;
       vm.parameter.pageSize = 50;
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
+      vm.parameter.business_matter = info.itemName;
+      vm.parameter.source_unit = info.unitName;
+      vm.parameter.system_name = info.systemName;
       init = function() {
         getGridData();
         return initGrid();
@@ -158,52 +293,193 @@
               }
             };
             $scope.gridApi = gridApi;
-            return gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
+            gridApi.pagination.on.paginationChanged($scope, function(newPage, pageSize) {
               if (!(vm.parameter.currentPage === newPage && vm.parameter.pageSize === pageSize)) {
                 vm.parameter.currentPage = newPage;
                 vm.parameter.pageSize = pageSize;
                 return getGridData();
               }
             });
+            return gridApi.core.on.sortChanged($scope, function(grid, sortColumns) {
+              if (sortColumns.length === 0) {
+                vm.parameter.sortWay = null;
+                vm.parameter.sortField = null;
+              } else {
+                vm.parameter.sortWay = sortColumns[0].sort.direction.toLocaleUpperCase();
+                vm.parameter.sortField = sortColumns[0].name;
+              }
+              return getGridData();
+            });
           }
         };
       };
       getGridData = function() {
-        vm.loading = true;
-        return dataBaseService.getGridData(vm.parameter).then(function(res) {
-          var column, j, len, ref, results;
-          vm.loading = false;
-          $scope.gridOptions.data = res.recordList;
-          $scope.gridOptions.totalItems = res.pageInfo.totalCount;
-          $scope.gridOptions.columnDefs = dataBaseService.recordList;
-          $scope.gridOptions.columnVirtualizationThreshold = dataBaseService.recordList.length;
-          ref = $scope.gridOptions.columnDefs;
-          results = [];
-          for (j = 0, len = ref.length; j < len; j++) {
-            column = ref[j];
-            results.push(column.enableColumnMenu = false);
-          }
-          return results;
-        }, function(res) {});
+        return $timeout(function() {
+          vm.loading = true;
+          return dataBaseService.getGridData(vm.parameter).then(function(res) {
+            var column, j, len, ref, results1;
+            vm.loading = false;
+            $scope.gridOptions.data = res.content;
+            $scope.gridOptions.totalItems = res.totalElements;
+            $scope.gridOptions.columnDefs = dataBaseService.recordList;
+            $scope.gridOptions.columnVirtualizationThreshold = dataBaseService.recordList.length;
+            ref = $scope.gridOptions.columnDefs;
+            results1 = [];
+            for (j = 0, len = ref.length; j < len; j++) {
+              column = ref[j];
+              results1.push(column.enableColumnMenu = false);
+            }
+            return results1;
+          }, function(res) {});
+        }, 500);
       };
       cancel = function() {
         return $mdDialog.cancel();
       };
       previewDoc = function(event) {
-        return mdDialogService.initCustomDialog('previewDocController', PAHT_OF_TEMPLATE_MDDIALOG + 'previewDoc.html?' + window.hsConfig.bust, event, {
-          objectId: $scope.gridApi.selection.getSelectedRows()[0].objectId
-        }).then(function(res) {}, function(res) {});
+        return $window.open($state.href('previewRecord', {
+          templateId: $scope.gridApi.selection.getSelectedRows()[0].templateId,
+          recordId: $scope.gridApi.selection.getSelectedRows()[0].recordCode,
+          businessCode: $scope.gridApi.selection.getSelectedRows()[0].businessCode
+        }));
       };
+      exportList = function() {
+        return dataBaseService.exportList(vm.parameter).then(function(res) {
+          return window.location.href = res.downloadUrl;
+        }, function(res) {});
+      };
+      downloadFile = function() {
+        var _ids, i, j, len, ref, rows;
+        _ids = [];
+        ref = $scope.gridApi.selection.getSelectedRows();
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          _ids.push(rows.id);
+        }
+        return dataBaseService.downloadFile(_ids).then(function(res) {
+          return window.location.href = res.downloadUrl;
+        }, function(res) {});
+      };
+      vm.downloadFile = downloadFile;
+      vm.exportList = exportList;
+      vm.getGridData = getGridData;
       vm.previewDoc = previewDoc;
       vm.cancel = cancel;
       init();
     }
   ]).controller('previewDocController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'objectId', function($scope, $log, $stateParams, $mdDialog, dataBaseService, objectId) {
-      var cancel, init, vm;
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'recordId', 'templateId', 'moduleTemplateService', 'mdDialogService', 'businessCode', function($scope, $log, $stateParams, $mdDialog, dataBaseService, recordId, templateId, moduleTemplateService, mdDialogService, businessCode) {
+      var PAHT_OF_TEMPLATE_MDDIALOG, cancel, getJsonData, getShowTemplate, init, initProcess, showProcessDetail, vm;
       vm = this;
-      vm.objectId = objectId;
-      init = function() {};
+      vm.parameter = {};
+      vm.parameter.templateId = templateId;
+      vm.parameter.recordCode = recordId;
+      vm.businessCode = businessCode;
+      PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
+      init = function() {
+        getJsonData();
+      };
+      getJsonData = function() {
+        return dataBaseService.getRecordJson(vm.parameter.recordCode).then(function(res) {
+          $scope.jsonData = res.jsonRecord;
+          return getShowTemplate();
+        }, function(res) {});
+      };
+      initProcess = function() {
+        var i, j, len, ref, results1, rows;
+        ref = vm.processLists;
+        results1 = [];
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if ((i + 1) % 5 === 1 && parseInt((i + 1) / 5) % 2 !== 0) {
+            results1.push(rows["class"] = '_last');
+          } else if ((i + 1) % 5 === 1 && parseInt((i + 1) / 5) % 2 === 0) {
+            results1.push(rows["class"] = '_first');
+          } else if ((((i + 1) % 5) === 0 && parseInt((i + 1) / 5) % 2 !== 0) || (i === vm.processLists.length - 1 && parseInt((i + 1) / 5) % 2 === 0)) {
+            results1.push(rows["class"] = 'last');
+          } else if ((((i + 1) % 5) === 0 && parseInt((i + 1) / 5) % 2 === 0) || (i === vm.processLists.length - 1 && parseInt((i + 1) / 5) % 2 !== 0)) {
+            results1.push(rows["class"] = 'first');
+          } else if (parseInt((i + 1) / 5) % 2 === 0) {
+            results1.push(rows["class"] = 'middle');
+          } else {
+            results1.push(rows["class"] = '_middle');
+          }
+        }
+        return results1;
+      };
+      getShowTemplate = function() {
+        return moduleTemplateService.getTemplate(vm.parameter.templateId).then(function(res) {
+          var i, items, j, k, l, len, len1, len2, ref, ref1, ref2, rows, x;
+          if (res) {
+            $scope.data = JSON.parse(res.showTemplate);
+            if ($scope.data) {
+              ref = $scope.data;
+              for (i = j = 0, len = ref.length; j < len; i = ++j) {
+                rows = ref[i];
+                if (rows.data && rows.data.length > 0) {
+                  ref1 = rows.data;
+                  for (x = k = 0, len1 = ref1.length; k < len1; x = ++k) {
+                    items = ref1[x];
+                    items.value = jsonPath($scope.jsonData, items.jsonPath);
+                  }
+                }
+              }
+            }
+            vm.process_lists = jsonPath($scope.jsonData, '$..*.node');
+            vm.processLists = [];
+            if (vm.process_lists) {
+              ref2 = vm.process_lists;
+              for (i = l = 0, len2 = ref2.length; l < len2; i = ++l) {
+                rows = ref2[i];
+                if (rows instanceof Array) {
+                  vm.processLists = vm.processLists.concat(rows);
+                } else {
+                  vm.processLists.push(rows);
+                }
+              }
+              return initProcess();
+            }
+          }
+        }, function(res) {});
+      };
+      cancel = function() {
+        return $mdDialog.cancel();
+      };
+      showProcessDetail = function(info) {
+        return mdDialogService.initCustomDialog('showProcessDetailController', PAHT_OF_TEMPLATE_MDDIALOG + 'showProcessDetail.html?' + window.hsConfig.bust, event, {
+          info: info
+        }).then(function(res) {}, function(res) {});
+      };
+      vm.showProcessDetail = showProcessDetail;
+      vm.cancel = cancel;
+      init();
+    }
+  ]).controller('showProcessDetailController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'info', function($scope, $log, $stateParams, $mdDialog, dataBaseService, info) {
+      var cancel, getBlock, init, vm;
+      vm = this;
+      init = function() {
+        vm.entity = info;
+        vm.blockLists = [];
+        getBlock(info);
+      };
+      getBlock = function(_json) {
+        var key, results1;
+        results1 = [];
+        for (key in _json) {
+          if (key === 'block') {
+            if (!_json[key] instanceof Array) {
+              vm.blockLists.push(_json[key]);
+            } else {
+              vm.blockLists = vm.blockLists.concat(_json[key]);
+            }
+            results1.push(getBlock(_json[key]));
+          } else {
+            results1.push(void 0);
+          }
+        }
+        return results1;
+      };
       cancel = function() {
         return $mdDialog.cancel();
       };

@@ -61,12 +61,17 @@
         vertical-align: middle;
         max-width: 245px;
         min-width: 55px;
+        margin-right: 5px;
         .progress-striped{
           display: inline-block;
           height: 11px;
           width: 100px;
           margin: 0 5px 0 0;
         }
+      }
+      a{
+        display: inline-block;
+        vertical-align: middle;
       }
       .sidebar--progress--time{
         font-size: 12px;
@@ -96,6 +101,7 @@
   right: 15px;
   bottom: 0;
   border: 1px solid #dbe1e4;
+  min-width: 850px;
   .operation--box{
     background: #f5f5f5;
     padding: 15px;
@@ -119,9 +125,8 @@
   //}
 }
 .check--error--list--modal{
-  .operation--box{
-    margin: 10px 0 12px 0;
-  }
+  width: 90%;
+
   &_content{
     //.ui-grid-header-cell .sortable {
     //  border: none;
@@ -131,6 +136,14 @@
     //  color: #ffffff;
     //  font-weight: normal;
     //}
+    border: 1px solid #dbe1e4;
+    //border-bottom: none;
+    margin: 15px;
+    padding-bottom: 15px;
+    .operation--box{
+      background: #f5f5f5;
+      padding: 15px;
+    }
   }
 }
 
@@ -162,4 +175,10 @@
       }
     }
   }
+}
+
+.let--middle--line{
+  height: 36px;
+  display: inline-block;
+  vertical-align: middle;
 }

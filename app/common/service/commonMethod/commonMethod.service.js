@@ -2,7 +2,7 @@
   'use strict';
   angular.module("myApp").service("commonMethodSerivce", [
     '$log', function($log) {
-      var includeInArr, initColumn, isArrRepeat;
+      var includeInArr, initColumn, isArrRepeat, sortArrBy;
       isArrRepeat = function(arr) {
         var counts, i, item, len, out;
         len = arr.length;
@@ -37,6 +37,35 @@
           value: value
         };
       };
+      sortArrBy = function(name) {
+        return function(o, p) {
+          var a, b;
+          a = void 0;
+          b = void 0;
+          if (typeof o === 'object' && typeof p === 'object' && o && p) {
+            a = o[name];
+            b = p[name];
+            if (a === b) {
+              return 0;
+            }
+            if (typeof a === typeof b) {
+              if (a < b) {
+                return -1;
+              } else {
+                return 1;
+              }
+            }
+            if (typeof a < typeof b) {
+              return -1;
+            } else {
+              return 1;
+            }
+          } else {
+            throw 'error';
+          }
+        };
+      };
+      this.sortArrBy = sortArrBy;
       this.initColumn = initColumn;
       this.includeInArr = includeInArr;
       this.isArrRepeat = isArrRepeat;

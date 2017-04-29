@@ -1,16 +1,19 @@
 <div class="anim-slide-left service--watch--wrap">
-    <div class="service--watch--prompt--wrap">
-        <div class="title">后台任务监控</div>
-        <div class="prompt--content">在这里可以查看后台运行的JOB是否正常，或者进行启动、停止的操作</div>
-    </div>
-
+    <md-content>
+        <md-list-item class="md-2-line service--watch--prompt--wrap">
+            <div class="md-list-item-text">
+                <h3 class="title">服务监控</h3>
+                <p class="prompt--content">InfoArchives的服务状态在此显示</p>
+            </div>
+        </md-list-item>
+    </md-content>
     <div class="service--watch--grid">
         <table class="table table-hover service--watch--table">
                 <thead>
                 <tr class="table__th--tr">
                     <th>ID</th>
                     <th>JOB名称</th>
-                    <th>秒数</th>
+                    <th>描述</th>
                     <th>启动时间</th>
                     <th>持续运行时间</th>
                     <th >当前状态</th>
@@ -21,7 +24,7 @@
                     <tr ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
                         <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
                         <td>{{data.jobName}}</td>
-                        <td>{{data.glueRemark}}</td>
+                        <td>{{data.jobDesc}}</td>
                         <td>{{data.startDate | date:'yyyy年MM月dd日 HH:mm:ss'}}</td>
                         <td><span >{{data.keepDay}}天 </span>
                             <span >{{data.keepHour}}小时 </span>
@@ -67,7 +70,7 @@
                         <td colspan="7">
                             <div ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
                                 <span class="attr--box">ID：{{missionList.id}}</span>
-                                <span class="attr--box">批次号：{{missionList.batchCode}}</span>
+                                <span class="attr--box"><span translate="MODULES_BATCH_BATCH_NUMBER">批次号</span>：{{missionList.batchCode}}</span>
                                 <span class="attr--box date" ng-if="missionList.batchStatus==4">任务开始时间：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
                                 <span class="attr--box date" ng-if="missionList.batchStatus==0">任务开始时间：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
                                 <span class="attr--box date" ng-if="missionList.batchStatus==2">任务开始时间：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
@@ -80,6 +83,16 @@
                     </tr>
                 </tbody>
             </table>
+        <div class="service--watch--grid__prompt--box">
+            <div class="prompt--content">
+                <span class="fa fa-exclamation-circle"></span>
+                <span>目前每个服务下只能运行一个任务，攻城狮正在全力开发多任务</span>
+            </div>
+            <div class="prompt--content">
+                <span class="fa fa-exclamation-circle"></span>
+                <span>此处只显示正在运行的任务，已完成的任务记录请进入<a ui-sref="infoArchives.batch">数据批次</a>查看</span>
+            </div>
+        </div>
     </div>
 </div>
 

@@ -365,7 +365,9 @@
             if (type === TYPE_FILE) {
               return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
             } else if (type === TYPE_NODE) {
-              return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+              module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+              node.hasNode = true;
+              return vm.hasNode = true;
             }
           });
           return;
@@ -387,7 +389,9 @@
                 if (type === TYPE_FILE) {
                   return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
                 } else if (type === TYPE_NODE) {
-                  return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+                  module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+                  rows.hasNode = true;
+                  return vm.hasNode = true;
                 }
               });
               break;
@@ -456,6 +460,10 @@
           rows = ref[i];
           if (rows.parentCode === node.code) {
             if (rows.type !== TYPE_FILE) {
+              if (rows.type === 'node') {
+                node.hasNode = true;
+                vm.hasNode = true;
+              }
               node.children.push(rows);
             } else {
               if (angular.isUndefined(node.hasFile)) {
@@ -527,7 +535,7 @@
       updateAbleAlert = function(data, attrRules, template) {
         return swal({
           title: "确定升级吗?",
-          text: "数据模版修改之后需要升级",
+          text: "数据模板修改之后需要升级",
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#40B98E",
@@ -548,7 +556,7 @@
       unupdateAbleAlert = function(model) {
         return swal({
           title: "干得不错",
-          text: "模版升级完成",
+          text: "模板升级完成",
           type: "success",
           confirmButtonColor: "#40B98E",
           confirmButtonText: "确定"
@@ -565,6 +573,7 @@
       var addCustomData, cancel, deleteCustomdata, init, saveCustomData, vm;
       vm = this;
       init = function() {
+        var i, j, len, ref, rows;
         vm.typeLists = [
           {
             value: 'date',
@@ -582,17 +591,26 @@
         ];
         vm.entity = angular.copy(property);
         vm.containerId = containerId;
-        return vm.containerType = containerType;
+        vm.containerType = containerType;
+        vm.systemAttrs = [];
+        ref = vm.entity;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if (rows.containerCode === vm.containerId && (rows.isSys === 1 || rows.isSys === '1')) {
+            vm.systemAttrs.push(rows);
+          }
+        }
+        return vm.systemAttrs.sort(commonMethodSerivce.sortArrBy("attrName"));
       };
       cancel = function() {
         return $mdDialog.cancel();
       };
       addCustomData = function() {
         return vm.entity.push({
-          attrNameZh: '自定义名',
-          attrNameEn: 'defaultName',
+          attrNameZh: '',
+          attrNameEn: '',
           attrType: 'string',
-          attrName: 'defualt',
+          attrName: '',
           attrLength: 1,
           isRequired: "1",
           containerCode: vm.containerId,
@@ -633,6 +651,7 @@
       var addCustomData, cancel, deleteCustomdata, deleteFile, init, saveCustomData, vm;
       vm = this;
       init = function() {
+        var i, j, len, ref, rows;
         vm.typeLists = [
           {
             value: 'date',
@@ -651,18 +670,27 @@
         vm.entity = angular.copy(property);
         vm.fileLists = fileLists;
         vm.currentFileId = vm.fileLists[0].code;
-        return vm.deleteLists = [];
+        vm.deleteLists = [];
+        vm.systemAttrs = [];
+        ref = vm.entity;
+        for (i = j = 0, len = ref.length; j < len; i = ++j) {
+          rows = ref[i];
+          if (rows.containerCode === vm.currentFileId && (rows.isSys === 1 || rows.isSys === '1')) {
+            vm.systemAttrs.push(rows);
+          }
+        }
+        return vm.systemAttrs.sort(commonMethodSerivce.sortArrBy("attrName"));
       };
       cancel = function() {
         return $mdDialog.cancel();
       };
       addCustomData = function() {
         return vm.entity.push({
-          attrNameZh: '自定义名',
-          attrNameEn: 'defaultName',
+          attrNameZh: '',
+          attrNameEn: '',
           attrType: 'string',
           attrLength: 1,
-          attrName: 'default',
+          attrName: '',
           isRequired: "1",
           containerCode: vm.currentFileId,
           isSys: "0"

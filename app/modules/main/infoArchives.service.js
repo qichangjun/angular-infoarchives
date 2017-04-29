@@ -9,8 +9,8 @@
         lists = {
           state: [
             {
-              title: '仪表板',
-              url: 'infoArchives.dashBoard',
+              title: '数据统计',
+              url: 'infoArchives.statistics',
               img: 'fa fa-tachometer'
             }, {
               title: '连接拓扑',

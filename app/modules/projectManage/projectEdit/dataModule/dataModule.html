@@ -1,5 +1,5 @@
 <div class="anim-slide-left data--module--new--prompt--wrap">
-    <div aria-label="customModule" ng-show="vm.afterLoad" style="height: 100%">
+    <div aria-label="customModule" class="data--module--new--prompt--box" ng-show="vm.afterLoad" style="height: 100%">
         <div ng-show="vm.versionList.length == 0" style="height: 100%">
             <div class="new--prompt--box">
                 <div class="new--prompt--box__head">
@@ -14,7 +14,7 @@
                 <img src="images/create--data--template--icon.png" alt=""/>
                 <h4 class="title--content">该项目还没有定义数据模板</h4>
                 <md-button class="red--btn"  ng-click="vm.versionList.push({versionNo:1.0});vm.currentVesion=1.0">
-                    创建数据模版
+                    创建数据模板
                 </md-button>
             </div>
         </div>
@@ -28,7 +28,7 @@
                     <span class="fa fa-angle-right"></span>
                     <span class="current--column">{{vm.projectName}}</span>
                     <span> | </span>
-                    <span class="current--column">数据模版</span>
+                    <span class="current--column">数据模板</span>
                     <div class="save--template--box">
                         <div class="current--version">
                             <span class="vertical-middle--inline-block">版本号</span><md-select placeholder="1.0" class="current--version__select" ng-model="vm.currentVesion" ng-change="vm.getModuleInfo()">
@@ -36,7 +36,7 @@
                             </md-select>
                         </div>
                         <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)">
-                            保存模版
+                            保存模板
                         </md-button>
                     </div>
                 </div>
@@ -49,7 +49,7 @@
                     <div class="md-dialog-content">
 
                             <div layout-gt-sm="row" id="container" >
-                                <collapsible-tree  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble">
+                                <collapsible-tree  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble" has-node="vm.hasNode">
                                 </collapsible-tree>
                             </div>
                     </div>
