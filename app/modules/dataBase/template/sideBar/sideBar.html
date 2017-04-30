@@ -10,15 +10,15 @@
 </md-toolbar>
 
 <md-content  class="data--base--right--sidebar--info--content">
-    <div ng-show="vm.loadingDetail" translate="MODULES_DATABASE_LOADING">加载数据中...</div>
+    <div ng-show="vm.loadingDetail" class="loading" translate="MODULES_DATABASE_LOADING">加载数据中...</div>
     <div ng-show="!vm.loadingDetail">
         <div class="attr--type--box" ng-show="vm.entity.unitName">
             <label class="title" translate="MODULES_BATCH_BUSINESS_UNIT">业务单位</label>
-            <span class="attr--value">{{vm.entity.unitName}}</span>
+            <span class="attr--value" title="{{vm.entity.unitName}}">{{vm.entity.unitName}}</span>
         </div>
         <div class="attr--type--box">
             <label class="title" translate="MODULES_DATABASE_BUSINESS_MATTERS">业务事项</label>
-            <span class="attr--value">{{vm.entity.itemName}}</span>
+            <span class="attr--value" title="{{vm.entity.itemName}}">{{vm.entity.itemName}}</span>
         </div>
         <div class="attr--type--box" ng-show="vm.entity.systemName">
             <label class="title" translate="MODULES_DATABASE_DOCKING_SYSTEM">对接系统</label>

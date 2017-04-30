@@ -186,12 +186,13 @@
           transform: none;
         }
         &__input{
-          height: 40px;
-          line-height: 40px;
-          border: 1px solid #e1e1e1;
+          height: 34px;
+          //line-height: 34px;
+          border: 1px solid #cccccc;
           border-radius: 4px;
           background: #ffffff;
-          padding: 6px;
+          padding: 0 6px;
+          box-shadow: inset 0 1px 1px rgba(0,0,0,.075);
         }
         .select--language--title{
           font-weight: normal;

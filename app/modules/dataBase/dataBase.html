@@ -56,7 +56,7 @@
                     <md-autocomplete
                             md-selected-item="vm.parameter.unit"
                             md-search-text="vm.searchUnitText"
-                            md-selected-item-change="vm.parameter.item = {objectId:'all',name:'所有'};vm.filterData()"
+                            md-selected-item-change="vm.parameter.item = {objectId:'all',name:' '};vm.filterData()"
                             md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                             md-item-text="unitLists.name"
                             md-min-length="0"
@@ -76,7 +76,7 @@
                 <md-autocomplete
                         md-selected-item="vm.parameter.unit"
                         md-search-text="vm.searchUnitText"
-                        md-selected-item-change="vm.parameter.item = {objectId:'all',name:'所有'};vm.filterData()"
+                        md-selected-item-change="vm.parameter.item = {objectId:'all',name:' '};vm.filterData()"
                         md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                         md-item-text="unitLists.name"
                         md-min-length="0"
@@ -128,9 +128,9 @@
         <!--</div>-->
 
         <div>
-            <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit'">
+            <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit' && data.children.length > 0">
             </circle-tree>
-            <straight-tree ng-if="vm.parameter.chartType=='source'"  id="customModule" nodes = 'data'  radius = '490'>
+            <straight-tree ng-if="vm.parameter.chartType=='source' && data.children.length > 0"  id="customModule" nodes = 'data'  radius = '490'>
             </straight-tree>
         </div>
 

@@ -1,106 +1,136 @@
 <div class=" anim-slide-left col-md-8 module--Template--wrap">
-    <div view-source="simple"></div>
+    <div ng-show="vm.versionList.length == 0" class="data--module--new--prompt--wrap">
+        <div class="data--module--new--prompt--box">
+            <div >
+                <div class="new--prompt--box">
+                    <div class="new--prompt--box__head">
+                        <img src="images/edit--project--manage--modal--new.png" alt=""/>
+                        <span translate="MODULES_PROJECTMANAGE_NEED_TO_CREATE_DATA_TEMPLATE">还需要创建数据模板</span>
+                    </div>
+                    <div class="prompt-content">
+                        您还没有创建数据模板，无法配置显示模版
+                    </div>
+                </div>
+                <div class="new--prompt__btn--box">
+                    <img src="images/create--rule--template--icon.png" alt=""/>
+                    <h4 class="title--content">该项目还没有定义数据模板</h4>
+                    <md-button class="red--btn"  ng-click="vm.serfToCreateModule()" translate="MODULES_PROJECTMANAGE_IMMEDIATELY_CREATED">
+                        立刻创建
+                    </md-button>
+                </div>
+            </div>
+        </div>
+    </div>
 
-    <div class="models--list--wrap">
-        <div class="models--list--box" ng-show="!vm.loadingAttrLists">
-            <script type="text/ng-template" id="nodes_renderer.html">
-                <div >
-                    <a class="drop--group--box" ng-if="(node.children && node.children.length > 0) || (node.attributes && node.attributes.length > 0)" data-nodrag ng-click="vm.toggle(this)">
+
+    <div ng-show="vm.versionList.length > 0">
+        <div view-source="simple"></div>
+        <div class="models--list--wrap">
+            <div class="models--list--box" ng-show="!vm.loadingAttrLists">
+                <script type="text/ng-template" id="nodes_renderer.html">
+                    <div >
+                        <a class="drop--group--box" ng-if="(node.children && node.children.length > 0) || (node.attributes && node.attributes.length > 0)" data-nodrag ng-click="vm.toggle(this)">
                         <span class="drop--group" ng-class="{'drop--off': collapsed,'drop--on': !collapsed}">
                             <span class="core"></span>
                         </span>
-                    </a>
-                    {{node.name}}
-                    <ul dnd-list="node.attributes" >
-                        <li ng-repeat="item in node.attributes"
-                            ng-class="{hidden: collapsed}"
-                            dnd-draggable="item"
-                            dnd-effect-allowed="move"
-                            dnd-moved="node.attributes.splice($index, 1)"
-                        >
-                            <span  >{{item.attrType != 'file' ? 'metedata'  : 'file' }}：{{item.attrNameZh}}</span>
+                        </a>
+                        {{node.name}}
+                        <ul  >
+                            <li ng-repeat="item in node.attributes"
+                                ng-class="{hidden: collapsed}"
+                                dnd-draggable="item"
+                                dnd-effect-allowed="move"
+                                dnd-moved="node.attributes.splice($index, 1)"
+                            >
+                                <span  >{{item.attrType != 'file' ? 'metedata'  : 'file' }}：
+                                    <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
+                                    <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
+                                </span>
+                            </li>
+                        </ul>
+
+                    </div>
+                    <ul ui-tree-nodes="" ng-model="node.children"
+                        ng-class="{hidden: collapsed}"
+                    >
+                        <li ng-repeat="node in node.children" ui-tree-node ng-include="'nodes_renderer.html'">
                         </li>
                     </ul>
-
-                </div>
-                <ul ui-tree-nodes="" ng-model="node.children"
-                    ng-class="{hidden: collapsed}"
-                >
-                    <li ng-repeat="node in node.children" ui-tree-node ng-include="'nodes_renderer.html'">
-                    </li>
-                </ul>
-            </script>
-            <div ui-tree data-drag-enabled="false">
-                <ul ui-tree-nodes="" ng-model="models.templates" id="tree-root">
-                    <li ng-repeat="node in models.templates" ui-tree-node ng-include="'nodes_renderer.html'"></li>
-                </ul>
-            </div>
-        </div>
-        <div  class="models--list--box" ng-show="vm.loadingAttrLists" translate="MODULES_DATABASE_LOADING"></div>
-    </div>
-    <div class="module--Template--wrap__show-wrap">
-        <div class="module--Template--wrap__show-box">
-            <div class="operation--btn--box">
-                <div class="btn-group" uib-dropdown is-open="status.isopen">
-                    <button id="single-button" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" type="button" class="btn btn-success green--btn" uib-dropdown-toggle>
-                        <span translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</span><span class="caret"></span>
-                    </button>
-                    <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
-                        <li role="menuitem"><a ng-click="vm.addContainer()" translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</a></li>
-                        <li role="menuitem"><a ng-click="vm.addProcessContainer()" translate="MODULES_PROJECTMANAGE_INCREASE_BUSINESS_PROCESS_INFORMATION">增加业务过程信息</a></li>
+                </script>
+                <div ui-tree data-drag-enabled="false">
+                    <ul ui-tree-nodes="" ng-model="models.templates" id="tree-root">
+                        <li ng-repeat="node in models.templates" ui-tree-node ng-include="'nodes_renderer.html'"></li>
                     </ul>
-                    <ul class="dropdown-menu" uib-dropdown-menu  role="menu" aria-labelledby="single-button"></ul>
                 </div>
-                <md-button class="blue--btn" ng-click="vm.previewForm()" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" translate="MODULES_PROJECTMANAGE_GENERATE_PREVIEW">生成预览</md-button>
-                <div>
-                    <md-select style="width:100px;" class="edit--custom--data--modal__select" ng-change="vm.changeVersion()" ng-model="vm.parameter.templateId">
-                        <md-option  ng-repeat="versionList in vm.versionList" value="{{versionList.id}}">
-                            <span translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span>：{{versionList.versionNo}}
-                        </md-option>
-                    </md-select>
-                </div>
-
             </div>
-            <!--<h1 style="float:left">-->
+            <div  class="models--list--box" ng-show="vm.loadingAttrLists" translate="MODULES_DATABASE_LOADING"></div>
+        </div>
+        <div class="module--Template--wrap__show-wrap">
+            <div class="module--Template--wrap__show-box">
+                <div class="operation--btn--box">
+                    <div class="btn-group" uib-dropdown is-open="status.isopen">
+                        <button id="single-button" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" type="button" class="btn btn-success green--btn" uib-dropdown-toggle>
+                            <span translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</span><span class="caret"></span>
+                        </button>
+                        <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
+                            <li role="menuitem"><a ng-click="vm.addContainer()" translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</a></li>
+                            <li role="menuitem"><a ng-click="vm.addProcessContainer()" translate="MODULES_PROJECTMANAGE_INCREASE_BUSINESS_PROCESS_INFORMATION">增加业务过程信息</a></li>
+                        </ul>
+                    </div>
+                    <md-button class="blue--btn" ng-click="vm.previewForm()" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" translate="MODULES_PROJECTMANAGE_GENERATE_PREVIEW">生成预览</md-button>
+                    <div>
+                        <md-select style="width:100px;" class="edit--custom--data--modal__select" ng-change="vm.changeVersion()" ng-model="vm.parameter.templateId">
+                            <md-option  ng-repeat="versionList in vm.versionList" value="{{versionList.id}}">
+                                <span translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span>：{{versionList.versionNo}}
+                            </md-option>
+                        </md-select>
+                    </div>
+
+                </div>
+                <!--<h1 style="float:left">-->
                 <!--模版配置-->
-            <!--</h1>-->
-            <div class="row template--configure--box">
-                <div ng-repeat="list in models.lists"
-                     class="gray {{list.type}}">
-                    <div class="panel panel-info" >
-                        <div class="panel-heading template--configure--box__head">
-                            <h3 class="panel-title">
-                                <md-menu>
-                                    <a class="menu--edit" aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
-                                        {{list.name}}
-                                    </a>
-                                    <md-menu-content width="4">
-                                        <md-menu-item>
-                                            <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_MODULE_NAME">模块名</span><div class="single--attribute--box__value">
-                                            <input ng-model="list.name"
-                                                   class="form-control single--attribute--box__value-input"
-                                                   name="projectName"
-                                                    >
-                                        </div>
-                                        </md-menu-item>
-                                    </md-menu-content>
-                                </md-menu>
-                            </h3>
-                            <span class="close" ng-click="models.lists.splice($index, 1)"><span aria-hidden="true">×</span></span>
-                        </div>
-                        <div class="panel-body template--configure--box__body" ng-if="list.type != 'process'">
-                            <ul dnd-list="list.data" class="configure--body--box">
-                                <li ng-repeat="item in list.data"
-                                    dnd-draggable="item"
-                                    dnd-moved="list.data.splice($index, 1)"
-                                    dnd-effect-allowed="move"
-                                    dnd-selected="models.selected = item"
-                                    class="single--configure--info"
-                                    ng-class="{'selected': models.selected === item,'file':item.attrType=='file','item':item.attrType!='file'}"
-                                        >
-                                    {{item.attrType != 'file' ? 'metedata'  : 'file' }}：{{item.attrNameZh}}
-                                </li>
-                            </ul>
+                <!--</h1>-->
+                <div class="row template--configure--box">
+                    <div ng-repeat="list in models.lists"ev
+                         class="gray {{list.type}}">
+                        <div class="panel panel-info" >
+                            <div class="panel-heading template--configure--box__head">
+                                <h3 class="panel-title">
+                                    <md-menu>
+                                        <a class="menu--edit" aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
+                                            {{list.name}}
+                                        </a>
+                                        <md-menu-content width="4">
+                                            <md-menu-item>
+                                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_MODULE_NAME">模块名</span><div class="single--attribute--box__value">
+                                                <input ng-model="list.name"
+                                                       class="form-control single--attribute--box__value-input"
+                                                       name="projectName"
+                                                >
+                                            </div>
+                                            </md-menu-item>
+                                        </md-menu-content>
+                                    </md-menu>
+                                </h3>
+                                <span class="close" ng-click="models.lists.splice($index, 1)"><span aria-hidden="true">×</span></span>
+                            </div>
+                            <div class="panel-body template--configure--box__body" ng-if="list.type != 'process'">
+                                <ul dnd-list="list.data" class="configure--body--box">
+                                    <li ng-repeat="item in list.data"
+                                        dnd-draggable="item"
+                                        dnd-moved="list.data.splice($index, 1)"
+                                        dnd-effect-allowed="move"
+                                        dnd-selected="models.selected = item"
+                                        class="single--configure--info"
+                                        ng-class="{'selected': models.selected === item,'file':item.attrType=='file','item':item.attrType!='file'}"
+                                    >
+                                        {{item.attrType != 'file' ? 'metedata'  : 'file' }}：
+                                        <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
+                                        <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
+                                        <span class="glyphicon glyphicon-remove" style="float: right;margin-right: 10px;color:red;line-height: 40px;" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>
+                                    </li>
+                                </ul>
+                            </div>
                         </div>
                     </div>
                 </div>

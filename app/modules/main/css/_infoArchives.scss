@@ -45,10 +45,11 @@
     .header{
       height: 57px;
       min-height: 57px;
-      background: #40b98e;
+      //background: #40b98e;
+      background: #3DA484;
       font-size: 18px;
-      border-right: 1px solid #40b98e;
-      box-shadow: -5px 0 10px rgba(0, 0, 0, 0.1) inset;
+      border-right: 1px solid #3DA484;
+      box-shadow: -3px 0 10px rgba(0, 0, 0, 0.1) inset;
       .md-toolbar-tools{
         display: inline-block;
         height: 57px;
@@ -81,7 +82,7 @@
           .md-subheader-inner{
             border-bottom: 1px solid #505050;
             padding-bottom: 6px;
-            padding-left: 30px;
+            padding-left: 25px;
             font-size: 12px;
           }
         }
@@ -108,11 +109,15 @@
               text-align: center;
               vertical-align: sub;
             }
+            .fa-bar-chart{
+              font-size: 18px;
+            }
           }
           .md-button{
             height: 48px;
             line-height: 48px;
-            padding-left: 27px;
+            padding-left: 22px;
+            padding-right: 0;
           }
         }
       }
@@ -129,8 +134,8 @@
       height: 57px;
       max-width: 1742px;
       width: auto;
-      background: #eaeae2;
-      border-bottom: 2px solid #e4e4e4;
+      background: #46BC98;
+      border-bottom: 2px solid #46BC98;
       .admin--info{
         float: right;
         height: 57px;
@@ -163,7 +168,8 @@
       .data--base--sidenav{
         float: left;
         height: 100%;
-        border-top: 1px solid #d7d7d7;
+        //border-top: 1px solid #d7d7d7;
+        border-top: 1px solid #46BC98;
         margin-top: -1px;
         .select--data--source--box{
           font-size: 16px;

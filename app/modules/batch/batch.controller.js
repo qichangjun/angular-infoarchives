@@ -56,7 +56,7 @@
           rowTemplate: hsTpl.hsRowTemplate,
           useExternalPagination: true,
           useExternalSorting: true,
-          rowHeight: 50,
+          rowHeight: 40,
           columnDefs: batchService.batch,
           columnVirtualizationThreshold: batchService.batch.length,
           onRegisterApi: function(gridApi) {
@@ -116,7 +116,7 @@
           }
           vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
           vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
-          vm.batchInfo.SIP2AIP = Math.floor(100 - (vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
+          vm.batchInfo.SIP2AIP = Math.floor((vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
         }, function(res) {});
       };
       getErrorList = function() {

@@ -31,7 +31,7 @@
                         <div class="md-list-item-text each--column--box__text" layout="column">
                     <span>
                         <span class="{{item.img}} item--img" aria-hidden="true"></span>
-                        {{ item.title }}
+                        <span translate="{{item.title}}"></span>
                     </span>
                         </div>
                     </md-list-item>
@@ -41,7 +41,7 @@
                         <div class="md-list-item-text each--column--box__text" layout="column">
                             <span>
                                 <span class="{{item.img}} item--img" aria-hidden="true"></span>
-                                {{ item.title }}
+                                <span translate="{{item.title}}"></span>
                             </span>
                         </div>
                     </md-list-item>
@@ -51,7 +51,7 @@
                         <div class="md-list-item-text each--column--box__text" layout="column">
                             <span>
                                 <span class="{{item.img}} item--img" aria-hidden="true"></span>
-                                {{ item.title }}
+                                <span translate="{{item.title}}"></span>
                             </span>
                         </div>
                     </md-list-item>
@@ -75,7 +75,6 @@
                                     <md-menu-content width="3">
                                         <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
                                         <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
-                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="xxx">xxx</md-menu-item>
                                     </md-menu-content>
                                 </md-menu>
                             </md-menu-item>

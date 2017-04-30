@@ -88,9 +88,9 @@
             <md-button class="pull-left md-raised green--btn" ng-disabled="!vm.selectIsError" ng-click="vm.forceSwitch()" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</md-button>
             <md-button class="pull-left md-raised red--btn" ng-disabled="!vm.selectIsError" ng-click="vm.deleteBatch()" translate="MODULES_BATCH_DELETE_ABNORMAL_DATA">删除异常数据</md-button>
         </div>
-        <div style="height: 90%;" ng-if="gridOptions.data.length > 0 && !vm.loading" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
-        <div ng-show="vm.loading">加载中...</div>
-        <div ng-show="gridOptions.data.length == 0" class="no--data"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span></div>
+        <div  ng-if="gridOptions.data.length > 0 && !vm.loading" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
+        <div ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
+        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="no--data"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span></div>
     </div>
     <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
         <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>

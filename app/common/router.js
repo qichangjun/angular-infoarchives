@@ -47,7 +47,7 @@
           access_level: 2
         }
       }).state("infoArchives.statistics", {
-        url: "statistics",
+        url: "statistics?year&systemName",
         templateUrl: "modules/statistics/statistics.html?" + window.hsConfig.bust,
         controller: "statisticsController",
         controllerAs: "vm",

@@ -1,7 +1,12 @@
 @charset "utf-8";
-.button-disabled{
-  cursor: not-allowed;
-  color: gray;
+//.button-disabled{
+//  cursor: not-allowed;
+//  color: gray;
+//}
+.md-button.md-default-theme[disabled], .md-button[disabled]{
+  cursor: not-allowed !important;
+  box-shadow: none;
+  opacity: .65;
 }
 .green--btn{
   display: inline-block;
@@ -23,7 +28,10 @@
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   margin: 0 8px;
   &:hover{
-    background: #03ce86 !important;
+    background: #3eae81 !important;
+  }
+  &[disabled]:hover{
+    background: #40B98E !important;
   }
 }
 .red--btn{
@@ -46,7 +54,10 @@
   box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
   margin: 0 8px;
   &:hover{
-    background: #de421b !important;
+    background: #cd624c !important;
+  }
+  &[disabled]:hover{
+    background: #E1654F !important;
   }
 }
 .gray--btn{
@@ -70,6 +81,9 @@
   margin: 0 8px;
   &:hover{
     background: #999999 !important;
+  }
+  &[disabled]:hover{
+    background: #cacaca !important;
   }
 }
 .default--btn{
@@ -98,6 +112,9 @@
     background-color: #e6e6e6;
     border-color: #adadad;
   }
+  &[disabled]:hover{
+    background: #ffffff !important;
+  }
 }
 .blue--btn{
   display: inline-block;
@@ -120,6 +137,9 @@
   margin: 0 8px;
   &:hover{
     background: #4c8bc5 !important;
+  }
+  &[disabled]:hover{
+    background: #4F93C5 !important;
   }
 }
 

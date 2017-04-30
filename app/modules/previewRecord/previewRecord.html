@@ -14,7 +14,6 @@
                     </div>
                 </div>
                 <span flex></span>
-
             </div>
         </md-toolbar>
         <md-dialog-content class="preview--template--form--modal__content md-dialog-content clearfix">
@@ -35,13 +34,13 @@
                                     <div ng-show="attr.attrType=='file'">
                                         <table class="preview--template--form--modal__table">
                                             <tbody>
-                                            <tr ng-repeat="fileValue in attr.value[0] track by $index">
-                                                <td><img src="images/doc.png" alt=""/></td>
-                                                <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
-                                                <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
-                                                <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
-                                                <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
-                                            </tr>
+                                                <tr ng-repeat="fileValue in attr.value[0] track by $index">
+                                                    <td><img src="images/doc.png" alt=""/></td>
+                                                    <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
+                                                    <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
+                                                    <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
+                                                    <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
@@ -69,7 +68,6 @@
                 </div>
             </div>
         </md-dialog-content>
-
     </form>
 </div>
 

@@ -16,14 +16,19 @@
         getBasicInfo();
       };
       getTreeData = function() {
+        $scope.data = {
+          name: 'Root',
+          children: [],
+          objectId: uuid.v4()
+        };
         return $timeout(function() {
           vm.parameter.item = {
             objectId: 'all',
-            name: '所有'
+            name: ' '
           };
           vm.parameter.unit = {
             objectId: 'all',
-            name: '所有'
+            name: ' '
           };
           if (vm.parameter.chartType === 'unit') {
             return dataBaseService.getUnitData().then(function(res) {
@@ -180,11 +185,11 @@
             vm.entity = {};
             vm.parameter.item = {
               objectId: 'all',
-              name: '所有'
+              name: ' '
             };
             vm.parameter.unit = {
               objectId: 'all',
-              name: '所有'
+              name: ' '
             };
             return $mdSidenav('tree-data-node-detail').close();
           }

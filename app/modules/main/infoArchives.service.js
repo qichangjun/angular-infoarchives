@@ -10,29 +10,29 @@
         lists = {
           state: [
             {
-              title: '数据统计',
+              title: 'MODULES_STATISTICS_DATA_STATISTICS',
               url: 'infoArchives.statistics',
-              img: 'fa fa-tachometer'
+              img: 'fa fa-bar-chart'
             }, {
-              title: '连接拓扑',
+              title: 'PROJECT_CONNECTMAP_CONNECTION_TOPOLOGY',
               url: 'infoArchives.connectMap',
               img: 'fa fa-code-fork'
             }
           ],
           data: [
             {
-              title: '数据批次',
+              title: 'MODULES_SERVICEWATCH_DATA_BATCH',
               url: 'infoArchives.batch',
               img: 'fa fa-truck'
             }, {
-              title: '数据仓库',
+              title: 'MODULES_DATABASE_DATA_BASE',
               url: 'infoArchives.dataBase',
               img: 'fa fa-database'
             }
           ],
           fileItem: [
             {
-              title: '系统接入',
+              title: 'MODULES_PROJECTMANAGE_SYSTEM_ACCESS',
               url: 'infoArchives.projectManage',
               img: 'fa fa-flag-checkered',
               childRoute: ['infoArchives.projectEdit.basicData', 'infoArchives.projectEdit.ruleSet', 'infoArchives.projectEdit.dataModule', 'infoArchives.projectEdit.moduleTemplate']
@@ -40,11 +40,11 @@
           ],
           other: [
             {
-              title: '服务监控',
+              title: 'MODULES_SERVICEWATCH_SERVICE_MONITORING',
               url: 'infoArchives.serviceWatch',
               img: 'fa fa-server'
             }, {
-              title: '系统设置',
+              title: 'MODULES_USERMANAGE_SYSTEM_SETTINGS',
               url: 'infoArchives.userManage',
               img: 'fa fa-cog'
             }

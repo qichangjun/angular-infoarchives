@@ -43,6 +43,15 @@
                                     </div>
                                 </div>
                                 <div class="attribute--row--box">
+                                    <span class="attribute--row--box__title" translate="MODULES_PROJECTMANAGE_SUBORDINATE_SYSTEM">所属系统</span>
+                                    <div class="popover-wrapper attribute--row--box__value">
+                                        <input ng-model="vm.entity.systemName"
+                                               class="form-control  attribute--row--box__value-input"
+                                               name="systemName"
+                                                >
+                                    </div>
+                                </div>
+                                <div class="attribute--row--box">
                                     <span class="attribute--row--box__title" translate="MODULES_PROJECTMANAGE_CREATE_TIME">创建时间</span>
                                     <div class="popover-wrapper attribute--row--box__value">{{vm.entity.createDate | date:'yyyy.MM.dd'}}</div>
                                 </div>

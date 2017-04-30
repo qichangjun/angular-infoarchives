@@ -30,7 +30,10 @@
                             <div class="panel-body show--results--body" ng-show="list.type == 'record'">
                                 <div ng-repeat="attr in list.data"
                                      ng-class="{'attr-file':attr.attrType=='file','attr-item':attr.attrType!='file'}">
-                                    <span>{{attr.attrType != 'file' ? 'metedata'  : 'file' }}：{{attr.attrNameZh}}</span>
+                                    <span>{{attr.attrType != 'file' ? 'metedata'  : 'file' }}：
+                                        <span ng-show="vm.language != 'en'">{{attr.attrNameZh}}</span>
+                                        <span ng-show="vm.language == 'en'">{{attr.attrNameEn}}</span>
+                                    </span>
                                 </div>
                             </div>
                             <div class="process--info--wrap" ng-show="list.type == 'process'">

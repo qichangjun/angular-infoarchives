@@ -2,18 +2,72 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("statisticsController", [
-    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', '$stateParams', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, $stateParams) {
-      var getDepartmentLists, getLegalPerson, getPersonalService, getTopTen, init, updateColumnCharts, vm;
+    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', '$stateParams', 'statisticsService', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, $stateParams, statisticsService) {
+      var getLegalPerson, getPersonalService, getRecordNum, getSystemName, getTopTen, getTopTenData, getYearList, init, updateColumnCharts, vm;
       vm = this;
       vm.parameter = $stateParams;
-      vm.parameter.year = 'all';
-      vm.parameter.system = 'all';
+      if (!vm.parameter.systemName) {
+        vm.parameter.systemName = 'all';
+      }
+      if (!vm.parameter.year) {
+        vm.parameter.year = 'all';
+      }
       init = function() {
-        updateColumnCharts();
-        getDepartmentLists();
-        getLegalPerson();
-        getPersonalService();
-        getTopTen();
+        getSystemName();
+        getYearList();
+        getRecordNum();
+        getTopTenData();
+      };
+      getYearList = function() {
+        return statisticsService.getYearList().then(function(res) {
+          return vm.yearLists = res;
+        }, function(res) {});
+      };
+      getSystemName = function() {
+        return statisticsService.getSystemName().then(function(res) {
+          return vm.systemLists = res;
+        }, function(res) {});
+      };
+      getRecordNum = function() {
+        return statisticsService.getRecordNum(vm.parameter).then(function(res) {
+          var i, j, len, ref, rows;
+          vm.recordNum = [];
+          i = 0;
+          while (i < 12) {
+            vm.recordNum[i] = {};
+            vm.recordNum[i].y = res[i + 1];
+            vm.recordNum[i].x = i;
+            vm.recordNum[i].description = {
+              unitName: '测试' + i,
+              recordStartDate: '2015年11月3日',
+              recordOverDate: '2017年05月21日',
+              dataCount: 225
+            };
+            i++;
+          }
+          vm.unitLists = [];
+          ref = vm.recordNum;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            vm.unitLists.push(rows.description.unitName);
+          }
+          return updateColumnCharts();
+        }, function(res) {});
+      };
+      getTopTenData = function() {
+        return statisticsService.getTopTenData().then(function(res) {
+          var i, j, len, ref, rows;
+          vm.topTenData = res;
+          vm.topTenUnitName = [];
+          vm.topTenUnitValue = [];
+          ref = vm.topTenData;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            vm.topTenUnitName.push(rows.sourceUnit);
+            vm.topTenUnitValue.push(rows.sum);
+          }
+          return getTopTen();
+        }, function(res) {});
       };
       getTopTen = function() {
         return $('#topTen').highcharts({
@@ -27,7 +81,7 @@
             text: ''
           },
           xAxis: {
-            categories: ['部门1', '部门2', '部门3', '部门4', '部门5', '部门6', '部门7', '部门8', '部门9', '部门10'],
+            categories: vm.topTenUnitName,
             title: {
               text: null
             }
@@ -43,7 +97,7 @@
             }
           },
           tooltip: {
-            valueSuffix: ' 百万'
+            valueSuffix: ''
           },
           plotOptions: {
             bar: {
@@ -59,7 +113,7 @@
           series: [
             {
               name: '总数据量',
-              data: [635, 515, 411, 308, 275, 251, 203, 107, 31, 2]
+              data: vm.topTenUnitValue
             }
           ],
           legend: {
@@ -175,39 +229,13 @@
           ]
         });
       };
-      getDepartmentLists = function() {
-        return vm.departmentLists = [
-          {
-            name: '部门1',
-            value: 100
-          }, {
-            name: '部门2',
-            value: 90
-          }, {
-            name: '部门3',
-            value: 80
-          }, {
-            name: '部门4',
-            value: 70
-          }, {
-            name: '部门5',
-            value: 60
-          }, {
-            name: '部门6',
-            value: 50
-          }, {
-            name: '部门7',
-            value: 40
-          }
-        ];
-      };
       updateColumnCharts = function() {
-        $('#container').highcharts({
+        return $('#container').highcharts({
           chart: {
             type: 'column'
           },
           title: {
-            text: '测试数据'
+            text: '单位AIP数量统计'
           },
           legend: {
             layout: 'vertical',
@@ -217,25 +245,25 @@
             symbolRadius: 0
           },
           subtitle: {
-            text: '数据来源: infoarchives'
+            text: ''
           },
           credits: {
             text: '',
             href: ''
           },
           xAxis: {
-            categories: ['一月', '二月', '三月', '四月', '五月', '六月', '七月', '八月', '九月', '十月', '十一月', '十二月'],
+            categories: vm.unitLists,
             crosshair: true
           },
           yAxis: {
             min: 0,
             title: {
-              text: '测试数据 (mm)'
+              text: 'AIP数量'
             }
           },
           tooltip: {
             headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y}</b></td></tr>' + '<td style="color:{series.color};padding:0">业务单位名称</td>' + '<td style="padding:0"><b>{point.description.unitName}</b></td></tr>' + '<td style="color:{series.color};padding:0">归档开始时间</td>' + '<td style="padding:0"><b>{point.description.recordStartDate}</b></td></tr>' + '<td style="color:{series.color};padding:0">截至时间</td>' + '<td style="padding:0"><b>{point.description.recordOverDate}</b></td></tr>' + '<td style="color:{series.color};padding:0">该单位的归档数据总量</td>' + '<td style="padding:0"><b>{point.description.dataCount}</b></td></tr>' + '</tr>',
             footerFormat: '</table>',
             shared: true,
             useHTML: true
@@ -248,21 +276,13 @@
           },
           series: [
             {
-              name: '数据1',
-              data: [49.9, 71.5, 106.4, 129.2, 144.0, 176.0, 135.6, 148.5, 216.4, 194.1, 95.6, 54.4]
-            }, {
-              name: '数据2',
-              data: [83.6, 78.8, 98.5, 93.4, 106.0, 84.5, 105.0, 104.3, 91.2, 83.5, 106.6, 92.3]
-            }, {
-              name: '数据3',
-              data: [48.9, 38.8, 39.3, 41.4, 47.0, 48.3, 59.0, 59.6, 52.4, 65.2, 59.3, 51.2]
-            }, {
-              name: '数据4',
-              data: [42.4, 33.2, 34.5, 39.7, 52.6, 75.5, 57.4, 60.4, 47.6, 39.1, 46.8, 51.1]
+              name: 'AIP数量',
+              data: vm.recordNum
             }
           ]
         });
       };
+      vm.getRecordNum = getRecordNum;
       init();
     }
   ]);

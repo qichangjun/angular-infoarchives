@@ -19,7 +19,7 @@
 
 .data--base--sidenav--right--box{
   float: left;
-  width: calc(100% - 237px);
+  width: calc(100% - 235px);
   //min-width: 890px;
   height: 100%;
   //padding: 0 15px;
@@ -77,7 +77,6 @@
           display: inline-block;
           vertical-align: middle;
           margin-right: 5px;
-          line-height: normal;
           //padding-bottom: 6px
         }
         .attribute--value{
@@ -309,6 +308,7 @@
 .data--base--view--type--filter{
   height: 94px;
   line-height: 94px;
+  overflow: hidden;
   &_title{
     display: inline-block;
     vertical-align: middle;
@@ -433,7 +433,12 @@
         font-weight: normal;
       }
       .attr--value{
+        display: inline-block;
+        width: 100%;
         padding-left: 25px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
       }
       .attr--row{
         padding-left: 25px;
@@ -480,7 +485,7 @@
           display: inline-block;
           vertical-align: middle;
           margin-right: 5px;
-          line-height: normal;
+          //line-height: normal;
         }
         .time--frame--value{
           display: inline-block;
@@ -513,7 +518,7 @@
 .data--base--svg--wrap{
   float: left;
   width: calc(100% - 300px);
-  height: calc(100% - 111px);
+  height: calc(100% - 96px);
   overflow:auto;
   position: relative;
   .data--base--svg--operation-box{

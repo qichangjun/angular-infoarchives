@@ -49,10 +49,6 @@ div.ui-grid-cell input.edit-input{
   }
 }
 
-.hs-ui-grid-cell-contents{
-  background: transparent;
-}
-
 .ui-grid-row{
   background: transparent;
   &:hover{
@@ -86,6 +82,8 @@ div.ui-grid-cell input.edit-input{
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  background: transparent;
+  line-height: 29px;
 }
 
 //业务设定
@@ -219,6 +217,11 @@ div.ui-grid-cell input.edit-input{
 }
 .ui-grid-selection-row-header-buttons{
   opacity: 1;
+  md-checkbox .md-container {
+    width: 20px;
+    height: 20px;
+    top: 45%;
+  }
 }
 .ui-grid-pager-panel{
   //height: auto;
@@ -226,4 +229,6 @@ div.ui-grid-cell input.edit-input{
   width: 280px;
   left: calc(100% - 280px);
   top: -72px;
+  height: 0;
+
 }

@@ -63,7 +63,7 @@
           nodeEnter.append('svg:text').attr('id', function(d) {
             return 'text' + d.objectId;
           }).attr('x', function(d) {
-            return -10;
+            return 85;
           }).attr('dy', '.35em').attr('text-anchor', function(d) {
             return 'end';
           }).text(function(d) {
@@ -71,26 +71,22 @@
           }).style('fill-opacity', 1e-6);
           nodeEnter.append('svg:image').attr('href', function(d) {
             if (d.type === 'root') {
-              return 'images/create--rule--template--icon.png';
+              return 'images/connect--map--data--root--icon.png';
             } else if (d.type === 'unit') {
-              return 'images/preview--box--icon.png';
+              return 'images/connect--map--rds--icon.png';
             }
           }).attr('x', function(d) {
             if (d.type === 'unit') {
-              return -50;
+              return -30;
             } else {
-              return -120;
+              return -80;
             }
           }).attr('y', function(d) {
             if (d.type === 'unit') {
-              return -120;
+              return -45;
             } else {
-              return -50;
+              return -40;
             }
-          }).attr({
-            'width': 100
-          }).attr({
-            'height': 100
           });
           nodeUpdate = node.transition().duration(duration).attr('transform', function(d) {
             return 'translate(' + d.y + ',' + d.x + ')';
