@@ -117,6 +117,11 @@
           vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
           vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
           vm.batchInfo.SIP2AIP = Math.floor((vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
+          if (!vm.batchInfo.packageCount) {
+            vm.batchInfo.DATA2AIU = 0;
+            vm.batchInfo.AIU2SIP = 0;
+            vm.batchInfo.SIP2AIP = 0;
+          }
         }, function(res) {});
       };
       getErrorList = function() {
@@ -133,12 +138,14 @@
         loadRate = $interval(function() {
           return batchService.getDetailInfo(vm.currentId).then(function(res) {
             vm.batchInfo = res.batch;
-            if (!vm.batchInfo.aipCount) {
-              vm.batchInfo.aipCount = 0;
-            }
             vm.batchInfo.DATA2AIU = Math.floor((vm.batchInfo.aiuCount / vm.batchInfo.packageCount) * 100);
             vm.batchInfo.AIU2SIP = Math.floor((vm.batchInfo.aiu2sipSuccessCount / vm.batchInfo.packageCount) * 100);
             vm.batchInfo.SIP2AIP = Math.floor((vm.batchInfo.aipCount / vm.batchInfo.packageCount) * 100);
+            if (!vm.batchInfo.packageCount) {
+              vm.batchInfo.DATA2AIU = 0;
+              vm.batchInfo.AIU2SIP = 0;
+              vm.batchInfo.SIP2AIP = 0;
+            }
             if ((vm.batchInfo.AIU2SIP === 100 && vm.batchInfo.SIP2AIP === 100 && vm.batchInfo.SIP2AIP === 100) || !$mdSidenav(SIDE_BAR_NAME).isOpen()) {
               return $interval.cancel(loadRate);
             }

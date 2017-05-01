@@ -141,26 +141,28 @@
       .attribute--row{
         display: inline-block;
         vertical-align: middle;
-        padding: 10px 13px;
+        padding: 10px 0;
         .single--attribute--box{
           display: inline-block;
           vertical-align: middle;
-          width: 300px;
+          width: 320px;
           margin-right: 10px;
           height: 34px;
           line-height: 34px;
           &__title{
             display: inline-block;
             font-weight: normal;
-            width: 85px;
+            width: 110px;
             margin-right: 10px;
             text-align: right;
             margin-bottom: 0;
             vertical-align: middle;
+            line-height: normal;
           }
           &__value{
             display: inline-block;
-            vertical-align: 1px;
+            vertical-align: middle;
+            //vertical-align: 1px;
             &-input{
               display: inline-block;
               vertical-align: middle;
@@ -647,7 +649,7 @@
   .models--list--wrap{
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 23px;
     bottom: 0;
     width: 286px;
     overflow-y: auto;
@@ -777,12 +779,12 @@
         }
       }
       &._first{
-        background: #ffffff url(../images/process-first.png) no-repeat center right;
+        background: transparent url(../images/process-first.png) no-repeat center right;
         position: relative;
         float:left
       }
       &.first{
-        background: #ffffff url(../images/process-first.png) no-repeat center right;
+        background: transparent url(../images/process-first.png) no-repeat center right;
         position: relative;
         float: right;
         &:after{
@@ -799,21 +801,21 @@
         }
       }
       &._middle{
-        background: #ffffff url(../images/process--middle.png) no-repeat center;
+        background: transparent url(../images/process--middle.png) no-repeat center;
         float: right;
       }
       &.middle{
         float: left;
-        background: #ffffff url(../images/process--middle.png) no-repeat center;
+        background: transparent url(../images/process--middle.png) no-repeat center;
       }
       &._last{
-        background: #ffffff url(../images/process-last.png) no-repeat center left;
+        background: transparent url(../images/process-last.png) no-repeat center left;
         position: relative;
         float: right;
       }
       &.last{
         float: left;
-        background: #ffffff url(../images/process-last.png) no-repeat center left;
+        background: transparent url(../images/process-last.png) no-repeat center left;
         position: relative;
         &:after{
           content:"\27A4";
@@ -828,7 +830,7 @@
         }
       }
       &.only{
-        background: #ffffff url(../images/process-only.png) no-repeat center;
+        background: transparent url(../images/process-only.png) no-repeat center;
       }
       .head{
         position: absolute;
@@ -851,13 +853,13 @@
       display: inline-block;
       width: 15px;
       height: 136px;
-      background: #ffffff url(../images/process--line--row.png) repeat-x center;
+      background: transparent url(../images/process--line--row.png) repeat-x center;
     }
     .process--line--col-right{
       display: inline-block;
       width: 100%;
       height: 60px;
-      background: #ffffff url(../images/process--line--col.png) repeat-y 767px;
+      background: transparent url(../images/process--line--col.png) repeat-y 767px;
       margin-bottom: 5px;
       position: relative;
       i{
@@ -872,7 +874,7 @@
       display: inline-block;
       width: 100%;
       height: 60px;
-      background: #ffffff url(../images/process--line--col.png) repeat-y 63px;
+      background: transparent url(../images/process--line--col.png) repeat-y 63px;
       margin-bottom: 5px;
       position: relative;
       i{

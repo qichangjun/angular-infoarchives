@@ -22,8 +22,8 @@
         i = 0;
         root = void 0;
         tree = void 0;
-        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 1200).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + m[3] + ',' + '-60' + ')');
-        tree = d3.layout.tree().size([h, w]);
+        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 1200).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + 400 + ',' + '60' + ')');
+        tree = d3.layout.tree().size([h - 300, w - 100]);
         diagonal = d3.svg.diagonal().projection(function(d) {
           return [d.y, d.x];
         });
@@ -32,7 +32,7 @@
           duration = d3.event && d3.event.altKey ? 5000 : 500;
           nodes = tree.nodes(root).reverse();
           nodes.forEach(function(d) {
-            d.y = d.depth * 380;
+            d.y = d.depth * 200;
           });
           node = vis.selectAll('g.node').data(nodes, function(d) {
             return d.id || (d.id = ++i);
@@ -60,16 +60,20 @@
               return '#fff';
             }
           });
-          nodeEnter.append('svg:text').attr('id', function(d) {
-            return 'text' + d.objectId;
-          }).attr('x', function(d) {
-            return 85;
+          nodeEnter.append('svg:text').attr('x', function(d) {
+            return 12;
           }).attr('dy', '.35em').attr('text-anchor', function(d) {
-            return 'end';
+            return 'start';
           }).text(function(d) {
             return d.name;
           }).style('fill-opacity', 1e-6);
           nodeEnter.append('svg:image').attr('href', function(d) {
+            if (d.type === 'root') {
+              return 'images/connect--map--data--root--icon.png';
+            } else if (d.type === 'unit') {
+              return 'images/connect--map--rds--icon.png';
+            }
+          }).attr('xlink:href', function(d) {
             if (d.type === 'root') {
               return 'images/connect--map--data--root--icon.png';
             } else if (d.type === 'unit') {
@@ -87,11 +91,23 @@
             } else {
               return -40;
             }
+          }).attr('width', function(d) {
+            if (d.type === 'root') {
+              return 64;
+            } else {
+              return 47;
+            }
+          }).attr('height', function(d) {
+            if (d.type === 'root') {
+              return 73;
+            } else {
+              return 32;
+            }
           });
           nodeUpdate = node.transition().duration(duration).attr('transform', function(d) {
             return 'translate(' + d.y + ',' + d.x + ')';
           });
-          nodeUpdate.select('circle').attr('r', 4.5).style('fill', function(d) {
+          nodeUpdate.select('circle').attr('r', 6).style('fill', function(d) {
             if (d._children) {
               return 'lightsteelblue';
             } else {

@@ -618,7 +618,10 @@ div.ui-grid-cell input.edit-input {
   height: 0; }
 
 td {
-  vertical-align: middle; }
+  vertical-align: middle !important; }
+
+tr {
+  vertical-align: middle !important; }
 
 .node rect {
   cursor: pointer;
@@ -901,7 +904,7 @@ path.link {
     height: calc(100% - 66px); }
     .data--base--wrapper .data--base--column--wrapper.project--edit {
       position: absolute;
-      top: 115px;
+      top: 110px;
       bottom: 0;
       height: auto; }
     .data--base--wrapper .data--base--column--wrapper ul, .data--base--wrapper .data--base--column--wrapper li {
@@ -1078,7 +1081,8 @@ path.link {
     padding: 0 7px; }
   .check--data--modal .check--data--content {
     margin: 0 16px 26px 16px;
-    overflow-y: auto; }
+    margin-top: -10px;
+    overflow-y: hidden; }
     .check--data--modal .check--data--content .search--wrap {
       display: table;
       width: 100%;
@@ -1105,7 +1109,7 @@ path.link {
     .check--data--modal .check--data--content .check--data--grid--wrap {
       border: 1px solid #dbe1e4;
       margin: 15px 0 0 0;
-      padding-bottom: 15px; }
+      padding-bottom: 5px; }
       .check--data--modal .check--data--content .check--data--grid--wrap .operation--box {
         background: #f5f5f5;
         padding: 15px; }
@@ -1416,8 +1420,7 @@ path.link {
   width: auto;
   margin: 0 auto;
   height: 100%;
-  position: relative;
-  border-right: 1px solid #e4e4e4; }
+  position: relative; }
   .info--archive--main--content--wrapper .info--archive--sidebar--wrapper {
     height: 100%;
     width: 178px;
@@ -1518,7 +1521,8 @@ path.link {
       position: relative;
       z-index: 10;
       width: 100%;
-      height: calc(100% - 57px); }
+      height: calc(100% - 57px);
+      border-right: 1px solid #e4e4e4; }
       .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav {
         float: left;
         height: 100%;
@@ -1539,6 +1543,24 @@ path.link {
               padding-top: 10px; }
         .info--archive--main--content--wrapper .info--archive--right--content--wrapper .data--base--sidenav--box .data--base--sidenav.project--edit .data--base--column--box {
           background: #f7f7f7 url(../images/basicdata-two-level-menu-bg.png) no-repeat right 97%; }
+
+.preview--record--wrap {
+  width: auto !important;
+  min-width: 780px;
+  max-width: 950px;
+  height: 100%;
+  margin: 0 auto;
+  background: #fdfdfd;
+  box-shadow: 0 7px 8px -4px rgba(0, 0, 0, 0.1), 0 17px 17px 2px rgba(0, 0, 0, 0.1);
+  overflow: auto; }
+  .preview--record--wrap .toolbar--tools--box {
+    background: #8ba5c0;
+    min-height: 88px !important;
+    color: #ffffff; }
+  .preview--record--wrap__content .show--results-wrap {
+    overflow: hidden; }
+    .preview--record--wrap__content .show--results-wrap .show--results-box {
+      margin: 0 30px 10px 30px; }
 
 .project--manage--main--content--wrapper {
   width: 100%;
@@ -1656,25 +1678,26 @@ path.link {
     .new--project--manage--modal .new--project--content .new--project--row--box .attribute--row {
       display: inline-block;
       vertical-align: middle;
-      padding: 10px 13px; }
+      padding: 10px 0; }
       .new--project--manage--modal .new--project--content .new--project--row--box .attribute--row .single--attribute--box {
         display: inline-block;
         vertical-align: middle;
-        width: 300px;
+        width: 320px;
         margin-right: 10px;
         height: 34px;
         line-height: 34px; }
         .new--project--manage--modal .new--project--content .new--project--row--box .attribute--row .single--attribute--box__title {
           display: inline-block;
           font-weight: normal;
-          width: 85px;
+          width: 110px;
           margin-right: 10px;
           text-align: right;
           margin-bottom: 0;
-          vertical-align: middle; }
+          vertical-align: middle;
+          line-height: normal; }
         .new--project--manage--modal .new--project--content .new--project--row--box .attribute--row .single--attribute--box__value {
           display: inline-block;
-          vertical-align: 1px; }
+          vertical-align: middle; }
           .new--project--manage--modal .new--project--content .new--project--row--box .attribute--row .single--attribute--box__value-input {
             display: inline-block;
             vertical-align: middle;
@@ -2034,7 +2057,7 @@ path.link {
   .module--Template--wrap .models--list--wrap {
     position: absolute;
     top: 0;
-    right: 10px;
+    right: 23px;
     bottom: 0;
     width: 286px;
     overflow-y: auto; }
@@ -2128,11 +2151,11 @@ path.link {
       .process--info--wrap .process--info--box .process--node--box:last-child:after {
         content: "" !important; }
       .process--info--wrap .process--info--box .process--node--box._first {
-        background: #ffffff url(../images/process-first.png) no-repeat center right;
+        background: transparent url(../images/process-first.png) no-repeat center right;
         position: relative;
         float: left; }
       .process--info--wrap .process--info--box .process--node--box.first {
-        background: #ffffff url(../images/process-first.png) no-repeat center right;
+        background: transparent url(../images/process-first.png) no-repeat center right;
         position: relative;
         float: right; }
         .process--info--wrap .process--info--box .process--node--box.first:after {
@@ -2146,18 +2169,18 @@ path.link {
           transform: rotate(90deg);
           color: #1e8a38; }
       .process--info--wrap .process--info--box .process--node--box._middle {
-        background: #ffffff url(../images/process--middle.png) no-repeat center;
+        background: transparent url(../images/process--middle.png) no-repeat center;
         float: right; }
       .process--info--wrap .process--info--box .process--node--box.middle {
         float: left;
-        background: #ffffff url(../images/process--middle.png) no-repeat center; }
+        background: transparent url(../images/process--middle.png) no-repeat center; }
       .process--info--wrap .process--info--box .process--node--box._last {
-        background: #ffffff url(../images/process-last.png) no-repeat center left;
+        background: transparent url(../images/process-last.png) no-repeat center left;
         position: relative;
         float: right; }
       .process--info--wrap .process--info--box .process--node--box.last {
         float: left;
-        background: #ffffff url(../images/process-last.png) no-repeat center left;
+        background: transparent url(../images/process-last.png) no-repeat center left;
         position: relative; }
         .process--info--wrap .process--info--box .process--node--box.last:after {
           content: "\27A4";
@@ -2170,7 +2193,7 @@ path.link {
           transform: rotate(90deg);
           color: #1e8a38; }
       .process--info--wrap .process--info--box .process--node--box.only {
-        background: #ffffff url(../images/process-only.png) no-repeat center; }
+        background: transparent url(../images/process-only.png) no-repeat center; }
       .process--info--wrap .process--info--box .process--node--box .head {
         position: absolute;
         top: 30px;
@@ -2189,12 +2212,12 @@ path.link {
       display: inline-block;
       width: 15px;
       height: 136px;
-      background: #ffffff url(../images/process--line--row.png) repeat-x center; }
+      background: transparent url(../images/process--line--row.png) repeat-x center; }
     .process--info--wrap .process--info--box .process--line--col-right {
       display: inline-block;
       width: 100%;
       height: 60px;
-      background: #ffffff url(../images/process--line--col.png) repeat-y 767px;
+      background: transparent url(../images/process--line--col.png) repeat-y 767px;
       margin-bottom: 5px;
       position: relative; }
       .process--info--wrap .process--info--box .process--line--col-right i {
@@ -2207,7 +2230,7 @@ path.link {
       display: inline-block;
       width: 100%;
       height: 60px;
-      background: #ffffff url(../images/process--line--col.png) repeat-y 63px;
+      background: transparent url(../images/process--line--col.png) repeat-y 63px;
       margin-bottom: 5px;
       position: relative; }
       .process--info--wrap .process--info--box .process--line--col-left i {
@@ -2349,8 +2372,9 @@ path.link {
   width: 90%; }
   .check--error--list--modal_content {
     border: 1px solid #dbe1e4;
-    margin: 15px;
-    padding-bottom: 15px; }
+    margin: 0 16px 26px 16px;
+    margin-top: -10px;
+    overflow-y: hidden; }
     .check--error--list--modal_content .operation--box {
       background: #f5f5f5;
       padding: 15px; }
@@ -2382,10 +2406,10 @@ path.link {
 .common--uigrid--height.batch-grid {
   height: calc(100% - 67px); }
 
-.batch--ui--grid--icon {
+.batch--ui--grid--icon--box .batch--ui--grid--icon {
   display: inline-block;
   font-size: 16px;
-  vertical-align: middle; }
+  vertical-align: text-top; }
 
 .service--watch--wrap {
   width: 100%;
@@ -2440,12 +2464,18 @@ path.link {
 
 .service--watch--table .table__th--tr {
   background: #4F93C5;
-  color: #fff; }
+  color: #fff;
+  height: 40px; }
   .service--watch--table .table__th--tr th {
     font-weight: normal;
-    padding: 11px 8px; }
+    padding: 11px 5px; }
     .service--watch--table .table__th--tr th:hover {
       background: transparent; }
+.service--watch--table_tr {
+  height: 40px; }
+  .service--watch--table_tr td {
+    padding: 8px 5px !important;
+    line-height: normal !important; }
 
 .service--watch--sheet {
   box-sizing: content-box;
@@ -2481,15 +2511,27 @@ path.link {
   box-sizing: border-box;
   padding: 0 30px; }
   .mission--list--spread--box .attr--box {
-    display: inline-block;
     flex: initial;
     -webkit-flex: initial;
-    width: 200px;
-    min-width: 100px;
-    padding: 8px; }
+    width: auto;
+    min-width: 200px;
+    padding: 0 8px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis; }
     .mission--list--spread--box .attr--box.date {
       flex: 1;
       min-width: 250px; }
+    .mission--list--spread--box .attr--box .progress--info {
+      display: inline-block;
+      vertical-align: middle;
+      width: 100px;
+      margin: 0; }
+
+.no--task--box {
+  text-align: center; }
+  .no--task--box .no--task {
+    color: #ab0909; }
 
 .service--watch--list--operation--box {
   font-size: 16px;

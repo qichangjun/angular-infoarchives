@@ -33,10 +33,17 @@
       };
       getTemplate = function() {
         return moduleTemplateService.getTemplate(vm.parameter.templateId).then(function(res) {
-          if (res) {
-            return $scope.models.lists = JSON.parse(res.showTemplate) || [];
+          if (res && res.showTemplate) {
+            return $scope.models.lists = JSON.parse(res.showTemplate);
           } else {
-            return $scope.models.lists = [];
+            return $scope.models.lists = [
+              {
+                type: 'record',
+                name: '信息',
+                id: uuid.v4(),
+                data: []
+              }
+            ];
           }
         }, function(res) {});
       };
@@ -75,7 +82,6 @@
             }
           }
           jsonToObj($scope.models.templates, res);
-          console.log($scope.models.templates);
           return $scope.models.templates = [$scope.models.templates];
         }, function(res) {
           vm.loadingAttrLists = false;

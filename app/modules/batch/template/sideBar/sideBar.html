@@ -5,7 +5,6 @@
         </button>
         <div class="head" translate="MODULES_BATCH_DETAILED_INFORMATION">详细信息</div>
         <div class="title">{{vm.batchInfo.batchCode}}</div>
-
     </div>
 </md-toolbar>
 
@@ -45,7 +44,6 @@
                         <uib-progressbar ng-show="vm.batchInfo.DATA2AIU==100" class="progress-striped active" type="success" value="vm.batchInfo.DATA2AIU"></uib-progressbar><span>{{vm.batchInfo.DATA2AIU}}%</span>
                         <div class="sidebar--progress--time">{{vm.batchInfo.packageAiuStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAiuEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                     </div>
-
                     </div>
                     <div class="single--attr--row">
                         <label class="title ver-align-top">AIU <span class="fa fa-long-arrow-right"></span> SIP</label><div class="value ver-align-top">
@@ -70,19 +68,19 @@
                     <!--<span>数据量信息</span>-->
                     <div class="single--attr--row">
                         <span class="title" translate="MODULES_BATCH_INTAKE_OF_AIU">摄入AIU数量</span>
-                        <span class="value">{{vm.batchInfo.aiuCount}}</span>
+                        <span class="value">{{vm.batchInfo.aiuCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
                         <span class="value">0</span>
                     </div>
                     <div class="single--attr--row">
                         <span class="title" translate="MODULES_BATCH_AIU_CONVERSION_TO_SIP_NUMBER">AIU转换为SIP数量</span>
-                        <span class="value">{{vm.batchInfo.aiu2sipSuccessCount}}</span>
+                        <span class="value">{{vm.batchInfo.aiu2sipSuccessCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
-                        <span class="value">{{vm.batchInfo.aiu2sipFailCount}}</span>
+                        <span class="value">{{vm.batchInfo.aiu2sipFailCount || 0}}</span>
                     </div>
                     <div class="single--attr--row">
                         <span class="title" translate="MODULES_BATCH_SIP_CONVERSION_TO_AIP_NUMBER">SIP转换为AIP数量</span>
-                        <span class="value">{{vm.batchInfo.aipCount}}</span>
+                        <span class="value">{{vm.batchInfo.aipCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
                         <span class="value">{{vm.batchInfo.sip2aipFailCount || 0}}</span>
                     </div>
@@ -106,7 +104,7 @@
                     </div>
                     <div class="single--attr--row">
                         <span class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_COUNT">异常数据包数量</span>
-                        <span class="value">{{vm.errorInfo.packageCount}}</span>
+                        <span class="value">{{vm.errorInfo.packageCount || 0}}</span>
                         <a ng-if="vm.errorInfo.id" ng-click="vm.checkErrorList(vm.errorInfo.id)" translate="MODULES_BATCH_CLICK_VIEW">点击查看</a>
                     </div>
                     <div class="single--attr--row">
@@ -128,7 +126,7 @@
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_COUNT">异常数据包数量</label>
-                        <span class="value">{{vm.errorInfo.packageCount}}</span>
+                        <span class="value">{{vm.errorInfo.packageCount || 0}}</span>
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_PROCESSING_TIME">处理时间</label>
@@ -148,8 +146,8 @@
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_RESULT">处理结果</label>
-                        <span><span translate="MODULES_BATCH_SUCCESS">成功</span> {{vm.errorInfo.successCount}}</span>
-                        <span><span translate="MODULES_BATCH_FAIL">失败</span> {{vm.errorInfo.failCount}}</span>
+                        <span><span translate="MODULES_BATCH_SUCCESS">成功</span> {{vm.errorInfo.successCount || 0}}</span>
+                        <span><span translate="MODULES_BATCH_FAIL">失败</span> {{vm.errorInfo.failCount || 0}}</span>
                     </div>
                 </div>
             </md-content>

@@ -1,11 +1,11 @@
-<div aria-label="Mango" class="preview--template--form--modal">
+<div aria-label="Mango" class="preview--template--form--modal preview--record--wrap">
     <form ng-cloak
           name="newProject"
           novalidate
           ng-submit="newProject.$valid?vm.newProject():vm.newProject.submit=true"
     >
         <md-toolbar class="md-menu-toolbar">
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools toolbar--tools--box">
                 <div class="preview--template--form--head">
                     <img src="images/preview--box--icon.png" alt=""/>
                     <div class="title--box">
@@ -16,7 +16,7 @@
                 <span flex></span>
             </div>
         </md-toolbar>
-        <md-dialog-content class="preview--template--form--modal__content md-dialog-content clearfix">
+        <md-dialog-content class="preview--template--form--modal__content preview--record--wrap__content clearfix">
             <div >
                 <div class="new--project--row--box">
                     <div class="row show--results-wrap">

@@ -228,7 +228,7 @@
     height: calc(100% - 66px);
     &.project--edit{
       position: absolute;
-      top: 115px;
+      top: 110px;
       bottom: 0;
       height: auto;
     }
@@ -472,7 +472,8 @@
   }
   .check--data--content{
     margin: 0 16px 26px 16px;
-    overflow-y: auto;
+    margin-top: -10px;
+    overflow-y: hidden;
     .search--wrap{
       display: table;
       width: 100%;
@@ -507,7 +508,7 @@
       border: 1px solid #dbe1e4;
       //border-bottom: none;
       margin: 15px 0 0 0;
-      padding-bottom: 15px;
+      padding-bottom: 5px;
       .operation--box{
         background: #f5f5f5;
         padding: 15px;

@@ -32,7 +32,7 @@
           return d3.select('#straight-tree-g').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
         };
         zoom = d3.behavior.zoom().scaleExtent([1, 20]).on("zoom", zoomed);
-        vis = d3.select('straight-tree').append('svg:svg').attr('id', 'straight-tree').attr('width', w + m[1] + m[3]).attr('height', h + m[0] + m[2]).append('svg:g').attr('id', 'straight-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
+        vis = d3.select('straight-tree').append('svg:svg').attr('id', 'straight-tree').attr('width', '100%').attr('height', h + m[0] + m[2]).append('svg:g').attr('id', 'straight-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + m[3] + ',' + m[0] + ')');
         tree = d3.layout.tree().size([h, w]);
         diagonal = d3.svg.diagonal().projection(function(d) {
           return [d.y, d.x];
@@ -94,7 +94,7 @@
           nodeUpdate = node.transition().duration(duration).attr('transform', function(d) {
             return 'translate(' + d.y + ',' + d.x + ')';
           });
-          nodeUpdate.select('circle').attr('r', 4.5).style('fill', function(d) {
+          nodeUpdate.select('circle').attr('r', 6).style('fill', function(d) {
             if (d._children) {
               return 'lightsteelblue';
             } else {

@@ -20,7 +20,7 @@
                 </md-button>
             </div>
         </div>
-        <div  ui-grid="gridOptions"  class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+        <div ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'700px','min-height':'300px'}" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
     </md-dialog-content>
 </md-dialog>
 

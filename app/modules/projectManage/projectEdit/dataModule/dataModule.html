@@ -35,10 +35,10 @@
                                 <md-option ng-value="versionList.id" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
                             </md-select>
                         </div>
-                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportSample($event)" translate="导出样例">
+                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportSample($event)" translate="MODULES_PROJECTMANAGE_EXPORT_SAMPLE">
                             导出样例
                         </md-button>
-                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportModule($event)" translate="导出模版">
+                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportModule($event)" translate="MODULES_PROJECTMANAGE_EXPORT_TEMPLATE">
                             导出模版
                         </md-button>
                         <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)" translate="MODULES_PROJECTMANAGE_SAVE_TEMPLATE">

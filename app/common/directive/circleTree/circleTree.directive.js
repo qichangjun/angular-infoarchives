@@ -34,7 +34,7 @@
           return d3.select('#circle-tree-g').attr("transform", "translate(" + d3.event.translate + ")scale(" + d3.event.scale + ")");
         };
         zoom = d3.behavior.zoom().translate([460, 460]).scale(1).scaleExtent([1, 20]).on("zoom", zoomed);
-        vis = d3.select('circle-tree').append('svg:svg').attr('viewBox', '0 0 960 960').attr('id', 'circleTree').attr('width', diameter).attr('height', diameter).append('svg:g').attr('id', 'circle-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
+        vis = d3.select('circle-tree').append('svg:svg').attr('viewBox', '0 0 960 960').attr('id', 'circleTree').attr('width', '100%').attr('height', diameter).append('svg:g').attr('id', 'circle-tree-g').call(zoom).on('dblclick.zoom', null).attr('transform', 'translate(' + diameter / 2 + ',' + diameter / 2 + ')');
         update = function(source) {
           var duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;
           duration = d3.event && d3.event.altKey ? 5000 : 500;
@@ -79,9 +79,9 @@
             }
           }).attr('transform', function(d) {
             if (d.x < 180) {
-              return 'translate(8)';
+              return 'translate(10)';
             } else {
-              return 'rotate(180)translate(-8)';
+              return 'rotate(180)translate(-10)';
             }
           }).text(function(d) {
             return d.name;
@@ -89,7 +89,7 @@
           nodeUpdate = node.transition().duration(duration).attr("transform", function(d) {
             return "rotate(" + (d.x - 90) + ")translate(" + d.y + ")";
           });
-          nodeUpdate.select('circle').attr('r', 4.5).style('fill', function(d) {
+          nodeUpdate.select('circle').attr('r', 6).style('fill', function(d) {
             if (d._children) {
               return 'lightsteelblue';
             } else {

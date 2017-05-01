@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").controller("dataModuleController", [
     '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'dataModuleService', 'uuid', 'basicDataService', 'commonMethodSerivce', '$translate', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, dataModuleService, uuid, basicDataService, commonMethodSerivce, $translate) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, PAHT_OF_TEMPLATE_MDDIALOG_DELETE, TYPE_BLOCK, TYPE_FILE, TYPE_NODE, TYPE_RECORD, addContainer, deleteAttr, deleteNode, editFile, editProject, exportModule, exportSample, getModuleInfo, getProjectInfo, getSysAttr, getVersionList, init, initSysAttr, jsonToObj, listenEvent, modelPush, module, nameList, searchIdAddFile, searchIdDeleteFile, searchParent, unupdateAbleAlert, updateAbleAlert, updateName, vm;
+      var PAHT_OF_TEMPLATE_MDDIALOG, TYPE_BLOCK, TYPE_FILE, TYPE_NODE, TYPE_RECORD, addContainer, deleteAttr, deleteNode, editFile, editProject, exportModule, exportSample, getModuleInfo, getProjectInfo, getSysAttr, getVersionList, init, initSysAttr, jsonToObj, listenEvent, modelPush, module, nameList, searchIdAddFile, searchIdDeleteFile, searchParent, unupdateAbleAlert, updateAbleAlert, updateName, vm;
       vm = this;
       vm.parameter = $stateParams;
       vm.attr = {};
@@ -11,7 +11,6 @@
       $scope.saveData = [];
       vm.moduleEditAble = true;
       nameList = [];
-      PAHT_OF_TEMPLATE_MDDIALOG_DELETE = 'modules/projectManage/template/mdDialog/';
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/projectManage/projectEdit/dataModule/template/mdDialog/';
       TYPE_FILE = 'file';
       TYPE_RECORD = 'record';

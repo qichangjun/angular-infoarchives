@@ -29,7 +29,7 @@
             <div class="models--list--box" ng-show="!vm.loadingAttrLists">
                 <script type="text/ng-template" id="nodes_renderer.html">
                     <div >
-                        <a class="drop--group--box" ng-if="(node.children && node.children.length > 0) || (node.attributes && node.attributes.length > 0)" data-nodrag ng-click="vm.toggle(this)">
+                        <a class="drop--group--box"  data-nodrag ng-click="vm.toggle(this)">
                         <span class="drop--group" ng-class="{'drop--off': collapsed,'drop--on': !collapsed}">
                             <span class="core"></span>
                         </span>
@@ -78,13 +78,13 @@
                         </ul>
                     </div>
                     <md-button class="blue--btn" ng-click="vm.previewForm()" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" translate="MODULES_PROJECTMANAGE_GENERATE_PREVIEW">生成预览</md-button>
-                    <div>
-                        <md-select style="width:100px;" class="edit--custom--data--modal__select" ng-change="vm.changeVersion()" ng-model="vm.parameter.templateId">
-                            <md-option  ng-repeat="versionList in vm.versionList" value="{{versionList.id}}">
-                                <span translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span>：{{versionList.versionNo}}
-                            </md-option>
-                        </md-select>
-                    </div>
+
+                    <md-select style="display:inline-block;min-width:100px;float: left" class="edit--custom--data--modal__select" ng-change="vm.changeVersion()" ng-model="vm.parameter.templateId">
+                        <md-option  ng-repeat="versionList in vm.versionList" value="{{versionList.id}}">
+                            <span translate="MODULES_PROJECTMANAGE_VERSION_NUMBER">版本号</span>：{{versionList.versionNo}}
+                        </md-option>
+                    </md-select>
+
 
                 </div>
                 <!--<h1 style="float:left">-->

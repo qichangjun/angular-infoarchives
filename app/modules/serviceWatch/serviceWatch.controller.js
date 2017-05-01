@@ -21,7 +21,7 @@
             rows.keepTime = (str - rows.startDate) / 1000;
             rows.keepDay = Math.floor(rows.keepTime / 86400);
             rows.keepHour = Math.floor(rows.keepTime % 86400 / 3600);
-            rows.keepMinute = Math.floor(rows.keepTime % 86400 / 3600);
+            rows.keepMinute = Math.floor(rows.keepTime % 86400 % 3600 / 60);
             results.push(rows.missionList = []);
           }
           return results;

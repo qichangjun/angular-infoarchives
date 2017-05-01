@@ -21,7 +21,7 @@
                 </tr>
                 </thead>
                 <tbody  ng-repeat="data in vm.gridOptions.data">
-                    <tr ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
+                    <tr class="service--watch--table_tr" ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
                         <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
                         <td>{{data.jobName}}</td>
                         <td>{{data.jobDesc}}</td>
@@ -52,10 +52,10 @@
                             </div>
                         </td>
                     </tr>
-                    <tr class="missionList" ng-show="data.showMission">
+                    <tr class="missionList service--watch--table_tr" ng-show="data.showMission">
                         <td colspan="7">
-                            <div ng-show="data.missionList.length == 0" >
-                                <span class="attr--box">没有任务</span>
+                            <div ng-show="data.missionList.length == 0" class="no--task--box" >
+                                <span class="attr--box no--task" translate="MODULES_SERVICEWATCH_NO_TASK">没有任务</span>
                             </div>
                             <div ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
                                 <span class="attr--box">ID：{{missionList.id}}</span>
@@ -69,8 +69,8 @@
                                     <span  ng-if="missionList.batchStatus==2"> {{missionList.aiu2sipSuccessCount || 0}}</span>
                                     {{missionList.aiu2sipSuccessCount}}</span>
                                 <span class="attr--box"><span translate="MODULES_SERVICEWATCH_SCHEDULE">进度</span>：
-                                    <uib-progressbar style="display: inline-block;vertical-align: middle;width:100px;margin: 0;" ng-show="!missionList.progress" class="progress-striped active" type="success" value="0"></uib-progressbar>
-                                    <uib-progressbar style="display: inline-block;vertical-align: middle;width:100px;margin: 0;" ng-show="missionList.progress" class="progress-striped active" type="success" value="missionList.progress"></uib-progressbar>{{missionList.progress || 0}}%
+                                    <uib-progressbar ng-show="!missionList.progress" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar>
+                                    <uib-progressbar ng-show="missionList.progress" class="progress-striped active progress--info" type="success" value="missionList.progress"></uib-progressbar>{{missionList.progress || 0}}%
                                 </span>
                             </div>
                         </td>
