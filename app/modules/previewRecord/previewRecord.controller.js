@@ -85,6 +85,38 @@
       vm.cancel = cancel;
       init();
     }
+  ]).controller('showProcessDetailController', [
+    '$scope', '$log', '$stateParams', '$mdDialog', 'dataBaseService', 'info', function($scope, $log, $stateParams, $mdDialog, dataBaseService, info) {
+      var cancel, getBlock, init, vm;
+      vm = this;
+      init = function() {
+        vm.entity = info;
+        vm.blockLists = [];
+        getBlock(info);
+      };
+      getBlock = function(_json) {
+        var key, results;
+        results = [];
+        for (key in _json) {
+          if (key === 'block') {
+            if (!_json[key] instanceof Array) {
+              vm.blockLists.push(_json[key]);
+            } else {
+              vm.blockLists = vm.blockLists.concat(_json[key]);
+            }
+            results.push(getBlock(_json[key]));
+          } else {
+            results.push(void 0);
+          }
+        }
+        return results;
+      };
+      cancel = function() {
+        return $mdDialog.cancel();
+      };
+      vm.cancel = cancel;
+      init();
+    }
   ]);
 
 }).call(this);

@@ -9,7 +9,7 @@
                 <div class="preview--template--form--head">
                     <img src="images/preview--box--icon.png" alt=""/>
                     <div class="title--box">
-                        <div class="title" translate="MODULES_DATABASE_BUSINESS_TRANSACTION">业务流水号</div>
+                        <div class="title" >{{vm.parameter.name}}</div>
                         <div class="number">{{vm.businessCode}}</div>
                     </div>
                 </div>
@@ -36,8 +36,9 @@
                                             <tbody>
                                                 <tr ng-repeat="fileValue in attr.value[0] track by $index">
                                                     <td><img src="images/doc.png" alt=""/></td>
-                                                    <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
-                                                    <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
+                                                    <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : <a
+                                                            href="{{fileValue.url}}">{{fileValue.name}}</a></td>
+                                                    <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.type}}</td>
                                                     <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
                                                     <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
                                                 </tr>
@@ -56,7 +57,7 @@
                                         <div>
                                             <div class="head">{{process.name}}</div>
                                             <div class="description">
-                                                <div>操作人 : {{process.operator}}</div>
+                                                <div><span class="MODULES_DATABASE_OPERATOR">操作人</span> : {{process.operator}}</div>
                                                 <div>{{process.operate_date}}</div>
                                             </div>
                                         </div>

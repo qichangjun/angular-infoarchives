@@ -90,7 +90,15 @@
         </div>
         <div  ng-if="gridOptions.data.length > 0 && !vm.loading" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-move-columns ui-grid-save-state  ui-grid-selection ui-grid-pagination ></div>
         <div ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
-        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="no--data"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span></div>
+        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="batch--no--data">
+            <!--<span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span>-->
+            <div class="batch--no--data__prompt--box">
+                <span class="prompt--img"><img src="images/batch--no--data-img.png" alt=""/></span>
+                <h3 class="prompt--head" translate="MODULES_BATCH_NO_ARCHIVED_DATA">没有归档数据</h3>
+                <span class="prompt--content"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_NO_ARCHIVED_DATA_PROMPT_ONE">请检查与业务系统的网络连接是否通畅或者数据库连接的情况</span></span>
+                <span class="prompt--content"><span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_NO_ARCHIVED_DATA_PROMPT_TWO">数据封装服务可能未启动，请查看</span>&nbsp;&nbsp;<a ui-sref="infoArchives.serviceWatch" translate="MODULES_SERVICEWATCH_SERVICE_MONITORING">服务监控</a></span>
+            </div>
+        </div>
     </div>
     <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
         <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>

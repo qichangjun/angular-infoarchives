@@ -50,6 +50,43 @@
       }
     }
   }
+  .connect--map--content--wrap{
+    width: 100%;
+    float: left;
+    height: calc(100% - 143px);
+    overflow: auto;
+    position: relative;
+    .connect--map--data--status--info--wrap{
+      display: inline-block;
+      border: 1px solid #d6e0e3;
+      border-radius: 4px;
+      background: #fdfdfd;
+      padding: 20px 30px;
+      position: absolute;
+      top: 200px;
+      left: 65px;
+      .status--info--box{
+        margin: 0;
+        padding: 0;
+        .single--info{
+          list-style-type: none;
+          color: #5DC560;
+          margin-bottom: 8px;
+          &:last-child{
+            margin-bottom: 0;
+          }
+          &.active{
+            color: #DB4A39;
+          }
+          .fa{
+            margin-right: 7px;
+            transform: scale(.85);
+
+          }
+        }
+      }
+    }
+  }
 }
 
 .tiptool--show--wrap{

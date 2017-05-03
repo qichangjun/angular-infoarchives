@@ -68,14 +68,15 @@
                             <img class="navbar--admin--icon" src="images/navbar--admin--icon.jpg" alt=""/>
                             <span class="caret"></span>
                         </a>
-                        <md-menu-content>
+                        <md-menu-content class="navbar--user--info--drop--down--content">
                             <md-menu-item class="md-indent">
-                                <md-menu>
+                                <md-menu >
                                     <md-button ng-click="$mdMenu.open()" translate="MODULES_MAIN_SWITCH_LANGUAGE">切换语言</md-button>
                                     <md-menu-content width="3">
                                         <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
                                         <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
                                     </md-menu-content>
+
                                 </md-menu>
                             </md-menu-item>
                             <md-menu-item class="md-indent">

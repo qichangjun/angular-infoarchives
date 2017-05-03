@@ -14,6 +14,7 @@
 
 md-dialog{
   max-width: 95%;
+  max-height: 95%;
 }
 
 md-autocomplete{
@@ -50,14 +51,23 @@ md-autocomplete{
   display: inline-block;
   vertical-align: middle;
   .drop--group{
-    display: inline-block;
-    width: 18px;
-    height: 18px;
-    border-width: 1px;
-    border-style: solid;
-    border-color: #199ed8;
-    cursor: pointer;
-    border-radius: 50%;
+    //display: inline-block;
+    //width: 18px;
+    //height: 18px;
+    //border-width: 1px;
+    //border-style: solid;
+    //border-color: #199ed8;
+    //cursor: pointer;
+    //border-radius: 50%;
+    padding: 0 4px;
+    font-size: 18px;
+    line-height: normal;
+    margin-right: 3px;
+    background: #4F93C5;
+    color: #ffffff;
+    .btn--icon{
+      width: 13px;
+    }
     &.drop--on{
       border-color: rgba(0,0,0,0.54);
     }
@@ -87,4 +97,60 @@ md-dialog .md-dialog-content{
 
 .highcharts-background{
   //fill: transparent;
+}
+
+md-toast{
+  width: 310px;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  margin-left: -160px;
+  text-align: center;
+}
+md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
+  background-color: #55B03E;
+  opacity: .9;
+  color: #ffffff;
+  border-radius: 5px;
+  font-size: 14px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.rzslider.rz-vertical{
+  width: 2px;
+}
+.rzslider.rz-vertical .rz-bar-wrapper{
+  width: 18px;
+  padding: 0 0 0 9px;
+  margin: 0 0 0 -9px;
+}
+.rzslider.rz-vertical .rz-bar{
+  width: 2px;
+  background: #bdbdbd;
+}
+.rzslider .rz-pointer{
+  width: 18px;
+  height: 18px;
+  background: #797979;
+  &:after{
+    top: 6px;
+    left: 6px;
+    width: 6px;
+    height: 6px;
+  }
+}
+.rzslider.rz-vertical .rz-pointer{
+  left: -8px!important;
+}
+.rzslider .rz-pointer.rz-active:after {
+  background-color: #797979;
+}
+
+.md-select-value .md-select-icon{
+  width: 16px;
+}
+md-checkbox{
+  margin-right: 8px;
+
 }

@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").controller("statisticsController", [
     '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', '$stateParams', 'statisticsService', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, $stateParams, statisticsService) {
-      var getLegalPerson, getPersonalService, getRecordNum, getSystemName, getTopTen, getTopTenData, getYearList, init, updateColumnCharts, vm;
+      var getLegalPerson, getPersonalService, getRecordNum, getSystemName, getTopTen, getTopTenData, getYearList, init, updateColumnCharts, updateUnitColumn, vm;
       vm = this;
       vm.parameter = $stateParams;
       if (!vm.parameter.systemName) {
@@ -12,6 +12,10 @@
       if (!vm.parameter.year) {
         vm.parameter.year = 'all';
       }
+      if (!vm.parameter.unit) {
+        vm.parameter.unit = 'all';
+      }
+      vm.unitLists = ['测试0', '测试1', '测试2', '测试3', '测试4', '测试5'];
       init = function() {
         getSystemName();
         getYearList();
@@ -29,30 +33,97 @@
         }, function(res) {});
       };
       getRecordNum = function() {
-        return statisticsService.getRecordNum(vm.parameter).then(function(res) {
-          var i, j, len, ref, rows;
-          vm.recordNum = [];
-          i = 0;
-          while (i < 12) {
-            vm.recordNum[i] = {};
-            vm.recordNum[i].y = res[i + 1];
-            vm.recordNum[i].x = i;
-            vm.recordNum[i].description = {
-              unitName: '测试' + i,
-              recordStartDate: '2015年11月3日',
-              recordOverDate: '2017年05月21日',
-              dataCount: 225
-            };
-            i++;
-          }
-          vm.unitLists = [];
-          ref = vm.recordNum;
-          for (i = j = 0, len = ref.length; j < len; i = ++j) {
-            rows = ref[i];
-            vm.unitLists.push(rows.description.unitName);
-          }
-          return updateColumnCharts();
-        }, function(res) {});
+        $state.go('.', vm.parameter, {
+          notify: false
+        });
+        if (vm.parameter.unit !== 'all') {
+          return statisticsService.getRecordNum(vm.parameter).then(function(res) {
+            var i;
+            vm.unitInfo = [];
+            vm.businessLists = [];
+            i = 0;
+            while (i < 11) {
+              vm.unitInfo[i] = {};
+              vm.unitInfo[i].y = parseInt(Math.random() * 100);
+              vm.unitInfo[i].x = i;
+              vm.businessLists.push('业务' + i);
+              i++;
+            }
+            return updateUnitColumn();
+          }, function(res) {});
+        } else {
+          return statisticsService.getRecordNum(vm.parameter).then(function(res) {
+            var i, j, len, ref, rows;
+            vm.recordNum = [];
+            i = 0;
+            while (i < 12) {
+              vm.recordNum[i] = {};
+              vm.recordNum[i].y = res[i + 1];
+              vm.recordNum[i].x = i;
+              vm.recordNum[i].description = {
+                unitName: '测试' + i,
+                recordStartDate: '2015年11月3日',
+                recordOverDate: '2017年05月21日',
+                dataCount: 225
+              };
+              i++;
+            }
+            vm.unitLists = [];
+            ref = vm.recordNum;
+            for (i = j = 0, len = ref.length; j < len; i = ++j) {
+              rows = ref[i];
+              vm.unitLists.push(rows.description.unitName);
+            }
+            vm.unitLists = ['测试0', '测试1', '测试2', '测试3', '测试4', '测试5'];
+            return updateColumnCharts();
+          }, function(res) {});
+        }
+      };
+      updateUnitColumn = function() {
+        return $('#containerOfUnit').highcharts({
+          chart: {
+            type: 'column'
+          },
+          title: {
+            text: null
+          },
+          legend: {
+            enabled: false
+          },
+          credits: {
+            text: '',
+            href: ''
+          },
+          xAxis: {
+            categories: vm.businessLists,
+            crosshair: true
+          },
+          yAxis: {
+            min: 0,
+            title: {
+              text: 'AIP数量'
+            }
+          },
+          tooltip: {
+            headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+            pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' + '<td style="padding:0"><b>{point.y}</b></td></tr>' + '</tr>',
+            footerFormat: '</table>',
+            shared: true,
+            useHTML: true
+          },
+          plotOptions: {
+            column: {
+              pointPadding: 0.2,
+              borderWidth: 0
+            }
+          },
+          series: [
+            {
+              name: 'AIP数量',
+              data: vm.unitInfo
+            }
+          ]
+        });
       };
       getTopTenData = function() {
         return statisticsService.getTopTenData().then(function(res) {
@@ -270,8 +341,16 @@
           },
           plotOptions: {
             column: {
+              cursor: 'pointer',
               pointPadding: 0.2,
-              borderWidth: 0
+              borderWidth: 0,
+              color: '#2b908f',
+              events: {
+                click: function(e) {
+                  vm.parameter.unit = e.point.description.unitName;
+                  return getRecordNum();
+                }
+              }
             }
           },
           series: [

@@ -42,11 +42,11 @@
                   type: 'item',
                   children: []
                 }, {
-                  name: '对接方式:OSS',
+                  name: '已归档数据量:10000件,35GB',
                   type: 'item',
                   children: []
                 }, {
-                  name: '对接方式:OSS',
+                  name: '当前JOB:查看',
                   type: 'item',
                   children: []
                 }
@@ -54,7 +54,25 @@
             }, {
               name: '医学出生证明系统',
               type: 'unit',
-              children: []
+              children: [
+                {
+                  name: '对接方式:OSS',
+                  type: 'item',
+                  children: []
+                }, {
+                  name: '连接状态:正常',
+                  type: 'item',
+                  children: []
+                }, {
+                  name: '已归档数据量:10000件,35GB',
+                  type: 'item',
+                  children: []
+                }, {
+                  name: '当前JOB:查看',
+                  type: 'item',
+                  children: []
+                }
+              ]
             }
           ]
         };
@@ -63,7 +81,7 @@
       listenEvent = function() {
         $scope.$on('node:mouseover', function(e, d) {
           return $timeout(function() {
-            if (d.type === 'item') {
+            if (d.type === 'item' && d.name === '当前JOB:查看') {
               vm.tiptool.show = true;
               vm.tiptool.x = d.x;
               return vm.tiptool.y = d.y;

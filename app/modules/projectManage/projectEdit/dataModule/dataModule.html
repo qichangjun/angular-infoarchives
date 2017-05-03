@@ -49,13 +49,20 @@
             </md-toolbar>
             <div class="two--px--line"></div>
             <form class="edit--project--manage--wrapper data--module">
-
+                <div class="bigger--map--box">
+                    <div>
+                        <rzslider style="height: 200px;"
+                                rz-slider-model="vm.slider.value"
+                                rz-slider-options="vm.slider.options"></rzslider>
+                    </div>
+                    <!--<button ng-click="vm.biggerMap()" class="btn btn-default fa fa-plus"></button>-->
+                    <!--<button ng-click="vm.smallerMap()" class="btn btn-default fa fa-minus"></button>-->
+                </div>
                 <md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>
                 <div>
                     <div class="md-dialog-content">
-
                             <div layout-gt-sm="row" id="container" >
-                                <collapsible-tree  id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble" has-node="vm.hasNode">
+                                <collapsible-tree id="customModule" nodes = 'nodes' width = '200' height = '200' radius = '490' edit-able="vm.moduleEditAble" has-node="vm.hasNode">
                                 </collapsible-tree>
                             </div>
                     </div>

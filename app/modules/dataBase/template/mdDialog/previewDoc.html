@@ -20,52 +20,50 @@
             </div>
         </md-toolbar>
         <md-dialog-content class="preview--template--form--modal__content md-dialog-content clearfix">
-            <div >
-                <div class="new--project--row--box">
-                    <div class="row show--results-wrap">
-                        <div ng-repeat="list in data" class="show--results-box">
-                            <div class="head--box">
-                                <span class="head--content">{{list.name}}</span>
-                            </div>
-                            <div class="panel-body show--results--body" ng-show="list.type == 'record'">
-                                <div ng-repeat="attr in list.data"
-                                     ng-class="{'attr-file':attr.attrType=='file','attr-item':attr.attrType!='file'}">
-                                    <span ng-show="attr.attrType!='file'">
-                                        <span>{{attr.attrNameZh}} : </span>
-                                        <span>{{attr.value[0]}}</span>
-                                    </span>
-                                    <div ng-show="attr.attrType=='file'">
-                                        <table class="preview--template--form--modal__table">
-                                            <tbody>
-                                            <tr ng-repeat="fileValue in attr.value[0] track by $index">
-                                                <td><img src="images/doc.png" alt=""/></td>
-                                                <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
-                                                <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
-                                                <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
-                                                <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
-                                            </tr>
-                                            </tbody>
-                                        </table>
-                                    </div>
+            <div class="new--project--row--box">
+                <div class="row show--results-wrap">
+                    <div ng-repeat="list in data" class="show--results-box">
+                        <div class="head--box">
+                            <span class="head--content">{{list.name}}</span>
+                        </div>
+                        <div class="panel-body show--results--body" ng-show="list.type == 'record'">
+                            <div ng-repeat="attr in list.data"
+                                 ng-class="{'attr-file':attr.attrType=='file','attr-item':attr.attrType!='file'}">
+                                <span ng-show="attr.attrType!='file'">
+                                    <span>{{attr.attrNameZh}} : </span>
+                                    <span>{{attr.value[0]}}</span>
+                                </span>
+                                <div ng-show="attr.attrType=='file'">
+                                    <table class="preview--template--form--modal__table">
+                                        <tbody>
+                                        <tr ng-repeat="fileValue in attr.value[0] track by $index">
+                                            <td><img src="images/doc.png" alt=""/></td>
+                                            <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : {{fileValue.name}}</td>
+                                            <td><span translate="MODULES_DATABASE_FILE_TYPE">文件类型</span> : {{fileValue.name}}</td>
+                                            <td><span translate="MODULES_DATABASE_FILE_SIZE">文件大小</span> : {{fileValue.size}}</td>
+                                            <td><span translate="MODULES_DATABASE_MD5_CODE">MD5码</span> : {{fileValue.md5}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
-                            <div class="process--info--wrap" ng-show="list.type == 'process'">
-                                <ul class="process--info--box clearfix">
-                                    <li class="process--node--box {{process.class}}"
-                                        ng-class="{only:vm.processLists.length==1}"
-                                        ng-repeat="process in vm.processLists |orderBy:process.operate_date"
-                                        ng-click="vm.showProcessDetail(process)"
-                                            >
-                                        <div>
-                                            <div class="head">{{process.name}}</div>
-                                            <div class="description">
-                                                <div>操作人 : {{process.operator}}</div>
-                                                <div>{{process.operate_date}}</div>
-                                            </div>
+                        </div>
+                        <div class="process--info--wrap" ng-show="list.type == 'process'">
+                            <ul class="process--info--box clearfix">
+                                <li class="process--node--box {{process.class}}"
+                                    ng-class="{only:vm.processLists.length==1}"
+                                    ng-repeat="process in vm.processLists |orderBy:process.operate_date"
+                                    ng-click="vm.showProcessDetail(process)"
+                                        >
+                                    <div>
+                                        <div class="head">{{process.name}}</div>
+                                        <div class="description">
+                                            <div><span class="MODULES_DATABASE_OPERATOR">操作人</span> : {{process.operator}}</div>
+                                            <div>{{process.operate_date}}</div>
                                         </div>
-                                    </li>
-                                </ul>
-                            </div>
+                                    </div>
+                                </li>
+                            </ul>
                         </div>
                     </div>
                 </div>

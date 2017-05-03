@@ -64,6 +64,9 @@
   "MODULES_BATCH_DATA_CHECK_ERROR":"Data check error",
   "MODULES_BATCH_FORCED_CONVERSION_QUANTITY":"Force Convert Count",
   "MODULES_BATCH_BUSINESS_UNIT":"Business Unit",
+  "MODULES_BATCH_NO_ARCHIVED_DATA":"No archived data",
+  "MODULES_BATCH_NO_ARCHIVED_DATA_PROMPT_ONE":"Please check whether the network connection to the business system is smooth or the database connection",
+  "MODULES_BATCH_NO_ARCHIVED_DATA_PROMPT_TWO":"The data encapsulation service may not be started,please check out",
 
   "MODULES_BATCH_BATCH_CODE":"Batch Code",
   "MODULES_BATCH_BATCH_STATUS":"Batch status",
@@ -95,11 +98,11 @@
   "MODULES_DATABASE_SYSTEM_SOURCE":"System Source",
   "MODULES_DATABASE_DATA_INFORMATION":"Data Information",
   "MODULES_DATABASE_LATEST_UPDATE_DATE":"Latest update date",
-  "MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS":"Number of docking systems",
-  "MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS":"Number of business units",
-  "MODULES_DATABASE_NUMBER_OF_BUSINESS_MATTERS":"Number of business matters",
-  "MODULES_DATABASE_TOTAL_NUMBER_OF_DATA_RECORDS":"Total number of data records",
-  "MODULES_DATABASE_TOTAL_DATA_CAPACITY":"Total data capacity",
+  "MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS":"Docking Systems Count",
+  "MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS":"Source Unit Count",
+  "MODULES_DATABASE_NUMBER_OF_BUSINESS_MATTERS":"Business Matter Count",
+  "MODULES_DATABASE_TOTAL_NUMBER_OF_DATA_RECORDS":"Data Package Count",
+  "MODULES_DATABASE_TOTAL_DATA_CAPACITY":"Data Capacity",
   "MODULES_DATABASE_DATA_SOURCES":"Data sources",
   "MODULES_DATABASE_SELECT_DATA_SOURCE":"Select data source",
   "MODULES_DATABASE_NOT_FOUND":"Not found",
@@ -113,9 +116,9 @@
   "MODULES_DATABASE_NODE_NAME":"Node name",
   "MODULES_DATABASE_OPERATION_DATE":"Operation Date",
   "MODULES_DATABASE_OPERATOR":"Operator",
-  "MODULES_DATABASE_FILE_NAME":"File Name",
-  "MODULES_DATABASE_FILE_TYPE":"File Type",
-  "MODULES_DATABASE_FILE_SIZE":"File Size",
+  "MODULES_DATABASE_FILE_NAME":"Name",
+  "MODULES_DATABASE_FILE_TYPE":"Type",
+  "MODULES_DATABASE_FILE_SIZE":"Size",
   "MODULES_DATABASE_MD5_CODE":"MD5 code",
   "MODULES_DATABASE_LOADING":"Loading...",
   "MODULES_DATABASE_DOCKING_SYSTEM":"Docking System",
@@ -148,7 +151,7 @@
   "MODULES_MAIN_ARCHIVED_ITEMS":"Archived items",
   "MODULES_MAIN_DATA_MANAGEMENT":"Data management",
   "MODULES_MAIN_OTHER":"Other",
-  "MODULES_MAIN_SWITCH_LANGUAGE":"Switch language",
+  "MODULES_MAIN_SWITCH_LANGUAGE":"Language Setting",
   "MODULES_MAIN_LOGOUT":"Logout",
 
   "MODULES_PROJECTMANAGE_PROJECT_MANAGEMENT":"Project Management",
@@ -245,6 +248,12 @@
   "MODULES_PROJECTMANAGE_PLEASE_SELECT_ATTRIBUTE":"Please select the attribute",
   "MODULES_PROJECTMANAGE_EXPORT_SAMPLE":"Export Sample",
   "MODULES_PROJECTMANAGE_EXPORT_TEMPLATE":"Export Template",
+  "MODULES_PROJECTMANAGE_RECEIVING_PLATFORM_RETENTION_PERIOD":"Receiving platform retention period",
+  "MODULES_PROJECTMANAGE_MODIFY_NAME":"Modify Name",
+  "MODULES_PROJECTMANAGE_BLOCK":"Block",
+  "MODULES_PROJECTMANAGE_NODE":"Node",
+  "MODULES_PROJECTMANAGE_ADD_FILE":"Add File",
+  "MODULES_PROJECTMANAGE_FILE_LIST":"File List",
 
 
   "MODULES_SERVICEWATCH_SERVICE_MONITORING":"Service Monitor",
@@ -261,7 +270,7 @@
   "MODULES_SERVICEWATCH_SERVICE_STOP":"Stop",
   "MODULES_SERVICEWATCH_NORMAL_OPERATION":"Normal",
   "MODULES_SERVICEWATCH_TASK_START_TIME":"Task start time",
-  "MODULES_SERVICEWATCH_PACKET_PROFICIENCY":"Packet proficiency",
+  "MODULES_SERVICEWATCH_PACKET_PROFICIENCY":"Success Count",
   "MODULES_SERVICEWATCH_SCHEDULE":"Schedule",
   "MODULES_SERVICEWATCH_SERVICE_CAN_ONLY_RUN_TAS":"At present, each service can only run a task, siege lion is full development of multi-tasking",
   "MODULES_SERVICEWATCH_SHOWS_ONLY_TASKS_THAT_ARE_RUNNING":"This shows only the tasks that are running, and the completed task records are entered into the",
@@ -276,7 +285,6 @@
 
 
 
-  
 
 
 
@@ -294,6 +302,8 @@
 
 
 
+  "MODULES_CONTAINER_TYPE_BLOCK":"block",
+  "MODULES_CONTAINER_TYPE_NODE":"node",
 
 
   "PROJECT_MANAGE_NEW_PROJECT":"New Project"

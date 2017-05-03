@@ -51,7 +51,7 @@
                             <uib-progressbar ng-show="vm.batchInfo.batchStatus>1 && vm.batchInfo.AIU2SIP==100" class="progress-striped active" type="success" value="vm.batchInfo.AIU2SIP"></uib-progressbar>
                             <span ng-show="vm.batchInfo.batchStatus>1">{{vm.batchInfo.AIU2SIP}}%</span>
                             <span ng-if="vm.batchInfo.batchStatus<=1" translate="MODULES_BATCH_NOT_START">未开始</span>
-                            <div class="sidebar--progress--time">{{vm.batchInfo.packageSipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageSipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
+                            <div ng-show="vm.batchInfo.batchStatus>1" class="sidebar--progress--time">{{vm.batchInfo.packageSipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageSipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                         </div>
                     </div>
                     <div class="single--attr--row">
@@ -60,32 +60,32 @@
                             <uib-progressbar ng-show="vm.batchInfo.batchStatus>=4 && vm.batchInfo.SIP2AIP==100" class="progress-striped active"  type="success" value="vm.batchInfo.SIP2AIP"></uib-progressbar>
                             <span ng-if="vm.batchInfo.batchStatus>=4">{{vm.batchInfo.SIP2AIP}}%</span>
                             <span ng-if="vm.batchInfo.batchStatus<4" translate="MODULES_BATCH_NOT_START">未开始</span>
-                            <div class="sidebar--progress--time">{{vm.batchInfo.packageAipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
+                            <div ng-show="vm.batchInfo.batchStatus>=4" class="sidebar--progress--time">{{vm.batchInfo.packageAipStartDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}&nbsp;-&nbsp;{{vm.batchInfo.packageAipEndDate | date:'yyyy/MM/dd&nbsp;HH:mm:ss'}}</div>
                         </div>
                     </div>
                 </div>
-                <div class="attr--type--box">
+                <div class="attr--type--box two--col">
                     <!--<span>数据量信息</span>-->
                     <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_INTAKE_OF_AIU">摄入AIU数量</span>
+                        <span class="title left" translate="MODULES_BATCH_INTAKE_OF_AIU">摄入AIU数量</span>
                         <span class="value">{{vm.batchInfo.aiuCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
                         <span class="value">0</span>
                     </div>
                     <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_AIU_CONVERSION_TO_SIP_NUMBER">AIU转换为SIP数量</span>
+                        <span class="title left" translate="MODULES_BATCH_AIU_CONVERSION_TO_SIP_NUMBER">AIU转换为SIP数量</span>
                         <span class="value">{{vm.batchInfo.aiu2sipSuccessCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
                         <span class="value">{{vm.batchInfo.aiu2sipFailCount || 0}}</span>
                     </div>
                     <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_SIP_CONVERSION_TO_AIP_NUMBER">SIP转换为AIP数量</span>
+                        <span class="title left" translate="MODULES_BATCH_SIP_CONVERSION_TO_AIP_NUMBER">SIP转换为AIP数量</span>
                         <span class="value">{{vm.batchInfo.aipCount || 0}}</span>
                         <span class="title" translate="MODULES_BATCH_ERROR_NUMBER">出错数量</span>
                         <span class="value">{{vm.batchInfo.sip2aipFailCount || 0}}</span>
                     </div>
                     <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_DATA_QUANTITY">数据量</span>
+                        <span class="title left" translate="MODULES_BATCH_DATA_QUANTITY">数据量</span>
                         <span class="value">{{vm.batchInfo.aipCapacity || 0 | formatByte}}</span>
                     </div>
                     <div class="single--attr--row">
@@ -130,7 +130,7 @@
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_PROCESSING_TIME">处理时间</label>
-                        <span class="value">{{vm.errorInfo.operateDate | date:'yyyy年MM月dd日'}}</span>
+                        <span class="value">{{vm.errorInfo.operateDate | date:'yyyy.MM.dd'}}</span>
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_PROCESSING_ACTION">处理动作</label>

@@ -29,9 +29,19 @@
             </div>
         </div>
     </div>
-    <div style="width: 100%;float: left;height: calc(100% - 143px);overflow: auto;position: relative">
+    <div class="connect--map--content--wrap" >
+        <div class="connect--map--data--status--info--wrap">
+            <ul class="status--info--box">
+                <li class="single--info"><span class="fa fa-circle fa-1"></span>SIP转换服务</li>
+                <li class="single--info"><span class="fa fa-circle"></span>AIP转换服务</li>
+                <li class="single--info"><span class="fa fa-circle"></span>搜索服务</li>
+                <li class="single--info active"><span class="fa fa-circle"></span>日志服务</li>
+                <li class="single--info"><span class="fa fa-circle"></span>FTP</li>
+                <li class="single--info"><span class="fa fa-circle"></span>ETL</li>
+            </ul>
+        </div>
         <connect-map-tree nodes="data"></connect-map-tree>
-        <div ng-show="vm.tiptool.show" ng-style="{position:'absolute','left':vm.tiptool.y + 520,'top':vm.tiptool.x - 10}">
+        <div ng-show="vm.tiptool.show" ng-style="{position:'absolute','left':vm.tiptool.y + 520,'top':vm.tiptool.x - 70}">
             <div class="tiptool--show--wrap">
                 <table class="table tiptool--show--data--table">
                     <thead>

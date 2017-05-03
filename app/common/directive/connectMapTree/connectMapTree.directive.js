@@ -22,7 +22,7 @@
         i = 0;
         root = void 0;
         tree = void 0;
-        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 1200).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + 400 + ',' + '60' + ')');
+        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 1200).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + 400 + ',' + '0' + ')');
         tree = d3.layout.tree().size([h - 300, w - 100]);
         diagonal = d3.svg.diagonal().projection(function(d) {
           return [d.y, d.x];

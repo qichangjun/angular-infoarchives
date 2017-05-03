@@ -1,4 +1,4 @@
-<div class=" anim-slide-left col-md-8 module--Template--wrap">
+<div class=" anim-slide-left module--Template--wrap">
     <div ng-show="vm.versionList.length == 0" class="data--module--new--prompt--wrap">
         <div class="data--module--new--prompt--box">
             <div >
@@ -23,22 +23,22 @@
     </div>
 
 
-    <div ng-show="vm.versionList.length > 0">
+    <div ng-show="vm.versionList.length > 0" class="models--list--out--wrap">
         <div view-source="simple"></div>
         <div class="models--list--wrap">
             <div class="models--list--box" ng-show="!vm.loadingAttrLists">
                 <script type="text/ng-template" id="nodes_renderer.html">
-                    <div >
-                        <a class="drop--group--box"  data-nodrag ng-click="vm.toggle(this)">
-                        <span class="drop--group" ng-class="{'drop--off': collapsed,'drop--on': !collapsed}">
-                            <span class="core"></span>
-                        </span>
+                    <div class="drop--group--box">
+                        <a class="btn btn-defult drop--group"  data-nodrag ng-click="vm.toggle(this)">
+                            <span class="btn--icon" ng-class="{'fa fa-angle-right': collapsed,'fa fa-angle-down': !collapsed}"></span>
                         </a>
                         {{node.name}}
                         <ul  >
                             <li ng-repeat="item in node.attributes"
                                 ng-class="{hidden: collapsed}"
                                 dnd-draggable="item"
+                                dnd-type="item.attrType"
+                                dnd-selected="item.selected = !item.selected"
                                 dnd-effect-allowed="move"
                                 dnd-moved="node.attributes.splice($index, 1)"
                             >
@@ -70,7 +70,7 @@
                 <div class="operation--btn--box">
                     <div class="btn-group" uib-dropdown is-open="status.isopen">
                         <button id="single-button" ng-show="vm.parameter.templateId == vm.versionList[vm.versionList.length - 1].id" type="button" class="btn btn-success green--btn" uib-dropdown-toggle>
-                            <span translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</span><span class="caret"></span>
+                            <span translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</span>&nbsp;<span class="caret"></span>
                         </button>
                         <ul class="dropdown-menu" uib-dropdown-menu role="menu" aria-labelledby="single-button">
                             <li role="menuitem"><a ng-click="vm.addContainer()" translate="MODULES_PROJECTMANAGE_ADD_FORM">增加表单</a></li>
@@ -90,49 +90,67 @@
                 <!--<h1 style="float:left">-->
                 <!--模版配置-->
                 <!--</h1>-->
-                <div class="row template--configure--box">
-                    <div ng-repeat="list in models.lists"ev
-                         class="gray {{list.type}}">
-                        <div class="panel panel-info" >
-                            <div class="panel-heading template--configure--box__head">
-                                <h3 class="panel-title">
-                                    <md-menu>
-                                        <a class="menu--edit" aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
-                                            {{list.name}}
-                                        </a>
-                                        <md-menu-content width="4">
-                                            <md-menu-item>
-                                                <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_MODULE_NAME">模块名</span><div class="single--attribute--box__value">
-                                                <input ng-model="list.name"
-                                                       class="form-control single--attribute--box__value-input"
-                                                       name="projectName"
-                                                >
-                                            </div>
-                                            </md-menu-item>
-                                        </md-menu-content>
-                                    </md-menu>
-                                </h3>
-                                <span class="close" ng-click="models.lists.splice($index, 1)"><span aria-hidden="true">×</span></span>
-                            </div>
-                            <div class="panel-body template--configure--box__body" ng-if="list.type != 'process'">
-                                <ul dnd-list="list.data" class="configure--body--box">
-                                    <li ng-repeat="item in list.data"
-                                        dnd-draggable="item"
-                                        dnd-moved="list.data.splice($index, 1)"
-                                        dnd-effect-allowed="move"
-                                        dnd-selected="models.selected = item"
-                                        class="single--configure--info"
-                                        ng-class="{'selected': models.selected === item,'file':item.attrType=='file','item':item.attrType!='file'}"
+                <div class=" template--configure--box">
+                    <div dnd-list="models.lists"
+                         dnd-allowed-types="vm.containerType"
+                         >
+                        <div ng-repeat="list in models.lists"
+                             dnd-type="list.type"
+                             dnd-draggable="list"
+                             dnd-effect-allowed="move"
+                             dnd-moved="models.lists.splice($index, 1)"
+                             class="gray {{list.type}}">
+                            <div class="panel panel-info" >
+                                <div class="panel-heading template--configure--box__head">
+                                    <h3 class="panel-title">
+                                        <md-menu>
+                                            <a class="menu--edit" aria-label="Open phone interactions menu"  ng-click="vm.openMenu($mdMenu, $event)">
+                                                {{list.name}}
+                                            </a>
+                                            <md-menu-content width="4">
+                                                <md-menu-item>
+                                                    <span class="single--attribute--box__title" translate="MODULES_PROJECTMANAGE_MODULE_NAME">模块名</span><div class="single--attribute--box__value">
+                                                    <input ng-model="list.name"
+                                                           class="form-control single--attribute--box__value-input"
+                                                           name="projectName"
+                                                    >
+                                                </div>
+                                                </md-menu-item>
+                                            </md-menu-content>
+                                        </md-menu>
+                                    </h3>
+                                    <span class="close" ng-click="models.lists.splice($index, 1)"><span aria-hidden="true">×</span></span>
+                                </div>
+                                <div class="panel-body template--configure--box__body" ng-if="list.type != 'process'">
+                                    <ul dnd-list="list.data" class="configure--body--box"
+                                        dnd-allowed-types="vm.itemTypes"
                                     >
-                                        {{item.attrType != 'file' ? 'metedata'  : 'file' }}：
-                                        <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
-                                        <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
-                                        <span class="glyphicon glyphicon-remove" style="float: right;margin-right: 10px;color:red;line-height: 40px;" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>
-                                    </li>
-                                </ul>
+                                        <li ng-repeat="item in list.data"
+                                            dnd-draggable="item"
+                                            dnd-type="item.attrType"
+                                            dnd-moved="list.data.splice($index, 1)"
+                                            dnd-effect-allowed="move"
+                                            class="single--configure--info"
+                                            ng-class="{'selected': models.selected === item,'file':item.attrType=='file','item':item.attrType!='file'}"
+                                        >
+                                            {{item.attrType != 'file' ? 'metedata'  : 'file' }}：
+                                            <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
+                                            <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
+                                            <span class="glyphicon glyphicon-remove" style="float: right;margin-right: 10px;color:red;line-height: 40px;" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>
+                                        </li>
+                                        <li class="dndPlaceholder" style="width: 30%">
+                                            将属性节点放置在这里
+                                        </li>
+                                    </ul>
+                                </div>
                             </div>
                         </div>
+                        <div class="dndPlaceholder" style="width: 100%">
+                            将容器节点放置在这里
+                        </div>
+
                     </div>
+
                 </div>
             </div>
         </div>

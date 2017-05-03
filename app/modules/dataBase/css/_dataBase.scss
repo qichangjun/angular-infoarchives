@@ -41,7 +41,7 @@
       width: 100%;
       background: #f5f5f5;
       //border-radius: 5px;
-      padding: 10px 0 10px 15px;
+      padding: 10px 0 10px 10px;
       border: 1px solid #dbe1e4;
       .single--attribute--box{
         display: table-cell;
@@ -352,24 +352,31 @@
       padding-bottom: 3px;
       padding-left: 5px;
       border-bottom: 1px solid #cccccc;
-      margin-bottom: 5px;
+      margin-bottom: 8px;
       color: #999999;
     }
-    .attr--row--box{
-      padding: 3px 5px 0;
-      .title{
-        display: inline-block;
-        vertical-align: middle;
-        font-weight: normal;
-        width: 100px;
-        text-align: left;
-        color: #797979;
-        margin: 0;
-        margin-right: 5px;
-      }
-      .value{
-        display: inline-block;
-        vertical-align: middle;
+    .attr--list--wrap{
+      display: table;
+      .attr--row--box{
+        padding: 3px 5px 0;
+        display: table-row;
+        .title{
+          //display: inline-block;
+          //vertical-align: middle;
+          font-weight: normal;
+          //width: 100px;
+          text-align: left;
+          color: #797979;
+          margin: 0;
+          display: table-cell;
+          padding: 3px 5px;
+        }
+        .value{
+          //display: inline-block;
+          //vertical-align: middle;
+          display: table-cell;
+          padding: 3px 5px;
+        }
       }
     }
     .select--attr--box{
@@ -445,7 +452,7 @@
         padding-bottom: 5px;
         .head{
           display: inline-block;
-          width: 70px;
+          width: 100px;
         }
         .data{
 

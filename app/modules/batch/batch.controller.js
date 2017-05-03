@@ -401,7 +401,8 @@
         $window.open($state.href('previewRecord', {
           templateId: $scope.gridApi.selection.getSelectedRows()[0].templateId,
           recordId: $scope.gridApi.selection.getSelectedRows()[0].recordCode,
-          businessCode: $scope.gridApi.selection.getSelectedRows()[0].businessCode
+          businessCode: $scope.gridApi.selection.getSelectedRows()[0].businessCode,
+          name: $scope.gridApi.selection.getSelectedRows()[0].name
         }));
       };
       downloadFile = function() {

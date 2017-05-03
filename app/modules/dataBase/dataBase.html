@@ -17,50 +17,48 @@
     <div class="data--base--filter--condition--wrap">
         <div class="data--info--box">
             <div class="data--info--box_head" translate="MODULES_DATABASE_DATA_INFORMATION">数据信息</div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_LATEST_UPDATE_DATE">  最新更新日期 </label>
-                <span class="value"> {{vm.basicInfo.latestUpdateDate | date:'yyyy.MM.dd'}} </span>
-            </div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS">对接系统数量</label>
-                <span class="value">{{vm.basicInfo.systemCount}}</span>
-            </div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS">业务单位数量</label>
-                <span class="value">{{vm.basicInfo.unitCount}}</span>
-            </div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_MATTERS">业务事项数量</label>
-                <span class="value">{{vm.basicInfo.businessCount}}</span>
-            </div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_TOTAL_NUMBER_OF_DATA_RECORDS">数据记录总数量</label>
-                <span class="value">{{vm.basicInfo.recordCount}}</span>
-            </div>
-            <div class="attr--row--box">
-                <label class="title" translate="MODULES_DATABASE_TOTAL_DATA_CAPACITY">数据总容量</label>
-                <span class="value">{{vm.basicInfo.recordCapacity || 0 | formatByte}}</span>
+            <div class="attr--list--wrap">
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_LATEST_UPDATE_DATE">  最新更新日期 </label>
+                    <span class="value"> {{vm.basicInfo.latestUpdateDate | date:'yyyy.MM.dd'}} </span>
+                </div>
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS">对接系统数量</label>
+                    <span class="value">{{vm.basicInfo.systemCount}}</span>
+                </div>
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS">业务单位数量</label>
+                    <span class="value">{{vm.basicInfo.unitCount}}</span>
+                </div>
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_MATTERS">业务事项数量</label>
+                    <span class="value">{{vm.basicInfo.businessCount}}</span>
+                </div>
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_TOTAL_NUMBER_OF_DATA_RECORDS">数据记录总数量</label>
+                    <span class="value">{{vm.basicInfo.recordCount}}</span>
+                </div>
+                <div class="attr--row--box">
+                    <label class="title" translate="MODULES_DATABASE_TOTAL_DATA_CAPACITY">数据总容量</label>
+                    <span class="value">{{vm.basicInfo.recordCapacity || 0 | formatByte}}</span>
+                </div>
             </div>
         </div>
         <div class="data--info--box">
             <div class="data--info--box_head" translate="MODULES_DATABASE_DATA_FILTERING">数据过滤</div>
-            <div class="select--attr--box" ng-if="vm.parameter.chartType == 'source'">
-                <label class="title" translate="MODULES_DATABASE_DATA_SOURCES"> 数据来源 </label>
+            <div class="select--attr--box" >
+                <label class="title" translate="MODULES_DATABASE_DATA_SOURCES" ng-if="vm.parameter.chartType == 'source'"> 数据来源 </label>
+                <label class="title" translate="MODULES_DATABASE_COMPANY" ng-if="vm.parameter.chartType == 'unit'"> 单位 </label>
                 <div class="select--value">
-                    <!--<md-select ng-model="vm.parameter.unit"-->
-                               <!--ng-change="vm.filterData()"-->
-                    <!--&gt;-->
-                        <!--<md-option ng-repeat="unitLists in vm.unitLists" ng-value="unitLists.objectId" >{{unitLists.name}}</md-option>-->
-                        <!--<md-option ng-value="'all'" >所有</md-option>-->
-                    <!--</md-select>-->
                     <md-autocomplete
                             md-selected-item="vm.parameter.unit"
                             md-search-text="vm.searchUnitText"
-                            md-selected-item-change="vm.parameter.item = {objectId:'all',name:' '};vm.filterData()"
+                            md-no-cache="true"
+                            md-selected-item-change="vm.parameter.item = null;vm.filterData()"
                             md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                             md-item-text="unitLists.name"
                             md-min-length="0"
-                            placeholder="{{'MODULES_DATABASE_SELECT_DATA_SOURCE'|translate}}">
+                            placeholder="- -">
                         <md-item-template>
                             <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
                         </md-item-template>
@@ -69,25 +67,6 @@
                         </md-not-found>
                     </md-autocomplete>
                 </div>
-            </div>
-
-            <div class="select--attr--box" ng-if="vm.parameter.chartType == 'unit'">
-                <label class="title" translate="MODULES_DATABASE_COMPANY">  单位 </label>
-                <md-autocomplete
-                        md-selected-item="vm.parameter.unit"
-                        md-search-text="vm.searchUnitText"
-                        md-selected-item-change="vm.parameter.item = {objectId:'all',name:' '};vm.filterData()"
-                        md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
-                        md-item-text="unitLists.name"
-                        md-min-length="0"
-                        placeholder="{{'MODULES_DATABASE_SELECT_UNIT'|translate}}">
-                    <md-item-template>
-                        <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
-                    </md-item-template>
-                    <md-not-found>
-                        <span translate="MODULES_DATABASE_NOT_FOUND">没有找到与</span> "{{vm.searchUnitText}}" <span translate="MODULES_DATABASE_MATCHED">匹配的</span>
-                    </md-not-found>
-                </md-autocomplete>
             </div>
             <div class="select--attr--box">
                 <label class="title" translate="MODULES_DATABASE_BUSINESS_MATTERS">  业务事项 </label>
@@ -106,7 +85,7 @@
                             md-items="items in vm.querySearch(vm.searchItemText,vm.itemLists)"
                             md-item-text="items.name"
                             md-min-length="0"
-                            placeholder="{{'MODULES_DATABASE_SELECT_BUSINESS_MATTERS'|translate}}">
+                            placeholder="- -">
                         <md-item-template>
                             <span md-highlight-text="vm.searchItemText" md-highlight-flags="^i">{{items.name}}</span>
                         </md-item-template>

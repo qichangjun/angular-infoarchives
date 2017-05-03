@@ -10,6 +10,20 @@
       module = null;
       $scope.saveData = [];
       vm.moduleEditAble = true;
+      vm.slider = {
+        value: 10,
+        options: {
+          vertical: true,
+          translate: function() {
+            return '';
+          },
+          onChange: function() {
+            return $scope.$broadcast('svg:changeSize', vm.slider.value / 10);
+          },
+          floor: 5,
+          ceil: 15
+        }
+      };
       nameList = [];
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/projectManage/projectEdit/dataModule/template/mdDialog/';
       TYPE_FILE = 'file';
@@ -150,7 +164,7 @@
             return results;
           })();
           return mdDialogService.initCustomDialog('updateNodeNameController', PAHT_OF_TEMPLATE_MDDIALOG + 'updateNodeName.html?' + window.hsConfig.bust, event, {
-            nodeName: d.name,
+            nodeName: '',
             brothersName: brothersName
           }).then(function(res) {
             if (res && !commonMethodSerivce.includeInArr(res, brothersName)) {
@@ -326,7 +340,7 @@
         return results;
       };
       updateName = function(node, id, name) {
-        var i, j, len, ref, rows;
+        var i, j, len, ref, results, rows;
         if (node.code === id) {
           $timeout(function() {
             node.name = name;
@@ -335,18 +349,19 @@
         }
         if (node.children) {
           ref = node.children;
+          results = [];
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
             if (rows.code === id) {
-              $timeout(function() {
+              results.push($timeout(function() {
                 rows.name = name;
-                return $scope.$broadcast('update:name', name, id);
-              });
-              return;
+                $scope.$broadcast('update:name', name, id);
+              }));
             } else {
-              updateName(rows, id, name);
+              results.push(updateName(rows, id, name));
             }
           }
+          return results;
         }
       };
       addContainer = function(node, id, type, name) {
@@ -356,7 +371,7 @@
             var code;
             code = uuid.v4();
             node.children.push({
-              "name": type + name,
+              "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
               "code": code,
               "type": type,
               "children": []
@@ -380,7 +395,7 @@
                 var code;
                 code = uuid.v4();
                 rows.children.push({
-                  "name": type + name,
+                  "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
                   "code": code,
                   "type": type,
                   "children": []
@@ -538,8 +553,8 @@
           type: "warning",
           showCancelButton: true,
           confirmButtonColor: "#40B98E",
-          confirmButtonText: $translate.instant("MODULES_PROJECTMANAGE_CONFIRM"),
-          cancelButtonText: $translate.instant("MODULES_PROJECTMANAGE_CANCEL")
+          confirmButtonText: $translate.instant("MODULES_PROJECTMANAGE_UPGRADE"),
+          cancelButtonText: $translate.instant("MODULES_PROJECTMANAGE_NOT_UPGRADE")
         }, function(isConfirm) {
           if (isConfirm) {
             return dataModuleService.updateVersion(data, attrRules, template).then(function(res) {

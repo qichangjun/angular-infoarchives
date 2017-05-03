@@ -6,6 +6,7 @@
       var batch, batchErrorList, checkForceSwitch, deleteBatch, exportList, forceSwitch, getDetailInfo, getErrorGridData, getErrorList, getGridData, getPackageList, packageList;
       getGridData = function(parameter) {
         var columns, deferred, info, orders;
+        console.log(parameter);
         info = angular.copy(parameter);
         deferred = $q.defer();
         if (parameter.sortField && parameter.sortWay) {

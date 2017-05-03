@@ -9,6 +9,8 @@
       vm.parameter = $stateParams;
       vm.loadingAttrLists = true;
       vm.language = $translate.use();
+      vm.containerType = ['record', 'process'];
+      vm.itemTypes = ['metadata', 'file'];
       init = function() {
         $scope.models = {
           selected: null,
@@ -22,12 +24,18 @@
           vm.versionList = res || [];
           if (vm.versionList.length > 0) {
             vm.parameter.templateId = res[res.length - 1].id;
+            $state.go('.', vm.parameter, {
+              notify: false
+            });
             getAttributeList();
             return getTemplate();
           }
         }, function(res) {});
       };
       changeVersion = function() {
+        $state.go('.', vm.parameter, {
+          notify: false
+        });
         getAttributeList();
         return getTemplate();
       };

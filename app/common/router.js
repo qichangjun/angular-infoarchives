@@ -19,7 +19,7 @@
           access_level: 1
         }
       }).state("previewRecord", {
-        url: "/previewRecord?templateId&recordId&businessCode",
+        url: "/previewRecord?templateId&recordId&businessCode&name",
         templateUrl: "modules/previewRecord/previewRecord.html?" + window.hsConfig.bust,
         controller: "previewRecordController",
         controllerAs: "vm",
@@ -47,7 +47,7 @@
           access_level: 2
         }
       }).state("infoArchives.statistics", {
-        url: "statistics?year&systemName",
+        url: "statistics?year&systemName&unit",
         templateUrl: "modules/statistics/statistics.html?" + window.hsConfig.bust,
         controller: "statisticsController",
         controllerAs: "vm",
@@ -87,7 +87,7 @@
           access_level: 2
         }
       }).state("infoArchives.projectEdit.moduleTemplate", {
-        url: "moduleTemplate/:objectId",
+        url: "moduleTemplate/:objectId?templateId",
         templateUrl: "modules/projectManage/projectEdit/moduleTemplate/moduleTemplate.html?" + window.hsConfig.bust,
         controller: "moduleTemplateController",
         controllerAs: "vm",

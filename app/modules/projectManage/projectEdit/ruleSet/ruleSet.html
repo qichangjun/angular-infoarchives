@@ -36,7 +36,7 @@
                 </div>
             </div>
             <div ng-show="vm.versionList.length != 0" class="edit--project--manage--wrapper">
-                <div class="base--info--content">
+                <div class="base--info--content rule--set">
                     <section layout="row"  layout-align="start center" layout-wrap class="edit--project--row--box">
                         <span class="edit--project--row" translate="MODULES_PROJECTMANAGE_ARCHIVE_POLICY">归档策略</span>
                         <div class="rule--set--content--wrap" style="height: auto">
@@ -200,21 +200,32 @@
                                     <span class="attribute--row--box__title " translate="MODULES_PROJECTMANAGE_RETENTION_PERIOD">保管期限</span>
                                     <div class="attribute--row--box__value">
                                         <md-select  class="attribute--row--box__select" ng-model="vm.retentionPeriod"
+                                                    ng-disabled="vm.approveErmsPeriod"
                                                     name="attrName"
                                                     required>
                                             <md-option ng-value="retentionPeriod.id" ng-repeat="retentionPeriod in vm.retentionPeriodList">{{retentionPeriod.periodName}}</md-option>
                                         </md-select>
+
                                     </div>
+                                    <md-checkbox style="margin-left:15px;" class="md-primary"  ng-model="vm.approveErmsPeriod"
+                                                  aria-label="Checkbox 1">
+                                        <span translate="MODULES_PROJECTMANAGE_RECEIVING_PLATFORM_RETENTION_PERIOD"></span>
+                                    </md-checkbox>
                                 </div>
                                 <div class="attribute--row--box select">
                                     <span class="attribute--row--box__title " translate="MODULES_PROJECTMANAGE_RETENTION_STRATEGY">保留策略</span>
                                     <div class="attribute--row--box__value">
                                         <md-select  class="attribute--row--box__select" ng-model="vm.retentionPolicy"
+                                                    ng-disabled="vm.approveErmsPolicy"
                                                     name="attrName"
                                                     required>
                                             <md-option ng-value="retentionPolicy.id" ng-repeat="retentionPolicy in vm.retentionPolicyList">{{retentionPolicy.policyName}}</md-option>
                                         </md-select>
                                     </div>
+                                    <md-checkbox style="margin-left:15px;" class="md-primary"  ng-model="vm.approveErmsPolicy"
+                                                 aria-label="Checkbox 1">
+                                        <span translate="MODULES_PROJECTMANAGE_RECEIVING_PLATFORM_RETENTION_PERIOD"></span>
+                                    </md-checkbox>
                                 </div>
                             </div><div class="archive--policy--prompt--wrap">
                             <div class="head">

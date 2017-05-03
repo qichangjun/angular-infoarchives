@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").service("serviceWatchService", [
     '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'JobRestangular', 'hsTpl', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, JobRestangular, hsTpl) {
-      var getList, serviceList, startService, stopService;
+      var getErmsMissionList, getList, serviceList, startService, stopService;
       getList = function() {
         var deferred;
         deferred = $q.defer();
@@ -115,6 +115,28 @@
           cellTemplate: 'modules/serviceWatch/template/ui-grid-template/grid-service-operation.html'
         }
       ];
+      getErmsMissionList = function() {
+        var deferred;
+        deferred = $q.defer();
+        MockRestangular.one(hsAPI['getErmsMissionList']).withHttpConfig({
+          ignoreLoadingBar: true
+        }).get({
+          accessUser: hsAuth.getAccessKey(),
+          accessToken: hsAuth.getAccessToken()
+        }).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast('服务器内部出错');
+        });
+        return deferred.promise;
+      };
+      this.getErmsMissionList = getErmsMissionList;
       this.stopService = stopService;
       this.startService = startService;
       this.serviceList = serviceList;
