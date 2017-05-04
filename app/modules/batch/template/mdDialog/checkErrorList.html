@@ -10,7 +10,13 @@
         </md-toolbar>
         <!--<md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>-->
         <md-dialog-content class="check--error--list--modal_content">
-            <div  ui-grid="gridOptions" class="common--uigrid--height "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
+            <div ng-show="gridOptions.data.length == 0 && vm.loading == false" ng-style="{'max-height':'900px','min-height':'700px'}">
+                没有数据
+            </div>
+            <div ng-show="vm.loading == true" ng-style="{'max-height':'900px','min-height':'700px'}">
+                加载中...
+            </div>
+            <div ng-show="gridOptions.data.length > 0" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'700px'}" ui-grid="gridOptions" class="common--uigrid--height "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
         </md-dialog-content>
 </md-dialog>
 

@@ -3,7 +3,7 @@
   'use strict';
   angular.module("myApp").controller("dataModuleController", [
     '$scope', '$log', '$stateParams', '$mdDialog', 'projectManageService', '$timeout', 'mdDialogService', 'dataModuleService', 'uuid', 'basicDataService', 'commonMethodSerivce', '$translate', function($scope, $log, $stateParams, $mdDialog, projectManageService, $timeout, mdDialogService, dataModuleService, uuid, basicDataService, commonMethodSerivce, $translate) {
-      var PAHT_OF_TEMPLATE_MDDIALOG, TYPE_BLOCK, TYPE_FILE, TYPE_NODE, TYPE_RECORD, addContainer, deleteAttr, deleteNode, editFile, editProject, exportModule, exportSample, getModuleInfo, getProjectInfo, getSysAttr, getVersionList, init, initSysAttr, jsonToObj, listenEvent, modelPush, module, nameList, searchIdAddFile, searchIdDeleteFile, searchParent, unupdateAbleAlert, updateAbleAlert, updateName, vm;
+      var PAHT_OF_TEMPLATE_MDDIALOG, TYPE_BLOCK, TYPE_FILE, TYPE_NODE, TYPE_RECORD, addContainer, checkHasNode, deleteAttr, deleteNode, editFile, editProject, exportModule, exportSample, getModuleInfo, getProjectInfo, getSysAttr, getVersionList, init, initSysAttr, jsonToObj, listenEvent, modelPush, module, nameList, searchIdAddFile, searchIdDeleteFile, searchParent, unupdateAbleAlert, updateAbleAlert, updateName, updateParentNode, vm;
       vm = this;
       vm.parameter = $stateParams;
       vm.attr = {};
@@ -146,7 +146,12 @@
             cancelButtonText: $translate.instant("MODULES_PROJECTMANAGE_CANCEL")
           }, function() {
             return $timeout(function() {
-              return deleteNode($scope.nodes, d.code);
+              deleteNode($scope.nodes, d.code);
+              vm.hasNode = false;
+              checkHasNode($scope.nodes);
+              if (!vm.hasNode) {
+                return updateParentNode($scope.nodes, d.parent.code);
+              }
             });
           });
         });
@@ -266,6 +271,26 @@
           return console.log('canceled');
         });
       };
+      updateParentNode = function(node, code) {
+        var i, j, len, ref, results, rows;
+        if (node.code === code) {
+          node.hasNode = false;
+          return;
+        }
+        if (node.children) {
+          ref = node.children;
+          results = [];
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (rows.code === code) {
+              results.push(rows.hasNode = false);
+            } else {
+              results.push(updateParentNode(rows, code));
+            }
+          }
+          return results;
+        }
+      };
       searchParent = function(node, parentCode) {
         var i, j, len, ref, results, rows;
         if (node.code === parentCode) {
@@ -339,6 +364,25 @@
         }
         return results;
       };
+      checkHasNode = function(node) {
+        var i, j, len, ref, rows;
+        if (node.type === 'node') {
+          vm.hasNode = true;
+          return;
+        }
+        if (node.children) {
+          ref = node.children;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            if (rows.type === 'node') {
+              vm.hasNode = true;
+              return;
+            } else {
+              checkHasNode(rows);
+            }
+          }
+        }
+      };
       updateName = function(node, id, name) {
         var i, j, len, ref, results, rows;
         if (node.code === id) {
@@ -365,25 +409,22 @@
         }
       };
       addContainer = function(node, id, type, name) {
-        var i, j, len, ref, rows;
+        var code, i, j, len, ref, rows;
         if (node.code === id) {
-          $timeout(function() {
-            var code;
-            code = uuid.v4();
-            node.children.push({
-              "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
-              "code": code,
-              "type": type,
-              "children": []
-            });
-            if (type === TYPE_FILE) {
-              return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
-            } else if (type === TYPE_NODE) {
-              module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
-              node.hasNode = true;
-              return vm.hasNode = true;
-            }
+          code = uuid.v4();
+          node.children.push({
+            "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
+            "code": code,
+            "type": type,
+            "children": []
           });
+          if (type === TYPE_FILE) {
+            module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
+          } else if (type === TYPE_NODE) {
+            module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+            node.hasNode = true;
+            vm.hasNode = true;
+          }
           return;
         }
         if (node.children) {
@@ -391,23 +432,20 @@
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
             if (rows.code === id) {
-              $timeout(function() {
-                var code;
-                code = uuid.v4();
-                rows.children.push({
-                  "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
-                  "code": code,
-                  "type": type,
-                  "children": []
-                });
-                if (type === TYPE_FILE) {
-                  return module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
-                } else if (type === TYPE_NODE) {
-                  module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
-                  rows.hasNode = true;
-                  return vm.hasNode = true;
-                }
+              code = uuid.v4();
+              rows.children.push({
+                "name": $translate.instant("MODULES_CONTAINER_TYPE_" + type.toUpperCase()) + name,
+                "code": code,
+                "type": type,
+                "children": []
               });
+              if (type === TYPE_FILE) {
+                module.attrRules = module.attrRules.concat(initSysAttr(code, vm.fileSysAttrLists));
+              } else if (type === TYPE_NODE) {
+                module.attrRules = module.attrRules.concat(initSysAttr(code, vm.nodeSysAttrLists));
+                rows.hasNode = true;
+                vm.hasNode = true;
+              }
               break;
               return;
             } else {
@@ -474,7 +512,7 @@
           rows = ref[i];
           if (rows.parentCode === node.code) {
             if (rows.type !== TYPE_FILE) {
-              if (rows.type === 'node') {
+              if (rows.type === TYPE_NODE) {
                 node.hasNode = true;
                 vm.hasNode = true;
               }

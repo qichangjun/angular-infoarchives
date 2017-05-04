@@ -124,6 +124,7 @@
                                 <div class="panel-body template--configure--box__body" ng-if="list.type != 'process'">
                                     <ul dnd-list="list.data" class="configure--body--box"
                                         dnd-allowed-types="vm.itemTypes"
+                                        dnd-horizontal-list="true"
                                     >
                                         <li ng-repeat="item in list.data"
                                             dnd-draggable="item"
@@ -136,17 +137,16 @@
                                             {{item.attrType != 'file' ? 'metedata'  : 'file' }}：
                                             <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
                                             <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
-                                            <span class="glyphicon glyphicon-remove" style="float: right;margin-right: 10px;color:red;line-height: 40px;" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>
+                                            <span class="glyphicon glyphicon-remove single--configure--info__remove" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>
                                         </li>
                                         <li class="dndPlaceholder" style="width: 30%">
-                                            将属性节点放置在这里
                                         </li>
                                     </ul>
                                 </div>
                             </div>
                         </div>
-                        <div class="dndPlaceholder" style="width: 100%">
-                            将容器节点放置在这里
+                        <div class="dndPlaceholder" style="width: 100%;background-color:#fff !important;border:1px dashed #ddd;text-align: center">
+
                         </div>
 
                     </div>

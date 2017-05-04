@@ -222,6 +222,7 @@
       };
       checkErrorList = function(id) {
         return mdDialogService.initCustomDialog('checkErrorListController', PAHT_OF_TEMPLATE_MDDIALOG + 'checkErrorList.html?' + window.hsConfig.bust, event, {
+          batchId: vm.batchInfo.batchCode,
           objectId: id
         }).then(function(res) {}, function(res) {});
       };
@@ -424,7 +425,7 @@
       init();
     }
   ]).controller('checkErrorListController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'i18nService', 'hsTpl', 'batchService', 'objectId', function($scope, $log, $stateParams, $mdDialog, i18nService, hsTpl, batchService, objectId) {
+    '$scope', '$log', '$stateParams', '$mdDialog', 'i18nService', 'hsTpl', 'batchService', 'objectId', 'batchId', function($scope, $log, $stateParams, $mdDialog, i18nService, hsTpl, batchService, objectId, batchId) {
       var cancel, getGridData, init, initGrid, vm;
       vm = this;
       vm.parameter = {};
@@ -443,7 +444,7 @@
           paginationCurrentPage: Number(vm.parameter.currentPage),
           rowTemplate: hsTpl.hsRowTemplate,
           useExternalPagination: true,
-          useExternalSorting: true,
+          useExternalSorting: false,
           rowHeight: 40,
           columnDefs: batchService.batchErrorList,
           columnVirtualizationThreshold: batchService.batchErrorList.length,
@@ -462,14 +463,19 @@
       getGridData = function() {
         vm.loading = true;
         return batchService.getErrorGridData(vm.parameter).then(function(res) {
-          var column, j, len, ref, results;
+          var column, i, j, k, len, len1, ref, ref1, results, rows;
           vm.loading = false;
+          ref = res.exceptionItemList;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            rows.batchCode = batchId;
+          }
           $scope.gridOptions.data = res.exceptionItemList;
           $scope.gridOptions.totalItems = res.pageInfo.totalCount;
-          ref = $scope.gridOptions.columnDefs;
+          ref1 = $scope.gridOptions.columnDefs;
           results = [];
-          for (j = 0, len = ref.length; j < len; j++) {
-            column = ref[j];
+          for (k = 0, len1 = ref1.length; k < len1; k++) {
+            column = ref1[k];
             results.push(column.enableColumnMenu = false);
           }
           return results;

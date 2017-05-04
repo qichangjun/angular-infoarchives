@@ -22,9 +22,9 @@
         <div ng-show="vm.versionList.length != 0" class="data--module--content--wrap">
             <md-toolbar class="md-menu-toolbar edit--project--manage--head-box">
                 <div class="md-toolbar-tools">
-                    <md-button class="md-icon-button edit--project--manage--head--btn" ng-click="vm.cancel()">
+                    <div class="md-icon-button edit--project--manage--head--btn" >
                         <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
-                    </md-button>
+                    </div>
                     <a  ui-sref="infoArchives.projectManage" class="project--manage--head" translate="MODULES_PROJECTMANAGE_SYSTEM_ACCESS">系统接入</a>
                     <span class="fa fa-angle-right"></span>
                     <span class="current--column">{{vm.projectName}}</span>
@@ -36,10 +36,10 @@
                                 <md-option ng-value="versionList.id" ng-repeat="versionList in vm.versionList">{{versionList.versionNo}}</md-option>
                             </md-select>
                         </div>
-                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportSample($event)" translate="MODULES_PROJECTMANAGE_EXPORT_SAMPLE">
+                        <md-button  class="green--btn" ng-disabled="vm.loading || !vm.updateAble" ng-click="vm.exportSample($event)" translate="MODULES_PROJECTMANAGE_EXPORT_SAMPLE">
                             导出样例
                         </md-button>
-                        <md-button  class="green--btn" ng-disabled="vm.loading" ng-click="vm.exportModule($event)" translate="MODULES_PROJECTMANAGE_EXPORT_TEMPLATE">
+                        <md-button  class="green--btn" ng-disabled="vm.loading || !vm.updateAble" ng-click="vm.exportModule($event)" translate="MODULES_PROJECTMANAGE_EXPORT_TEMPLATE">
                             导出模版
                         </md-button>
                         <md-button ng-if="vm.moduleEditAble" class="green--btn" ng-disabled="vm.loading" ng-click="vm.editProject($event)" translate="MODULES_PROJECTMANAGE_SAVE_TEMPLATE">

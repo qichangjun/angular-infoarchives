@@ -106,9 +106,10 @@ md-toast{
   left: 50%;
   margin-left: -160px;
   text-align: center;
+  margin-top: -5px;
 }
 md-toast.md-default-theme .md-toast-content, md-toast .md-toast-content {
-  background-color: #55B03E;
+  background-color: #2D5053;
   opacity: .9;
   color: #ffffff;
   border-radius: 5px;

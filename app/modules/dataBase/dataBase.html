@@ -101,12 +101,13 @@
         </div>
     </div>
     <div class="data--base--svg--wrap">
-        <!--<div class="data&#45;&#45;base&#45;&#45;svg&#45;&#45;operation-box">-->
-            <!--<button class="btn btn-default fa fa-minus small&#45;&#45;btn" ng-click="vm.smallerSvg()"></button>-->
-            <!--<button class="btn btn-default  fa fa-plus enlarge&#45;&#45;btn" ng-click="vm.biggerSvg()"></button>-->
-        <!--</div>-->
-
-        <div>
+        <div  ng-show="vm.loading" style="margin: auto auto;
+                    width: 100px;
+                    margin-top: 39%;
+        ">
+           <div>加载数据中...</div>
+        </div>
+        <div ng-show="!vm.loading">
             <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit' && data.children.length > 0">
             </circle-tree>
             <straight-tree ng-if="vm.parameter.chartType=='source' && data.children.length > 0"  id="customModule" nodes = 'data'  radius = '490'>

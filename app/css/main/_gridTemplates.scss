@@ -43,10 +43,10 @@ div.ui-grid-cell input.edit-input{
     border-right: none;
   }
 
-  //&:nth-child(even) .ui-grid-cell {
-  //  background-color: #f2f2f2;
-  //  border-right: none;
-  //}
+  &:nth-child(even) .ui-grid-cell {
+    //background-color: #f2f2f2;
+    border-right: none;
+  }
 }
 .ui-grid-row{
   &:nth-child(odd) {

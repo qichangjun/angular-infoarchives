@@ -3,6 +3,7 @@
   width: 410px;
   max-width: 600px;
   background: #EDEDED;
+  overflow: hidden;
   .right--sidebar--info--head{
     background: #464646;
     .md-toolbar-tools{
@@ -29,11 +30,24 @@
       }
     }
   }
+  .batch--sidebar--wrap{
+    height: 100%;
+  }
 }
 .right--sidebar--info--content{
   background: inherit;
+  height: calc(100% - 64px);
+  md-tabs{
+    height: 100%;
+  }
+  md-tabs.md-dynamic-height md-tabs-content-wrapper{
+    height: calc(100% - 48px);
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
   md-content{
     background: inherit;
+    height: 100%;
   }
   .attr--type--box{
     margin: 20px 10px;
@@ -102,7 +116,7 @@
         }
       }
       .value{
-        width: 83px;
+        width: 80px;
         margin-right: 0;
       }
     }

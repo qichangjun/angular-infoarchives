@@ -205,8 +205,7 @@
           ids: ids
         }).then(function(res) {
           if (res.code === '1') {
-            deferred.resolve(res.data);
-            return mdToastService.showToast(res.message);
+            return deferred.resolve(res.data);
           } else {
             deferred.reject(res);
             return mdToastService.showToast(res.message);

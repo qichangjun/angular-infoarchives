@@ -83,7 +83,7 @@
         </div>
     </div>
     <div class="batch--grid--wrap">
-        <div class="clearfix operation--box">
+        <div class="clearfix operation--box" ng-show="gridOptions.data.length > 0 && !vm.loading">
             <md-button class="pull-left md-raised green--btn" ng-click="vm.exportList()" translate="MODULES_BATCH_EXPORT_BATCH_LIST">导出批次清单</md-button>
             <md-button class="pull-left md-raised green--btn" ng-disabled="!vm.selectIsError" ng-click="vm.forceSwitch()" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</md-button>
             <md-button class="pull-left md-raised red--btn" ng-disabled="!vm.selectIsError" ng-click="vm.deleteBatch()" translate="MODULES_BATCH_DELETE_ABNORMAL_DATA">删除异常数据</md-button>
@@ -101,6 +101,6 @@
         </div>
     </div>
     <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
-        <div ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>
+        <div class="batch--sidebar--wrap" ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>
     </md-sidenav>
 </div>

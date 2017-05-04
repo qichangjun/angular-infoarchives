@@ -747,9 +747,21 @@
               border: none;
               background: #f7f7f7;
               padding-left: 10px;
+              padding-right: 20px;
               white-space: nowrap;
               overflow: hidden;
               text-overflow: ellipsis;
+              position: relative;
+              &__remove{
+                color:red;
+                position: absolute;
+                top: 13px;
+                right: 7px;
+                opacity: 1;
+                &:hover{
+                  opacity: .7;
+                }
+              }
             }
           }
         }
@@ -979,6 +991,3 @@
   }
 }
 
-.selected{
-  background-color:red !important;
-}

@@ -11,7 +11,7 @@
 <md-content  class="right--sidebar--info--content">
     <md-tabs md-dynamic-height md-border-bottom>
         <md-tab label="{{'MODULES_BATCH_BATCH_BASIC_INFORMATION'|translate}}">
-            <md-content class="">
+            <md-content>
                 <div class="attr--type--box">
                     <!--<span>基本信息</span>-->
                     <div class="single--attr--row">
@@ -134,10 +134,9 @@
                     </div>
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_PROCESSING_ACTION">处理动作</label>
-                        <span class="value" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</span>
-                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 0" >待处理</span>-->
-                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 1" >已转换</span>-->
-                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 2" >已删除</span>-->
+                        <span class="value" ng-show="vm.errorInfo.handleBehavior==1" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</span>
+                        <span class="value" ng-show="vm.errorInfo.handleBehavior==2" translate="已删除">已删除</span>
+                        <span class="value" ng-show="vm.errorInfo.handleBehavior==0" translate="待处理">待处理</span>
                         <a ng-if="vm.errorInfo.id" ng-click="vm.checkErrorList(vm.errorInfo.id)" translate="MODULES_BATCH_VIEW_DATA">查看数据</a>
                     </div>
                     <div class="single--attr--row">
