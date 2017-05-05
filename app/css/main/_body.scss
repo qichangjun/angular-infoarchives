@@ -29,10 +29,9 @@ a:focus, a:hover{
   position: absolute;
   text-align: center;
   margin: auto;
-  top: 0;
+  top: 70px;
   left: 0;
   right: 0;
-  bottom: 0;
   font-size: 16px;
   color: #ab0909;
   .fa{
@@ -45,10 +44,11 @@ a:focus, a:hover{
   position: absolute;
   text-align: center;
   margin: auto;
-  top: 0;
+  top: 70px;
   left: 0;
   right: 0;
   bottom: 0;
+  z-index: 99999;
   font-size: 16px;
   color: #199ed8;
   .fa{

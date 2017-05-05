@@ -44,14 +44,13 @@
                     <md-button class=" green--btn" ng-click="vm.downloadFile()" translate="MODULES_BATCH_DOWNLOAD">下载</md-button>
                     <md-button class=" green--btn" ng-disabled="gridApi.selection.getSelectedRows().length != 1" ng-click="vm.previewDoc($event)" translate="MODULES_BATCH_PREVIEW">预览</md-button>
                 </div>
-                <div ng-show="gridOptions.data.length == 0 && vm.loading == false" ng-style="{'max-height':'900px','min-height':'700px'}">
+                <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="no--data" translate="MODULES_BATCH_DELETE_NO_DATA">
                     没有数据
                 </div>
-                <div ng-show="vm.loading == true" ng-style="{'max-height':'900px','min-height':'700px'}">
+                <div ng-show="vm.loading == true" class="loading" translate="MODULES_DATABASE_LOADING">
                     加载中...
                 </div>
-
-                <div ng-show="gridOptions.data.length > 0" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'700px'}" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+                <div ng-show="gridOptions.data.length > 0 && !vm.loading" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'700px'}" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
             </div>
         </md-dialog-content>
 </md-dialog>

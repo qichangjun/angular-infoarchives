@@ -73,8 +73,12 @@ div.ui-grid-cell input.edit-input{
     //background: #eaf1fd;
   }
 }
+.select-hover-color{
+  background: #f2f6ff !important;
+}
+
 .ui-grid-cell-contents {
-  //background: transparent!important;
+  background: transparent!important;
   //border-bottom: none ;
 
   //border-right: none;
@@ -246,5 +250,4 @@ div.ui-grid-cell input.edit-input{
   left: calc(100% - 280px);
   top: -72px;
   height: 0;
-
 }

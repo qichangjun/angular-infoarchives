@@ -101,11 +101,8 @@
         </div>
     </div>
     <div class="data--base--svg--wrap">
-        <div  ng-show="vm.loading" style="margin: auto auto;
-                    width: 100px;
-                    margin-top: 39%;
-        ">
-           <div>加载数据中...</div>
+        <div  ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">
+           加载数据中...
         </div>
         <div ng-show="!vm.loading">
             <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit' && data.children.length > 0">
