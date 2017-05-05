@@ -135,8 +135,8 @@
                     <div class="single--attr--row">
                         <label class="title" translate="MODULES_BATCH_PROCESSING_ACTION">处理动作</label>
                         <span class="value" ng-show="vm.errorInfo.handleBehavior==1" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</span>
-                        <span class="value" ng-show="vm.errorInfo.handleBehavior==2" translate="已删除">已删除</span>
-                        <span class="value" ng-show="vm.errorInfo.handleBehavior==0" translate="待处理">待处理</span>
+                        <span class="value" ng-show="vm.errorInfo.handleBehavior==2" translate="MODULES_BATCH_DELETED">已删除</span>
+                        <span class="value" ng-show="vm.errorInfo.handleBehavior==0" translate="MODULES_BATCH_PENDING_TREATMENT">待处理</span>
                         <a ng-if="vm.errorInfo.id" ng-click="vm.checkErrorList(vm.errorInfo.id)" translate="MODULES_BATCH_VIEW_DATA">查看数据</a>
                     </div>
                     <div class="single--attr--row">

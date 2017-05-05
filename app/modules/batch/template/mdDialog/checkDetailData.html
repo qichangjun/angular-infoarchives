@@ -20,13 +20,13 @@
                 </md-button>
             </div>
         </div>
-        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="no--data" translate="MODULES_BATCH_DELETE_NO_DATA">
+        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="loading" translate="没有数据">
             没有数据
         </div>
         <div ng-show="vm.loading == true" class="loading" translate="MODULES_DATABASE_LOADING">
             加载中...
         </div>
-        <div ng-show="gridOptions.data.length > 0 && !vm.loading" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'700px'}" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
+        <div  ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'500px'}" ui-grid="gridOptions" class="common--uigrid--height batch-grid "  ui-grid-auto-resize ui-grid-resize-columns  ui-grid-selection ui-grid-pagination ui-grid-pinning></div>
     </md-dialog-content>
 </md-dialog>
 

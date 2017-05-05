@@ -32,8 +32,8 @@
         if (parameter.exception_handle_behavior && parameter.exception_handle_behavior.length > 0) {
           columns.push(commonMethodSerivce.initColumn('exceptionHandleBehavior', 'IN', 'int', info.exception_handle_behavior.join(',')));
         }
-        if (parameter.batch_status && parameter.batch_status !== 'all') {
-          columns.push(commonMethodSerivce.initColumn('batchStatus', 'IN', 'int', info.batch_status));
+        if (parameter.batchStatus && parameter.batchStatus !== 'all') {
+          columns.push(commonMethodSerivce.initColumn('batchStatus', 'IN', 'int', info.batchStatus));
         }
         Restangular.all(hsAPI['getBatchList'] + '?accessUser=' + hsAuth.getAccessKey() + '&accessToken=' + hsAuth.getAccessToken()).post({
           columns: columns,
@@ -263,13 +263,13 @@
           name: 'packageAiuStartDate',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_PACKAGE_AIU_START_DATE',
-          minWidth: 200,
+          minWidth: 160,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-startDate.html'
         }, {
           name: 'packageAipEndDate',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_PACKAGE_AIU_END_DATE',
-          minWidth: 200,
+          minWidth: 160,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-endDate.html'
         }, {
           field: 'packageCount',
@@ -347,7 +347,7 @@
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'businessCode',
+          name: 'recordCode',
           headerCellFilter: 'translate',
           displayName: 'MODULES_DATABASE_BUSINESS_TRANSACTION',
           width: 200,
@@ -359,7 +359,7 @@
           minWidth: 200,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          name: 'recordCode',
+          name: 'licenseNumber',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_RECORD_CODE',
           minWidth: 200,

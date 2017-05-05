@@ -33,7 +33,7 @@
         <div class="filter--properties--box clearfix" ng-init="vm.showMenu=true" ng-class="{true: 'showTool', false: 'hiddenTool'}[vm.showMenu]" style="transition: all 0.3s ease-in-out;">
             <div class="single--attribute--box">
                 <span class="attribute--title" translate="MODULES_BATCH_BATCH_STATUS">批次状态</span><div class="attribute--value">
-                    <md-select ng-model="vm.parameter.batch_status"
+                    <md-select ng-model="vm.parameter.batchStatus"
                     >
                         <md-option ng-value="'0,1,2,3,4'" translate="MODULES_BATCH_IN_OPERATION">运行中</md-option>
                         <md-option ng-value="'5'" translate="MODULES_BATCH_COMPLETED">已完成</md-option>
@@ -42,7 +42,7 @@
                     </md-select>
                 </div>
             </div>
-            <div class="single--attribute--box" ng-if="vm.parameter.batch_status == '5' || vm.parameter.batch_status=='all' ">
+            <div class="single--attribute--box" ng-if="vm.parameter.batchStatus == '5' || vm.parameter.batchStatus=='all' ">
                 <span class="attribute--title"><span translate="MODULES_BATCH_ABNORMAL_DISPOSAL">异常处置</span>：</span><div class="attribute--value">
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);"-->
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);"-->
@@ -60,7 +60,7 @@
             <div class="single--attribute--box time--frame">
                 <span class="let--middle--line"></span>
                 <div class="time--frame__box">
-                    <span class="attribute--title" translate="MODULES_BATCH_TIME_FRAME">时间范围</span>
+                    <span class="attribute--title" translate="MODULES_BATCH_PACKAGE_AIU_START_DATE">起始时间</span>
                     <div  layout="row" class="attribute--value">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{{'MODULES_BATCH_START_DATE'|translate}}"  uib-datepicker-popup ng-model="vm.parameter.start_date" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />

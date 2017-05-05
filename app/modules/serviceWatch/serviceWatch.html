@@ -8,6 +8,7 @@
         </md-list-item>
     </md-content>
     <div class="service--watch--grid">
+        <div class="service--watch--lost--scroll">
         <table class="table table-hover service--watch--table">
                 <thead>
                 <tr class="table__th--tr">
@@ -21,21 +22,21 @@
                 </tr>
                 </thead>
                 <tbody class="service--watch--table_tbody" ng-repeat="data in vm.gridOptions.data">
-                    <tr class="service--watch--table_tr" ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
-                        <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
-                        <td>{{data.jobName}}</td>
-                        <td>{{data.jobDesc}}</td>
-                        <td>{{data.startDate | date:'yyyy.MM.dd HH:mm:ss'}}</td>
-                        <td><span >{{data.keepDay}} <span translate="MODULES_SERVICEWATCH_DAY">天</span></span>
-                            <span >{{data.keepHour}} <span translate="MODULES_SERVICEWATCH_HOUR">小时</span> </span>
-                            <span >{{data.keepMinute}} <span translate="MODULES_SERVICEWATCH_MINUTE">分</span> </span>
-                        </td>
-                        <td>
-                            <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus == 'PAUSED'" translate="MODULES_SERVICEWATCH_SERVICE_STOP"> 停止 </span>
-                            <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus != 'PAUSED'" translate="MODULES_SERVICEWATCH_NORMAL_OPERATION"> 正常 </span>
-                        </td>
-                        <td class="service--watch--list--operation--box">
-                            <div ng-if="!data.isChanging">
+                <tr class="service--watch--table_tr" ng-click="vm.checkMission(data,$event);data.showMission=!data.showMission">
+                    <td><span class="glyphicon glyphicon-tasks"></span>&nbsp;&nbsp;{{data.id}}</td>
+                    <td>{{data.jobName}}</td>
+                    <td>{{data.jobDesc}}</td>
+                    <td>{{data.startDate | date:'yyyy.MM.dd HH:mm:ss'}}</td>
+                    <td><span >{{data.keepDay}} <span translate="MODULES_SERVICEWATCH_DAY">天</span></span>
+                        <span >{{data.keepHour}} <span translate="MODULES_SERVICEWATCH_HOUR">小时</span> </span>
+                        <span >{{data.keepMinute}} <span translate="MODULES_SERVICEWATCH_MINUTE">分</span> </span>
+                    </td>
+                    <td>
+                        <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus == 'PAUSED'" translate="MODULES_SERVICEWATCH_SERVICE_STOP"> 停止 </span>
+                        <span class="current--state--info" ng-class="{'normal--state': data.jobStatus != 'PAUSED','stop--state': data.jobStatus == 'PAUSED'}" ng-if="data.jobStatus != 'PAUSED'" translate="MODULES_SERVICEWATCH_NORMAL_OPERATION"> 正常 </span>
+                    </td>
+                    <td class="service--watch--list--operation--box">
+                        <div ng-if="!data.isChanging">
                             <span class="glyphicon glyphicon-play star--btn"
                                   ng-click="vm.startService(data,$event)"
                                   ng-class="{'button-disabled': data.jobStatus != 'PAUSED'}"
@@ -46,33 +47,33 @@
                                   ng-class="{'button-disabled': data.jobStatus == 'PAUSED'}"
                                     >
                             </span>
-                            </div>
-                            <div ng-if="data.isChanging">
-                                <md-progress-circular  class="md-hue-2" md-diameter="20px"></md-progress-circular>
-                            </div>
-                        </td>
-                    </tr>
-                    <tr class="missionList service--watch--table_tr" ng-show="data.showMission">
-                        <td colspan="7">
-                            <div ng-show="data.missionList.length == 0 || data.ermsLists.length == 0" class="no--task--box" >
-                                <span class="attr--box no--task" translate="MODULES_SERVICEWATCH_NO_TASK">没有任务</span>
-                            </div>
-                            <div ng-show="data.ermsLists.length > 0" ng-repeat="ermsLists in data.ermsLists" class="mission--list--spread--box">
-                                <span class="attr--box">ID：{{ermsLists.id}}</span>
-                                <span class="attr--box">启动次数：{{ermsLists.startTime}}</span>
-                                <span class="attr--box">最后一次启动时间：{{ermsLists.startTime | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box">导入ERMS数据数量包：{{ermsLists.importErmsCount}}</span>
-                                <span class="attr--box"><span >占总量百分比</span>：
+                        </div>
+                        <div ng-if="data.isChanging">
+                            <md-progress-circular  class="md-hue-2" md-diameter="20px"></md-progress-circular>
+                        </div>
+                    </td>
+                </tr>
+                <tr class="missionList service--watch--table_tr" ng-show="data.showMission">
+                    <td colspan="7">
+                        <div ng-show="data.missionList.length == 0 || data.ermsLists.length == 0" class="no--task--box" >
+                            <span class="attr--box no--task" translate="MODULES_SERVICEWATCH_NO_TASK">没有任务</span>
+                        </div>
+                        <div ng-show="data.ermsLists.length > 0" ng-repeat="ermsLists in data.ermsLists" class="mission--list--spread--box">
+                            <span class="attr--box">ID：{{ermsLists.id}}</span>
+                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_STARTUP_TIME">启动次数</span>：{{ermsLists.startTime}}</span>
+                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_LAST_START_TIME">最后一次启动时间</span>：{{ermsLists.startTime | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_IMPORT_ERMS_DATA_PACKET">导入ERMS数据数量包</span>：{{ermsLists.importErmsCount}}</span>
+                                <span class="attr--box"><span translate="MODULES_SERVICEWATCH_PERCENTAGE_OF_TOTAL">占总量百分比</span>：
                                     <uib-progressbar ng-show="missionList.aipPackageCount == 0" class="progress-striped active progress--info" type="success" value="(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100"></uib-progressbar><span ng-show="missionList.aipPackageCount == 0">{{(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100}}&nbsp;%</span>
-                                    <uib-progressbar ng-show="missionList.aipPackageCount != 0" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar><span ng-show="missionList.aipPackageCount != 0">0&nbsp;%</span>
+                                    <uib-progressbar ng-show="missionList.aipPackageCount != 0" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar>&nbsp;<span ng-show="missionList.aipPackageCount != 0">0&nbsp;%</span>
                                 </span>
-                            </div>
-                            <div ng-show="data.missionList.length > 0" ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
-                                <span class="attr--box">ID：{{missionList.id}}</span>
-                                <span class="attr--box"><span translate="MODULES_BATCH_BATCH_NUMBER">批次号</span>：{{missionList.batchCode}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==4"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==0"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                                <span class="attr--box date" ng-if="missionList.batchStatus==2"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                        </div>
+                        <div ng-show="data.missionList.length > 0" ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
+                            <span class="attr--box">ID：{{missionList.id}}</span>
+                            <span class="attr--box"><span translate="MODULES_BATCH_BATCH_NUMBER">批次号</span>：{{missionList.batchCode}}</span>
+                            <span class="attr--box date" ng-if="missionList.batchStatus==4"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                            <span class="attr--box date" ng-if="missionList.batchStatus==0"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageAiuStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                            <span class="attr--box date" ng-if="missionList.batchStatus==2"><span translate="MODULES_SERVICEWATCH_TASK_START_TIME">任务开始时间</span>：{{missionList.packageSipStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
                                 <span class="attr--box data--count"><span translate="MODULES_SERVICEWATCH_PACKET_PROFICIENCY">成功数量</span>：
                                     <span  ng-if="missionList.batchStatus==4"> {{missionList.aipCount || 0}}</span>
                                     <span  ng-if="missionList.batchStatus==0"> {{missionList.aiuCount || 0}}</span>
@@ -80,13 +81,14 @@
                                     {{missionList.aiu2sipSuccessCount}}</span>
                                 <span class="attr--box"><span translate="MODULES_SERVICEWATCH_SCHEDULE">进度</span>：
                                     <uib-progressbar ng-show="!missionList.progress" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar>
-                                    <uib-progressbar ng-show="missionList.progress" class="progress-striped active progress--info" type="success" value="missionList.progress"></uib-progressbar>{{missionList.progress || 0}}&nbsp;%
+                                    <uib-progressbar ng-show="missionList.progress" class="progress-striped active progress--info" type="success" value="missionList.progress"></uib-progressbar>&nbsp;{{missionList.progress || 0}}&nbsp;%
                                 </span>
-                            </div>
-                        </td>
-                    </tr>
+                        </div>
+                    </td>
+                </tr>
                 </tbody>
             </table>
+        </div>
         <div class="service--watch--grid__prompt--box">
             <div class="prompt--content">
                 <span class="fa fa-exclamation-circle"></span>

@@ -1,5 +1,6 @@
 <div aria-label="Mango" class="preview--template--form--modal preview--record--wrap">
     <form ng-cloak
+          class="preview--record--form"
           name="newProject"
           novalidate
           ng-submit="newProject.$valid?vm.newProject():vm.newProject.submit=true"
@@ -17,9 +18,9 @@
             </div>
         </md-toolbar>
         <md-dialog-content class="preview--template--form--modal__content preview--record--wrap__content clearfix">
-            <div >
+            <div class="preview--record--scroll--wrap">
                 <div class="new--project--row--box">
-                    <div class="row show--results-wrap">
+                    <div class="show--results-wrap">
                         <div ng-repeat="list in data" class="show--results-box">
                             <div class="head--box">
                                 <span class="head--content">{{list.name}}</span>

@@ -1,42 +1,57 @@
-<div class="anim-slide-left connect--map--wrap">
-    <div class="connect--map--wrap_data--count" >
+<div class="anim-slide-left statistics--wrap">
+    <div class="statistics--wrap_data--count" >
         <div class="cell-box">
-            <span class="fa fa-database "></span>
+            <span class="fa fa-database color-one"></span>
             <div class="data--description">
                 <p class="head" translate="MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS">对接系统数量</p>
-                <span class="data--value color-one">2 <span translate="PROJECT_CONNECTMAP_NUM">个</span></span>
+                <span class="data--value">{{vm.overAllInfo.systemCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_NUM">个</span></span>
             </div>
         </div>
         <div class="cell-box">
-            <span class="fa fa-cubes"></span>
+            <span class="fa fa-university color-two"></span>
             <div class="data--description">
-                <p class="head" translate="PROJECT_CONNECTMAP_ARCHIVED_RECORD_QUANTITY">归档记录数量</p>
-                <span class="data--value color-two">15436条</span>
+                <p class="head" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS">业务单位数量</p>
+                <span class="data--value">{{vm.overAllInfo.unitCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_HOME">家</span></span>
             </div>
         </div>
         <div class="cell-box">
-            <span class="fa fa-hdd-o" style="font-size: 28px"></span>
+            <span class="fa fa-paper-plane-o color-three"></span>
+            <div class="data--description">
+                <p class="head" translate="MODULES_STATISTICS_INVOLVE_BUSINESS_COUNT">涉及业务数量</p>
+                <span class="data--value">{{vm.overAllInfo.businessMatterCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_NUM">个</span></span>
+            </div>
+        </div>
+        <div class="cell-box">
+            <span class="fa fa-cubes color-four"></span>
+            <div class="data--description">
+                <p class="head" translate="MODULES_DATABASE_ARCHIVED_DATA">归档数量</p>
+                <span class="data--value">{{vm.overAllInfo.recordCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
+            </div>
+        </div>
+        <div class="cell-box">
+            <span class="fa fa-hdd-o color-five" style="font-size: 28px"></span>
             <div class="data--description">
                 <p class="head" translate="MODULES_DATABASE_TOTAL_DATA_CAPACITY">数据总容量</p>
-                <span class="data--value color-three">25GB</span>
+                <span class="data--value">{{vm.overAllInfo.recordCapacity | formatByte}}</span>
             </div>
         </div>
         <div class="cell-box">
-            <span class="fa fa-external-link"></span>
+            <span class="fa fa-stack-overflow color-six"></span>
             <div class="data--description">
-                <p class="head">数据被调用次数</p>
-                <span class="data--value color-four">233次</span>
+                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_ERMS_COUNT">导入ERMS的数量</p>
+                <span class="data--value">{{vm.overAllInfo.importErmsCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
             </div>
         </div>
+
     </div>
-    <div class="connect--map--content--wrap" >
+    <div class="statistics--wrap_data--form connect--map--content--wrap clearfix">
         <div class="connect--map--data--status--info--wrap">
             <ul class="status--info--box">
-                <li class="single--info"><span class="fa fa-circle fa-1"></span>SIP转换服务</li>
-                <li class="single--info"><span class="fa fa-circle"></span>AIP转换服务</li>
-                <li class="single--info"><span class="fa fa-circle"></span>搜索服务</li>
-                <li class="single--info active"><span class="fa fa-circle"></span>日志服务</li>
-                <li class="single--info"><span class="fa fa-circle"></span>FTP</li>
+                <li class="single--info"><span class="fa fa-circle fa-1"></span><span translate="PROJECT_CONNECTMAP_SIP_CONVERSION_SERVICE">SIP转换服务</span></li>
+                <li class="single--info"><span class="fa fa-circle"></span><span translate="PROJECT_CONNECTMAP_AIP_CONVERSION_SERVICE">AIP转换服务</span></li>
+                <li class="single--info active"><span class="fa fa-circle"></span><span translate="PROJECT_CONNECTMAP_SEARCH_SERVICE">搜索服务</span></li>
+                <li class="single--info"><span class="fa fa-circle"></span><span translate="PROJECT_CONNECTMAP_LOG_SERVICE">日志服务</span></li>
+                <li class="single--info active"><span class="fa fa-circle"></span>FTP</li>
                 <li class="single--info"><span class="fa fa-circle"></span>ETL</li>
             </ul>
         </div>
@@ -45,27 +60,27 @@
             <div class="tiptool--show--wrap">
                 <table class="table tiptool--show--data--table">
                     <thead>
-                        <tr class="table__th--tr">
-                            <th>ID</th>
-                            <th>JOB名称</th>
-                            <th>耗时(秒)</th>
-                            <th>状态</th>
-                        </tr>
+                    <tr class="table__th--tr">
+                        <th>ID</th>
+                        <th translate="MODULES_SERVICEWATCH_JOB_NAME">JOB名称</th>
+                        <th translate="PROJECT_CONNECTMAP_CONSUME_SECONDS">耗时(秒)</th>
+                        <th translate="MODULES_BATCH_STATE">状态</th>
+                    </tr>
                     </thead>
                     <tbody>
-                        <tr ng-repeat="detailInfo in vm.detailInfos">
-                            <td>{{detailInfo.id}}</td>
-                            <td>{{detailInfo.job}}</td>
-                            <td>{{detailInfo.keepTime}}</td>
-                            <td>{{detailInfo.status}}</td>
-                        </tr>
+                    <tr ng-repeat="detailInfo in vm.detailInfos">
+                        <td>{{detailInfo.id}}</td>
+                        <td>{{detailInfo.jobName}}</td>
+                        <td>{{detailInfo.keepTime}}</td>
+                        <td>{{detailInfo.progress}}%</td>
+                    </tr>
                     </tbody>
                 </table>
                 <span class="org--bot"></span>
             </div>
         </div>
-
     </div>
+
 </div>
 
 

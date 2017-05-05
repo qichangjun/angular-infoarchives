@@ -173,6 +173,8 @@
     margin: 0 16px 26px 16px;
     margin-top: -10px;
     overflow-y: hidden;
+    position: relative;
+    min-height: 300px;
     .operation--box{
       background: #f5f5f5;
       padding: 15px;
@@ -198,6 +200,7 @@
   }
   .operation--box{
     margin: 40px 0 30px 0 ;
+
     &_btn{
       display: inline-block;
       .btn--name{

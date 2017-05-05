@@ -21,7 +21,7 @@
       vm.systemSource;
       vm.parameter = $stateParams;
       vm.parameter.pageSize = Number(vm.parameter.pageSize) || 50;
-      vm.parameter.batch_status = vm.parameter.batch_status || 'all';
+      vm.parameter.batchStatus = vm.parameter.batchStatus || 'all';
       vm.parameter.currentPage = Number(vm.parameter.currentPage) || 1;
       vm.parameter.exception_handle_behavior = vm.parameter.exception_handle_behavior || [];
       if (!vm.parameter.start_date) {
@@ -194,7 +194,7 @@
         }
       };
       search = function() {
-        if (vm.parameter.batch_status === '0,1,2,3,4' || vm.parameter.batch_status === '6') {
+        if (vm.parameter.batchStatus === '0,1,2,3,4' || vm.parameter.batchStatus === '6') {
           vm.parameter.exception_handle_behavior = [];
         }
         $state.go('.', vm.parameter, {
@@ -375,14 +375,22 @@
       getGridData = function() {
         vm.loading = true;
         return dataBaseService.getGridData(vm.parameter).then(function(res) {
-          var column, j, len, ref, results;
+          var column, i, j, k, len, len1, ref, ref1, results, rows;
           vm.loading = false;
           $scope.gridOptions.data = res.content;
+          ref = $scope.gridOptions.data;
+          for (i = j = 0, len = ref.length; j < len; i = ++j) {
+            rows = ref[i];
+            rows.name = rows.name.split('_')[1];
+            if (rows.licenseNumber === 'null') {
+              rows.licenseNumber = null;
+            }
+          }
           $scope.gridOptions.totalItems = res.totalElements;
-          ref = $scope.gridOptions.columnDefs;
+          ref1 = $scope.gridOptions.columnDefs;
           results = [];
-          for (j = 0, len = ref.length; j < len; j++) {
-            column = ref[j];
+          for (k = 0, len1 = ref1.length; k < len1; k++) {
+            column = ref1[k];
             results.push(column.enableColumnMenu = false);
           }
           return results;

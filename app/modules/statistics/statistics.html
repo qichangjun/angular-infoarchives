@@ -3,64 +3,65 @@
         <div class="cell-box">
             <span class="fa fa-database color-one"></span>
             <div class="data--description">
-                <p class="head">对接系统数量</p>
-                <span class="data--value">2 个</span>
+                <p class="head" translate="MODULES_DATABASE_NUMBER_OF_DOCKING_SYSTEMS">对接系统数量</p>
+                <span class="data--value">{{vm.overAllInfo.systemCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_NUM">个</span></span>
             </div>
         </div>
         <div class="cell-box">
             <span class="fa fa-university color-two"></span>
             <div class="data--description">
-                <p class="head">业务单位数量</p>
-                <span class="data--value">34 家</span>
+                <p class="head" translate="MODULES_DATABASE_NUMBER_OF_BUSINESS_UNITS">业务单位数量</p>
+                <span class="data--value">{{vm.overAllInfo.unitCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_HOME">家</span></span>
             </div>
         </div>
         <div class="cell-box">
             <span class="fa fa-paper-plane-o color-three"></span>
             <div class="data--description">
-                <p class="head">涉及业务数量</p>
-                <span class="data--value">233 个</span>
+                <p class="head" translate="MODULES_STATISTICS_INVOLVE_BUSINESS_COUNT">涉及业务数量</p>
+                <span class="data--value">{{vm.overAllInfo.businessMatterCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_NUM">个</span></span>
             </div>
         </div>
         <div class="cell-box">
             <span class="fa fa-cubes color-four"></span>
             <div class="data--description">
-                <p class="head">归档记录数量</p>
-                <span class="data--value">15436 条</span>
+                <p class="head" translate="MODULES_DATABASE_ARCHIVED_DATA">归档数量</p>
+                <span class="data--value">{{vm.overAllInfo.recordCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
             </div>
         </div>
         <div class="cell-box">
             <span class="fa fa-hdd-o color-five" style="font-size: 28px"></span>
             <div class="data--description">
-                <p class="head">数据总量</p>
-                <span class="data--value">25 GB</span>
+                <p class="head" translate="MODULES_DATABASE_TOTAL_DATA_CAPACITY">数据总容量</p>
+                <span class="data--value">{{vm.overAllInfo.recordCapacity | formatByte}}</span>
             </div>
         </div>
         <div class="cell-box">
             <span class="fa fa-stack-overflow color-six"></span>
             <div class="data--description">
-                <p class="head">数据被调用次数</p>
-                <span class="data--value">11423 条</span>
+                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_ERMS_COUNT">导入ERMS的数量</p>
+                <span class="data--value">{{vm.overAllInfo.importErmsCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
             </div>
         </div>
 
     </div>
 
-    <div class="statistics--wrap_data--form clearfix">
-       <h4 class="data--form--head">月度归档数据量</h4>
+    <div class="statistics--wrap_data--form connect--map--content--wrap clearfix">
+       <h4 class="data--form--head" translate="MODULES_STATISTICS_MONTHLY_FILING_DATA">月度归档数据量</h4>
        <div class="condition--filter--box" >
-           <md-select style="width: 95px;" ng-model="vm.parameter.unit" ng-change="vm.getRecordNum()">
+           <md-select ng-model="vm.parameter.unit" ng-change="vm.getRecordNum()">
                <md-option ng-repeat="unitLists in vm.unitLists" ng-value="unitLists" >{{unitLists}}</md-option>
-               <md-option ng-value="'all'" >所有单位</md-option>
+               <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_UNITS">所有单位</md-option>
            </md-select>
-           <md-select style="width: 95px;" ng-model="vm.parameter.year" ng-change="vm.getRecordNum()">
+           <label translate="MODULES_STATISTICS_YEAR">年度</label>
+           <md-select ng-model="vm.parameter.year" ng-change="vm.getRecordNum()">
                <md-option ng-repeat="year in vm.yearLists" ng-value="year" >{{year}}</md-option>
-               <md-option ng-value="'all'" >所有年度</md-option>
+               <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_YEAR">所有年度</md-option>
            </md-select>
-           <md-select style="width: 100px;" ng-model="vm.parameter.systemName" ng-change="vm.getRecordNum()">
-               <md-option ng-repeat="systemLists in vm.systemLists" ng-value="systemLists" >{{systemLists}}</md-option>
-               <md-option ng-value="'all'" >所有系统</md-option>
+           <label ng-show="vm.parameter.year != 'all'" translate="MODULES_STATISTICS_MONTH">月份</label>
+           <md-select ng-model="vm.parameter.month" ng-change="vm.getRecordNum()" ng-show="vm.parameter.year != 'all'">
+               <md-option ng-repeat="monthLists in vm.monthLists" ng-value="monthLists" >{{monthLists}}</md-option>
+               <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_MONTH">所有月份</md-option>
            </md-select>
-           <md-button></md-button>
        </div>
        <div class="" id="container" ng-show="vm.parameter.unit=='all'" style="width: 100%"></div>
         <div class="" id="containerOfUnit" ng-show="vm.parameter.unit!='all'"  style="width: 100%"></div>

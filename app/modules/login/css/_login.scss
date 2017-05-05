@@ -210,6 +210,10 @@
             margin: 0;
             width: 280px;
             background: #fff;
+            .md-select-value{
+              line-height: normal;
+              padding: 1px 2px 3px 6px;
+            }
           }
           .md-select-value>span{
             transform: none;

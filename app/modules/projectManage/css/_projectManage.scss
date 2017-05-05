@@ -436,7 +436,7 @@
     //padding: 0 80px 0 0;
     //border-right: 1px solid #d7d7d7;
     &.rule--set{
-      min-width: 900px;
+      min-width: 912px;
     }
     .edit--project--row--box{
       margin-bottom: 40px;
@@ -961,6 +961,7 @@
 }
 .preview--template--form--modal__content{
   padding: 0 16px 26px 16px !important;
+  height: calc(100% - 108px);
 }
 .preview--template--form--modal__table{
   color:  #999999;
