@@ -15,24 +15,37 @@
         nodes: '='
       },
       link: function(scope, element) {
-        var diagonal, h, horizontalSeparationBetweenNodes, i, m, nodeHeight, nodeWidth, root, tree, update, verticalSeparationBetweenNodes, vis, w;
+        var diagonal, h, i, m, root, stringGetLength, tree, update, vis, w;
         m = [20, 120, 20, 120];
         w = 900 - m[1] - m[3];
         h = 900 - m[0] - m[2];
         i = 0;
         root = void 0;
         tree = void 0;
-        nodeWidth = 120;
-        nodeHeight = 75;
-        horizontalSeparationBetweenNodes = 60;
-        verticalSeparationBetweenNodes = 128;
-        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 1200).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + 400 + ',' + '0' + ')');
-        tree = d3.layout.tree().size([h - 10, w - 100]);
+        vis = d3.select('connect-map-tree').append('svg:svg').attr('id', 'connect-map-tree').attr('width', 1200).attr('height', 900).append('svg:g').attr('id', 'straight-tree-g').attr('transform', 'translate(' + 400 + ',' + '0' + ')');
+        tree = d3.layout.tree().size([h - 201, w - 100]);
         diagonal = d3.svg.diagonal().projection(function(d) {
           return [d.y, d.x];
         });
+        stringGetLength = function(str) {
+          var charCode, len, realLength;
+          realLength = 0;
+          len = str.length;
+          charCode = -1;
+          i = 0;
+          while (i < len) {
+            charCode = str.charCodeAt(i);
+            if (charCode >= 0 && charCode <= 128) {
+              realLength++;
+            } else {
+              realLength = realLength + 2;
+            }
+            i++;
+          }
+          return realLength;
+        };
         update = function(source, delayTime) {
-          var duration, link, node, nodeEnter, nodeExit, nodeUpdate, nodes;
+          var duration, link, node, nodeEnter, nodeExit, nodeText, nodeUpdate, nodes;
           duration = d3.event && d3.event.altKey ? 5000 : 200;
           if (delayTime) {
             duration = delayTime;
@@ -46,8 +59,14 @@
           });
           nodeEnter = node.enter().append('svg:g').attr('class', 'node').attr('transform', function(d) {
             return 'translate(' + source.y0 + ',' + source.x0 + ')';
+          });
+          nodeEnter.append('svg:circle').attr('r', 1e-6).style('fill', function(d) {
+            if (d._children) {
+              return 'lightsteelblue';
+            } else {
+              return '#fff';
+            }
           }).on('click', function(d) {
-            scope.$emit('node:update', d);
             if (d.children) {
               d._children = d.children;
               d.children = null;
@@ -56,60 +75,62 @@
               d._children = null;
             }
             update(d, 500);
-          }).on('mouseover', function(d) {
-            return scope.$emit('node:mouseover', d);
-          }).on('mouseout', function(d) {
-            return scope.$emit('node:mouseout', d);
+            scope.$emit('node:update', root);
           });
-          nodeEnter.append('svg:circle').attr('r', 1e-6).style('fill', function(d) {
-            if (d._children) {
-              return 'lightsteelblue';
-            } else {
-              return '#fff';
-            }
-          });
-          nodeEnter.append('svg:text').attr('x', function(d) {
+          nodeText = nodeEnter.append('svg:text').attr('x', function(d) {
             return 12;
           }).attr('dy', '.35em').attr('text-anchor', function(d) {
             return 'start';
-          }).text(function(d) {
+          });
+          nodeText.append('text:tspan').text(function(d) {
             return d.name;
-          }).style('fill-opacity', 1e-6);
+          }).on('mouseover', function(d) {
+            scope.$emit('node:mouseover', d);
+          }).on('mouseout', function(d) {
+            scope.$emit('node:mouseout', d);
+          });
+          nodeText.append('text:tspan').text(function(d) {
+            if (d.type === 'item') {
+              return '查看详情';
+            }
+          }).style('fill', 'blue').style('cursor', 'pointer').on('click', function(d) {
+            scope.$emit('node:clickItem', d);
+          }).attr('dx', 12);
           nodeEnter.append('svg:image').attr('href', function(d) {
             if (d.type === 'root') {
               return 'images/connect--map--data--root--icon.png';
             } else if (d.type === 'unit') {
-              return 'images/connect--map--rds--icon.png';
+              return 'images/' + d.dataBase + '--map--icon' + '.png';
             }
           }).attr('xlink:href', function(d) {
             if (d.type === 'root') {
               return 'images/connect--map--data--root--icon.png';
             } else if (d.type === 'unit') {
-              return 'images/connect--map--rds--icon.png';
+              return 'images/' + d.dataBase + '--map--icon' + '.png';
             }
           }).attr('x', function(d) {
             if (d.type === 'unit') {
-              return -30;
+              return -25;
             } else {
-              return -80;
+              return -135;
             }
           }).attr('y', function(d) {
             if (d.type === 'unit') {
-              return -45;
+              return -57;
             } else {
-              return -40;
+              return -65;
             }
           }).attr('width', function(d) {
             if (d.type === 'root') {
-              return 64;
+              return 128;
             } else {
-              return 47;
+              return 50;
             }
           }).attr('height', function(d) {
             if (d.type === 'root') {
-              return 73;
+              return 128;
             } else {
-              return 32;
+              return 50;
             }
           });
           nodeUpdate = node.transition().duration(duration).attr('transform', function(d) {

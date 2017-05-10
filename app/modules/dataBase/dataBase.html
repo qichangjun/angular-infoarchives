@@ -58,7 +58,7 @@
                             md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                             md-item-text="unitLists.name"
                             md-min-length="0"
-                            placeholder="- -">
+                            placeholder="{{'MODULES_STATISTICS_ALL_UNITS'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
                         </md-item-template>
@@ -85,7 +85,7 @@
                             md-items="items in vm.querySearch(vm.searchItemText,vm.itemLists)"
                             md-item-text="items.name"
                             md-min-length="0"
-                            placeholder="- -">
+                            placeholder="{{'MODULES_DATABASE_PLEASE_SELECT_UNIT'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchItemText" md-highlight-flags="^i">{{items.name}}</span>
                         </md-item-template>
@@ -101,10 +101,14 @@
         </div>
     </div>
     <div class="data--base--svg--wrap">
+        <rzslider style="height: 200px;position:absolute"
+                  rz-slider-model="vm.slider.value"
+                  rz-slider-options="vm.slider.options"></rzslider>
         <div  ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">
            加载数据中...
         </div>
         <div ng-show="!vm.loading">
+
             <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit' && data.children.length > 0">
             </circle-tree>
             <straight-tree ng-if="vm.parameter.chartType=='source' && data.children.length > 0"  id="customModule" nodes = 'data'  radius = '490'>

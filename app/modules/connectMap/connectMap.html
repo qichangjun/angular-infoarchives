@@ -56,27 +56,52 @@
             </ul>
         </div>
         <connect-map-tree nodes="data"></connect-map-tree>
-        <div ng-show="vm.tiptool.show" ng-style="{position:'absolute','left':vm.tiptool.y + 520,'top':vm.tiptool.x - 70}">
-            <div class="tiptool--show--wrap">
-                <table class="table tiptool--show--data--table">
-                    <thead>
-                    <tr class="table__th--tr">
-                        <th>ID</th>
-                        <th translate="MODULES_SERVICEWATCH_JOB_NAME">JOB名称</th>
-                        <th translate="PROJECT_CONNECTMAP_CONSUME_SECONDS">耗时(秒)</th>
-                        <th translate="MODULES_BATCH_STATE">状态</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr ng-repeat="detailInfo in vm.detailInfos">
-                        <td>{{detailInfo.id}}</td>
-                        <td>{{detailInfo.jobName}}</td>
-                        <td>{{detailInfo.keepTime}}</td>
-                        <td>{{detailInfo.progress}}%</td>
-                    </tr>
-                    </tbody>
-                </table>
-                <span class="org--bot"></span>
+        <!--<div  ng-show="vm.tiptool.show" ng-style="{position:'absolute','left':vm.tiptool.y + 520,'top':vm.tiptool.x - 70}">-->
+            <!--<div class="tiptool&#45;&#45;show&#45;&#45;wrap">-->
+                <!--<table class="table tiptool&#45;&#45;show&#45;&#45;data&#45;&#45;table">-->
+                    <!--<thead>-->
+                    <!--<tr class="table__th&#45;&#45;tr">-->
+                        <!--<th>ID</th>-->
+                        <!--<th translate="MODULES_SERVICEWATCH_JOB_NAME">JOB名称</th>-->
+                        <!--<th translate="PROJECT_CONNECTMAP_CONSUME_SECONDS">耗时(秒)</th>-->
+                        <!--<th translate="MODULES_BATCH_STATE">状态</th>-->
+                    <!--</tr>-->
+                    <!--</thead>-->
+                    <!--<tbody>-->
+                    <!--<tr ng-repeat="detailInfo in vm.detailInfos">-->
+                        <!--<td>{{detailInfo.id}}</td>-->
+                        <!--<td>{{detailInfo.jobName}}</td>-->
+                        <!--<td>{{detailInfo.keepTime}}</td>-->
+                        <!--<td>{{detailInfo.progress}}%</td>-->
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+                <!--<span class="org&#45;&#45;bot"></span>-->
+            <!--</div>-->
+        <!--</div>-->
+        <div ng-repeat="detailLists in vm.detailLists"  ng-style="{position:'absolute','left':detailLists.y,'top':detailLists.x}">
+            <div class="tiptool--show--wrap" ng-show="detailLists.type=='dataBase'">
+                <div>
+                    <div><span>系统数据库类型:</span><span>{{detailLists.info}}</span></div>
+                    <div><span>接入方式:</span><span>ETL</span></div>
+                    <div><span>AIU存储路径:</span><span>fdfsfs</span></div>
+                    <div ng-click="vm.detailLists.splice($index,1)">关闭</div>
+                </div>
+            </div>
+            <div class="tiptool--show--wrap" ng-show="detailLists.type=='updateTime'">
+                <div>
+                    <div><span>接入时间:</span><span>1234</span></div>
+                    <div><span>最新更新时间:</span><span>532523523</span></div>
+                    <div ng-click="vm.detailLists.splice($index,1)">关闭</div>
+                </div>
+            </div>
+            <div class="tiptool--show--wrap" ng-show="detailLists.type=='recordNum'">
+                <div>
+                    <div><span>归档记录总数:</span><span>1234</span></div>
+                    <div><span>本月归档记录数:</span><span>423532</span></div>
+                    <div><span>数据总量:</span><span>32425</span></div>
+                    <div ng-click="vm.detailLists.splice($index,1)">关闭</div>
+                </div>
             </div>
         </div>
     </div>

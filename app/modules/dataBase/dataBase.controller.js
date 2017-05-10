@@ -10,6 +10,20 @@
         vm.parameter.chartType = 'unit';
       }
       PAHT_OF_TEMPLATE_MDDIALOG = 'modules/dataBase/template/mdDialog/';
+      vm.slider = {
+        value: 10,
+        options: {
+          vertical: true,
+          translate: function() {
+            return '';
+          },
+          onChange: function() {
+            return $scope.$broadcast('svg:changeSize', vm.slider.value / 10);
+          },
+          floor: 10,
+          ceil: 50
+        }
+      };
       init = function() {
         getTreeData();
         listenEvent();
@@ -188,6 +202,7 @@
         });
       };
       changeChartType = function(chartType) {
+        vm.slider.value = 10;
         $state.go('.', vm.parameter, {
           notify: false
         });

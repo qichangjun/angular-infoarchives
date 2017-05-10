@@ -243,14 +243,14 @@
           name: 'batchCode',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_BATCH_CODE',
-          minWidth: 200,
+          minWidth: 220,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           field: 'id',
           name: 'id',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_BUSINESS_SYSTEM_ID',
-          minWidth: 250,
+          minWidth: 260,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'batchStatus',

@@ -25,6 +25,8 @@
       //right: 10px;
       //top:18px;
       //font-size: 19.5px;
+      height: 100%;
+      line-height: normal;
       &:hover{
         color: #ffffff;
       }
@@ -55,6 +57,7 @@
     border-top: 1px solid #cccccc;
     &:first-child{
       margin-top: 0;
+      border-top: none;
     }
     &:last-child{
       border-bottom: none;
@@ -122,8 +125,7 @@
     }
   }
   md-tabs[md-border-bottom] md-tabs-wrapper{
-    border-width: 0;
-
+    margin: 0 10px;
   }
 }
 .batch--grid--wrap{
@@ -244,6 +246,7 @@
   right: 0;
   bottom: 0;
   min-height: 445px;
+  min-width: 1000px;
   .batch--no--data__prompt--box{
     display: table;
     width: 1px;

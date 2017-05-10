@@ -3,15 +3,10 @@
   'use strict';
   angular.module("myApp").controller("connectMapController", [
     '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', 'hsAuth', 'connectMapService', 'statisticsService', 'serviceWatchService', 'batchService', '$interval', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, hsAuth, connectMapService, statisticsService, serviceWatchService, batchService, $interval) {
-      var getList, getOverAll, getSystemInfo, getSystemLists, init, listenEvent, refreshList, vm;
+      var getOverAll, getSystemInfo, getSystemLists, init, listenEvent, refreshList, vm;
       vm = this;
       refreshList = null;
-      vm.tiptool = {
-        show: false,
-        x: null,
-        y: null,
-        info: {}
-      };
+      vm.detailLists = [];
       $scope.data = {
         name: '',
         type: 'root',
@@ -22,74 +17,6 @@
         listenEvent();
         return getOverAll();
       };
-      getList = function() {
-        return serviceWatchService.getList().then(function(res) {
-          var i, j, len, ref, rows, str;
-          vm.detailInfos = res.data;
-          ref = vm.detailInfos;
-          for (i = j = 0, len = ref.length; j < len; i = ++j) {
-            rows = ref[i];
-            str = Date.parse(new Date()).toString();
-            rows.keepTime = (str - rows.startDate) / 1000;
-            rows.keepDay = Math.floor(rows.keepTime / 86400);
-            rows.keepHour = Math.floor(rows.keepTime % 86400 / 3600);
-            rows.keepMinute = Math.floor(rows.keepTime % 86400 % 3600 / 60);
-          }
-          return angular.forEach(vm.detailInfos, function(item) {
-            var parameter;
-            if (item.jobName === 'ERMS导入服务') {
-              serviceWatchService.getErmsMissionList().then(function(res) {
-                if (res.aipPackageCount === 0 || !res.aipPackageCount) {
-                  return item.progress = 0;
-                } else {
-                  return item.progress = (res.importErmsCount / res.aipPackageCount) * 100;
-                }
-              });
-            } else if (item.jobName !== 'ERMS导入服务') {
-              if (item.jobName === 'AIP封装') {
-                parameter = {
-                  batchStatus: 4
-                };
-              } else if (item.jobName === 'AIU封装') {
-                parameter = {
-                  batchStatus: 0
-                };
-              } else if (item.jobName === 'SIP封装') {
-                parameter = {
-                  batchStatus: 2
-                };
-              }
-              return batchService.getGridData(parameter).then(function(res) {
-                if (res.content[0]) {
-                  if (res.content[0].batchStatus === 4) {
-                    if (res.content[0].aipCount === 0 || !res.content[0].aipCount) {
-                      item.progress = 0;
-                    } else {
-                      item.progress = (res.content[0].aipCount / res.content[0].aiu2sipSuccessCount) * 100;
-                    }
-                  }
-                  if (res.content[0].batchStatus === 0) {
-                    if (res.content[0].packageCount === 0 || !res.content[0].packageCount) {
-                      item.progress = 0;
-                    } else {
-                      item.progress = (res.content[0].aiuCount / res.content[0].packageCount) * 100;
-                    }
-                  }
-                  if (res.content[0].batchStatus === 2) {
-                    if (res.content[0].aiuCount === 0 || !res.content[0].aiuCount) {
-                      return item.progress = 0;
-                    } else {
-                      return item.progress = (res.content[0].aiu2sipSuccessCount / res.content[0].aiuCount) * 100;
-                    }
-                  }
-                } else {
-                  return item.progress = 0;
-                }
-              }, function(res) {});
-            }
-          });
-        }, function(res) {});
-      };
       getOverAll = function() {
         return statisticsService.getOverAll().then(function(res) {
           return vm.overAllInfo = res;
@@ -98,20 +25,26 @@
       getSystemLists = function() {
         vm.loading = true;
         return connectMapService.getSystemLists().then(function(res) {
-          var i, j, len, results, rows;
-          vm.systemLength = res.length;
-          results = [];
-          for (i = j = 0, len = res.length; j < len; i = ++j) {
-            rows = res[i];
-            $scope.data.children.push({
-              name: rows,
-              type: 'unit'
+          var _resList, i, j, len, rows;
+          _resList = [];
+          for (i in res) {
+            _resList.push({
+              name: i,
+              dataBase: res[i]
             });
-            results.push(angular.forEach($scope.data.children, function(item) {
-              return getSystemInfo(item.name);
-            }));
           }
-          return results;
+          vm.systemLength = _resList.length;
+          for (i = j = 0, len = _resList.length; j < len; i = ++j) {
+            rows = _resList[i];
+            $scope.data.children.push({
+              name: rows.name,
+              type: 'unit',
+              dataBase: rows.dataBase
+            });
+          }
+          return angular.forEach($scope.data.children, function(item) {
+            return getSystemInfo(item.name);
+          });
         }, function(res) {});
       };
       getSystemInfo = function(systemName) {
@@ -129,17 +62,25 @@
             if (rows.name === systemName) {
               results.push(rows.children = [
                 {
-                  name: name,
-                  type: 'item'
+                  name: '系统数据库类型:' + rows.dataBase,
+                  type: 'item',
+                  detailType: 'dataBase',
+                  detailInfo: res
                 }, {
-                  name: '连接状态:正常',
-                  type: 'item'
+                  name: '最新更新时间:',
+                  type: 'item',
+                  detailType: 'updateTime',
+                  detailInfo: res
                 }, {
-                  name: '已归档数据量:' + res.recordCount + '件,' + res.recordCapacity + 'GB',
-                  type: 'item'
+                  name: '档数据量:' + res.recordCount + '件,' + res.recordCapacity + 'GB',
+                  type: 'item',
+                  detailType: 'recordNum',
+                  detailInfo: res
                 }, {
                   name: '当前JOB:查看',
-                  type: 'item'
+                  type: 'item',
+                  detailType: 'job',
+                  detailInfo: res
                 }
               ]);
             } else {
@@ -150,25 +91,34 @@
         }, function(res) {});
       };
       listenEvent = function() {
-        $scope.$on('node:mouseover', function(e, d) {
+        $scope.$on('node:clickItem', function(e, d) {
           return $timeout(function() {
-            if (d.type === 'item' && d.name === '当前JOB:查看') {
-              vm.tiptool.show = true;
-              vm.tiptool.x = d.x;
-              vm.tiptool.y = d.y;
-              getList();
-              return refreshList = $interval(function() {
-                return getList();
-              }, 5000, 0);
+            var _enableShow, i, j, len, ref, rows;
+            _enableShow = true;
+            ref = vm.detailLists;
+            for (i = j = 0, len = ref.length; j < len; i = ++j) {
+              rows = ref[i];
+              if (rows.name === d.parent.name && rows.type === d.detailType) {
+                _enableShow = false;
+                break;
+              } else {
+                _enableShow = true;
+              }
+            }
+            if (_enableShow) {
+              vm.detailLists.push({
+                x: d.x - 30,
+                y: d.y + 720,
+                name: d.parent.name,
+                type: d.detailType,
+                info: d.detailInfo
+              });
             }
           });
         });
-        $scope.$on('node:mouseout', function(e, d) {
+        return $scope.$on('node:update', function(e, data) {
           return $timeout(function() {
-            vm.tiptool.show = false;
-            vm.tiptool.x = d.x;
-            vm.tiptool.y = d.y;
-            return $interval.cancel(refreshList);
+            vm.detailLists = [];
           });
         });
       };

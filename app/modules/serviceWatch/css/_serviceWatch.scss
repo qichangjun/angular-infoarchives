@@ -61,16 +61,23 @@
 .table>tbody+tbody {
   border-top: none;
 }
+.table>thead>tr>th{
+  border-bottom: none;
+}
 .service--watch--table{
+  margin-bottom: 0;
   .table__th--tr{
     background: #4F93C5;
     color: #fff;
     height: 40px;
     th{
       font-weight: normal;
-      padding: 11px 5px;
+      padding: 10px 5px;
       &:hover{
         background: transparent;
+      }
+      &:first-child{
+        padding-left: 20px !important;
       }
     }
   }
@@ -89,6 +96,9 @@
     td{
       padding: 8px 5px !important;
       line-height: normal !important;
+      &:first-child{
+        padding-left: 20px !important;
+      }
     }
   }
 }
@@ -183,4 +193,6 @@
 .service--watch--lost--scroll{
   //width: 100%;
   overflow: auto;
+  border: 1px solid #dddddd;
+  margin-bottom: 20px;
 }

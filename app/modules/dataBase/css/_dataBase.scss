@@ -23,10 +23,11 @@
   //min-width: 890px;
   height: 100%;
   //padding: 0 15px;
+  //overflow-x: auto;
   .data--filtering--wrapper{
     margin: 15px 0;
     //min-width: 850px;
-    min-width: 970px;
+    //min-width: 1000px;
     padding: 0 15px;
     .data--filtering--head{
       font-size: 16px;
@@ -38,6 +39,7 @@
     }
     .filter--properties--box{
       display: table;
+      min-width: 970px;
       width: 100%;
       background: #f5f5f5;
       //border-radius: 5px;
@@ -53,7 +55,8 @@
         color: #797979;
         &.time--frame{
           float: right;
-          width: 338px;
+          width: 411px;
+          text-align: right;
           height: 100%;
           //min-width: 288px;
           margin-right: 0;
@@ -215,6 +218,8 @@
   width: 235px;
   background: #f5f5f5;
   box-shadow: none;
+  overflow-x: hidden;
+  overflow-y: auto;
   .header{
     //height: 55px;
     min-height: 0;
@@ -246,6 +251,10 @@
       /*border-left: 1px solid #E5E5E5;*/
       border-right: 1px solid #d7d7d7;
       width: 235px;
+      .batch--select--data--source--box{
+        font-size: 16px;
+        padding: 22px 0 20px 25px;
+      }
       .each--column--box {
         //border: 1px solid #f5f5f5;
         border-left: 5px solid transparent;
@@ -425,7 +434,7 @@
       opacity: 1;
       position: absolute;
       right: 10px;
-      top:18px;
+      top: 21px;
     }
   }
   .data--base--right--sidebar--info--content{
@@ -484,6 +493,7 @@
   .check--data--content{
     margin: 0 16px 26px 16px;
     margin-top: -10px;
+    border-bottom: 1px solid #dbe1e4;
     overflow-y: hidden;
     .search--wrap{
       display: table;
@@ -493,6 +503,8 @@
       border: 1px solid #dbe1e4;
       .time--frame-box{
         display: inline-block;
+        vertical-align: middle;
+
         .time--frame--title{
           display: inline-block;
           vertical-align: middle;
@@ -511,13 +523,30 @@
       .search--box{
         display: inline-block;
         vertical-align: middle;
-        width: 500px;
+        width: 510px;
         margin-left: 30px;
+        position: relative;
+        &__input{
+          display: inline-block;
+          vertical-align: middle;
+          padding-left: 20px;
+          width: 400px;
+          margin-top: 1px;
+        }
+        .fa-search{
+          position: absolute;
+          top: 11px;
+          left: 5px;
+          color: #91A8C0;
+        }
+        .searct--btn{
+
+        }
       }
     }
     .check--data--grid--wrap{
       border: 1px solid #dbe1e4;
-      //border-bottom: none;
+      border-bottom: none;
       margin: 15px 0 0 0;
       padding-bottom: 5px;
       min-height: 180px;

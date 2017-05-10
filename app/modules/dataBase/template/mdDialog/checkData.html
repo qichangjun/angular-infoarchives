@@ -35,7 +35,9 @@
                     </div>
                 </div>
                 <div class="search--box">
-                    <input type="text" class="form-control " ng-change="vm.getGridData()" ng-model="vm.parameter.name">
+                    <input type="text" class="form-control search--box__input"  ng-model="vm.parameter.name">
+                    <i class="fa fa-search"></i>
+                    <md-button class="green--btn pull-right" ng-click="vm.getGridData()"  translate="MODULES_DATABASE_SEARCH">搜索</md-button>
                 </div>
             </div>
             <div class="check--data--grid--wrap">
@@ -47,7 +49,7 @@
                         <span translate="MODULES_BATCH_PREVIEW">预览</span>
                     </md-button>
                 </div>
-                <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="loading" translate="没有数据">
+                <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="loading" translate="MODULES_BATCH_DELETE_NO_DATA">
                     没有数据
                 </div>
                 <div ng-show="vm.loading == true" class="loading" translate="MODULES_DATABASE_LOADING">

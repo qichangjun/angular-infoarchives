@@ -5,12 +5,13 @@
             md-is-locked-open="true"
             md-whiteframe="4"
     >
-        <div class="select--data--source--box" translate="MODULES_BATCH_SELECT_DATA_SOURCE">
-            选择数据源
-        </div>
+
         <div class="data--base--column--wrapper">
             <ul class="data--base--column--box">
                 <!--<md-subheader class="md-no-sticky"></md-subheader>-->
+                <div class="batch--select--data--source--box" translate="MODULES_BATCH_SELECT_DATA_SOURCE">
+                    选择数据源
+                </div>
                 <li class="each--column--box" ng-repeat="item in vm.dataBases" ng-click="vm.getBaseData(item.id)"  ng-class="{active: vm.parameter.projectId == item.id}">
                     <a>
                         <span class="fa fa-cube" aria-hidden="true"></span>

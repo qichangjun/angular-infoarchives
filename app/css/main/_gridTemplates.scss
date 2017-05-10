@@ -128,7 +128,8 @@ div.ui-grid-cell input.edit-input{
   background: #4f93c5 !important;
 }
 .ui-grid-header{
-  //border-bottom: none;
+  border-bottom: none;
+
 }
 .ui-grid-header-cell .sortable{
   border-right: 1px solid #eeeeee;
@@ -250,4 +251,8 @@ div.ui-grid-cell input.edit-input{
   left: calc(100% - 280px);
   top: -72px;
   height: 0;
+}
+.ui-grid-canvas{
+  padding-top: 0;
+  margin-top: -1px;
 }

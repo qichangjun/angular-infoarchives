@@ -57,8 +57,8 @@
                <md-option ng-repeat="year in vm.yearLists" ng-value="year" >{{year}}</md-option>
                <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_YEAR">所有年度</md-option>
            </md-select>
-           <label ng-show="vm.parameter.year != 'all'" translate="MODULES_STATISTICS_MONTH">月份</label>
-           <md-select ng-model="vm.parameter.month" ng-change="vm.getRecordNum()" ng-show="vm.parameter.year != 'all'">
+           <label translate="MODULES_STATISTICS_MONTH">月份</label>
+           <md-select ng-model="vm.parameter.month" ng-change="vm.getRecordNum()">
                <md-option ng-repeat="monthLists in vm.monthLists" ng-value="monthLists" >{{monthLists}}</md-option>
                <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_MONTH">所有月份</md-option>
            </md-select>
