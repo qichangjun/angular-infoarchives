@@ -169,15 +169,16 @@
             return results;
           })();
           return mdDialogService.initCustomDialog('updateNodeNameController', PAHT_OF_TEMPLATE_MDDIALOG + 'updateNodeName.html?' + window.hsConfig.bust, event, {
-            nodeName: '',
-            brothersName: brothersName
+            nodeName: d.name,
+            brothersName: brothersName,
+            isRepeat: d.isRepeat
           }).then(function(res) {
-            if (res && !commonMethodSerivce.includeInArr(res, brothersName)) {
-              return updateName($scope.nodes, d.code, res);
-            } else if (res && commonMethodSerivce.includeInArr(res, brothersName)) {
-              return mdDialogService.initAlertDialog($translate.instant('MODULES_PROJECTMANAGE_NODE_NAME_CAN_NOT_BE_REPEATED'), '', $translate.instant('MODULES_PROJECTMANAGE_GOT_IT'), e);
+            if (res && !commonMethodSerivce.includeInArr(res.name, brothersName)) {
+              updateName($scope.nodes, d.code, res.name, res.isRepeat);
+            } else if (res && commonMethodSerivce.includeInArr(res.name, brothersName)) {
+              mdDialogService.initAlertDialog($translate.instant('MODULES_PROJECTMANAGE_NODE_NAME_CAN_NOT_BE_REPEATED'), '', $translate.instant('MODULES_PROJECTMANAGE_GOT_IT'), e);
             } else {
-              return mdDialogService.initAlertDialog($translate.instant('MODULES_PROJECTMANAGE_NODE_NAME_CAN_NOT_BE_EMPTY'), '', $translate.instant('MODULES_PROJECTMANAGE_GOT_IT'), e);
+              mdDialogService.initAlertDialog($translate.instant('MODULES_PROJECTMANAGE_NODE_NAME_CAN_NOT_BE_EMPTY'), '', $translate.instant('MODULES_PROJECTMANAGE_GOT_IT'), e);
             }
           }, function(res) {});
         });
@@ -383,15 +384,15 @@
           }
         }
       };
-      updateName = function(node, id, name) {
+      updateName = function(node, id, name, isRepeat) {
         var i, j, len, ref, results, rows;
         if (node.code === id) {
-          $timeout(function() {
+          return $timeout(function() {
             node.name = name;
+            node.isRepeat = isRepeat;
             $scope.$broadcast('update:name', name, id);
           });
-        }
-        if (node.children) {
+        } else if (node.children) {
           ref = node.children;
           results = [];
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
@@ -399,10 +400,11 @@
             if (rows.code === id) {
               results.push($timeout(function() {
                 rows.name = name;
+                rows.isRepeat = isRepeat;
                 $scope.$broadcast('update:name', name, id);
               }));
             } else {
-              results.push(updateName(rows, id, name));
+              results.push(updateName(rows, id, name, isRepeat));
             }
           }
           return results;
@@ -844,9 +846,10 @@
       init();
     }
   ]).controller('updateNodeNameController', [
-    '$scope', '$log', '$stateParams', '$mdDialog', 'nodeName', 'commonMethodSerivce', 'brothersName', 'mdToastService', '$translate', function($scope, $log, $stateParams, $mdDialog, nodeName, commonMethodSerivce, brothersName, mdToastService, $translate) {
+    '$scope', '$log', '$stateParams', '$mdDialog', 'nodeName', 'commonMethodSerivce', 'brothersName', 'mdToastService', '$translate', 'isRepeat', function($scope, $log, $stateParams, $mdDialog, nodeName, commonMethodSerivce, brothersName, mdToastService, $translate, isRepeat) {
       var cancel, init, update, vm;
       vm = this;
+      vm.isRepeat = isRepeat;
       init = function() {
         var i, j, len, rows;
         for (i = j = 0, len = brothersName.length; j < len; i = ++j) {
@@ -863,7 +866,10 @@
       };
       update = function() {
         if (!commonMethodSerivce.includeInArr(vm.nodeName, brothersName)) {
-          return $mdDialog.hide(vm.nodeName);
+          return $mdDialog.hide({
+            name: vm.nodeName,
+            isRepeat: vm.isRepeat
+          });
         } else {
           return mdToastService.showToast($translate.instant('MODULES_PROJECTMANAGE_NODE_NAME_CAN_NOT_BE_REPEATED'));
         }

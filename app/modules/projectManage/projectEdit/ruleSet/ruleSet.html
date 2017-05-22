@@ -1,6 +1,6 @@
 <div class="anim-slide-left data--module--new--prompt--wrap">
     <div class="data--module--new--prompt--box">
-        <md-toolbar ng-show="vm.versionList.length > 0" class="md-menu-toolbar edit--project--manage--head-box">
+        <div ng-show="vm.versionList.length > 0" class="md-menu-toolbar edit--project--manage--head-box">
             <div class="md-toolbar-tools">
                 <div class="md-icon-button edit--project--manage--head--btn" >
                     <a ui-sref="infoArchives.projectManage" class="fa fa-angle-left"></a>
@@ -14,10 +14,10 @@
                 <!--保存-->
                 <!--</md-button>-->
             </div>
-        </md-toolbar>
+        </div>
         <div ng-show="!vm.afterLoad" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
-        <div ng-show="vm.afterLoad" >
-            <div ng-show="vm.versionList.length == 0">
+        <div ng-show="vm.afterLoad" class="data--module--new--prompt--box">
+            <div ng-show="vm.versionList.length == 0" class="new--prompt--box--wrap">
                 <div class="new--prompt--box">
                     <div class="new--prompt--box__head">
                         <img src="images/edit--project--manage--modal--new.png" alt=""/>
@@ -35,7 +35,7 @@
                     </md-button>
                 </div>
             </div>
-            <div ng-show="vm.versionList.length != 0" class="edit--project--manage--wrapper">
+            <div ng-show="vm.versionList.length != 0"  class="edit--project--manage--wrapper">
                 <div class="base--info--content rule--set">
                     <section layout="row"  layout-align="start center" layout-wrap class="edit--project--row--box">
                         <span class="edit--project--row" translate="MODULES_PROJECTMANAGE_ARCHIVE_POLICY">归档策略</span>
@@ -195,8 +195,17 @@
                                 <div class="attribute--row--box select">
                                     <span class="attribute--row--box__title blue--font" translate="MODULES_PROJECTMANAGE_EXAMPLE">示例</span>
                                     <div class="attribute--row--box__value blue--font">
-                                        <span></span>
-                                        YW001-J010-001-2017-0001
+                                        <span ng-repeat="rule in vm.ruleProperty track by $index" >
+                                             <span ng-show="rule.fieldType==0">
+                                                {{rule.attrType=='string' ? vm.str.substr($index * 5,5) : rule.attrType=='int' ? '1234' : rule.attrType=='boolean' ? 'true' : 20170611 }}
+                                             </span>
+                                             <span  ng-show="rule.fieldType==1">
+                                                {{rule.fieldValue}}
+                                             </span>
+                                             <span  ng-show="rule.fieldType==2">
+                                                {{vm.serialNum.substr(0,rule.fieldSize)}}
+                                             </span>
+                                        </span>
                                     </div>
                                 </div>
                                 <div class="attribute--row--box select">

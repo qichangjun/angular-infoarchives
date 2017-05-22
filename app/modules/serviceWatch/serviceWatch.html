@@ -60,13 +60,13 @@
                         </div>
                         <div ng-show="data.ermsLists.length > 0" ng-repeat="ermsLists in data.ermsLists" class="mission--list--spread--box">
                             <span class="attr--box">ID：{{ermsLists.id}}</span>
-                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_STARTUP_TIME">启动次数</span>：{{ermsLists.startTime}}</span>
-                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_LAST_START_TIME">最后一次启动时间</span>：{{ermsLists.startTime | date:'yyyy.MM.dd HH:mm:ss'}}</span>
-                            <span class="attr--box"><span translate="MODULES_SERVICEWATCH_IMPORT_ERMS_DATA_PACKET">导入ERMS数据数量包</span>：{{ermsLists.importErmsCount}}</span>
-                                <span class="attr--box"><span translate="MODULES_SERVICEWATCH_PERCENTAGE_OF_TOTAL">占总量百分比</span>：
-                                    <uib-progressbar ng-show="missionList.aipPackageCount == 0" class="progress-striped active progress--info" type="success" value="(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100"></uib-progressbar><span ng-show="missionList.aipPackageCount == 0">{{(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100}}&nbsp;%</span>
-                                    <uib-progressbar ng-show="missionList.aipPackageCount != 0" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar>&nbsp;<span ng-show="missionList.aipPackageCount != 0">0&nbsp;%</span>
-                                </span>
+                            <span class="attr--box data--count"><span translate="MODULES_SERVICEWATCH_STARTUP_TIME">启动次数</span>：{{ermsLists.startTime}}</span>
+                            <span class="attr--box date"><span translate="MODULES_SERVICEWATCH_LAST_START_TIME">最后一次启动时间</span>：{{ermsLists.lastStartDate | date:'yyyy.MM.dd HH:mm:ss'}}</span>
+                            <span class="attr--box conversion--count"><span translate="MODULES_SERVICEWATCH_IMPORT_ERMS_DATA_PACKET">导入ERMS数据数量包</span>：{{ermsLists.importErmsCount}}</span>
+                            <span class="attr--box percentage--count"><span translate="MODULES_SERVICEWATCH_PERCENTAGE_OF_TOTAL">占总量百分比</span>：
+                                <uib-progressbar ng-show="missionList.aipPackageCount != 0" class="progress-striped active progress--info" type="success" value="(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100"></uib-progressbar><span ng-show="missionList.aipPackageCount != 0">&nbsp;{{(ermsLists.importErmsCount/ermsLists.aipPackageCount)*100}}&nbsp;%</span>
+                                <uib-progressbar ng-show="missionList.aipPackageCount == 0" class="progress-striped active progress--info" type="success" value="0"></uib-progressbar>&nbsp;<span ng-show="missionList.aipPackageCount == 0">0&nbsp;%</span>
+                            </span>
                         </div>
                         <div ng-show="data.missionList.length > 0" ng-repeat="missionList in data.missionList" class="mission--list--spread--box">
                             <span class="attr--box">ID：{{missionList.id}}</span>

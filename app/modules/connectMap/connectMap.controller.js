@@ -2,10 +2,11 @@
 (function() {
   'use strict';
   angular.module("myApp").controller("connectMapController", [
-    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', 'hsAuth', 'connectMapService', 'statisticsService', 'serviceWatchService', 'batchService', '$interval', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, hsAuth, connectMapService, statisticsService, serviceWatchService, batchService, $interval) {
-      var getOverAll, getSystemInfo, getSystemLists, init, listenEvent, refreshList, vm;
+    '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', 'hsAuth', 'connectMapService', 'statisticsService', 'serviceWatchService', 'batchService', '$interval', 'commonMethodSerivce', '$filter', '$translate', 'projectManageService', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, hsAuth, connectMapService, statisticsService, serviceWatchService, batchService, $interval, commonMethodSerivce, $filter, $translate, projectManageService) {
+      var getOverAll, getProjectList, getSystemInfo, init, listenEvent, vm;
       vm = this;
-      refreshList = null;
+      vm.completeNum = 0;
+      vm.unitNum = null;
       vm.detailLists = [];
       $scope.data = {
         name: '',
@@ -13,7 +14,7 @@
         children: []
       };
       init = function() {
-        getSystemLists();
+        getProjectList();
         listenEvent();
         return getOverAll();
       };
@@ -22,98 +23,96 @@
           return vm.overAllInfo = res;
         }, function(res) {});
       };
-      getSystemLists = function() {
-        vm.loading = true;
-        return connectMapService.getSystemLists().then(function(res) {
+      getProjectList = function() {
+        return projectManageService.getProjectList().then(function(res) {
           var _resList, i, j, len, rows;
-          _resList = [];
-          for (i in res) {
-            _resList.push({
-              name: i,
-              dataBase: res[i]
-            });
-          }
+          _resList = res;
           vm.systemLength = _resList.length;
           for (i = j = 0, len = _resList.length; j < len; i = ++j) {
             rows = _resList[i];
             $scope.data.children.push({
-              name: rows.name,
+              name: rows.projectName,
               type: 'unit',
-              dataBase: rows.dataBase
+              dataBase: rows.databaseName,
+              id: rows.id
             });
           }
+          vm.unitNum = $scope.data.children.length;
           return angular.forEach($scope.data.children, function(item) {
-            return getSystemInfo(item.name);
+            return getSystemInfo(item.id);
           });
         }, function(res) {});
       };
-      getSystemInfo = function(systemName) {
-        return connectMapService.getSystemInfo(systemName).then(function(res) {
-          var i, j, len, name, ref, results, rows;
-          if (res.extractionMethod === 0) {
-            name = '对接方式:ETL数据抽取';
-          } else {
-            name = '对接方式:AIU写入接口';
-          }
+      getSystemInfo = function(id) {
+        return connectMapService.getSystemInfo(id).then(function(res) {
+          var i, j, len, ref, rows;
           ref = $scope.data.children;
-          results = [];
           for (i = j = 0, len = ref.length; j < len; i = ++j) {
             rows = ref[i];
-            if (rows.name === systemName) {
-              results.push(rows.children = [
+            if (rows.id === id) {
+              rows.children = [
                 {
-                  name: '系统数据库类型:' + rows.dataBase,
+                  name: $translate.instant("PROJECT_CONNECTMAP_SYSTEM_DATABASE_TYPE") + '：' + rows.dataBase,
                   type: 'item',
                   detailType: 'dataBase',
                   detailInfo: res
                 }, {
-                  name: '最新更新时间:',
+                  name: $translate.instant("PROJECT_CONNECTMAP_LATEST_UPDATE_TIME") + '：' + $filter('date')(res.latestUpdateDate, 'yyyy.MM.dd'),
                   type: 'item',
                   detailType: 'updateTime',
                   detailInfo: res
                 }, {
-                  name: '档数据量:' + res.recordCount + '件,' + res.recordCapacity + 'GB',
+                  name: $translate.instant("MODULES_DATABASE_ARCHIVED_DATA") + '：' + res.recordCount + '，' + res.recordCapacity + 'GB',
                   type: 'item',
                   detailType: 'recordNum',
                   detailInfo: res
-                }, {
-                  name: '当前JOB:查看',
-                  type: 'item',
-                  detailType: 'job',
-                  detailInfo: res
                 }
-              ]);
-            } else {
-              results.push(void 0);
+              ];
             }
           }
-          return results;
+          return vm.completeNum++;
         }, function(res) {});
       };
       listenEvent = function() {
         $scope.$on('node:clickItem', function(e, d) {
           return $timeout(function() {
-            var _enableShow, i, j, len, ref, rows;
-            _enableShow = true;
-            ref = vm.detailLists;
-            for (i = j = 0, len = ref.length; j < len; i = ++j) {
-              rows = ref[i];
-              if (rows.name === d.parent.name && rows.type === d.detailType) {
-                _enableShow = false;
-                break;
-              } else {
-                _enableShow = true;
+            var _height, _nameLists, _typeLists, item;
+            console.log(commonMethodSerivce.stringGetLength(d.name));
+            _nameLists = (function() {
+              var j, len, ref, results;
+              ref = vm.detailLists;
+              results = [];
+              for (j = 0, len = ref.length; j < len; j++) {
+                item = ref[j];
+                results.push(item.name);
               }
+              return results;
+            })();
+            _typeLists = (function() {
+              var j, len, ref, results;
+              ref = vm.detailLists;
+              results = [];
+              for (j = 0, len = ref.length; j < len; j++) {
+                item = ref[j];
+                results.push(item.type);
+              }
+              return results;
+            })();
+            console.log(d);
+            if (d.detailType === 'dataBase' || d.detailType === 'recordNum') {
+              _height = 43.5;
+            } else {
+              _height = 38;
             }
-            if (_enableShow) {
-              vm.detailLists.push({
-                x: d.x - 30,
-                y: d.y + 720,
+            vm.detailLists = [
+              {
+                x: d.x + 203 - _height,
+                y: d.y + commonMethodSerivce.stringGetLength(d.name) * 9.5 + 450,
                 name: d.parent.name,
                 type: d.detailType,
                 info: d.detailInfo
-              });
-            }
+              }
+            ];
           });
         });
         return $scope.$on('node:update', function(e, data) {

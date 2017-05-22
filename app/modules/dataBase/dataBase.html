@@ -47,9 +47,9 @@
         <div class="data--info--box">
             <div class="data--info--box_head" translate="MODULES_DATABASE_DATA_FILTERING">数据过滤</div>
             <div class="select--attr--box" >
-                <label class="title" translate="MODULES_DATABASE_DATA_SOURCES" ng-if="vm.parameter.chartType == 'source'"> 数据来源 </label>
+                <label class="title" translate="MODULES_DATABASE_DOCKING_SYSTEM" ng-if="vm.parameter.chartType == 'source'"> 对接系统 </label>
                 <label class="title" translate="MODULES_DATABASE_COMPANY" ng-if="vm.parameter.chartType == 'unit'"> 单位 </label>
-                <div class="select--value">
+                <div class="select--value" ng-if="vm.parameter.chartType == 'source'">
                     <md-autocomplete
                             md-selected-item="vm.parameter.unit"
                             md-search-text="vm.searchUnitText"
@@ -58,7 +58,25 @@
                             md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                             md-item-text="unitLists.name"
                             md-min-length="0"
-                            placeholder="{{'MODULES_STATISTICS_ALL_UNITS'|translate}}">
+                            placeholder="{{'MODULES_DATABASE_SELECT_DOCKING_SYSTEM'|translate}}">
+                        <md-item-template>
+                            <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
+                        </md-item-template>
+                        <md-not-found>
+                            <span translate="MODULES_DATABASE_NOT_FOUND">没有找到与</span> "{{vm.searchUnitText}}" <span translate="MODULES_DATABASE_MATCHED">匹配的</span>
+                        </md-not-found>
+                    </md-autocomplete>
+                </div>
+                <div class="select--value" ng-if="vm.parameter.chartType == 'unit'">
+                    <md-autocomplete
+                            md-selected-item="vm.parameter.unit"
+                            md-search-text="vm.searchUnitText"
+                            md-no-cache="true"
+                            md-selected-item-change="vm.parameter.item = null;vm.filterData()"
+                            md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
+                            md-item-text="unitLists.name"
+                            md-min-length="0"
+                            placeholder="{{'MODULES_DATABASE_SELECT_UNIT'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
                         </md-item-template>
@@ -85,7 +103,7 @@
                             md-items="items in vm.querySearch(vm.searchItemText,vm.itemLists)"
                             md-item-text="items.name"
                             md-min-length="0"
-                            placeholder="{{'MODULES_DATABASE_PLEASE_SELECT_UNIT'|translate}}">
+                            placeholder="{{'MODULES_DATABASE_SELECT_BUSINESS_MATTERS'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchItemText" md-highlight-flags="^i">{{items.name}}</span>
                         </md-item-template>
@@ -101,7 +119,7 @@
         </div>
     </div>
     <div class="data--base--svg--wrap">
-        <rzslider style="height: 200px;position:absolute"
+        <rzslider class="bigger--btn"
                   rz-slider-model="vm.slider.value"
                   rz-slider-options="vm.slider.options"></rzslider>
         <div  ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">

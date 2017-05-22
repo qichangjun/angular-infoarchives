@@ -94,10 +94,10 @@
     display: inline-block;
     font-size: 12px;
     border-radius: 4px;
-    padding: 15px 10px;
-    background: #333333;
+    padding: 15px 30px 15px 15px;
+    background: #000000;
     color: #ffffff;
-    opacity: .95;
+    opacity: .7;
     word-break: keep-all;
     position:relative;
     th{
@@ -107,17 +107,41 @@
     th td{
       word-break: keep-all;
     }
+    .attr--row{
+      padding: 3px;
+      white-space: nowrap;
+    }
+  }
+  .remove--btn{
+    width: 15px;
+    height: 15px;
+    position: absolute;
+    top: 50%;
+    right: 7px;
+    margin-top: -8px;
+    font-size: 16px;
+    &:hover{
+      opacity: .8;
+    }
   }
   .org--bot{
-    width:0;
-    height:0;
-    font-size:0;
-    border-width:10px;
-    border-style:solid;
-    border-color: transparent #333333 transparent transparent ;
-    overflow:hidden;
-    position:absolute;
-    left:-19px;
-    top:60px;
+    width: 0;
+    height: 0;
+    font-size: 0;
+    border-width: 10px;
+    border-style: solid;
+    border-color: transparent #000000 transparent transparent ;
+    overflow: hidden;
+    position: absolute;
+    left: -19px;
+    top: 40%;
   }
 }
+
+.connectMap-detail{
+  transition: 0.3s linear all; -webkit-transition: 0.3s linear all;
+}
+.connectMap-detail.ng-enter {opacity: 0;}
+.connectMap-detail.ng-enter.ng-enter-active { opacity: 1; }
+.connectMap-detail.ng-leave {opacity: 1;}
+.connectMap-detail.ng-leave.ng-leave-active { opacity: 0;}

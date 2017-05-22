@@ -243,13 +243,13 @@
           name: 'batchCode',
           headerCellFilter: 'translate',
           displayName: 'MODULES_BATCH_BATCH_CODE',
-          minWidth: 220,
+          minWidth: 270,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
-          field: 'id',
-          name: 'id',
+          field: 'businessCode',
+          name: 'projectId',
           headerCellFilter: 'translate',
-          displayName: 'MODULES_BATCH_BUSINESS_SYSTEM_ID',
+          displayName: 'MODULES_PROJECTMANAGE_SERVICE_NUMBER',
           minWidth: 260,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
@@ -262,14 +262,14 @@
         }, {
           name: 'packageAiuStartDate',
           headerCellFilter: 'translate',
-          displayName: 'MODULES_BATCH_PACKAGE_AIU_START_DATE',
-          minWidth: 160,
+          displayName: 'MODULES_BATCH_CONVERSION_START_TIME',
+          minWidth: 260,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-startDate.html'
         }, {
           name: 'packageAipEndDate',
           headerCellFilter: 'translate',
-          displayName: 'MODULES_BATCH_PACKAGE_AIU_END_DATE',
-          minWidth: 160,
+          displayName: 'MODULES_BATCH_CONVERSION_END_TIME',
+          minWidth: 260,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-endDate.html'
         }, {
           field: 'packageCount',
@@ -282,15 +282,16 @@
           field: 'aipCount',
           name: 'aipCount',
           headerCellFilter: 'translate',
-          displayName: 'MODULES_BATCH_AIP_COUNT',
-          minWidth: 100,
+          displayName: 'MODULES_BATCH_PACKET_CONVERSION_SUCCESSES',
+          minWidth: 160,
           cellTemplate: hsTpl.hsCellTemplate
         }, {
           name: 'operation',
           enableSorting: false,
+          pinnedRight: true,
           headerCellFilter: 'translate',
-          displayName: '',
-          minWidth: 100,
+          displayName: 'MODULES_SERVICEWATCH_OPERATION',
+          width: 75,
           cellTemplate: 'modules/batch/template/ui-grid-template/grid-dataError-operation.html'
         }
       ];

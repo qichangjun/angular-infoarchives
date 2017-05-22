@@ -1,7 +1,6 @@
 <div  class="hs-ui-grid-cell-contents hs-ui-grid-cell add-background-colors clearfix" >
-    <div class="hidd">
-        <span style="margin-right:20px; "  class="glyphicon glyphicon-eye-open" ng-click="grid.appScope.vm.checkDetail(row.entity.id,$event)"></span>
-        <span  ng-if="row.entity.batchStatus == 5" class="glyphicon glyphicon-tasks" ng-click="grid.appScope.vm.checkDetailData(row.entity,$event)"></span>
+    <div ng-show="row.entity.isHover">
+        <span style="margin-right:15px; "  class="glyphicon glyphicon-eye-open" ng-click="grid.appScope.vm.checkDetail(row.entity.id,$event)"></span><span  ng-if="row.entity.batchStatus == 5" class="glyphicon glyphicon-tasks" ng-click="grid.appScope.vm.checkDetailData(row.entity,$event)"></span>
     </div>
 </div>
 <style>

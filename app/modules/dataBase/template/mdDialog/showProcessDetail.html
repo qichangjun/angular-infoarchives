@@ -5,7 +5,7 @@
           ng-submit="newProject.$valid?vm.newProject():vm.newProject.submit=true"
     >
         <md-toolbar class="md-menu-toolbar">
-            <div class="md-toolbar-tools">
+            <div class="md-toolbar-tools ">
                 <div class="preview--template--form--head">
                     <img src="images/preview--node--icon.png" alt=""/>
                     <div class="title--box">
@@ -29,7 +29,6 @@
                             <div class="attr-item">
                                 <div >
                                     <span><span translate="MODULES_DATABASE_NODE_NAME">节点名称</span> : {{vm.entity.name}}</span>
-                                    <span>{{attr.value[0]}}</span>
                                 </div>
                             </div>
                             <div class="attr-item">
@@ -53,11 +52,11 @@
                             <div class="panel-body show--results--body" >
                                 <div >
                                     <div class="attr-item" ng-repeat="attrList in blockList.property">
-                                        <span>{{attrList.name}} : {{attrList.content}}</span>
+                                        <span>{{attrList.attrNameZh}} : {{attrList.content}}</span>
                                     </div>
                                     <table class="preview--template--form--modal__table">
                                         <tbody>
-                                        <tr ng-repeat="fileValue in blockList.file">
+                                        <tr ng-repeat="fileValue in blockList.file" ng-show="fileValue.name">
                                             <td><img src="images/doc.png" alt=""/></td>
                                             <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : <a
                                                     href="{{fileValue.url}}">{{fileValue.name}}</a></td>

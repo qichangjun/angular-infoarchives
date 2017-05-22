@@ -116,7 +116,7 @@ div.ui-grid-cell input.edit-input{
 .ui-grid-render-container-body{
   .ui-grid-viewport[role="rowgroup"]{
     overflow-x: auto !important;
-    overflow-y: auto !important;
+    //overflow-y: auto !important;
   }
 }
 
@@ -255,4 +255,10 @@ div.ui-grid-cell input.edit-input{
 .ui-grid-canvas{
   padding-top: 0;
   margin-top: -1px;
+}
+.ui-grid-pinned-container.ui-grid-pinned-container-right .ui-grid-cell:first-child{
+  border-left: none;
+}
+.ui-grid-pinned-container.ui-grid-pinned-container-right .ui-grid-header-cell:first-child{
+  border-left: none;
 }

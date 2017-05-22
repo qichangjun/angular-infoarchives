@@ -35,7 +35,7 @@
                                     <div ng-show="attr.attrType=='file'">
                                         <table class="preview--template--form--modal__table">
                                             <tbody>
-                                                <tr ng-repeat="fileValue in attr.value[0] track by $index">
+                                                <tr ng-repeat="fileValue in attr.value track by $index" >
                                                     <td><img src="images/doc.png" alt=""/></td>
                                                     <td><span translate="MODULES_DATABASE_FILE_NAME">文件名</span> : <a
                                                             href="{{fileValue.url}}">{{fileValue.name}}</a></td>
