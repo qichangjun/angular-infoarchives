@@ -11,6 +11,18 @@
       i = Math.floor(Math.log(bytes) / Math.log(k));
       return parseInt(bytes / Math.pow(k, i)) + ' ' + sizes[i];
     };
+  }).filter('formatType', function() {
+    return function(url) {
+      if (url) {
+        if (url.indexOf('/') !== -1) {
+          url = url.split('/');
+          url = url[url.length - 1];
+        }
+        url = url.split('.');
+        url = url[url.length - 1];
+        return url;
+      }
+    };
   });
 
 }).call(this);

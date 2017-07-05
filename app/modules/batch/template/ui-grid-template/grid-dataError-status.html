@@ -1,9 +1,14 @@
 <div  class="hs-ui-grid-cell-contents hs-ui-grid-cell add-background-colors clearfix" >
     <div class="batch--ui--grid--icon--box" >
-        <span  style="color:green;" ng-if="row.entity.batchStatus == 5" class="fa fa-check-circle-o batch--ui--grid--icon"></span>
-        <span  style="color:#3a87ad;" ng-if="row.entity.batchStatus != 5 && row.entity.batchStatus != 6" class="glyphicon glyphicon-cog batch--ui--grid--icon"></span>
-
-        <span  style="color:#FF9900;" ng-if="row.entity.batchStatus == 6" class="fa fa-exclamation-triangle batch--ui--grid--icon"></span>
+        <span  style="color:green;"    ng-if="row.entity.batchStatus == 5" class="fa fa-check-circle-o batch--ui--grid--icon">
+            <md-tooltip md-direction="bottom">{{'MODULES_SERVICEWATCH_NORMAL_OPERATION'|translate}}</md-tooltip>
+        </span>
+        <span  style="color:#3a87ad;"  ng-if="row.entity.batchStatus != 5 && row.entity.batchStatus != 6" class="glyphicon glyphicon-cog batch--ui--grid--icon">
+            <md-tooltip md-direction="bottom">{{'MODULES_BATCH_TRANSFORMATION'|translate}}</md-tooltip>
+        </span>
+        <span  style="color:#FF9900;"   ng-if="row.entity.batchStatus == 6" class="fa fa-exclamation-triangle batch--ui--grid--icon">
+            <md-tooltip md-direction="bottom">{{'MODULES_BATCH_ABNORMAL'|translate}}</md-tooltip>
+        </span>
     </div>
 
 </div>

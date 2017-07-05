@@ -8,16 +8,21 @@
 
         <md-toolbar class="md-theme-indigo header">
             <div class="md-toolbar-tools">
-                <img class="header_logo" src="images/logo.png" alt=""/>
+                <img class="header_logo" src="images/logo--icon.png" alt=""/>
             </div>
         </md-toolbar>
         <div class="info--archive--sidebar--content">
             <!--<div class="md-toolbar-tools header&#45;&#45;bottom&#45;&#45;version"> Version 1.0 Bild 10032</div>-->
             <md-content layout-padding class="sidebar--column--wrapper">
                 <md-list flex>
-                    <md-subheader class="md-no-sticky separate--column--header" ><span translate="MODULES_MAIN_STATE">状态</span></md-subheader>
-                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.state" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
-
+                    <md-subheader class="md-no-sticky separate--column--header"
+                        has-permission
+                        permission="'status'"
+                    ><span translate="MODULES_MAIN_STATE">状态</span></md-subheader>
+                    <md-list-item
+                        has-permission
+                        permission = "item.permission"
+                        class="md-1-line each--column--box" ng-repeat="item in vm.navList.state" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
                         <div class="md-list-item-text each--column--box__text" layout="column" >
                              <span>
                                 <span class="{{item.img}} item--img" aria-hidden="true"></span>
@@ -26,8 +31,14 @@
                         </div>
                     </md-list-item>
 
-                    <md-subheader class="md-no-sticky separate--column--header"><span  translate="MODULES_MAIN_ARCHIVED_ITEMS">归档项目</span></md-subheader>
-                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.fileItem" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url || item.childRoute.indexOf(vm.currentsState) != -1} ">
+                    <md-subheader class="md-no-sticky separate--column--header"
+                                  has-permission
+                                  permission = "'projectManage'"
+                    ><span  translate="MODULES_MAIN_ARCHIVED_ITEMS">归档项目</span></md-subheader>
+                    <md-list-item
+                            has-permission
+                            permission = "item.permission"
+                            class="md-1-line each--column--box" ng-repeat="item in vm.navList.fileItem" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url || item.childRoute.indexOf(vm.currentsState) != -1} ">
                         <div class="md-list-item-text each--column--box__text" layout="column">
                     <span>
                         <span class="{{item.img}} item--img" aria-hidden="true"></span>
@@ -35,9 +46,14 @@
                     </span>
                         </div>
                     </md-list-item>
-
-                    <md-subheader class="md-no-sticky separate--column--header" ><span translate="MODULES_MAIN_DATA_MANAGEMENT">数据管理</span></md-subheader>
-                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.data" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+                    <md-subheader class="md-no-sticky separate--column--header"
+                                  has-permission
+                                  permission="'dataManage'"
+                    ><span translate="MODULES_MAIN_DATA_MANAGEMENT">数据管理</span></md-subheader>
+                    <md-list-item
+                            has-permission
+                            permission = "item.permission"
+                            class="md-1-line each--column--box" ng-repeat="item in vm.navList.data" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
                         <div class="md-list-item-text each--column--box__text" layout="column">
                             <span>
                                 <span class="{{item.img}} item--img" aria-hidden="true"></span>
@@ -46,12 +62,40 @@
                         </div>
                     </md-list-item>
 
-                    <md-subheader class="md-no-sticky separate--column--header"><span  translate="MODULES_MAIN_OTHER">其他</span></md-subheader>
-                    <md-list-item class="md-1-line each--column--box" ng-repeat="item in vm.navList.other" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
+                    <md-subheader class="md-no-sticky separate--column--header"
+                                  has-permission
+                                  permission="'other'"
+                    ><span  translate="MODULES_MAIN_OTHER">其他</span></md-subheader>
+                    <md-list-item
+                            has-permission
+                            permission = "item.permission"
+                            class="md-1-line each--column--box" ng-repeat="item in vm.navList.other" ng-click="vm.changeRoute(item.url)"  ng-class="{active: vm.currentsState == item.url}">
                         <div class="md-list-item-text each--column--box__text" layout="column">
                             <span>
                                 <span class="{{item.img}} item--img" aria-hidden="true"></span>
                                 <span translate="{{item.title}}"></span>
+                            </span>
+                        </div>
+                    </md-list-item>
+                    <md-list-item
+                            has-permission
+                            permission = "'userManage'"
+                            class="md-1-line each--column--box" ng-click="vm.gotoAdmin('userManage')" >
+                        <div class="md-list-item-text each--column--box__text" layout="column">
+                            <span>
+                                <span class="fa fa-user item--img" aria-hidden="true"></span>
+                                <span translate="SIDE_BAR_USER_MANAGE"></span>
+                            </span>
+                        </div>
+                    </md-list-item>
+                    <md-list-item
+                            has-permission
+                            permission = "'logManage'"
+                            class="md-1-line each--column--box" ng-click="vm.gotoAdmin('log')" >
+                        <div class="md-list-item-text each--column--box__text" layout="column">
+                            <span>
+                                <span class="fa fa-file-text-o item--img" aria-hidden="true"></span>
+                                <span translate="SIDE_BAR_LOG_MANAGE"></span>
                             </span>
                         </div>
                     </md-list-item>
@@ -61,23 +105,86 @@
 </md-sidenav>
     <div class="info--archive--right--content--wrapper">
         <div class="top--head--box">
+            <div class="pull-left top--head__company--title">
+                <div class="title">杭州市电子数据归档系统</div>
+                <div class="title">Electronic Data Archive System</div>
+            </div>
             <div layout="row" class="admin--info">
+                <md-menu-bar class="unread--message">
+                    <md-menu>
+                        <a ng-click="$mdMenu.open()" class="admin--info__link">
+                            <span class="fa fa-bell"></span>
+                            <span ng-show="vm.messageUnReadNum > 0" class="fa fa-circle unread--message--text-danger"></span>
+                            <!--<span class="caret"></span>-->
+                        </a>
+                        <md-menu-content class="unread--message--wrap">
+                            <md-menu-item class="md-indent">
+                                <div class="unread--message--head--box clearfix">
+                                    <span class="unread--message--count">
+                                        <span translate="MODULES_MAIN_YOU_HAVE">您有</span><span class="text-danger">{{vm.messageUnReadNum}}</span><span translate="MODULES_MAIN_ONE_UNREAD_MESSAGE">条未读消息</span>
+                                    </span>
+                                    <a ng-mouseup="vm.markMessageStatus();$event.stopPropagation()" class="btn btn-success  pull-right all--read--btn" translate="MODULES_MAIN_ALL_READ">
+                                        全部已读
+                                    </a>
+                                </div>
+                            </md-menu-item>
+                            <div ng-show="messageLists.length >0" class="no--message--box">
+                                <i class="fa fa-inbox no--message--box__icon" ></i>
+                                <h4 class="no--message--box__prompt" translate="MODULES_MAIN_NO_NEW_MESSAGES">没有新的消息</h4>
+                            </div>
+                            <div class="unread--message--content--wrap">
+                                <md-menu-item  class="md-indent unread--message--content--box" ng-repeat="messageLists in vm.messageLists">
+                                    <div ng-class="{0: 'unRead', 1: 'isReaded'}[messageLists.status]" class="singer--message--box">
+                                        <div class="singer--message--title--box">
+                                            <h5 class="title">{{messageLists.name}}</h5>
+                                            <span>{{messageLists.sentDate | date:'yyyy.MM.dd HH:mm:ss' }}</span>
+                                            <a class="drop--group"
+                                               ng-mouseup="messageLists.display=!messageLists.display;vm.markMessageStatus(messageLists);$event.stopPropagation()">
+                                            <span class="btn--icon"
+                                                  ng-class="{'fa fa-caret-right': !messageLists.display,'fa fa-caret-down': messageLists.display}">
+                                            </span>
+                                            </a>
+                                        </div>
+                                        <div ng-show="messageLists.display" class="unread--message--drop--down--box" >
+                                            <div class="drop--down__value">
+                                                <span translate="MODULES_MAIN_RECIPIENT">接受人</span>：{{messageLists.acceptBy}}
+                                            </div>
+                                            <div class="drop--down__value">
+                                                <span translate="MODULES_MAIN_SENDER">消息发送人</span>：{{messageLists.sentBy}}
+                                            </div>
+                                            <div class="drop--down__value">{{messageLists.sentComments}}</div>
+                                            <div ng-if="messageLists.docId" class="drop--down__value">
+                                                <a ng-mouseup="vm.downloadErrorDoc(messageLists.docId)" translate="MODULES_MAIN_DOWNLOAD_ATTACHMENTS">下载附件</a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </md-menu-item>
+                            </div>
+                        </md-menu-content>
+                    </md-menu>
+                </md-menu-bar>
                 <md-menu-bar >
                     <md-menu>
                         <a ng-click="$mdMenu.open()" class="admin--info__link">
-                            <img class="navbar--admin--icon" src="images/navbar--admin--icon.jpg" alt=""/>
+                            <img class="navbar--admin--icon" src="{{vm.userImgSrc}}" alt=""/>
+                            <!--<img class="navbar&#45;&#45;admin&#45;&#45;icon" src="images/navbar&#45;&#45;admin&#45;&#45;icon.jpg" alt=""/>-->
                             <span class="caret"></span>
                         </a>
                         <md-menu-content class="navbar--user--info--drop--down--content">
-                            <md-menu-item class="md-indent">
-                                <md-menu >
-                                    <md-button ng-click="$mdMenu.open()" translate="MODULES_MAIN_SWITCH_LANGUAGE">切换语言</md-button>
-                                    <md-menu-content width="3">
-                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>
-                                        <md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>
-                                    </md-menu-content>
+                            <!--<md-menu-item class="md-indent">-->
+                                <!--<md-menu >-->
+                                    <!--<md-button ng-click="$mdMenu.open()" translate="MODULES_MAIN_SWITCH_LANGUAGE">切换语言</md-button>-->
+                                    <!--<md-menu-content width="3">-->
+                                        <!--<md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="cn">中文</md-menu-item>-->
+                                        <!--<md-menu-item type="radio" ng-model="vm.language" ng-click="vm.changeLanguage()" value="en">English</md-menu-item>-->
+                                    <!--</md-menu-content>-->
 
-                                </md-menu>
+                                <!--</md-menu>-->
+                            <!--</md-menu-item>-->
+                            <md-menu-item class="md-indent">
+                                <md-button ng-click="vm.editCurrentUser()" translate="MODULES_USERMANAGE_EDIT_INFORMATION">
+                                    编辑个人信息
+                                </md-button>
                             </md-menu-item>
                             <md-menu-item class="md-indent">
                                 <md-button ng-click="vm.loginOut()" translate="MODULES_MAIN_LOGOUT">
@@ -88,10 +195,25 @@
                     </md-menu>
                 </md-menu-bar>
             </div>
+            <div class="pull-right top--head__company--title top--head__search--box"
+                style="overflow: hidden">
+                <input id="search" type="text"
+                       ng-focus="searchInput = true"
+                       ng-blur="searchInput = false"
+                       ng-class="{true: 'search-active', false: 'search-inactive'}[searchInput]"
+                       class="form-control search--box__input search-input-animation"
+                       placeholder="请输入事项编号、姓名等关键字查询"
+                       ng-model="vm.keywords">
+                <i class="fa fa-search search--icon" ng-click="searchInput = true"></i>
+                <div class="remove--btn"
+                     style="right: -50px"
+                     ng-click="searchInput = true;vm.keywords = ''"
+                     ng-class="{true: 'delete-active', false: 'delete-inactive'}[searchInput]">
+                    <i class="fa fa-times-circle"></i>
+                </div>
+            </div>
         </div>
         <div ui-view class="anim-in-out clearfix data--base--sidenav--box" data-anim-sync="true" ></div>
     </div>
-
-
 </div>
 

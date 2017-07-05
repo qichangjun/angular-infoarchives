@@ -59,7 +59,8 @@
         font-size: 18px;
       }
       &_logo{
-        width: 143px;
+        //width: 143px;
+        width: 30px;
       }
     }
     .info--archive--sidebar--content{
@@ -137,6 +138,80 @@
       width: auto;
       background: #46BC98;
       border-bottom: 2px solid #46BC98;
+      .top--head__company--title{
+        height: 57px;
+        line-height: 57px;
+        padding-left: 24px;
+        color: #ffffff;
+        font-size: 16px;
+        .title{
+          line-height: 1;
+          margin-top: 5px;
+          &:first-child{
+            margin-top: 12px;
+          }
+          &:last-child{
+            font-size: 12px;
+          }
+        }
+      }
+      .top--head__search--box{
+        position:relative;
+        .search--box__input{
+          height: 100%;
+          //width: 450px;
+          background: rgb(62, 177, 144);
+          border-color: rgb(62, 177, 144);
+          border-radius: 0;
+          text-indent: 25px;
+          //padding-left: 20px;
+          padding-right: 25px;
+          color: #ffffff;
+          font-size: 14px;
+          &:focus{
+            border-color: rgb(62, 177, 144);
+            box-shadow: inset 0 1px 1px rgba(62, 177, 144,.6), inset 0 0 8px rgba(62, 177, 144,.6);
+            //opacity: .6;
+          }
+          &::-webkit-input-placeholder{
+            color: #ffffff;
+            opacity: .7;
+            font-size: 14px;
+          }
+          &:-moz-placeholder{
+            color: #ffffff;
+            opacity: .7;
+            font-size: 14px;
+          }
+          &::-moz-placeholder{
+            color: #ffffff;
+            opacity: .7;
+            font-size: 14px;
+          }
+          &:-ms-input-placeholde{
+            color: #ffffff;
+            opacity: .7;
+            font-size: 14px;
+          }
+        }
+        .search--icon{
+          position: absolute;
+          top: 20px;
+          left: 35px;
+        }
+        .remove--btn{
+          position: absolute;
+          top: 0;
+          right: 5px;
+          opacity: 0.8;
+          transition-duration: 0.4s;
+          transition-timing-function: ease-in-out;
+          transition-property: all;
+          &.delete-inactive{
+            visibility: hidden;
+          }
+        }
+      }
       .admin--info{
         float: right;
         height: 57px;
@@ -145,7 +220,7 @@
         &__link{
           cursor: pointer;
           text-decoration: none;
-          color: #333333;
+          color: #ffffff;
           font-size: 14px;
           .navbar--admin--icon{
             width: 33px;
@@ -153,6 +228,13 @@
             border-radius: 50%;
             margin-right: 5px;
           }
+          .unread--message--text-danger{
+            transform:translateY(-5px) scale(0.6);
+            color: #e3604e;
+          }
+        }
+        .unread--message{
+          padding-right: 0;
         }
       }
     }
@@ -210,4 +292,249 @@
 
 .navbar--user--info--drop--down--content{
   min-width: 210px !important;
+}
+.edit--current--user--wrap{
+  width: 480px ;
+  .md-toolbar-tools{
+    background: #ffffff;
+    color: #000000;
+    .head{
+      color: #000000;
+    }
+  }
+  .right--sidebar--info--content{
+    background: inherit;
+    height: calc(100% - 96px);
+    md-tabs{
+      height: 100%;
+    }
+    md-tabs.md-dynamic-height md-tabs-content-wrapper{
+      height: calc(100% - 48px);
+      overflow-y: auto;
+      overflow-x: hidden;
+    }
+    md-content{
+      background: inherit;
+      height: 100%;
+    }
+    .attr--type--box{
+      margin: 20px 10px;
+      padding-top: 20px;
+      border-top: 1px solid #cccccc;
+      &:first-child{
+        margin-top: 0;
+        border-top: none;
+      }
+      &:last-child{
+        border-bottom: none;
+      }
+      .single--attr--row{
+        padding: 5px 0;
+        .title{
+          display: inline-block;
+          vertical-align: middle;
+          width: 117px;
+          text-align: left;
+          color: #797979;
+          padding: 0 5px;
+          font-weight: normal;
+          margin: 0;
+        }
+        .value{
+          display: inline-block;
+          vertical-align: middle;
+          max-width: 245px;
+          min-width: 55px;
+          margin-right: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+          .progress-striped{
+            display: inline-block;
+            height: 11px;
+            width: 100px;
+            margin: 0 5px 0 0;
+          }
+        }
+        a{
+          display: inline-block;
+          vertical-align: middle;
+        }
+        .sidebar--progress--time{
+          font-size: 12px;
+          color: #797979;
+          padding-top: 5px;
+        }
+        .data-volume-info-prompt{
+          font-size: 12px;
+          color: #797979;
+          .fa{
+            color: #ff9900;
+            font-size: 15px;
+            margin-right: 5px;
+          }
+        }
+      }
+      &.two--col{
+        .title{
+          width: 80px;
+          padding-right: 0;
+          &.left{
+            width: 130px;
+            padding-right: 0;
+          }
+        }
+        .value{
+          width: 80px;
+          margin-right: 0;
+        }
+      }
+    }
+    md-tabs[md-border-bottom] md-tabs-wrapper{
+      margin: 0 10px;
+    }
+    //user manage
+    .column--header{
+      color: #797979;
+      border-bottom: 1px solid #d4d4d4;
+      padding: 10px 0;
+      margin: 0 10px;
+      padding-left: 6px;
+    }
+    .department--type--box{
+      padding-top: 15px;
+      .attr--name{
+        display: inline-block;
+        vertical-align: middle;
+        font-weight: normal;
+        width: 133px;
+        text-align: right;
+        margin: 0;
+        //margin-right: 5px;
+      }
+      .attr--value{
+        display: inline-block;
+        vertical-align: middle;
+        width: 260px;
+      }
+    }
+    .column--content--box{
+      padding: 10px 0;
+      height: calc(100% - 41px);
+      overflow-y: auto;
+      &.add--Organization--sideBar--content{
+        height: calc(100% - 90px)
+      }
+      .row--box{
+        margin: 5px 0;
+        height: 34px;
+        line-height: 34px;
+        display: inline-block;
+        vertical-align: middle;
+        .attr--name{
+          display: inline-block;
+          vertical-align: middle;
+          font-weight: normal;
+          width: 133px;
+          text-align: right;
+          margin: 0;
+          //margin-right: 5px;
+          white-space: nowrap;
+          overflow: hidden;
+          text-overflow: ellipsis;
+        }
+        .attr--value{
+          display: inline-block;
+          vertical-align: middle;
+          width: 260px;
+          &.upload--head{
+             .md-button{
+               border: 1px solid #cccccc;
+               border-radius: 4px;
+               margin: 0;
+             }
+           }
+        }
+        &.user--avatar{
+          height: auto;
+        }
+      }
+    }
+  }
+  .footer--operation--box{
+    text-align: center;
+    padding: 10px 0;
+  }
+}
+
+.unread--message--wrap{
+  padding-top: 0 !important;
+  .md-indent{
+    height: auto;
+  }
+  .unread--message--head--box{
+    background: #F2F2F0;
+    padding: 10px 10px 10px 20px;
+    .unread--message--count{
+      display: inline-block;
+      height: 28px;
+      line-height: 28px;
+      vertical-align: middle;
+      color: #999999;
+    }
+    .all--read--btn{
+      margin-right: 0;
+      padding: 3px 10px;
+    }
+  }
+  .unread--message--content--wrap{
+    max-height: 350px;
+    overflow-y: auto;
+    .unread--message--content--box{
+      .singer--message--box{
+        padding-right: 5px;
+        &.isReaded{
+          color: #999988;
+        }
+        .singer--message--title--box{
+          padding: 10px 5px 0 5px;
+          position: relative;
+          .title{
+            margin: 0;
+            padding-bottom: 5px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+          }
+          .drop--group{
+            position: absolute;
+            top: 8px;
+            left: -7px;
+            width: 10px;
+            text-align: center;
+          }
+        }
+        .unread--message--drop--down--box{
+          padding: 5px 0 0 5px;
+          border-top: 1px solid #eaeaea;
+          margin-top: 5px;
+          .drop--down__value{
+            padding-bottom: 3px;
+          }
+        }
+      }
+    }
+  }
+  .no--message--box{
+    height: 200px;
+    text-align: center;
+    color: #999999;
+    padding-top: 40px;
+    &__icon{
+      font-size: 50px;
+    }
+    &__prompt{
+
+    }
+  }
 }

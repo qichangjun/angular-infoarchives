@@ -1,4 +1,22 @@
 @charset "utf-8";
+.search-input-animation{
+  transition-duration: 0.4s;
+  transition-timing-function: ease-in-out;
+  transition-property: all;
+  width: 0px;
+  opacity: 0;
+}
+.search-active{
+  width:300px;
+  opacity: 1;
+}
+.delete-active{
+  right: 10px !important;
+}
+.delete-inactive{
+
+}
+
 .missionList{
   transition-duration: 0.4s;
   transition-timing-function: ease-in-out;

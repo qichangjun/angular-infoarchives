@@ -1,8 +1,8 @@
 (function() {
   'use strict';
   angular.module("myApp").service("ruleSetService", [
-    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state) {
-      var createRule, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRetentionPolicyId, getRetentionPolicyList, getRule, saveRetentionPeriod, saveRetentionPolicy, saveRule;
+    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', '$translate', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state, $translate) {
+      var createRule, getProperty, getRetentionPeriodId, getRetentionPeriodList, getRetentionPolicyId, getRetentionPolicyList, getRule, saveRetentionPeriod, saveRetentionPeriodAndPolicy, saveRetentionPolicy, saveRule;
       getRule = function(id) {
         var deferred;
         deferred = $q.defer();
@@ -22,7 +22,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -42,7 +42,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -62,7 +62,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -85,7 +85,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -105,7 +105,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -125,7 +125,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -144,7 +144,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -163,7 +163,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -184,7 +184,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -205,10 +205,29 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
+      saveRetentionPeriodAndPolicy = function(info) {
+        var deferred;
+        deferred = $q.defer();
+        info.accessUser = hsAuth.getAccessKey();
+        info.accessToken = hsAuth.getAccessToken();
+        Restangular.one(hsAPI['saveRetentionPeriodAndPolicy']).get(info).then(function(res) {
+          if (res.code === '1') {
+            return deferred.resolve(res.data);
+          } else {
+            deferred.reject(res);
+            return mdToastService.showToast(res.message);
+          }
+        }, function(res) {
+          deferred.reject(res);
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
+        });
+        return deferred.promise;
+      };
+      this.saveRetentionPeriodAndPolicy = saveRetentionPeriodAndPolicy;
       this.saveRetentionPolicy = saveRetentionPolicy;
       this.getRetentionPolicyList = getRetentionPolicyList;
       this.getRetentionPolicyId = getRetentionPolicyId;

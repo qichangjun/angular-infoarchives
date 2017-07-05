@@ -1,8 +1,22 @@
 <div>
-    Multiple files
-    <div class="button" ngf-select="uploadFiles($files)" ng-model="oddFiles" ngf-multiple="true">Select</div>
-    Drop files: <div ngf-drop="uploadFiles($files)" class="drop-box">Drop</div>
-    <table class="table attribute--row--box__table" ng-show="files.length > 0">
+    <div ngf-select="uploadFiles($files,true)" ngf-drop="uploadFiles($files,true)"  ng-model="oddFiles"
+         ngf-multiple="false"
+         accept="image/gif, image/png, image/jpeg"
+
+         style="background: #F8F8F8;
+            border: 5px dashed #DDD;
+            width: 110px;
+            height: 110px;
+            line-height: 100px;
+            text-align: center;"
+         class="drop-box" ngf-drop-available="true">
+        <span ng-show="!files[0]" translate="MODULES_BATCH_UPLOAD_FILES" style="cursor: pointer">选择文件</span>
+        <img style="width: 50px;height: 50px;border-radius: 50px;" ngf-src="!files[0].$error && files[0]">
+    </div>
+
+    <!--<md-button  class="button" ngf-select="uploadFiles($files,true)" accept="image/*" ng-model="oddFiles" ngf-multiple="false">选择头像</md-button>-->
+
+    <table  class="table attribute--row--box__table" ng-show="files.length > 0 && showProcess">
         <thead>
         <tr class="table__th--tr">
             <th>序号</th>
@@ -19,7 +33,7 @@
             <td>{{$index}}</td>
             <td>{{file.name}}</td>
             <td>{{file.type}}</td>
-            <td>{{file.size}}</td>
+            <td>{{file.size | formatByte}}</td>
             <td>
                 <uib-progressbar  class="progress-striped active" type="warning" value="file.progress" ng-show="file.status == 2">
                     {{file.progress}}%

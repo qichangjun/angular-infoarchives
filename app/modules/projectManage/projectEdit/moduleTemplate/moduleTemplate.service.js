@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("moduleTemplateService", [
-    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', 'templateRestangular', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state, templateRestangular) {
+    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', 'templateRestangular', '$translate', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state, templateRestangular, $translate) {
       var createTemplate, getAttributeList, getTemplate;
       getAttributeList = function(id) {
         var deferred;
@@ -19,7 +19,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -39,7 +39,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -60,7 +60,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };

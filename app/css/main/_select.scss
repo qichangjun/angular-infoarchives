@@ -16,10 +16,11 @@ md-select{
   color: #555555;
   min-width: inherit;
   min-height: 28px;
-  line-height: 100%;
+  //line-height: 100%;
+  line-height: 28px;
 }
 .md-select-value .md-select-icon:after{
-  top: 0;
+  //top: 0;
 
 }
 md-select.md-default-theme:not([disabled]):focus .md-select-value, md-select:not([disabled]):focus .md-select-value {
@@ -46,7 +47,7 @@ md-checkbox.md-default-theme:not([disabled]).md-primary.md-checked .md-icon, md-
   text-transform: none;
   &.md-active{
     color: #333333 !important;
-    padding: 12px 16px;
+    padding: 12px 24px;
     //text-transform: none;
   }
 }

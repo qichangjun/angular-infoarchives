@@ -76,6 +76,7 @@
                             md-items="unitLists in vm.querySearch(vm.searchUnitText,vm.unitLists)"
                             md-item-text="unitLists.name"
                             md-min-length="0"
+                            class="select--value__label"
                             placeholder="{{'MODULES_DATABASE_SELECT_UNIT'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchUnitText" md-highlight-flags="^i">{{unitLists.name}}</span>
@@ -99,10 +100,11 @@
                             md-selected-item="vm.parameter.item"
                             md-no-cache="true"
                             md-search-text="vm.searchItemText"
-                            md-selected-item-change="vm.filterData()"
+                            md-selected-item-change="vm.filterData(items.name,items.type,items)"
                             md-items="items in vm.querySearch(vm.searchItemText,vm.itemLists)"
                             md-item-text="items.name"
                             md-min-length="0"
+                            class="select--value__label"
                             placeholder="{{'MODULES_DATABASE_SELECT_BUSINESS_MATTERS'|translate}}">
                         <md-item-template>
                             <span md-highlight-text="vm.searchItemText" md-highlight-flags="^i">{{items.name}}</span>
@@ -126,7 +128,6 @@
            加载数据中...
         </div>
         <div ng-show="!vm.loading">
-
             <circle-tree nodes="data" ng-if="vm.parameter.chartType=='unit' && data.children.length > 0">
             </circle-tree>
             <straight-tree ng-if="vm.parameter.chartType=='source' && data.children.length > 0"  id="customModule" nodes = 'data'  radius = '490'>

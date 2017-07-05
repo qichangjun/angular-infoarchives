@@ -30,9 +30,11 @@
                         <a class="btn btn-defult drop--group"  data-nodrag ng-click="vm.toggle(this)">
                             <span class="btn--icon" ng-class="{'fa fa-angle-right': collapsed,'fa fa-angle-down': !collapsed}"></span>
                         </a>
-                        <span ng-show="!node.isRepeat">{{node.name}}</span>
+                        <span ng-if="!node.isRepeat" ng-show="vm.language == 'cn'">{{node.name}}</span>
+                        <span ng-if="!node.isRepeat" ng-show="vm.language == 'en'">{{node.name}}</span>
                         <span ng-if="node.isRepeat" dnd-draggable="node" dnd-type="'repeatBlock'">
-                            {{node.name}}
+                            <span  ng-show="vm.language == 'cn'">{{node.name}}</span>
+                            <span  ng-show="vm.language == 'en'">{{node.name}}</span>
                         </span>
                         <ul  ng-show="!node.isRepeat">
                             <li ng-repeat="item in node.attributes"
@@ -43,7 +45,9 @@
                                 dnd-effect-allowed="move"
                                 dnd-moved="node.attributes.splice($index, 1)"
                             >
-                                <span  >{{item.attrType != 'file' ? 'metedata'  : 'file' }}：
+                                <span  >{{item.attrType != 'file' ? '元数据'  : '文件' }}：
+                                     <span  ng-show="vm.language == 'cn'">{{node.nameZh}}</span>
+                                    <span  ng-show="vm.language == 'en'">{{node.nameEn}}</span>
                                     <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
                                     <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
                                 </span>
@@ -135,7 +139,7 @@
                                             class="single--configure--info"
                                             ng-class="{'selected': models.selected === item,'file':item.attrType=='file' || item.attrType=='repeatBlock','item':item.attrType=='metadata'}"
                                         >
-                                            {{item.attrType != 'file' ? 'metadata'  : 'file' }}：
+                                            {{item.attrType != 'file' ? '元数据'  : '文件' }}：
                                             <span ng-show="vm.language != 'en'">{{item.attrNameZh}}</span>
                                             <span ng-show="vm.language == 'en'">{{item.attrNameEn}}</span>
                                             <span class="glyphicon glyphicon-remove single--configure--info__remove" ng-click="list.data.splice($index,1);vm.deleteItem(item,models.templates)"></span>

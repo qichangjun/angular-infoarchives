@@ -1,12 +1,12 @@
 <!DOCTYPE html>
-<!--[if lt IE 7]>      <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
-<!--[if IE 7]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9 lt-ie8"> <![endif]-->
-<!--[if IE 8]>         <html lang="en" ng-app="myApp" class="no-js lt-ie9"> <![endif]-->
-<!--[if gt IE 8]><!--> <html lang="en" ng-app="myApp" class="no-js"> <!--<![endif]-->
+<!--[if lt IE 7]>      <html lang="en"  class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
+<!--[if IE 7]>         <html lang="en"  class="no-js lt-ie9 lt-ie8"> <![endif]-->
+<!--[if IE 8]>         <html lang="en"  class="no-js lt-ie9"> <![endif]-->
+<!--[if gt IE 8]><!--> <html lang="en"  class="no-js"> <!--<![endif]-->
   <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>InfoArchives</title>
+    <title>杭州市电子数据归档系统</title>
     <meta name="description" content="">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <!--Gulp need-->
@@ -40,7 +40,6 @@
     <!--<link rel="stylesheet" href="common/hsUiGridTemplates/css/uiGridTemplates.css" />-->
     <!--<link rel="stylesheet" href="common/hsTemplates/css/hsTemplates.css" />-->
     <!--<link rel="stylesheet" href="common/directive/collapsibleTree/collapsibleTree.css" />-->
-    <!--<link rel="stylesheet" href="common/directive/messageVerify/css/hsFormMessage.css" />-->
     <!--<link rel="stylesheet" href="modules/login/css/login.css" />-->
 
     <!-- endbuild -->
@@ -53,6 +52,7 @@
     <!-- build:js(app) js/main.js -->
     <script src="bower_components/lodash/lodash.js"></script>
     <script src="bower_components/jquery/jquery.js"></script>
+    <script src="bower_components/jquery.cookie/jquery.cookie.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/bootstrap-sass/assets/javascripts/bootstrap.js"></script>
     <script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
@@ -86,18 +86,20 @@
     <script src="custom_components/jsonPath/jsonPath.js"></script>
 
 
-
+    <script src="common/app.ready.js"></script>
     <script src="common/module.js"></script>
     <script src="common/plug.config.js"></script>
     <script src="common/constant.js"></script>
     <script src="common/router.js"></script>
     <script src="common/run.js"></script>
     <script src="common/app.config.js"></script>
+    <script src="common/factory/permissions.factory.js"></script>
     <script src="common/factory/languageStorage.factory.js"></script>
     <script src="common/factory/MockRestangular.factory.js"></script>
     <script src="common/factory/jobRestangular.factory.js"></script>
     <!--<script src="common/factory/testSocket.factory.js"></script>-->
 
+    <script src="common/directive/hasPermission/hasPermission.directive.js"></script>
     <script src="common/directive/collapsibleTree/angular-d3-tree.directive.js"></script>
     <script src="common/directive/straightTree/straightTree.directive.js"></script>
     <script src="common/directive/circleTree/circleTree.directive.js"></script>
@@ -117,11 +119,13 @@
     <script src="common/service/commonFilter/commonFilter.js"></script>
     <script src="common/service/commonMethod/commonMethod.service.js"></script>
 
-    <script src="modules/login/login.service.js"></script>
-    <script src="modules/login/login.controller.js"></script>
+
 
     <script src="modules/main/infoArchives.controller.js"></script>
     <script src="modules/main/infoArchives.service.js"></script>
+
+    <script src="modules/login/login.service.js"></script>
+    <script src="modules/login/login.controller.js"></script>
 
     <script src="modules/dataBase/dataBase.controller.js"></script>
     <script src="modules/dataBase/dataBase.service.js"></script>
@@ -153,6 +157,7 @@
     <script src="modules/connectMap/connectMap.service.js"></script>
 
     <script src="modules/previewRecord/previewRecord.controller.js"></script>
+    <script src="modules/previewRecord/previewRecord.service.js"></script>
 
     
     <!-- endbuild -->

@@ -2,8 +2,8 @@
 (function() {
   'use strict';
   angular.module("myApp").service("commonMethodSerivce", [
-    '$log', function($log) {
-      var includeInArr, initColumn, isArrRepeat, randomNum, randomString, sortArrBy, stringGetLength;
+    '$log', '$location', 'loginService', 'hsAuth', '$timeout', function($log, $location, loginService, hsAuth, $timeout) {
+      var includeInArr, initColumn, isArrRepeat, logOut, randomNum, randomString, sortArrBy, stringGetLength;
       isArrRepeat = function(arr) {
         var counts, i, item, len, out;
         len = arr.length;
@@ -109,6 +109,18 @@
         }
         return realLength;
       };
+      logOut = function() {
+        return loginService.userLogout().then(function() {
+          hsAuth.removeUser();
+          if ($location.$$path !== '/login') {
+            Cookies.set('before_login_url', $location.$$absUrl);
+          }
+          return $timeout(function() {
+            return window.location.href = window.hsConfig.loginUrl;
+          });
+        }, function(res) {});
+      };
+      this.logOut = logOut;
       this.stringGetLength = stringGetLength;
       this.randomNum = randomNum;
       this.randomString = randomString;

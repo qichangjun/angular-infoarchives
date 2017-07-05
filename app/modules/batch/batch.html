@@ -44,14 +44,13 @@
                 </div>
             </div>
             <div class="single--attribute--box" ng-if="vm.parameter.batchStatus == '5' || vm.parameter.batchStatus=='all' ">
-                <span class="attribute--title"><span translate="MODULES_BATCH_ABNORMAL_DISPOSAL">异常处置</span>：</span><div class="attribute--value">
+                <span class="attribute--title"><span translate="MODULES_BATCH_ABNORMAL_DISPOSAL">异常处置</span>:</span><div class="attribute--value">
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '1'" ng-click="vm.changeBehavior(1);"-->
                     <!--ng-checked="vm.parameter.exception_handle_behavior == '2'" ng-click="vm.changeBehavior(2);"-->
-                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('1')" ng-click="vm.changeBehavior('1')"
+                    <md-checkbox class="md-primary" ng-checked="vm.exists('1')" ng-click="vm.changeBehavior('1')"
                                  aria-label="Checkbox 1">
                         <span translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</span>
-                    </md-checkbox>
-                    <md-checkbox style="margin-bottom: 0px;" class="md-primary" ng-checked="vm.exists('2')" ng-click="vm.changeBehavior('2')"
+                    </md-checkbox><md-checkbox class="md-primary" ng-checked="vm.exists('2')" ng-click="vm.changeBehavior('2')"
                                  aria-label="Checkbox 1">
                         <span translate="MODULES_BATCH_DELETE">删除</span>
                     </md-checkbox>
@@ -61,17 +60,14 @@
             <div class="single--attribute--box time--frame">
                 <span class="let--middle--line"></span>
                 <div class="time--frame__box">
-                    <span class="attribute--title" translate="MODULES_BATCH_CONVERSION_START_TIME">起始时间</span>
-                    <div  layout="row" class="attribute--value">
+                    <span class="attribute--title" translate="MODULES_BATCH_RECEIVE_TIME">接收时间</span><div  layout="row" class="attribute--value">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{{'MODULES_BATCH_START_DATE'|translate}}"  uib-datepicker-popup ng-model="vm.parameter.start_date" is-open="popup2.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
                           <span class="input-group-btn">
                             <button type="button" class="btn btn-default" ng-click="popup2.opened = true"><i class="glyphicon glyphicon-calendar"></i></button>
                           </span>
                         </div>
-                    </div>
-                    <span class="time--frame__sign">-</span>
-                    <div  layout="row" class="attribute--value">
+                    </div><span class="time--frame__sign">-</span><div  layout="row" class="attribute--value">
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="{{'MODULES_BATCH_DEADLINE'|translate}}"  uib-datepicker-popup ng-model="vm.parameter.end_date" is-open="popup3.opened" datepicker-options="dateOptions"  close-text="{{'MODULES_BATCH_CLOSE'|translate}}" />
                           <span class="input-group-btn">
@@ -91,6 +87,7 @@
         </div>
         <div style="height: calc(100% - 57px)">
             <div  ng-show="!vm.loading"
+                  ng-if="vm.timeoutSetting"
                   ui-grid="gridOptions" class="common--uigrid--height batch-grid "
                   ui-grid-auto-resize ui-grid-resize-columns
                   ui-grid-move-columns ui-grid-save-state
@@ -100,8 +97,8 @@
             ></div>
         </div>
 
-        <div ng-show="vm.loading" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
-        <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="batch--no--data">
+        <div ng-show="vm.loading || !vm.timeoutSetting" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
+        <div ng-show="gridOptions.data.length == 0 && !vm.loading " class="batch--no--data">
             <!--<span class="fa fa-exclamation-circle"></span><span translate="MODULES_BATCH_DELETE_NO_DATA">没有数据</span>-->
             <div class="batch--no--data__prompt--box">
                 <span class="prompt--img"><img src="images/batch--no--data-img.png" alt=""/></span>
@@ -111,7 +108,8 @@
             </div>
         </div>
     </div>
-    <md-sidenav  class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
-        <div class="batch--sidebar--wrap" ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>
+    <md-sidenav   md-disable-backdrop class="md-sidenav-right right--sidebar--info--wrap" md-component-id="batch_detail" md-whiteframe="4">
+        <div ng-show="vm.loadingDetail" class="loading" translate="MODULES_DATABASE_LOADING">正在加载...</div>
+        <div ng-show="!vm.loadingDetail" class="batch--sidebar--wrap" ng-include="'./modules/batch/template/sideBar/sideBar.html'"></div>
     </md-sidenav>
 </div>

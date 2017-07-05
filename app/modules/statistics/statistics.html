@@ -38,10 +38,11 @@
         <div class="cell-box">
             <span class="fa fa-stack-overflow color-six"></span>
             <div class="data--description">
-                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_ERMS_COUNT">导入ERMS的数量</p>
+                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_DIGITAL_ARCHIVES">导入数字档案室</p>
                 <span class="data--value">{{vm.overAllInfo.importErmsCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
             </div>
         </div>
+
 
     </div>
 
@@ -62,6 +63,7 @@
                <md-option ng-repeat="monthLists in vm.monthLists" ng-value="monthLists" >{{monthLists}}</md-option>
                <md-option ng-value="'all'" translate="MODULES_STATISTICS_ALL_MONTH">所有月份</md-option>
            </md-select>
+           <md-button class="pull-right green--btn" ng-click="vm.exportExcel()" translate="MODULES_STATISTICS_EXPORT_REPORT">导出报表</md-button>
        </div>
        <div class="" id="container" ng-show="vm.parameter.unit=='all'" style="width: 100%"></div>
         <div class="" id="containerOfUnit" ng-show="vm.parameter.unit!='all'"  style="width: 100%"></div>

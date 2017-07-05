@@ -4,8 +4,11 @@
             <div class="md-toolbar-tools">
                 <h2 class="modal--head--title">File</h2>
                 <md-select class="edit--file--data--modal__select" ng-model="vm.currentFileId" >
-                    <md-option ng-repeat="fileLists in vm.fileLists" value="{{fileLists.code}}" >
-                        {{fileLists.name}}
+                    <md-option ng-if="vm.language=='cn'" ng-repeat="fileLists in vm.fileLists" value="{{fileLists.code}}" >
+                        {{fileLists.nameZh}}
+                    </md-option>
+                    <md-option ng-if="vm.language=='en'" ng-repeat="fileLists in vm.fileLists" value="{{fileLists.code}}" >
+                        {{fileLists.nameEn}}
                     </md-option>
                 </md-select>
                 <img class="modal--head--icon" src="images/edit--file--data--modal--head--icon.png" alt=""/>

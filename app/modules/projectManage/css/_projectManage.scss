@@ -277,6 +277,17 @@
         text-align: right;
         margin-right: 10px;
       }
+      &__checkbox{
+        display: inline-block;
+        vertical-align: middle;
+        margin-left: 40px;
+        width: 160px;
+        text-align: center;
+        margin-top: 10px;
+        md-checkbox{
+          margin-bottom: 0;
+        }
+      }
       &__value{
         display: inline-block;
         vertical-align: middle;
@@ -805,6 +816,9 @@
     .show--results--body{
       min-height: 100%;
       padding: 0;
+      .attr--name{
+        color: #797979;
+      }
     }
   }
 }
@@ -977,7 +991,7 @@
   //height: calc(100% - 108px);
 }
 .preview--template--form--modal__table{
-  color:  #999999;
+  //color:  #999999;
   width: 100%;
   tr{
     .serial--number{
@@ -999,6 +1013,9 @@
       padding: 11px 8px;
       font-weight: normal;
     }
+  }
+  .attr--name{
+    color: #797979;
   }
 }
 

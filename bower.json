@@ -24,7 +24,7 @@
     "ui-router": "~0.2.15",
     "animate.css": "3.4.0",
     "js-cookie": "~2.0.4",
-    "font-awesome": "4.6.0",
+    "font-awesome": "4.7.0",
     "angular-material": "~1.1.1",
     "angular-aria": "~1.5.8",
     "bootstrap": "^3.3.7",
@@ -44,6 +44,7 @@
     "angular-resizable": "^1.2.0",
     "angular-ui-tree": "^2.22.5",
     "highcharts": "^5.0.10",
-    "angularjs-slider": "^6.1.1"
+    "angularjs-slider": "^6.1.1",
+    "jquery.cookie": "^1.4.1"
   }
 }

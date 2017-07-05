@@ -96,24 +96,24 @@
                     </div>
 
                 </div>
-                <div class="attr--type--box" ng-show="vm.errorInfo.packageCount > 0">
-                    <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_TYPE">异常数据包类型</span>
-                        <span class="value" ng-if="vm.errorInfo.packageType == 0">AIU</span>
-                        <span class="value" ng-if="vm.errorInfo.packageType == 1">SIP</span>
-                    </div>
-                    <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_COUNT">异常数据包数量</span>
-                        <span class="value">{{vm.errorInfo.packageCount || 0}}</span>
-                        <a ng-if="vm.errorInfo.id" ng-click="vm.checkErrorList(vm.errorInfo.id)" translate="MODULES_BATCH_CLICK_VIEW">点击查看</a>
-                    </div>
-                    <div class="single--attr--row">
-                        <span class="title" translate="MODULES_BATCH_EXCEPTION_HANDLING">异常处理</span>
-                        <span class="value" ng-if="vm.errorInfo.handleBehavior == 0" translate="MODULES_BATCH_PENDING_TREATMENT">待处理</span>
-                        <span class="value" ng-if="vm.errorInfo.handleBehavior == 1" translate="MODULES_BATCH_BEEN_CONVERTED">已转换</span>
-                        <span class="value" ng-if="vm.errorInfo.handleBehavior == 2" translate="MODULES_BATCH_DELETED">已删除</span>
-                    </div>
-                </div>
+                <!--<div class="attr&#45;&#45;type&#45;&#45;box" ng-show="vm.errorInfo.packageCount > 0">-->
+                    <!--<div class="single&#45;&#45;attr&#45;&#45;row">-->
+                        <!--<span class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_TYPE">异常数据包类型</span>-->
+                        <!--<span class="value" ng-if="vm.errorInfo.packageType == 0">AIU</span>-->
+                        <!--<span class="value" ng-if="vm.errorInfo.packageType == 1">SIP</span>-->
+                    <!--</div>-->
+                    <!--<div class="single&#45;&#45;attr&#45;&#45;row">-->
+                        <!--<span class="title" translate="MODULES_BATCH_ABNORMAL_PACKET_COUNT">异常数据包数量</span>-->
+                        <!--<span class="value">{{vm.errorInfo.packageCount || 0}}</span>-->
+                        <!--<a ng-if="vm.errorInfo.id" ng-click="vm.checkErrorList(vm.errorInfo.id,vm.batchInfo.id)" translate="MODULES_BATCH_CLICK_VIEW">点击查看</a>-->
+                    <!--</div>-->
+                    <!--<div class="single&#45;&#45;attr&#45;&#45;row">-->
+                        <!--<span class="title" translate="MODULES_BATCH_EXCEPTION_HANDLE_BEHAVIOR_STATE">异常处理</span>-->
+                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 0" translate="MODULES_BATCH_PENDING_TREATMENT">待处理</span>-->
+                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 1" translate="MODULES_BATCH_BEEN_CONVERTED">已转换</span>-->
+                        <!--<span class="value" ng-if="vm.errorInfo.handleBehavior == 2" translate="MODULES_BATCH_DELETED">已删除</span>-->
+                    <!--</div>-->
+                <!--</div>-->
             </md-content>
         </md-tab>
         <md-tab label="{{'MODULES_BATCH_EXCEPTION_HANDLING_RECORD'|translate}}" ng-disabled="!vm.errorInfo || vm.errorInfo.packageCount == 0">

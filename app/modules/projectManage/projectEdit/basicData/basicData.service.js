@@ -1,7 +1,7 @@
 (function() {
   'use strict';
   angular.module("myApp").service("basicDataService", [
-    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state) {
+    '$log', '$q', '$timeout', '$mdToast', 'MockRestangular', 'hsAPI', 'mdToastService', 'hsAuth', 'Restangular', '$state', '$translate', function($log, $q, $timeout, $mdToast, MockRestangular, hsAPI, mdToastService, hsAuth, Restangular, $state, $translate) {
       var editProject, getProjectInfo;
       getProjectInfo = function(id) {
         var deferred;
@@ -19,7 +19,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };
@@ -38,7 +38,7 @@
           }
         }, function(res) {
           deferred.reject(res);
-          return mdToastService.showToast('服务器内部出错');
+          return mdToastService.showToast($translate.instant('MODULES_SHOWTOAST_SERVER_ERROR'));
         });
         return deferred.promise;
       };

@@ -10,13 +10,17 @@
         </md-toolbar>
         <!--<md-progress-linear ng-show="vm.loading" md-mode="indeterminate"></md-progress-linear>-->
         <md-dialog-content class="check--error--list--modal_content">
+            <div class="clearfix operation--box" >
+                <md-button class="pull-left md-raised green--btn" ng-show="gridOptions.data.length > 0 && !vm.loading && vm.batchStatus == 6"  ng-click="vm.forceSwitch()" translate="MODULES_BATCH_FORCED_CONVERSION">强制转换</md-button>
+                <md-button class="pull-left md-raised red--btn" ng-show="gridOptions.data.length > 0 && !vm.loading && vm.batchStatus == 6" ng-click="vm.deleteBatch()" translate="MODULES_BATCH_DELETE_ABNORMAL_DATA">删除异常数据</md-button>
+            </div>
             <div ng-show="gridOptions.data.length == 0 && !vm.loading" class="no--data" translate="MODULES_BATCH_DELETE_NO_DATA">
                 没有数据
             </div>
             <div ng-show="vm.loading == true"  class="loading" translate="MODULES_DATABASE_LOADING">
                 加载中...
             </div>
-            <div ng-show="gridOptions.data.length > 0 && !vm.loading" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'500px'}" ui-grid="gridOptions" class="common--uigrid--height "  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
+            <div ng-show="gridOptions.data.length > 0 && !vm.loading" ng-style="{height:(gridOptions.data.length * 40 + 100)+'px','max-height':'900px','min-height':'500px'}" ui-grid="gridOptions" class="common--uigrid--height"  ui-grid-auto-resize ui-grid-resize-columns   ui-grid-pagination ui-grid-pinning></div>
         </md-dialog-content>
 </md-dialog>
 

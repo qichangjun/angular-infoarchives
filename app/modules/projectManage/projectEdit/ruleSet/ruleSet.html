@@ -41,9 +41,9 @@
                         <span class="edit--project--row" translate="MODULES_PROJECTMANAGE_ARCHIVE_POLICY">归档策略</span>
                         <div class="rule--set--content--wrap" style="height: auto">
                             <div class="attribute--wrapper rule--set">
-                                <div class="attribute--row--box auto--height">
+                                <div class="attribute--row--box select auto--height">
                                     <span class="attribute--row--box__title" translate="MODULES_PROJECTMANAGE_REF_RULES">档号规则</span>
-                                    <div class="rule--set--re--rules--wrap">
+                                    <div ng-show="!vm.approveErmsCoding" class="rule--set--re--rules--wrap">
                                         <div class="rule--Property--box" ng-repeat="rule in vm.ruleProperty track by $index">
                                             <a ng-if="rule.fieldType == 0"
                                                ng-class="{selected : rule.showEdit,incorrect : rule.isIncorrect}"
@@ -68,8 +68,7 @@
                                                           novalidate
                                                           ng-submit="addRule.$valid?rule.showEdit = false:vm.addRule.submit=true">
                                                         <div class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ELEMENT_TYPE">元素类型</span>
-                                                            <md-select  class="set-rule-add-tool_value" ng-model="rule.fieldType"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ELEMENT_TYPE">元素类型</span><md-select  class="set-rule-add-tool_value" ng-model="rule.fieldType"
                                                                         name="fieldType"
                                                                         required
                                                                         hs-form-message
@@ -83,8 +82,7 @@
                                                         </div>
 
                                                         <div ng-if="rule.fieldType == 0" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" ranslate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</span>
-                                                            <md-select  class="set-rule-add-tool_value" ng-model="rule.attrName"
+                                                            <span class="set-rule-add-tool_attr" ranslate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</span><md-select  class="set-rule-add-tool_value" ng-model="rule.attrName"
                                                                         ng-change="vm.changeAttr($index)"
                                                                         name="attrName"
                                                                         required
@@ -97,8 +95,7 @@
                                                             </md-select>
                                                         </div>
                                                         <div ng-if="rule.fieldType == 1" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_FIELD">字段</span>
-                                                            <input type="text" ng-model="rule.fieldValue"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_FIELD">字段</span><input type="text" ng-model="rule.fieldValue"
                                                                    class="form-control set-rule-add-tool_value"
                                                                    name="fieldValue"
                                                                    required
@@ -108,8 +105,7 @@
                                                                     >
                                                         </div>
                                                         <div ng-if="rule.fieldType == 2" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_LENGTH">长度</span>
-                                                            <input type="number" ng-model="rule.fieldSize"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_LENGTH">长度</span><input type="number" ng-model="rule.fieldSize"
                                                                    class="form-control set-rule-add-tool_value"
                                                                    name="fieldSize"
                                                                    required
@@ -134,8 +130,7 @@
                                                           novalidate
                                                           ng-submit="addRule.$valid?vm.addRule(vm.entity):vm.addRule.submit=true">
                                                         <div class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ELEMENT_TYPE">元素类型</span>
-                                                            <md-select  class="set-rule-add-tool_value" ng-model="vm.entity.fieldType"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ELEMENT_TYPE">元素类型</span><md-select  class="set-rule-add-tool_value" ng-model="vm.entity.fieldType"
                                                                         name="fieldType"
                                                                         required
                                                                         hs-form-message
@@ -148,8 +143,7 @@
                                                             </md-select>
                                                         </div>
                                                         <div ng-if="vm.entity.fieldType == 0" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</span>
-                                                            <md-select  class="set-rule-add-tool_value"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_ATTRIBUTE_NAME">属性名</span><md-select  class="set-rule-add-tool_value"
                                                                         ng-model="vm.entity.attrName"
                                                                         name="attrName"
                                                                         required
@@ -162,8 +156,7 @@
                                                             </md-select>
                                                         </div>
                                                         <div ng-if="vm.entity.fieldType == 1" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_FIELD">字段</span>
-                                                            <input type="text"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_FIELD">字段</span><input type="text"
                                                                    ng-model="vm.entity.fieldValue"
                                                                    class="form-control set-rule-add-tool_value"
                                                                    name="fieldValue"
@@ -174,8 +167,7 @@
                                                                     >
                                                         </div>
                                                         <div ng-if="vm.entity.fieldType == 2" class="et-rule-add-tool-row">
-                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_LENGTH">长度</span>
-                                                            <input type="number" ng-model="vm.entity.fieldSize"
+                                                            <span class="set-rule-add-tool_attr" translate="MODULES_PROJECTMANAGE_LENGTH">长度</span><input type="number" ng-model="vm.entity.fieldSize"
                                                                    class="form-control set-rule-add-tool_value"
                                                                    name="fieldSize"
                                                                    required
@@ -190,7 +182,10 @@
                                             </div>
                                         </div>
                                     </div>
-
+                                    <md-checkbox style="margin-bottom:0;" class="md-primary"  ng-model="vm.approveErmsCoding"
+                                                 aria-label="Checkbox 1">
+                                        <span translate="MODULES_PROJECTMANAGE_PROVINCIAL_ARCHIVES_RULES"></span>
+                                    </md-checkbox>
                                 </div>
                                 <div class="attribute--row--box select">
                                     <span class="attribute--row--box__title blue--font" translate="MODULES_PROJECTMANAGE_EXAMPLE">示例</span>

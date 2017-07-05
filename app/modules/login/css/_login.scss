@@ -221,8 +221,61 @@
         }
       }
       .user-login-checkbox{
-        margin: 20px 0 10px 0;
+        margin: 10px 0 20px 0;
         padding-left: 3px;
+        display: inline-block;
+        vertical-align: middle;
+        .input_check {position: absolute;visibility: hidden;}
+        .input_check + label {
+          background-color: #FFF;
+          border: 1px solid #C1CACA;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05);
+          padding: 9px;
+          border-radius: 2px;
+          display: inline-block;
+          vertical-align: bottom;
+          position: relative;
+          margin-right: 5px;
+
+          //margin-right: 30px;
+        }
+        .input_check + label:active {
+          box-shadow: 0 1px 2px rgba(0,0,0,0.05), inset 0px 1px 3px rgba(0,0,0,0.1);
+        }
+
+        .input_check:checked + label {
+          background-color: #337ab7;
+          border: 1px solid #337ab7;
+          box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05), inset 0px -15px 10px -12px rgba(0, 0, 0, 0.05), inset 15px 10px -12px rgba(255, 255, 255, 0.1);
+          color: #243441;
+        }
+
+        .input_check:checked + label:after {
+          -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+          position: absolute;
+          left: 5.66667px;
+          top: 1.22222px;
+          display: table;
+          width: 7.66667px;
+          height: 12.33333px;
+          border-width: 2px;
+          border-style: solid;
+          border-top: 0;
+          border-left: 0;
+          content: "";
+          color: #fff;
+          //content: '\2714'; //勾选符号
+          //position: absolute;
+          //top: 0px;
+          //left: 0px;
+          //color: #ffffff;
+          //width: 100%;
+          //text-align: center;
+          //font-size: 1.4em;
+          //padding: 1px 0 0 0;
+          //vertical-align: text-top;
+        }
       }
     }
     .user-login-btn{
@@ -236,7 +289,7 @@
     height: 50px;
     border-top: 1px solid #e2e2e2;
     position: absolute;
-    bottom: 0px;
+    bottom: 0;
     left: 50%;
     margin-left: -490px;
   }

@@ -31,7 +31,8 @@
 .nodeTool.ng-leave {opacity: 1;}
 .nodeTool.ng-leave.ng-leave-active { opacity: 0; transform: translateY(30px);}
 .node text{
-  font-size:12px
+  font-size:12px;
+  cursor: default;
 }
 
 path.link{

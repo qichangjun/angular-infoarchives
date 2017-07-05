@@ -2,7 +2,7 @@
   'use strict';
   angular.module("myApp").controller("statisticsController", [
     '$scope', '$log', '$state', 'mdDialogService', '$timeout', '$mdToast', '$stateParams', 'statisticsService', function($scope, $log, $state, mdDialogService, $timeout, $mdToast, $stateParams, statisticsService) {
-      var getAipListOfAll, getBusinessMatterList, getOverAll, getRecordNum, getUnitLists, getYearList, init, updateAllUnit, updateUnitColumn, vm;
+      var exportExcel, getAipListOfAll, getBusinessMatterList, getOverAll, getRecordNum, getUnitLists, getYearList, init, updateAllUnit, updateUnitColumn, vm;
       vm = this;
       vm.parameter = $stateParams;
       vm.parameter.month = vm.parameter.month || 'all';
@@ -150,7 +150,8 @@
                   $state.go('.', vm.parameter, {
                     notify: false
                   });
-                  return getRecordNum();
+                  getRecordNum();
+                  return getYearList();
                 }
               }
             }
@@ -212,6 +213,12 @@
           return updateUnitColumn();
         }, function(res) {});
       };
+      exportExcel = function() {
+        return statisticsService.exportExcel(vm.parameter).then(function(res) {
+          return window.location.href = res.downloadUrl;
+        }, function(res) {});
+      };
+      vm.exportExcel = exportExcel;
       vm.getRecordNum = getRecordNum;
       init();
     }

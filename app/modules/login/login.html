@@ -60,9 +60,8 @@
       </div>
 
       <div class="checkbox user-login-checkbox">
-        <label >
-          <input type="checkbox" ng-model="vm.remember"> <span translate="MODULES_LOGIN_REMEMBER_ME">记住我</span>
-        </label>
+          <input type="checkbox" ng-model="vm.remember" id="checkbox_al" class="input_check">
+          <label for="checkbox_al"></label><span translate="MODULES_LOGIN_REMEMBER_ME">记住我</span>
       </div>
       <button type="submit"
               ng-disabled="vm.loading"

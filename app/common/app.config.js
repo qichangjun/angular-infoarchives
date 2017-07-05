@@ -12,13 +12,19 @@
     bust: '1_0_15'
   };
 
-  window.hsConfig.baseUrl = 'http://' + '192.168.0.156:8080' + '/infoarchivesapi';
-
   window.hsConfig.baseUrl = 'http://' + 'demo.docworks.cn' + '/infoarchivesapi';
 
-  window.hsConfig.jobBaseUrl = 'http://' + 'ia.docworks.cn:8003' + '/infoarchivesjobapi';
+  window.hsConfig.jobBaseUrl = 'http://' + 'demo.docworks.cn' + '/infoarchivesjobapi';
 
   window.hsConfig.webUrl = 'http://' + window.location.host + '/infoarchives';
+
+  window.hsConfig.loginUrl = 'http://' + window.location.host + '/admin/app/index.html#!/login';
+
+  window.hsConfig.adminBaseUrl = 'http://' + 'demo.docworks.cn' + '/adminapi';
+
+  window.hsConfig.filePreviewBaseUrl = 'http://' + window.location.host + '/docview/trunk/app/index.html#!/?docbase=DCTM&docId=';
+
+  window.hsConfig.searchUrl = 'http://' + window.location.host + '/infoarchivesSearch/app/index.html#!/search?keywords=';
 
   window.hsConfig.pageSize = 50;
 
@@ -26,9 +32,13 @@
     window.hsConfig.bust = "bust" + (new Date()).getTime();
   } else {
     window.hsConfig.bust = "bust" + (new Date()).getTime();
+    window.hsConfig.loginUrl = 'http://' + window.location.host + '/admin/#!/login';
     window.hsConfig.baseUrl = 'http://' + window.location.host + '/infoarchivesapi';
     window.hsConfig.jobBaseUrl = 'http://' + window.location.host + '/infoarchivesjobapi';
     window.hsConfig.webUrl = 'http://' + window.location.host + '/infoarchives';
+    window.hsConfig.adminBaseUrl = 'http://' + window.location.host + '/adminapi';
+    window.hsConfig.searchUrl = 'http://' + window.location.host + '/infoarchivessearch/#!/search?keywords=';
+    window.hsConfig.filePreviewBaseUrl = 'http://' + window.location.host + '/infoarchivesdocview/#!/?docbase=infoarchives&docId=';
   }
 
 }).call(this);

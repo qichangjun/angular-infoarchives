@@ -116,9 +116,10 @@ div.ui-grid-cell input.edit-input{
 .ui-grid-render-container-body{
   .ui-grid-viewport[role="rowgroup"]{
     overflow-x: auto !important;
-    //overflow-y: auto !important;
+    //overflow-y: hidden !important;
   }
 }
+
 
 
 .ui-grid-header-cell:last-child .ui-grid-column-resizer.right{
@@ -247,8 +248,8 @@ div.ui-grid-cell input.edit-input{
 .ui-grid-pager-panel{
   //height: auto;
   line-height: normal;
-  width: 280px;
-  left: calc(100% - 280px);
+  width: 290px;
+  left: calc(100% - 290px);
   top: -72px;
   height: 0;
 }
@@ -261,4 +262,10 @@ div.ui-grid-cell input.edit-input{
 }
 .ui-grid-pinned-container.ui-grid-pinned-container-right .ui-grid-header-cell:first-child{
   border-left: none;
+}
+.operation--cell--grid{
+  padding-left: 20px;
+}
+.first--cell--margin{
+  padding-left: 18px;
 }

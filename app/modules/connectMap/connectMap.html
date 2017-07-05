@@ -38,7 +38,7 @@
         <div class="cell-box">
             <span class="fa fa-stack-overflow color-six"></span>
             <div class="data--description">
-                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_ERMS_COUNT">导入ERMS的数量</p>
+                <p class="head" translate="PROJECT_CONNECTMAP_IMPORT_DIGITAL_ARCHIVES">导入数字档案室</p>
                 <span class="data--value">{{vm.overAllInfo.importErmsCount}}&nbsp;<span translate="PROJECT_CONNECTMAP_STRIP">条</span></span>
             </div>
         </div>
@@ -56,7 +56,7 @@
             </ul>
         </div>
         <div ng-show="vm.unitNum!=vm.completeNum" class="loading" translate="MODULES_DATABASE_LOADING">数据加载中...</div>
-        <connect-map-tree nodes="data" ng-show="vm.unitNum==vm.completeNum"></connect-map-tree>
+        <connect-map-tree nodes="data" ng-if="vm.unitNum==vm.completeNum"></connect-map-tree>
         <div ng-repeat="detailLists in vm.detailLists" class="connectMap-detail"  ng-style="{position:'absolute','left':detailLists.y,'top':detailLists.x}">
             <div class="tiptool--show--wrap" ng-show="detailLists.type=='dataBase'">
                 <div class="tiptool--show--data--table">
